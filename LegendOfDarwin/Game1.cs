@@ -15,6 +15,7 @@ namespace LegendOfDarwin
 {
     /// <summary>
     /// This is the main type for your game
+    /// This is a test comment.
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {

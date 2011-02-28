@@ -22,6 +22,8 @@ namespace LegendOfDarwin
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Darwin darwin;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,6 +40,9 @@ namespace LegendOfDarwin
         {
             // TODO: Add your initialization logic here
 
+            darwin = new Darwin();
+            darwin.SetPosition(0.0f, 0.0f);
+
             base.Initialize();
         }
 
@@ -50,7 +55,10 @@ namespace LegendOfDarwin
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            Texture2D darwinTex = Content.Load<Texture2D>("Darwin");
+            Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
+
+            darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
         }
 
         /// <summary>
@@ -73,9 +81,34 @@ namespace LegendOfDarwin
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            KeyboardState ks = Keyboard.GetState();
+
+            detectDarwinMovement(ks);
+
+            //currently does nothing
+            darwin.Update(gameTime);
 
             base.Update(gameTime);
+        }
+
+        private void detectDarwinMovement(KeyboardState ks)
+        {
+            if (ks.IsKeyDown(Keys.Right))
+            {
+                darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
+            }
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
+            }
+            if (ks.IsKeyDown(Keys.Up))
+            {
+                darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
+            }
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
+            }
         }
 
         /// <summary>
@@ -84,9 +117,13 @@ namespace LegendOfDarwin
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            darwin.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

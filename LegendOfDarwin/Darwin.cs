@@ -18,6 +18,7 @@ namespace LegendOfDarwin
         //Darwin's width in pixels - set to 100 till his real height is set
         public const int DARWIN_WIDTH = 100;
 
+
         //flag to show whether darwin is a zombie or not
         public static bool isZombie;
 
@@ -33,7 +34,7 @@ namespace LegendOfDarwin
 
         // The current position of Darwin on the floor
         // Might have to be changed to coordinates depending on the floor layout
-        Vector2 position = Vector2.Zero;
+        public Vector2 position = Vector2.Zero;
 
 
         // Textures 
@@ -67,10 +68,11 @@ namespace LegendOfDarwin
         }
 
         // Load the content
-        public void LoadContent(GraphicsDevice newGraphics, Texture2D newTex)
+        public void LoadContent(GraphicsDevice newGraphics, Texture2D humanTex, Texture2D zombieTex)
         {
             graphics = newGraphics;
-            darwinTex = newTex;
+            darwinTex = humanTex;
+            zombieDarwinTex = zombieTex;
         }
 
         // Update

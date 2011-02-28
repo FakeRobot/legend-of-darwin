@@ -84,6 +84,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
 
             detectDarwinMovement(ks);
+            detectDarwinTransform(ks);
 
             //currently does nothing
             darwin.Update(gameTime);
@@ -108,6 +109,14 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Down))
             {
                 darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
+            }
+        }
+
+        private void detectDarwinTransform(KeyboardState ks)
+        {
+            if (ks.IsKeyDown(Keys.Z))
+            {
+                darwin.Transform();
             }
         }
 

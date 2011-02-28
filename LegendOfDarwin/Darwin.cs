@@ -52,6 +52,19 @@ namespace LegendOfDarwin
             source.Y = 0;
         }
 
+        // Change into a zombie
+        public void Transform()
+        {
+            if (isZombie == true)
+            {
+                isZombie = false;
+            }
+            else
+            {
+                isZombie = true;
+            }
+        }
+
         // Set the position of Darwin
         public void SetPosition(float startX, float startY)
         {
@@ -117,7 +130,14 @@ namespace LegendOfDarwin
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(darwinTex, destination, source, Color.White);
+            if (isZombie == false)
+            {
+                spriteBatch.Draw(darwinTex, destination, source, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(zombieDarwinTex, destination, source, Color.White);
+            }
         }
     }
 }

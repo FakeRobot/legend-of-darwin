@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendOfDarwin", "LegendOfDarwin\LegendOfDarwin.csproj", "{BF998A99-27BD-495E-8B3F-92EFA927802A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegendOfDarwinContent", "LegendOfDarwin\Content\LegendOfDarwinContent.contentproj", "{3FF224AE-E6D1-48B3-A60C-0CC5D26A32C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

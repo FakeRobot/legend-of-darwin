@@ -24,6 +24,9 @@ namespace LegendOfDarwin
 
         Darwin darwin;
 
+        GameBoard board;
+        GraphicsDevice device;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -41,8 +44,15 @@ namespace LegendOfDarwin
             // TODO: Add your initialization logic here
 
             darwin = new Darwin();
-            darwin.SetPosition(0.0f, 0.0f);
+            //darwin.SetPosition(0.0f, 0.0f);
+            device = graphics.GraphicsDevice;
+            board = new GameBoard(new Vector2(50, 50), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
+            darwin.setGridPosition(5, 5);
+            if(board.setPosition(darwin))
+            {
+                darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+            }
             base.Initialize();
         }
 
@@ -96,19 +106,39 @@ namespace LegendOfDarwin
         {
             if (ks.IsKeyDown(Keys.Right))
             {
-                darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
+                darwin.setGridPosition(darwin.X + 1, darwin.Y);
+                if (board.setPosition(darwin))
+                {
+                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                //darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Left))
             {
-                darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
+                darwin.setGridPosition(darwin.X - 1, darwin.Y);
+                if (board.setPosition(darwin))
+                {
+                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                //darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
+                darwin.setGridPosition(darwin.X, darwin.Y - 1);
+                if (board.setPosition(darwin))
+                {
+                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                //darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
             }
             if (ks.IsKeyDown(Keys.Down))
             {
-                darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
+                darwin.setGridPosition(darwin.X, darwin.Y + 1);
+                if (board.setPosition(darwin))
+                {
+                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                //darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
             }
         }
 

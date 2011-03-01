@@ -8,27 +8,30 @@ namespace LegendOfDarwin
 {
     class GameBoard
     {
-        private Rectangle[][] grid;
-        private Boolean[][] hasObject;
+        private Rectangle[,] grid;
+        private Boolean[,] hasObject;
 
         public GameBoard(Vector2 boardSize, Vector2 windowSize)
         {
             int length = (int)(windowSize.Y / boardSize.Y);
             int width = (int)(windowSize.X / boardSize.X);
 
+            grid = new Rectangle[(int)boardSize.X, (int)boardSize.Y];
+            hasObject = new Boolean[(int)boardSize.X, (int)boardSize.Y];
+
             for (int i = 0; i < boardSize.X; i++)
             {
                 for (int j = 0; j < boardSize.Y; j++)
                 {
-                    grid[i][j] = new Rectangle(i * width, j * length, width, length);
-                    hasObject[i][j] = false;
+                    grid[i,j] = new Rectangle(i * width, j * length, width, length);
+                    hasObject[i,j] = false;
                 }
             }
         }
 
         public Boolean isTaken(int x, int y)
         {
-            return hasObject[x][y];
+            return hasObject[x,y];
         }
 
         public Boolean setPosition(BasicObject bo)
@@ -38,14 +41,19 @@ namespace LegendOfDarwin
                 return false;
             }
 
-            hasObject[bo.X][bo.Y] = true;
+            hasObject[bo.X,bo.Y] = true;
 
             return true;
         }
 
-        public void freePosition(int x, int y)
+        public Rectangle getPosition(BasicObject bo)
         {
-            hasObject[x][y] = false;
+            return grid[bo.X,bo.Y];
+        }
+
+        public void freePosition(BasicObject bo)
+        {
+            hasObject[bo.X,bo.Y] = false;
         }
 
     }

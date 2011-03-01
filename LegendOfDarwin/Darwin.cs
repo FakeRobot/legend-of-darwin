@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin
 {
-    class Darwin
+    class Darwin : BasicObject
     {
         GraphicsDevice graphics;
 
@@ -44,6 +44,7 @@ namespace LegendOfDarwin
         //constructor
         public Darwin()
         {
+            
             // Init the frame or cell of the animation that will be shown. 
             source = new Rectangle();
             source.Width = DARWIN_HEIGHT;

@@ -14,8 +14,7 @@ using Microsoft.Xna.Framework.Storage;
 namespace LegendOfDarwin
 {
     /// <summary>
-    /// This is the main type for your game
-    /// This is a test comment.
+    /// This is the main type for the game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
@@ -46,7 +45,7 @@ namespace LegendOfDarwin
             // TODO: Add your initialization logic here
 
             darwin = new Darwin();
-            //darwin.SetPosition(0.0f, 0.0f);
+            //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
             board = new GameBoard(new Vector2(50, 50), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
@@ -58,7 +57,7 @@ namespace LegendOfDarwin
 
             UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
 
-            darwin.setSource(UNIVERSAL_SOURCE);
+            //darwin.setSource(UNIVERSAL_SOURCE);
             
             base.Initialize();
         }

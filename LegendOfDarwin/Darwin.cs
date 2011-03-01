@@ -13,10 +13,10 @@ namespace LegendOfDarwin
         GraphicsDevice graphics;
 
 
-        //Darwin's height in pixels - set to 100 till his real height is set
-        public const int DARWIN_HEIGHT = 100;
-        //Darwin's width in pixels - set to 100 till his real height is set
-        public const int DARWIN_WIDTH = 100;
+        //Darwin's height in pixels
+        public const int DARWIN_HEIGHT = 64;
+        //Darwin's width in pixels
+        public const int DARWIN_WIDTH = 64;
 
 
         //flag to show whether darwin is a zombie or not
@@ -44,7 +44,6 @@ namespace LegendOfDarwin
         //constructor
         public Darwin()
         {
-            
             // Init the frame or cell of the animation that will be shown. 
             source = new Rectangle();
             source.Width = DARWIN_HEIGHT;
@@ -75,11 +74,11 @@ namespace LegendOfDarwin
         }
 
         // Set the position of Darwin
-        public void setPosition(float startX, float startY)
+        public void setPosition(int startX, int startY)
         {
             // Set the initial position of Darwin
-            position.X = startX;
-            position.Y = startY;
+            position.X = (float)startX;
+            position.Y = (float)startY;
 
             // Update the destination
             destination = new Rectangle();

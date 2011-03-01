@@ -8,13 +8,20 @@ namespace LegendOfDarwin
 {
     class GameBoard
     {
+        private int squareLength, squareWidth;
         private Rectangle[,] grid;
         private Boolean[,] hasObject;
+        private int gridLength;
+        private int gridWidth;
 
+       
         public GameBoard(Vector2 boardSize, Vector2 windowSize)
         {
-            int length = (int)(windowSize.Y / boardSize.Y);
-            int width = (int)(windowSize.X / boardSize.X);
+            squareLength = (int)(windowSize.Y / boardSize.Y);
+            squareWidth = (int)(windowSize.X / boardSize.X);
+
+            gridLength = (int)boardSize.Y;
+            gridWidth = (int)boardSize.X;
 
             grid = new Rectangle[(int)boardSize.X, (int)boardSize.Y];
             hasObject = new Boolean[(int)boardSize.X, (int)boardSize.Y];
@@ -23,7 +30,7 @@ namespace LegendOfDarwin
             {
                 for (int j = 0; j < boardSize.Y; j++)
                 {
-                    grid[i,j] = new Rectangle(i * width, j * length, width, length);
+                    grid[i,j] = new Rectangle(i * squareWidth, j * squareLength, squareWidth, squareLength);
                     hasObject[i,j] = false;
                 }
             }
@@ -31,6 +38,14 @@ namespace LegendOfDarwin
 
         public Boolean isTaken(int x, int y)
         {
+            if (x < 0 || x > gridWidth)
+            {
+                return true;
+            }
+            if (y < 0 || y > gridLength)
+            {
+                return true;
+            }
             return hasObject[x,y];
         }
 
@@ -58,7 +73,26 @@ namespace LegendOfDarwin
 
         public void setGridPositionOpen(int x, int y)
         {
-            hasObject[x, y] = false;
+            if (x < 0 || x > gridWidth)
+            {
+            }
+            else if (y < 0 || y > gridLength)
+            {
+            }
+            else
+            {
+                hasObject[x, y] = false;
+            }
+        }
+
+        public int getSquareLength()
+        {
+            return this.squareLength;
+        }
+
+        public int getSquareWidth()
+        {
+            return this.squareWidth;
         }
     }
 }

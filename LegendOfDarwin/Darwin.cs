@@ -60,6 +60,12 @@ namespace LegendOfDarwin
             source.Y = rec.Y;
         }
 
+        public void setPictureSize(int width, int height)
+        {
+            destination.Width = width;
+            destination.Height = height;
+        }
+
         // Change into a zombie
         public void Transform()
         {

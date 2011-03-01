@@ -18,7 +18,9 @@ namespace LegendOfDarwin
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        Rectangle UNIVERSAL_SOURCE;
+
+        private int counter;
+
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -47,7 +49,7 @@ namespace LegendOfDarwin
             darwin = new Darwin();
             //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
-            board = new GameBoard(new Vector2(50, 50), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
+            board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
             darwin.setGridPosition(5, 5);
             if(board.isGridPositionOpen(darwin))
@@ -55,7 +57,9 @@ namespace LegendOfDarwin
                 darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
 
-            UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
+
+            counter = 0;
+            //UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
 
             //darwin.setSource(UNIVERSAL_SOURCE);
             
@@ -99,8 +103,21 @@ namespace LegendOfDarwin
 
             KeyboardState ks = Keyboard.GetState();
 
-            detectDarwinMovement(ks);
-            detectDarwinTransform(ks);
+            if (counter == 0)
+            {
+                detectDarwinMovement(ks);
+                detectDarwinTransform(ks);
+
+                darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            }
+            else if (counter == 30)
+            {
+                counter = 0;
+            }
+            else
+            {
+                counter++;
+            }
 
             //currently does nothing
             darwin.Update(gameTime);

@@ -53,6 +53,14 @@ namespace LegendOfDarwin
             source.Y = 0;
         }
 
+        public void setSource(Rectangle rec)
+        {
+            source.Width = rec.Width;
+            source.Height = rec.Height;
+            source.X = rec.X;
+            source.Y = rec.Y;
+        }
+
         // Change into a zombie
         public void Transform()
         {

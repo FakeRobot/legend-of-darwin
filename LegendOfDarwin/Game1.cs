@@ -19,6 +19,8 @@ namespace LegendOfDarwin
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        Rectangle UNIVERSAL_SOURCE;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -53,6 +55,11 @@ namespace LegendOfDarwin
             {
                 darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
+
+            UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
+
+            darwin.setSource(UNIVERSAL_SOURCE);
+            
             base.Initialize();
         }
 
@@ -109,6 +116,7 @@ namespace LegendOfDarwin
                 darwin.setGridPosition(darwin.X + 1, darwin.Y);
                 if (board.setPosition(darwin))
                 {
+                    board.freePosition(darwin.X - 1, darwin.Y);
                     darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
@@ -118,6 +126,7 @@ namespace LegendOfDarwin
                 darwin.setGridPosition(darwin.X - 1, darwin.Y);
                 if (board.setPosition(darwin))
                 {
+                    board.freePosition(darwin.X + 1, darwin.Y);
                     darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
@@ -127,6 +136,7 @@ namespace LegendOfDarwin
                 darwin.setGridPosition(darwin.X, darwin.Y - 1);
                 if (board.setPosition(darwin))
                 {
+                    board.freePosition(darwin.X, darwin.Y + 1);
                     darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
@@ -136,6 +146,7 @@ namespace LegendOfDarwin
                 darwin.setGridPosition(darwin.X, darwin.Y + 1);
                 if (board.setPosition(darwin))
                 {
+                    board.freePosition(darwin.X, darwin.Y - 1);
                     darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));

@@ -56,5 +56,9 @@ namespace LegendOfDarwin
             hasObject[bo.X,bo.Y] = false;
         }
 
+        public void freePosition(int x, int y)
+        {
+            hasObject[x, y] = false;
+        }
     }
 }

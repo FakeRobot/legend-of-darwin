@@ -51,9 +51,9 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(50, 50), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
             darwin.setGridPosition(5, 5);
-            if(board.setPosition(darwin))
+            if(board.isGridPositionOpen(darwin))
             {
-                darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
 
             UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
@@ -114,40 +114,40 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Right))
             {
                 darwin.setGridPosition(darwin.X + 1, darwin.Y);
-                if (board.setPosition(darwin))
+                if (board.isGridPositionOpen(darwin))
                 {
-                    board.freePosition(darwin.X - 1, darwin.Y);
-                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                    board.setGridPositionOpen(darwin.X - 1, darwin.Y);
+                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Left))
             {
                 darwin.setGridPosition(darwin.X - 1, darwin.Y);
-                if (board.setPosition(darwin))
+                if (board.isGridPositionOpen(darwin))
                 {
-                    board.freePosition(darwin.X + 1, darwin.Y);
-                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                    board.setGridPositionOpen(darwin.X + 1, darwin.Y);
+                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Up))
             {
                 darwin.setGridPosition(darwin.X, darwin.Y - 1);
-                if (board.setPosition(darwin))
+                if (board.isGridPositionOpen(darwin))
                 {
-                    board.freePosition(darwin.X, darwin.Y + 1);
-                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                    board.setGridPositionOpen(darwin.X, darwin.Y + 1);
+                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
             }
             if (ks.IsKeyDown(Keys.Down))
             {
                 darwin.setGridPosition(darwin.X, darwin.Y + 1);
-                if (board.setPosition(darwin))
+                if (board.isGridPositionOpen(darwin))
                 {
-                    board.freePosition(darwin.X, darwin.Y - 1);
-                    darwin.SetPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                    board.setGridPositionOpen(darwin.X, darwin.Y - 1);
+                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
             }

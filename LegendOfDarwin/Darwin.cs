@@ -75,7 +75,7 @@ namespace LegendOfDarwin
         }
 
         // Set the position of Darwin
-        public void SetPosition(float startX, float startY)
+        public void setPosition(float startX, float startY)
         {
             // Set the initial position of Darwin
             position.X = startX;

@@ -34,7 +34,7 @@ namespace LegendOfDarwin
             return hasObject[x,y];
         }
 
-        public Boolean setPosition(BasicObject bo)
+        public Boolean isGridPositionOpen(BasicObject bo)
         {
             if (isTaken(bo.X, bo.Y))
             {
@@ -56,7 +56,7 @@ namespace LegendOfDarwin
             hasObject[bo.X,bo.Y] = false;
         }
 
-        public void freePosition(int x, int y)
+        public void setGridPositionOpen(int x, int y)
         {
             hasObject[x, y] = false;
         }

@@ -36,8 +36,7 @@ namespace LegendOfDarwin
 
         GraphicsDevice device;
 
-        // Test subject atm
-        Darwin d2;
+        BasicObject potentialGridPosition;
 
         bool keyIsHeldDown = false;
 
@@ -49,10 +48,8 @@ namespace LegendOfDarwin
 
         protected override void Initialize()
         {
-            // Testing
-            d2 = new Darwin();
-
             darwin = new Darwin();
+            potentialGridPosition = new BasicObject();
             //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
 
@@ -65,6 +62,8 @@ namespace LegendOfDarwin
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
+            potentialGridPosition.setGridPosition(5,5);
+
             if(board.isGridPositionOpen(darwin))
             {
                 darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
@@ -72,13 +71,6 @@ namespace LegendOfDarwin
 
             // Darwin's lag movement
             counterReady = counter = 5;
-
-            // Test
-            d2.setGridPosition(10, 10);
-            if (board.isGridPositionOpen(d2))
-            {
-                d2.setPosition(board.getPosition(d2).X, board.getPosition(d2).Y);
-            }
             
             base.Initialize();
         }
@@ -102,9 +94,6 @@ namespace LegendOfDarwin
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
-            
-            // Test
-            d2.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
         }
 
         protected override void UnloadContent()
@@ -119,7 +108,6 @@ namespace LegendOfDarwin
                 this.Exit();
 
             KeyboardState ks = Keyboard.GetState();
-
 
             updateKeyHeldDown(ks);
 
@@ -143,8 +131,6 @@ namespace LegendOfDarwin
                 detectDarwinTransform(ks);
                 darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             }
-
-            d2.setPictureSize(board.getSquareWidth(), board.getSquareLength());
 
             //currently does nothing
             darwin.Update(gameTime);
@@ -171,59 +157,43 @@ namespace LegendOfDarwin
         {
             if (ks.IsKeyDown(Keys.Right))
             {
-                darwin.setGridPosition(darwin.X + 1, darwin.Y);
-                if (board.isGridPositionOpen(darwin))
+                potentialGridPosition.setGridPosition(darwin.X + 1, darwin.Y);
+                if (board.isGridPositionOpen(potentialGridPosition))
                 {
+                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
                     board.setGridPositionOpen(darwin.X - 1, darwin.Y);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-                else
-                {
-                    darwin.setGridPosition(darwin.X - 1, darwin.Y);
-                }
-                //darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Left))
             {
-                darwin.setGridPosition(darwin.X - 1, darwin.Y);
-                if (board.isGridPositionOpen(darwin))
+                potentialGridPosition.setGridPosition(darwin.X - 1, darwin.Y);
+                if (board.isGridPositionOpen(potentialGridPosition))
                 {
+                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
                     board.setGridPositionOpen(darwin.X + 1, darwin.Y);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-                else
-                {
-                    darwin.setGridPosition(darwin.X + 1, darwin.Y);
-                }
-                //darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                darwin.setGridPosition(darwin.X, darwin.Y - 1);
-                if (board.isGridPositionOpen(darwin))
+                potentialGridPosition.setGridPosition(darwin.X, darwin.Y - 1);
+                if (board.isGridPositionOpen(potentialGridPosition))
                 {
+                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
                     board.setGridPositionOpen(darwin.X, darwin.Y + 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-                else
-                {
-                    darwin.setGridPosition(darwin.X, darwin.Y + 1);
-                }
-                //darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
             }
             if (ks.IsKeyDown(Keys.Down))
             {
-                darwin.setGridPosition(darwin.X, darwin.Y + 1);
-                if (board.isGridPositionOpen(darwin))
+                potentialGridPosition.setGridPosition(darwin.X, darwin.Y + 1);
+                if (board.isGridPositionOpen(potentialGridPosition))
                 {
+                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
                     board.setGridPositionOpen(darwin.X, darwin.Y - 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-                else
-                {
-                    darwin.setGridPosition(darwin.X, darwin.Y - 1);
-                }
-                //darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
             }
         }
 
@@ -244,7 +214,6 @@ namespace LegendOfDarwin
 
 
             darwin.Draw(spriteBatch);
-            d2.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
 
             spriteBatch.End();

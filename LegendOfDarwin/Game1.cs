@@ -151,6 +151,7 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
+            firstSwitch.Draw(spriteBatch);
 
             spriteBatch.End();
 

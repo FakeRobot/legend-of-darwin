@@ -10,9 +10,16 @@ namespace LegendOfDarwin
 {
     class Switch : BasicObject
     {
+        // the texture to draw on the wall squares
         Texture2D wallTex;
 
+        // squares that will be in the wall
         BasicObject[] bos;
+
+        // The frame or cell of the sprite to show
+        private Rectangle source;
+
+        GameBoard board;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
@@ -27,6 +34,8 @@ namespace LegendOfDarwin
 
             this.bos = bos;
 
+            this.board = myboard;
+
             // check that you aren't putting a switch on a spot that is already taken
             /*
             if (!myboard.isGridPositionOpen(this))
@@ -38,7 +47,7 @@ namespace LegendOfDarwin
             foreach (BasicObject bo in bos)
             {
                 // if it is open, fill it.
-                if (myboard.isGridPositionOpen(bo))
+                if (board.isGridPositionOpen(bo))
                 {
                     bo.setGridPosition(bo.X, bo.Y);
 
@@ -55,10 +64,11 @@ namespace LegendOfDarwin
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-         /*   foreach (BasicObject bo in bos)
+            foreach (BasicObject bo in bos)
             {
-                spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
-            }*/
+                source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+                spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
+            }
         }
     }
 }

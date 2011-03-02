@@ -39,7 +39,7 @@ namespace LegendOfDarwin
 
         GraphicsDevice device;
 
-        BasicObject potentialGridPosition;
+        
 
         bool keyIsHeldDown = false;
 
@@ -52,7 +52,7 @@ namespace LegendOfDarwin
         protected override void Initialize()
         {
             darwin = new Darwin();
-            potentialGridPosition = new BasicObject();
+            
             device = graphics.GraphicsDevice;
 
             InitializeGraphics();
@@ -77,7 +77,7 @@ namespace LegendOfDarwin
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
-            potentialGridPosition.setGridPosition(5,5);
+            
 
             if(board.isGridPositionOpen(darwin))
             {
@@ -134,24 +134,18 @@ namespace LegendOfDarwin
             {
                 if (counter > counterReady)
                 {
-                    detectDarwinMovement(ks);
-                    darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+                    darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
                     counter = 0;
                 }
                 else
                 {
                     counter++;
                 }
-
             }
             else
             {
-                detectDarwinMovement(ks);
-                darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
-
-            //currently does nothing
-            darwin.Update(gameTime, ks);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime,darwin);
@@ -168,50 +162,6 @@ namespace LegendOfDarwin
             else
             {
                 keyIsHeldDown = true;
-            }
-        }
-
-        private void detectDarwinMovement(KeyboardState ks)
-        {
-            if (ks.IsKeyDown(Keys.Right))
-            {
-                potentialGridPosition.setGridPosition(darwin.X + 1, darwin.Y);
-                if (board.isGridPositionOpen(potentialGridPosition))
-                {
-                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(darwin.X - 1, darwin.Y);
-                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-                }
-            }
-            if (ks.IsKeyDown(Keys.Left))
-            {
-                potentialGridPosition.setGridPosition(darwin.X - 1, darwin.Y);
-                if (board.isGridPositionOpen(potentialGridPosition))
-                {
-                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(darwin.X + 1, darwin.Y);
-                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-                }
-            }
-            if (ks.IsKeyDown(Keys.Up))
-            {
-                potentialGridPosition.setGridPosition(darwin.X, darwin.Y - 1);
-                if (board.isGridPositionOpen(potentialGridPosition))
-                {
-                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(darwin.X, darwin.Y + 1);
-                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-                }
-            }
-            if (ks.IsKeyDown(Keys.Down))
-            {
-                potentialGridPosition.setGridPosition(darwin.X, darwin.Y + 1);
-                if (board.isGridPositionOpen(potentialGridPosition))
-                {
-                    darwin.setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(darwin.X, darwin.Y - 1);
-                    darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-                }
             }
         }
 

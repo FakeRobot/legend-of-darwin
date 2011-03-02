@@ -46,6 +46,8 @@ namespace LegendOfDarwin
         Texture2D darwinTex;
         Texture2D zombieDarwinTex;
 
+        BasicObject potentialGridPosition;
+
         //constructor
         public Darwin()
         {
@@ -55,6 +57,9 @@ namespace LegendOfDarwin
             source.Height = DARWIN_WIDTH;
             source.X = 0;
             source.Y = 0;
+
+            potentialGridPosition = new BasicObject();
+            potentialGridPosition.setGridPosition(5, 5);
         }
 
         public void setSource(Rectangle rec)
@@ -94,15 +99,63 @@ namespace LegendOfDarwin
             zombieDarwinTex = zombieTex;
         }
 
-        public void Update(GameTime gameTime, KeyboardState ks)
+        public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
         {
             updateDarwinTransformState(ks);
+            moveDarwin(ks, board, currentDarwinX, currentDarwinY);
+            setPictureSize(board.getSquareWidth(), board.getSquareLength());
 
+        }
 
+        private void moveDarwin(KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
+        {
+            if (ks.IsKeyDown(Keys.Right))
+            {
+                potentialGridPosition.setGridPosition(currentDarwinX + 1, currentDarwinY);
+                if (board.isGridPositionOpen(potentialGridPosition))
+                {
+                    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
+                    board.setGridPositionOpen(currentDarwinX - 1, currentDarwinY);
+                    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
+                }
+
+            }
+            if (ks.IsKeyDown(Keys.Left))
+            {
+                potentialGridPosition.setGridPosition(currentDarwinX - 1, currentDarwinY);
+                if (board.isGridPositionOpen(potentialGridPosition))
+                {
+                    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
+                    board.setGridPositionOpen(currentDarwinX + 1, currentDarwinY);
+                    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
+                }
+            }
+            if (ks.IsKeyDown(Keys.Up))
+            {
+                potentialGridPosition.setGridPosition(currentDarwinX, currentDarwinY - 1);
+                if (board.isGridPositionOpen(potentialGridPosition))
+                {
+                    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY + 1);
+                    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
+                }
+            }
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                potentialGridPosition.setGridPosition(currentDarwinX, currentDarwinY + 1);
+                if (board.isGridPositionOpen(potentialGridPosition))
+                {
+                    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY - 1);
+                    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
+                }
+
+            }
         }
 
         private void updateDarwinTransformState(KeyboardState ks)
         {
+            //need to add flag - buggy
             if (ks.IsKeyDown(Keys.Z))
             {
                 if (isZombie == true)

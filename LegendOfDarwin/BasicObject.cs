@@ -25,6 +25,7 @@ namespace LegendOfDarwin
             Y = 0;
         }
         */
+
         // Set their positions
         public void setGridPosition(int x, int y)
         {

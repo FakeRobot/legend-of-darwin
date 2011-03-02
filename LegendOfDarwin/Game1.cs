@@ -54,13 +54,9 @@ namespace LegendOfDarwin
             s1.X = 20;
             s1.Y = 19;
 
-
-
             BasicObject s2 = new BasicObject();
-            s2.X = 21;
-            s2.Y = 21;
-           
-
+            s2.X = 20;
+            s2.Y = 20;
 
             BasicObject s3 = new BasicObject();
             s3.X = 20;

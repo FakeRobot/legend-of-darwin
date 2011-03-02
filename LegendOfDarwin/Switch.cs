@@ -49,8 +49,7 @@ namespace LegendOfDarwin
                 // if it is open, fill it.
                 if (board.isGridPositionOpen(bo))
                 {
-                    bo.setGridPosition(bo.X, bo.Y);
-
+                    //if its free it will be set by the function call in the if
                 }
             }
         }

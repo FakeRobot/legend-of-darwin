@@ -116,7 +116,6 @@ namespace LegendOfDarwin
                 if (counter > counterReady)
                 {
                     detectDarwinMovement(ks);
-                    detectDarwinTransform(ks);
                     darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
                     counter = 0;
                 }
@@ -128,12 +127,11 @@ namespace LegendOfDarwin
             }
             else{
                 detectDarwinMovement(ks);
-                detectDarwinTransform(ks);
                 darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             }
 
             //currently does nothing
-            darwin.Update(gameTime);
+            darwin.Update(gameTime, ks);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime);
@@ -194,14 +192,7 @@ namespace LegendOfDarwin
                     board.setGridPositionOpen(darwin.X, darwin.Y - 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-            }
-        }
 
-        private void detectDarwinTransform(KeyboardState ks)
-        {
-            if (ks.IsKeyDown(Keys.Z))
-            {
-                darwin.Transform();
             }
         }
 

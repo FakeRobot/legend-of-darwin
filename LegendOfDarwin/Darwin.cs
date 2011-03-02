@@ -66,19 +66,6 @@ namespace LegendOfDarwin
             destination.Height = height;
         }
 
-        // Change into a zombie
-        public void Transform()
-        {
-            if (isZombie == true)
-            {
-                isZombie = false;
-            }
-            else
-            {
-                isZombie = true;
-            }
-        }
-
         // Set the position of Darwin
         public void setPosition(int startX, int startY)
         {
@@ -102,10 +89,26 @@ namespace LegendOfDarwin
             zombieDarwinTex = zombieTex;
         }
 
-        // Update
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, KeyboardState ks)
         {
+            updateDarwinTransformState(ks);
 
+
+        }
+
+        private void updateDarwinTransformState(KeyboardState ks)
+        {
+            if (ks.IsKeyDown(Keys.Z))
+            {
+                if (isZombie == true)
+                {
+                    isZombie = false;
+                }
+                else
+                {
+                    isZombie = true;
+                }
+            }
         }
 
         // Check if Darwin is intersecting something

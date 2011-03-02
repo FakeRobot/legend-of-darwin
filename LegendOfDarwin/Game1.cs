@@ -84,7 +84,11 @@ namespace LegendOfDarwin
 
             BasicObject[] squares = new BasicObject[8] {s1, s2, s3, s4, s5, s6, s7, s8};
 
-            firstSwitch = new Switch(10, 3, board, squares);
+            BasicObject switchSquare = new BasicObject();
+            switchSquare.X = 10;
+            switchSquare.Y = 3;
+
+            firstSwitch = new Switch(switchSquare, board, squares);
 
             // Initial starting position
             darwin.setGridPosition(5, 5);

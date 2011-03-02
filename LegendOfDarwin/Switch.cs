@@ -16,8 +16,11 @@ namespace LegendOfDarwin
         // squares that will be in the wall
         BasicObject[] bos;
 
+        //the square that the switch will be drawn on
+        BasicObject switchSquare;
+
         // The frame or cell of the sprite to show
-        private Rectangle source;
+        private Rectangle switchSource;
 
         GameBoard board;
 
@@ -26,11 +29,10 @@ namespace LegendOfDarwin
          * myboard is the gameboard
          * the bos array is an array of positions that the switch changed from occupied to open when switched
          **/
-        public Switch(int posX, int posY, GameBoard myboard, BasicObject[] bos)
+        public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] bos)
         {
             //switch inherits an X and Y from the basic object
-            this.X = posX;
-            this.Y = posY;
+            this.switchSquare = switchSquare;
 
             this.bos = bos;
 
@@ -65,9 +67,11 @@ namespace LegendOfDarwin
         {
             foreach (BasicObject bo in bos)
             {
-                source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+                Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
                 spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
             }
+            switchSource = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+            spriteBatch.Draw(wallTex, board.getPosition(switchSquare), switchSource, Color.White);
         }
     }
 }

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin
 {
     class Switch : BasicObject
     {
-        Texture2D WallTex;
+        Texture2D wallTex;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
@@ -34,14 +37,24 @@ namespace LegendOfDarwin
                 if (myboard.isGridPositionOpen(bo))
                 {
                     bo.setGridPosition(bo.X, bo.Y);
+
                 }
-
-
             }
+        }
 
+        // Load the content
+        public void LoadContent(Texture2D myWallTex)
+        {
+            wallTex = myWallTex;
+        }
 
-
-            
+        // Draw
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (BasicObject bo in bos)
+            {
+                spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
+            }
         }
     }
 }

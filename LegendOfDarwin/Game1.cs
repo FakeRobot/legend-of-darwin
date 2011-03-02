@@ -31,6 +31,9 @@ namespace LegendOfDarwin
         // First Zombie
         Zombie firstZombie;
 
+        // First Switch
+        Switch firstSwitch;
+
         // The grid board
         GameBoard board;
 
@@ -50,7 +53,6 @@ namespace LegendOfDarwin
         {
             darwin = new Darwin();
             potentialGridPosition = new BasicObject();
-            //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
 
             InitializeGraphics();
@@ -59,6 +61,19 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
+
+            //array of squares that the switch will control
+            BasicObject s1 = new BasicObject();
+            s1.X = 20;
+            s1.Y = 20;
+
+            BasicObject s2 = new BasicObject();
+            s2.X = 21;
+            s2.Y = 21;
+           
+            BasicObject[] squares = new BasicObject[2] {s1, s2};
+
+            firstSwitch = new Switch(10, 3, board, squares);
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
@@ -87,6 +102,10 @@ namespace LegendOfDarwin
             // Test
             Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
             Texture2D basicMenuTex = Content.Load<Texture2D>("grid_menu_outline");
+
+            // Texture for the wall
+            Texture2D wallTex = Content.Load<Texture2D>("Wall");
+            firstSwitch.LoadContent(wallTex);
 
             // Test
             board.LoadContent(basicGridTex);
@@ -125,7 +144,8 @@ namespace LegendOfDarwin
                 }
 
             }
-            else{
+            else
+            {
                 detectDarwinMovement(ks);
                 darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             }

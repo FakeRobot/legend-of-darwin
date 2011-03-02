@@ -109,7 +109,7 @@ namespace LegendOfDarwin
             if (board.isGridPositionOpen(20, 2))
             {
                 firstStair.setGridPosition(20, 2);
-                firstStair.setDestination(board.getDestination(20, 2));
+                //firstStair.setDestination(board.getDestination(20, 2));
             }
 
 

@@ -107,6 +107,10 @@ namespace LegendOfDarwin
         {
             return grid[bo.X,bo.Y];
         }
+        public Rectangle getPosition(int x, int y)
+        {
+            return grid[x, y];
+        }
 
 
         /*

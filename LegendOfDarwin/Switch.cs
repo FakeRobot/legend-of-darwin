@@ -24,7 +24,7 @@ namespace LegendOfDarwin
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
          * myboard is the gameboard
-         * the bos array is an array of positions that the switch changed from occupied to open when switched
+         * walls is an array basic objects with the positions on the grid that the switch will control
          **/
         public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] walls) : base(myboard)
         {
@@ -36,19 +36,25 @@ namespace LegendOfDarwin
 
             this.board = myboard;
 
-            // initialize the square that the switch is on to be occupied
             if (board.isGridPositionOpen(this.X, this.Y))
             {
                 board.setGridPositionOccupied(this.X, this.Y);
+            }
+            else
+            {
+                // you are putting a switch on a block that is already occupied. That isn't good.
             }
 
             // initialize all of the walls associated with this switch to be occupied
             foreach (BasicObject bo in walls)
             {
-                // if it is open, fill it.
                 if (board.isGridPositionOpen(bo))
                 {
-                    board.setGridPositionOccupied(this.X, this.Y);
+                    board.setGridPositionOccupied(bo.X, bo.Y);
+                }
+                else
+                {
+                    // you are putting a wall on a block that is already occupied. That isn't good.
                 }
             }
         }
@@ -69,11 +75,7 @@ namespace LegendOfDarwin
             }
             
             switchSource = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
-
-            BasicObject switchSquare = new BasicObject(board);
-            switchSquare.setPosition(this.X, this.Y);
-
-            spriteBatch.Draw(wallTex, board.getPosition(switchSquare), switchSource, Color.White);
+            spriteBatch.Draw(wallTex, board.getPosition(this.X, this.Y), switchSource, Color.White);
         }
     }
 }

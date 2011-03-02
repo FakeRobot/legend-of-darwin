@@ -13,35 +13,19 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace LegendOfDarwin
 {
-    /// <summary>
-    /// This is the main type for the game
-    /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        // counter and counterReady used for the movement timing of darwin
-        private int counter;
-        private int counterReady;
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // Main character of the game
         Darwin darwin;
-
-        // First Zombie
         Zombie firstZombie;
-
-        // First Switch
         Switch firstSwitch;
-
-        // The grid board
         GameBoard board;
-
         GraphicsDevice device;
-
-        
-
         bool keyIsHeldDown = false;
+        private int counter;
+        private int counterReady;
 
         public Game1()
         {
@@ -51,15 +35,11 @@ namespace LegendOfDarwin
 
         protected override void Initialize()
         {
-            darwin = new Darwin();
-            
+            darwin = new Darwin(); 
             device = graphics.GraphicsDevice;
-
             InitializeGraphics();
 
-            // Initializing board
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
-
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             //array of squares that the switch will control
@@ -77,7 +57,6 @@ namespace LegendOfDarwin
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
-            
 
             if(board.isGridPositionOpen(darwin))
             {
@@ -115,10 +94,7 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(zombieTex);
         }
 
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+        protected override void UnloadContent(){}
 
         protected override void Update(GameTime gameTime)
         {

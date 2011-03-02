@@ -76,7 +76,6 @@ namespace LegendOfDarwin
             destination.Height = height;
         }
 
-        // Set the position of Darwin
         public void setPosition(int startX, int startY)
         {
             // Set the initial position of Darwin
@@ -91,7 +90,6 @@ namespace LegendOfDarwin
             destination.Y = (int)Math.Round(position.Y);
         }
 
-        // Load the content
         public void LoadContent(GraphicsDevice newGraphics, Texture2D humanTex, Texture2D zombieTex)
         {
             graphics = newGraphics;
@@ -202,7 +200,6 @@ namespace LegendOfDarwin
             return false;
         }
 
-        // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
             if (isZombie == false)

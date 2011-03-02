@@ -10,17 +10,38 @@ namespace LegendOfDarwin
 
     class Stairs : BasicObject
     {
-        private Texture2D stairTex;
+        private Texture2D stairUpTex;
+        private Texture2D stairDownTex;
+
+        private enum Dir { Up, Down };
+
+        private Dir view;
 
         public Stairs(GameBoard myBoard)
             : base(myBoard)
-        { 
+        {
             // DO nothing
         }
 
-        public void LoadContent(Texture2D content)
+        public void LoadContent(Texture2D stairUp, Texture2D stairDown, String orientation)
         {
-            stairTex = content;
+            stairUpTex = stairUp;
+            stairDownTex = stairDown;
+            view = new Dir();
+
+            if (orientation.Equals("Up"))
+            {
+                view = Dir.Up;
+            }
+            else if (orientation.Equals("Down"))
+            {
+                view = Dir.Down;
+            }
+            else
+            {
+                throw new Exception("Orientation needs either 'Up' or 'Down'");
+            }
+
         }
 
         public void setDestination(Rectangle rectangle)
@@ -30,7 +51,18 @@ namespace LegendOfDarwin
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(stairTex, destination, Color.White);
+            switch (view)
+            { 
+                case Dir.Down:
+                    spriteBatch.Draw(stairDownTex, destination, Color.White);
+                    break;
+                case Dir.Up:
+                    spriteBatch.Draw(stairUpTex, destination, Color.White);
+                    break;
+                default:
+                    throw new Exception("Something happened with the view");
+            }
+
         }
     }
 }

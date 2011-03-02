@@ -27,7 +27,7 @@ namespace LegendOfDarwin
         private int counter;
         private int counterReady;
 
-        Stairs firstStair;
+        Stairs firstStair, secondStair;
 
 
         public Game1()
@@ -47,6 +47,7 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             firstStair = new Stairs(board);
+            secondStair = new Stairs(board);
 
             //array of squares that the switch will control
 
@@ -109,7 +110,12 @@ namespace LegendOfDarwin
             if (board.isGridPositionOpen(20, 2))
             {
                 firstStair.setGridPosition(20, 2);
-                //firstStair.setDestination(board.getDestination(20, 2));
+                firstStair.setDestination(board.getPosition(20, 2));
+            }
+            if (board.isGridPositionOpen(19, 2))
+            {
+                secondStair.setGridPosition(19, 2);
+                secondStair.setDestination(board.getPosition(19, 2));
             }
 
 
@@ -135,11 +141,13 @@ namespace LegendOfDarwin
             Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
             Texture2D basicMenuTex = Content.Load<Texture2D>("grid_menu_outline");
 
-            Texture2D basicStairTex = Content.Load<Texture2D>("stairs");
+            Texture2D basicStairUpTex = Content.Load<Texture2D>("stairsUp");
+            Texture2D basicStairDownTex = Content.Load<Texture2D>("stairsDown");
             // Texture for the wall
             Texture2D wallTex = Content.Load<Texture2D>("Wall");
 
-            firstStair.LoadContent(basicStairTex);
+            firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
+            secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
             firstSwitch.LoadContent(wallTex);
 
             // Test
@@ -209,6 +217,7 @@ namespace LegendOfDarwin
 
 
             firstStair.Draw(spriteBatch);
+            secondStair.Draw(spriteBatch);
 
 
             darwin.Draw(spriteBatch);

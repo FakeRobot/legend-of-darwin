@@ -117,8 +117,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="stairs.png">
-      <Name>stairs</Name>
+    <Compile Include="stairsUp.png">
+      <Name>stairsUp</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -136,6 +136,13 @@
     </Compile>
     <Compile Include="DarwinUp.png">
       <Name>DarwinUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="stairsDown.png">
+      <Name>stairsDown</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

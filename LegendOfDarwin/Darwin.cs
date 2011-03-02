@@ -121,10 +121,10 @@ namespace LegendOfDarwin
         {
             if (ks.IsKeyDown(Keys.Right))
             {
+                facing = Dir.Right;
                 if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY))
                 {
                     this.MoveRight();
-                    facing = Dir.Right;
                 }
                 else
                 {
@@ -133,10 +133,10 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.Left))
             {
+                facing = Dir.Left;
                 if(board.isGridPositionOpen(currentDarwinX -1, currentDarwinY))
                 {
                     this.MoveLeft();
-                    facing = Dir.Left;
                 }
                 else
                 {
@@ -146,10 +146,10 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.Up))
             {
+                facing = Dir.Up;
                 if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1))
                 {
                     this.MoveUp();
-                    facing = Dir.Up;
                 }
                 else
                 {
@@ -158,10 +158,10 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.Down))
             {
+                facing = Dir.Down;
                 if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1))
                 {
                     this.MoveDown();
-                    facing = Dir.Down;
                 }
                 else
                 {

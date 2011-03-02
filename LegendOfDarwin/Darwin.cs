@@ -113,7 +113,7 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(potentialGridPosition))
                 {
                     setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(currentDarwinX - 1, currentDarwinY);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
                     setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
                 }
 
@@ -124,7 +124,7 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(potentialGridPosition))
                 {
                     setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(currentDarwinX + 1, currentDarwinY);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
                     setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
                 }
             }
@@ -134,7 +134,7 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(potentialGridPosition))
                 {
                     setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(currentDarwinX, currentDarwinY + 1);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
                     setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
                 }
             }
@@ -144,10 +144,9 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(potentialGridPosition))
                 {
                     setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                    board.setGridPositionOpen(currentDarwinX, currentDarwinY - 1);
+                    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
                     setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
                 }
-
             }
         }
 

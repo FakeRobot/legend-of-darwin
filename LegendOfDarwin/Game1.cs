@@ -46,11 +46,40 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             //array of squares that the switch will control
-            BasicObject s1 = new BasicObject(20, 20);
+            //later add an x and y to the constructor
+            BasicObject s1 = new BasicObject();
+            s1.X = 20;
+            s1.Y = 19;
 
-            BasicObject s2 = new BasicObject(21, 21);
-           
-            BasicObject[] squares = new BasicObject[2] {s1, s2};
+            BasicObject s2 = new BasicObject();
+            s2.X = 20;
+            s2.Y = 20;
+
+            BasicObject s3 = new BasicObject();
+            s3.X = 20;
+            s3.Y = 21;
+
+            BasicObject s4 = new BasicObject();
+            s4.X = 20;
+            s4.Y = 22;
+
+            BasicObject s5 = new BasicObject();
+            s5.X = 20;
+            s5.Y = 19;
+
+            BasicObject s6 = new BasicObject();
+            s6.X = 21;
+            s6.Y = 19;
+
+            BasicObject s7 = new BasicObject();
+            s7.X = 22;
+            s7.Y = 19;
+
+            BasicObject s8 = new BasicObject();
+            s8.X = 23;
+            s8.Y = 19;
+
+            BasicObject[] squares = new BasicObject[8] {s1, s2, s3, s4, s5, s6, s7, s8};
 
             firstSwitch = new Switch(10, 3, board, squares);
 

@@ -93,6 +93,16 @@ namespace LegendOfDarwin
             return true;
         }
 
+        public Boolean isGridPositionOpen(int x, int y)
+        { 
+            if(isTaken(x, y))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /*
          * PreCon: The bo's coordinates have the actually position using the function isGridPositionOpen
          * Gets the rectangle based on the bo's coordinates on the grid

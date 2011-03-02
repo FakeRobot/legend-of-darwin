@@ -43,7 +43,11 @@ namespace LegendOfDarwin
         // the board that the zombie is moving on
         protected GameBoard board;
 
-        public int testcounter;
+        // counter for pacing zombie's movements
+        public int movecounter=0;
+
+        //rate that the zombie moves at, increase to slow down, decrease to speed up
+        public const int ZOMBIE_MOVE_RATE=50;
 
         /* constructor
         *  sets an initial area for the zombie to take up
@@ -223,9 +227,44 @@ namespace LegendOfDarwin
 
         }
 
+        /**
+         * moves zombie in the direction that darwin currently is
+         * */
         public void moveTowardsDarwin(Darwin darwin)
         {
 
+            if (darwin.X > this.X)
+            {
+                //move right
+                if (isZombieInRange(this.X + 1, this.Y))
+                {
+                    MoveRight();
+                }
+            }
+            else if (darwin.X < this.X)
+            {
+                //move left
+                if (isZombieInRange(this.X - 1, this.Y))
+                {
+                    MoveLeft();
+                }
+            }
+            if (darwin.Y > this.Y)
+            {
+                //move down
+                if (isZombieInRange(this.X, this.Y+1))
+                {
+                    MoveDown();
+                }
+            }
+            else if (darwin.Y < this.Y)
+            {
+                //move down
+                if (isZombieInRange(this.X, this.Y - 1))
+                {
+                    MoveUp();
+                }
+            }
 
         }
 
@@ -333,29 +372,29 @@ namespace LegendOfDarwin
 
         public void testRun()
         {
-            if (testcounter < 300 && (testcounter % 50) == 0)
+            if (movecounter < 300 && (movecounter % 50) == 0)
             {
                 this.MoveRight();
             }
-            else if (testcounter < 600 && testcounter > 300 && (testcounter % 50) == 0)
+            else if (movecounter < 600 && movecounter > 300 && (movecounter % 50) == 0)
             {
                 this.MoveDown();
             }
-            else if (testcounter > 600 && testcounter < 900 && (testcounter % 50) == 0)
+            else if (movecounter > 600 && movecounter < 900 && (movecounter % 50) == 0)
             {
                 this.MoveLeft();
             }
-            else if (testcounter < 1200 && testcounter > 900 && (testcounter % 50) == 0)
+            else if (movecounter < 1200 && movecounter > 900 && (movecounter % 50) == 0)
             {
                 this.MoveUp();
             }
 
-            if (testcounter < 1200)
-                testcounter++;
+            if (movecounter < 1200)
+                movecounter++;
         }
 
         // Update
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime,Darwin darwin)
         {
             //testRun();
 
@@ -363,12 +402,17 @@ namespace LegendOfDarwin
             //Random rand1 = new Random();     
             //Random rand2 = new Random();
 
-            if (testcounter > 50)
+            if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                this.RandomWalk();
-                testcounter = 0;
+                if (isRangeDetectionAllowed() && isDarwinInRange(darwin))
+                    moveTowardsDarwin(darwin);
+                else
+                    this.RandomWalk();
+
+
+                movecounter = 0;
             }
-            testcounter++;
+            movecounter++;
 
         }
 

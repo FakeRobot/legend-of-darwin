@@ -39,7 +39,7 @@ namespace LegendOfDarwin
             // initialize the square that the switch is on to be occupied
             if (board.isGridPositionOpen(this.X, this.Y))
             {
-               // board.setGridPositionOccupied(this.X, this.Y);
+                board.setGridPositionOccupied(this.X, this.Y);
             }
 
             // initialize all of the walls associated with this switch to be occupied
@@ -48,7 +48,7 @@ namespace LegendOfDarwin
                 // if it is open, fill it.
                 if (board.isGridPositionOpen(bo))
                 {
-                    // board.setGridPositionOccupied(this.X, this.Y);
+                    board.setGridPositionOccupied(this.X, this.Y);
                 }
             }
         }

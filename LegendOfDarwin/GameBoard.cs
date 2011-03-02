@@ -68,11 +68,11 @@ namespace LegendOfDarwin
         {
             if (x < 0 || x > gridWidth)
             {
-                return true;
+                return false;
             }
             if (y < 0 || y > gridLength)
             {
-                return true;
+                return false;
             }
             return hasObject[x,y];
         }
@@ -108,6 +108,20 @@ namespace LegendOfDarwin
             return grid[bo.X,bo.Y];
         }
 
+
+        /*
+         * Frees the coordinates on the grid based on bo's coordinates
+         * This is deprecated
+         */ 
+        public void freePosition(BasicObject bo)
+        {
+            hasObject[bo.X,bo.Y] = false;
+        }
+
+        /*
+         * Does the same as freePosition
+         */ 
+
         public void setGridPositionOpen(int x, int y)
         {
             if (x < 0 || x > gridWidth)
@@ -122,6 +136,52 @@ namespace LegendOfDarwin
             }
         }
 
+
+        public void setGridPositionOpen(BasicObject bo)
+        {
+            if (bo.X < 0 || bo.X > gridWidth)
+            {
+            }
+            else if (bo.Y < 0 || bo.Y > gridLength)
+            {
+            }
+            else
+            {
+                hasObject[bo.X, bo.Y] = false;
+            }        
+        }
+
+        public void setGridPositionClosed(int x, int y)
+        {
+            if (x < 0 || x > gridWidth)
+            {
+            }
+            else if (y < 0 || y > gridLength)
+            {
+            }
+            else
+            {
+                hasObject[x, y] = true;
+            }        
+        }
+
+        public void setGridPositionClosed(BasicObject bo)
+        {
+            if (bo.X < 0 || bo.X > gridWidth)
+            {
+            }
+            else if (bo.Y < 0 || bo.Y > gridLength)
+            {
+            }
+            else
+            {
+                hasObject[bo.X, bo.Y] = true;
+            }
+        }
+
+        /*
+         * Exactly what it says
+         */ 
         public void setGridPositionOccupied(int x, int y)
         {
             if( (x>0 && x<gridWidth) && (y>0 && y< gridLength) )
@@ -129,6 +189,7 @@ namespace LegendOfDarwin
                 hasObject[x, y] = true;
             }
         }
+
 
         public int getSquareLength()
         {
@@ -152,6 +213,24 @@ namespace LegendOfDarwin
                     this.background[i, j] = content;
                 }
             }
+        }
+
+        /*
+         * content is the picture to be loaded onto the position made by x and y
+         * It will do nothing if either x or y is out of bounds on the grid.
+         */ 
+        public void LoadGridContent(Texture2D content, int x, int y)
+        {
+            if (x < 0 || x > gridWidth)
+            {
+            }
+            else if (y < 0 || y > gridLength)
+            {
+            }
+            else
+            {
+                this.background[x, y] = content;
+            }            
         }
 
         /*
@@ -191,6 +270,11 @@ namespace LegendOfDarwin
                     spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
                 }
             }
+        }
+
+        internal Rectangle getPosition(int x, int y)
+        {
+            return grid[x, y];
         }
     }
 }

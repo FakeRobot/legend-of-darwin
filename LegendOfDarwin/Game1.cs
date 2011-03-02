@@ -46,6 +46,8 @@ namespace LegendOfDarwin
             darwin = new Darwin(board); 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
+            firstStair = new Stairs(board);
+
             //array of squares that the switch will control
 
 
@@ -102,7 +104,15 @@ namespace LegendOfDarwin
 
             // Darwin's lag movement
             counterReady = counter = 5;
-            
+
+
+            if (board.isGridPositionOpen(20, 2))
+            {
+                firstStair.setGridPosition(20, 2);
+                firstStair.setDestination(board.getPosition(20, 2));
+            }
+
+
             base.Initialize();
         }
 
@@ -119,8 +129,11 @@ namespace LegendOfDarwin
             Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
             Texture2D basicMenuTex = Content.Load<Texture2D>("grid_menu_outline");
 
+            Texture2D basicStairTex = Content.Load<Texture2D>("stairs");
             // Texture for the wall
             Texture2D wallTex = Content.Load<Texture2D>("Wall");
+
+            firstStair.LoadContent(basicStairTex);
             firstSwitch.LoadContent(wallTex);
 
             // Test
@@ -184,6 +197,9 @@ namespace LegendOfDarwin
 
             spriteBatch.Begin();
             board.Draw(spriteBatch);
+
+
+            firstStair.Draw(spriteBatch);
 
 
             darwin.Draw(spriteBatch);

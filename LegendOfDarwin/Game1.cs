@@ -18,17 +18,23 @@ namespace LegendOfDarwin
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-
+        // counter and counterReady used for the movement timing of darwin
         private int counter;
         private int counterReady;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // Main character of the game
         Darwin darwin;
 
+        // The grid board
         GameBoard board;
+
         GraphicsDevice device;
+
+        // Test subject atm
+        Darwin d2;
 
         public Game1()
         {
@@ -44,23 +50,32 @@ namespace LegendOfDarwin
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Testing
+            d2 = new Darwin();
 
             darwin = new Darwin();
             //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
+
+            // Initializing board
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
+            // Initial starting position
             darwin.setGridPosition(5, 5);
             if(board.isGridPositionOpen(darwin))
             {
                 darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
 
+            // Darwin's lag movement
             counterReady = counter = 15;
-            //UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
 
-            //darwin.setSource(UNIVERSAL_SOURCE);
+            // Test
+            d2.setGridPosition(10, 10);
+            if (board.isGridPositionOpen(d2))
+            {
+                d2.setPosition(board.getPosition(d2).X, board.getPosition(d2).Y);
+            }
             
             base.Initialize();
         }
@@ -78,6 +93,9 @@ namespace LegendOfDarwin
             Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
+            
+            // Test
+            d2.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
         }
 
         /// <summary>
@@ -102,6 +120,7 @@ namespace LegendOfDarwin
 
             KeyboardState ks = Keyboard.GetState();
 
+            // Check the counter
             if (counter > counterReady)
             {
                 detectDarwinMovement(ks);
@@ -113,6 +132,9 @@ namespace LegendOfDarwin
             {
                 counter++;
             }
+
+
+            d2.setPictureSize(board.getSquareWidth(), board.getSquareLength());
 
             //currently does nothing
             darwin.Update(gameTime);
@@ -130,6 +152,10 @@ namespace LegendOfDarwin
                     board.setGridPositionOpen(darwin.X - 1, darwin.Y);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
+                else
+                {
+                    darwin.setGridPosition(darwin.X - 1, darwin.Y);
+                }
                 //darwin.SetPosition((darwin.position.X + 1.0f), darwin.position.Y);
             }
             if (ks.IsKeyDown(Keys.Left))
@@ -139,6 +165,10 @@ namespace LegendOfDarwin
                 {
                     board.setGridPositionOpen(darwin.X + 1, darwin.Y);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                else
+                {
+                    darwin.setGridPosition(darwin.X + 1, darwin.Y);
                 }
                 //darwin.SetPosition((darwin.position.X - 1.0f), darwin.position.Y);
             }
@@ -150,6 +180,10 @@ namespace LegendOfDarwin
                     board.setGridPositionOpen(darwin.X, darwin.Y + 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
+                else
+                {
+                    darwin.setGridPosition(darwin.X, darwin.Y + 1);
+                }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y - 1.0f));
             }
             if (ks.IsKeyDown(Keys.Down))
@@ -159,6 +193,10 @@ namespace LegendOfDarwin
                 {
                     board.setGridPositionOpen(darwin.X, darwin.Y - 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+                }
+                else
+                {
+                    darwin.setGridPosition(darwin.X, darwin.Y - 1);
                 }
                 //darwin.SetPosition(darwin.position.X, (darwin.position.Y + 1.0f));
             }
@@ -183,6 +221,7 @@ namespace LegendOfDarwin
             spriteBatch.Begin();
 
             darwin.Draw(spriteBatch);
+            d2.Draw(spriteBatch);
 
             spriteBatch.End();
 

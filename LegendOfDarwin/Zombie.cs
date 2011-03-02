@@ -233,36 +233,50 @@ namespace LegendOfDarwin
         public void moveTowardsDarwin(Darwin darwin)
         {
 
-            if (darwin.X > this.X)
+            int changeX = 0;
+            int changeY = 0;
+
+            changeX = darwin.X - this.X;
+            changeY = darwin.Y - this.Y;
+
+            if (Math.Abs(changeX) > Math.Abs(changeY))
             {
-                //move right
-                if (isZombieInRange(this.X + 1, this.Y))
+                //move in x direction
+                if (darwin.X > this.X)
                 {
-                    MoveRight();
+                    //move right
+                    if (isZombieInRange(this.X + 1, this.Y))
+                    {
+                        MoveRight();
+                    }
+                }
+                else if (darwin.X < this.X)
+                {
+                    //move left
+                    if (isZombieInRange(this.X - 1, this.Y))
+                    {
+                        MoveLeft();
+                    }
                 }
             }
-            else if (darwin.X < this.X)
+            else 
             {
-                //move left
-                if (isZombieInRange(this.X - 1, this.Y))
+                //move in y direction
+                if (darwin.Y > this.Y)
                 {
-                    MoveLeft();
+                    //move down
+                    if (isZombieInRange(this.X, this.Y + 1))
+                    {
+                        MoveDown();
+                    }
                 }
-            }
-            if (darwin.Y > this.Y)
-            {
-                //move down
-                if (isZombieInRange(this.X, this.Y+1))
+                else if (darwin.Y < this.Y)
                 {
-                    MoveDown();
-                }
-            }
-            else if (darwin.Y < this.Y)
-            {
-                //move down
-                if (isZombieInRange(this.X, this.Y - 1))
-                {
-                    MoveUp();
+                    //move down
+                    if (isZombieInRange(this.X, this.Y - 1))
+                    {
+                        MoveUp();
+                    }
                 }
             }
 

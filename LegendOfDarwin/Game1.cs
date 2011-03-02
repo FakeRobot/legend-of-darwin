@@ -28,6 +28,9 @@ namespace LegendOfDarwin
         // Main character of the game
         Darwin darwin;
 
+        // First Zombie
+        Zombie firstZombie;
+
         // The grid board
         GameBoard board;
 
@@ -59,6 +62,8 @@ namespace LegendOfDarwin
 
             // Initializing board
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
+
+            firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
@@ -93,6 +98,7 @@ namespace LegendOfDarwin
             Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
+            firstZombie.LoadContent(zombieDarwinTex);
             
             // Test
             d2.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
@@ -138,6 +144,9 @@ namespace LegendOfDarwin
 
             //currently does nothing
             darwin.Update(gameTime);
+
+            firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            firstZombie.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -222,6 +231,7 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             d2.Draw(spriteBatch);
+            firstZombie.Draw(spriteBatch);
 
             spriteBatch.End();
 

@@ -111,20 +111,7 @@ namespace LegendOfDarwin
         {
             return grid[x, y];
         }
-
-
-        /*
-         * Frees the coordinates on the grid based on bo's coordinates
-         * This is deprecated
-         */ 
-        public void freePosition(BasicObject bo)
-        {
-            hasObject[bo.X,bo.Y] = false;
-        }
-
-        /*
-         * Does the same as freePosition
-         */ 
+ 
         public void setGridPositionOpen(int x, int y)
         {
             if ((x > 0 && x < gridWidth) && (y > 0 && y < gridLength))

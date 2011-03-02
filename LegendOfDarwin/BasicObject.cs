@@ -44,6 +44,7 @@ namespace LegendOfDarwin
             this.setGridPosition(this.X + 1, this.Y);
             if (board.isGridPositionOpen(this))
             {
+                board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X - 1, this.Y);
                 this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             }
@@ -61,6 +62,7 @@ namespace LegendOfDarwin
             this.setGridPosition(this.X - 1, this.Y);
             if (board.isGridPositionOpen(this))
             {
+                board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X + 1, this.Y);
                 this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             }
@@ -78,6 +80,7 @@ namespace LegendOfDarwin
             this.setGridPosition(this.X, this.Y + 1);
             if (board.isGridPositionOpen(this))
             {
+                board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y - 1);
                 this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             }
@@ -95,6 +98,7 @@ namespace LegendOfDarwin
             this.setGridPosition(this.X, this.Y - 1);
             if (board.isGridPositionOpen(this))
             {
+                board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y + 1);
                 this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             }

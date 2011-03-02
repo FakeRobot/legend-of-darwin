@@ -87,9 +87,6 @@ namespace LegendOfDarwin
             {
                 return false;
             }
-
-            //hasObject[bo.X,bo.Y] = true;
-
             return true;
         }
 
@@ -111,17 +108,6 @@ namespace LegendOfDarwin
             return grid[bo.X,bo.Y];
         }
 
-        /*
-         * Frees the coordinates on the grid based on bo's coordinates
-         */ 
-        public void freePosition(BasicObject bo)
-        {
-            hasObject[bo.X,bo.Y] = false;
-        }
-
-        /*
-         * Does the same as freePosition
-         */ 
         public void setGridPositionOpen(int x, int y)
         {
             if (x < 0 || x > gridWidth)
@@ -136,7 +122,6 @@ namespace LegendOfDarwin
             }
         }
 
-
         public void setGridPositionOccupied(int x, int y)
         {
             if( (x>0 && x<gridWidth) && (y>0 && y< gridLength) )
@@ -145,18 +130,11 @@ namespace LegendOfDarwin
             }
         }
 
-
-        /*
-         * Exactly what it says
-         */ 
         public int getSquareLength()
         {
             return this.squareLength;
         }
 
-        /*
-         * Exactly what it says
-         */ 
         public int getSquareWidth()
         {
             return this.squareWidth;

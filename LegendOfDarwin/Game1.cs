@@ -20,7 +20,7 @@ namespace LegendOfDarwin
     {
 
         private int counter;
-
+        private int counterReady;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -57,8 +57,7 @@ namespace LegendOfDarwin
                 darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
 
-
-            counter = 0;
+            counterReady = counter = 15;
             //UNIVERSAL_SOURCE = new Rectangle(board.getPosition(darwin).X, board.getPosition(darwin).Y, board.getPosition(darwin).Width, board.getPosition(darwin).Height);
 
             //darwin.setSource(UNIVERSAL_SOURCE);
@@ -103,15 +102,11 @@ namespace LegendOfDarwin
 
             KeyboardState ks = Keyboard.GetState();
 
-            if (counter == 0)
+            if (counter > counterReady)
             {
                 detectDarwinMovement(ks);
                 detectDarwinTransform(ks);
-
                 darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            }
-            else if (counter == 30)
-            {
                 counter = 0;
             }
             else

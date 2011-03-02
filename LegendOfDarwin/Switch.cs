@@ -51,10 +51,10 @@ namespace LegendOfDarwin
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (BasicObject bo in bos)
-            {
-                spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
-            }
+            //foreach (BasicObject bo in bos)
+            //{
+            //    spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
+            //}
         }
     }
 }

@@ -39,18 +39,14 @@ namespace LegendOfDarwin
         // Test subject atm
         Darwin d2;
 
+        bool keyIsHeldDown = false;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             // Testing
@@ -75,7 +71,7 @@ namespace LegendOfDarwin
             }
 
             // Darwin's lag movement
-            counterReady = counter = 15;
+            counterReady = counter = 5;
 
             // Test
             d2.setGridPosition(10, 10);
@@ -87,10 +83,6 @@ namespace LegendOfDarwin
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -115,20 +107,11 @@ namespace LegendOfDarwin
             d2.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -137,19 +120,29 @@ namespace LegendOfDarwin
 
             KeyboardState ks = Keyboard.GetState();
 
-            // Check the counter
-            if (counter > counterReady)
+
+            updateKeyHeldDown(ks);
+
+            if (keyIsHeldDown)
             {
+                if (counter > counterReady)
+                {
+                    detectDarwinMovement(ks);
+                    detectDarwinTransform(ks);
+                    darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+                    counter = 0;
+                }
+                else
+                {
+                    counter++;
+                }
+
+            }
+            else{
                 detectDarwinMovement(ks);
                 detectDarwinTransform(ks);
                 darwin.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-                counter = 0;
             }
-            else
-            {
-                counter++;
-            }
-
 
             d2.setPictureSize(board.getSquareWidth(), board.getSquareLength());
 
@@ -160,6 +153,18 @@ namespace LegendOfDarwin
             firstZombie.Update(gameTime);
 
             base.Update(gameTime);
+        }
+
+        private void updateKeyHeldDown(KeyboardState ks)
+        {
+            if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down))
+            {
+                keyIsHeldDown = false;
+            }
+            else
+            {
+                keyIsHeldDown = true;
+            }
         }
 
         private void detectDarwinMovement(KeyboardState ks)
@@ -230,10 +235,6 @@ namespace LegendOfDarwin
             }
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);

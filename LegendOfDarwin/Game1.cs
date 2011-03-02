@@ -192,7 +192,6 @@ namespace LegendOfDarwin
                     board.setGridPositionOpen(darwin.X, darwin.Y - 1);
                     darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
                 }
-
             }
         }
 

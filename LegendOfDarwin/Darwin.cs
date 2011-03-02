@@ -12,12 +12,17 @@ namespace LegendOfDarwin
     {
         GraphicsDevice graphics;
 
+        // an enum type for the direction 
+        public enum Dir { Up, Down, Left, Right };
 
         //Darwin's height in pixels
         public const int DARWIN_HEIGHT = 64;
         //Darwin's width in pixels
         public const int DARWIN_WIDTH = 64;
 
+
+        //Which direction is Darwin facing
+        public Dir facing = Dir.Down;
 
         //flag to show whether darwin is a zombie or not
         public static bool isZombie;

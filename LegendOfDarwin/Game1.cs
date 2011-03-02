@@ -98,6 +98,7 @@ namespace LegendOfDarwin
 
             Texture2D darwinTex = Content.Load<Texture2D>("Darwin");
             Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
+            Texture2D zombieTex = Content.Load<Texture2D>("Zombie");
 
             // Test
             Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
@@ -108,7 +109,7 @@ namespace LegendOfDarwin
             board.LoadBackgroundContent(basicMenuTex);
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
-            firstZombie.LoadContent(zombieDarwinTex);
+            firstZombie.LoadContent(zombieTex);
             
             // Test
             d2.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);

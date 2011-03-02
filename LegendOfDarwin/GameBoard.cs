@@ -276,7 +276,7 @@ namespace LegendOfDarwin
             }
         }
 
-        internal Rectangle getPosition(int x, int y)
+        internal Rectangle getDestination(int x, int y)
         {
             return grid[x, y];
         }

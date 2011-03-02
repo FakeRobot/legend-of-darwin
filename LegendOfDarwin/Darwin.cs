@@ -44,7 +44,10 @@ namespace LegendOfDarwin
 
 
         // Textures 
-        Texture2D darwinTex;
+        Texture2D darwinUpTex;
+        Texture2D darwinDownTex;
+        Texture2D darwinRightTex;
+        Texture2D darwinLeftTex;
         Texture2D zombieDarwinTex;
 
         //BasicObject potentialGridPosition;
@@ -96,10 +99,13 @@ namespace LegendOfDarwin
         }
         */
 
-        public void LoadContent(GraphicsDevice newGraphics, Texture2D humanTex, Texture2D zombieTex)
+        public void LoadContent(GraphicsDevice newGraphics, Texture2D humanUp, Texture2D humanDown, Texture2D humanRight, Texture2D humanLeft, Texture2D zombieTex)
         {
             graphics = newGraphics;
-            darwinTex = humanTex;
+            darwinUpTex = humanUp;
+            darwinDownTex = humanDown;
+            darwinRightTex = humanRight;
+            darwinLeftTex = humanLeft;
             zombieDarwinTex = zombieTex;
         }
 
@@ -118,6 +124,7 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY))
                 {
                     this.MoveRight();
+                    facing = Dir.Right;
                 }
                 else
                 {
@@ -129,6 +136,7 @@ namespace LegendOfDarwin
                 if(board.isGridPositionOpen(currentDarwinX -1, currentDarwinY))
                 {
                     this.MoveLeft();
+                    facing = Dir.Left;
                 }
                 else
                 {
@@ -141,6 +149,7 @@ namespace LegendOfDarwin
                 if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1))
                 {
                     this.MoveUp();
+                    facing = Dir.Up;
                 }
                 else
                 {
@@ -152,6 +161,7 @@ namespace LegendOfDarwin
                 if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1))
                 {
                     this.MoveDown();
+                    facing = Dir.Down;
                 }
                 else
                 {
@@ -213,7 +223,22 @@ namespace LegendOfDarwin
         {
             if (isZombie == false)
             {
-                spriteBatch.Draw(darwinTex, destination, source, Color.White);
+                if (facing == Dir.Up)
+                {
+                    spriteBatch.Draw(darwinUpTex, destination, source, Color.White);
+                }
+                else if (facing == Dir.Down)
+                {
+                    spriteBatch.Draw(darwinDownTex, destination, source, Color.White);
+                }
+                else if (facing == Dir.Left)
+                {
+                    spriteBatch.Draw(darwinLeftTex, destination, source, Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(darwinRightTex, destination, source, Color.White);
+                }
             }
             else
             {

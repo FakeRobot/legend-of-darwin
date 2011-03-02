@@ -125,75 +125,37 @@ namespace LegendOfDarwin
         /*
          * Does the same as freePosition
          */ 
-
         public void setGridPositionOpen(int x, int y)
         {
-            if (x < 0 || x > gridWidth)
-            {
-            }
-            else if (y < 0 || y > gridLength)
-            {
-            }
-            else
+            if ((x > 0 && x < gridWidth) && (y > 0 && y < gridLength))
             {
                 hasObject[x, y] = false;
             }
         }
 
-
         public void setGridPositionOpen(BasicObject bo)
         {
-            if (bo.X < 0 || bo.X > gridWidth)
-            {
-            }
-            else if (bo.Y < 0 || bo.Y > gridLength)
-            {
-            }
-            else
+            if ((bo.X > 0 && bo.X < gridWidth) && (bo.Y > 0 && bo.Y < gridLength))
             {
                 hasObject[bo.X, bo.Y] = false;
-            }        
+            }
         }
 
-        public void setGridPositionClosed(int x, int y)
+        public void setGridPositionOccupied(int x, int y)
         {
-            if (x < 0 || x > gridWidth)
-            {
-            }
-            else if (y < 0 || y > gridLength)
-            {
-            }
-            else
+            if( (x>0 && x<gridWidth) && (y>0 && y<gridLength) )
             {
                 hasObject[x, y] = true;
-            }        
+            }
         }
 
-        public void setGridPositionClosed(BasicObject bo)
+        public void setGridPositionOccupied(BasicObject bo)
         {
-            if (bo.X < 0 || bo.X > gridWidth)
-            {
-            }
-            else if (bo.Y < 0 || bo.Y > gridLength)
-            {
-            }
-            else
+            if ((bo.X > 0 && bo.X < gridWidth) && (bo.Y > 0 && bo.Y < gridLength))
             {
                 hasObject[bo.X, bo.Y] = true;
             }
         }
-
-        /*
-         * Exactly what it says
-         */ 
-        public void setGridPositionOccupied(int x, int y)
-        {
-            if( (x>0 && x<gridWidth) && (y>0 && y< gridLength) )
-            {
-                hasObject[x, y] = true;
-            }
-        }
-
 
         public int getSquareLength()
         {

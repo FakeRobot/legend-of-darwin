@@ -114,47 +114,18 @@ namespace LegendOfDarwin
         {
             if (ks.IsKeyDown(Keys.Right))
             {
-                //potentialGridPosition.setGridPosition(currentDarwinX + 1, currentDarwinY);
-                //if (board.isGridPositionOpen(potentialGridPosition))
-                //{
-                //    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                //    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
-                //    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
-                //}
                 this.MoveRight();
-
             }
             if (ks.IsKeyDown(Keys.Left))
             {
-                //potentialGridPosition.setGridPosition(currentDarwinX - 1, currentDarwinY);
-                //if (board.isGridPositionOpen(potentialGridPosition))
-                //{
-                //    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                //    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
-                //    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
-                //}
                 this.MoveLeft();
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                //potentialGridPosition.setGridPosition(currentDarwinX, currentDarwinY - 1);
-                //if (board.isGridPositionOpen(potentialGridPosition))
-                //{
-                //    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                //    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
-                //    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
-                //}
                 this.MoveUp();
             }
             if (ks.IsKeyDown(Keys.Down))
             {
-                //potentialGridPosition.setGridPosition(currentDarwinX, currentDarwinY + 1);
-                //if (board.isGridPositionOpen(potentialGridPosition))
-                //{
-                //    setGridPosition(potentialGridPosition.X, potentialGridPosition.Y);
-                //    board.setGridPositionOpen(currentDarwinX, currentDarwinY);
-                //    setPosition(board.getPosition(potentialGridPosition).X, board.getPosition(potentialGridPosition).Y);
-                //}
                 this.MoveDown();
             }
         }

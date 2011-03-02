@@ -88,7 +88,7 @@ namespace LegendOfDarwin
                 return false;
             }
 
-            hasObject[bo.X,bo.Y] = true;
+            //hasObject[bo.X,bo.Y] = true;
 
             return true;
         }
@@ -136,6 +136,16 @@ namespace LegendOfDarwin
                 hasObject[x, y] = false;
             }
         }
+
+
+        public void setGridPositionOccupied(int x, int y)
+        {
+            if( (x>0 && x<gridWidth) && (y>0 && y< gridLength) )
+            {
+                hasObject[x, y] = true;
+            }
+        }
+
 
         /*
          * Exactly what it says

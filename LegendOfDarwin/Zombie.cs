@@ -73,7 +73,10 @@ namespace LegendOfDarwin
             this.X = startX;
             this.Y = startY;
 
-            board.isGridPositionOpen(this);
+            if (board.isGridPositionOpen(this))
+            {
+                board.setGridPositionOccupied(this.X, this.Y);
+            }
 
             destination = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
             this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);

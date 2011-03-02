@@ -12,6 +12,8 @@ namespace LegendOfDarwin
     {
         Texture2D wallTex;
 
+        BasicObject[] bos;
+
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
          * myboard is the gameboard
@@ -22,6 +24,8 @@ namespace LegendOfDarwin
             //switch inherits an X and Y from the basic object
             this.X = posX;
             this.Y = posY;
+
+            this.bos = bos;
 
             // check that you aren't putting a switch on a spot that is already taken
             /*
@@ -51,10 +55,10 @@ namespace LegendOfDarwin
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            //foreach (BasicObject bo in bos)
-            //{
-            //    spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
-            //}
+         /*   foreach (BasicObject bo in bos)
+            {
+                spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
+            }*/
         }
     }
 }

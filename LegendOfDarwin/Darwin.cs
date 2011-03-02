@@ -36,6 +36,7 @@ namespace LegendOfDarwin
         // The location to draw the sprite on the screen.
         //public Rectangle destination;
 
+        bool collision;
 
         // The current position of Darwin on the floor
         // Might have to be changed to coordinates depending on the floor layout
@@ -120,7 +121,7 @@ namespace LegendOfDarwin
                 }
                 else
                 {
-                    //its a zombie or a wall
+                    collision = true;
                 }
             }
             if (ks.IsKeyDown(Keys.Left))
@@ -131,18 +132,19 @@ namespace LegendOfDarwin
                 }
                 else
                 {
-                    //its a zombie or a wall
+                    collision = true;
                 }
                 
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1)){
+                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1))
+                {
                     this.MoveUp();
                 }
                 else
                 {
-                    //its a zombie or a wall
+                    collision = true;
                 }
             }
             if (ks.IsKeyDown(Keys.Down))
@@ -153,7 +155,7 @@ namespace LegendOfDarwin
                 }
                 else
                 {
-                    //its a zombie or a wall
+                    collision = true;
                 }
             }
         }

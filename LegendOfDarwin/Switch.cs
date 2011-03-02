@@ -19,7 +19,7 @@ namespace LegendOfDarwin
         // The frame or cell of the sprite to show
         private Rectangle switchSource;
 
-        GameBoard board;
+        private bool isOn;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
@@ -34,8 +34,6 @@ namespace LegendOfDarwin
 
             this.walls = walls;
 
-            this.board = myboard;
-
             if (board.isGridPositionOpen(this.X, this.Y))
             {
                 board.setGridPositionOccupied(this.X, this.Y);
@@ -43,39 +41,81 @@ namespace LegendOfDarwin
             else
             {
                 // you are putting a switch on a block that is already occupied. That isn't good.
+                // Throw an error or something
             }
 
+            turnOn();
+
+        }
+
+        // toggle the walls associated with this switch to be un-walkable
+        public void turnOn()
+        {
             // initialize all of the walls associated with this switch to be occupied
             foreach (BasicObject bo in walls)
             {
                 if (board.isGridPositionOpen(bo))
                 {
-                    board.setGridPositionOccupied(bo.X, bo.Y);
-                }
-                else
-                {
-                    // you are putting a wall on a block that is already occupied. That isn't good.
+                    board.setGridPositionOccupied(bo);
                 }
             }
+
+            isOn = true;
         }
 
-        // Load the content
+        // toggle the walls associated with this switch to be walkable
+        public void turnOff()
+        {
+            foreach (BasicObject bo in walls)
+            {
+                if (!board.isGridPositionOpen(bo))
+                {
+                    board.setGridPositionOpen(bo);
+                }
+            }
+
+            isOn = false;
+        }
+
         public void LoadContent(Texture2D myWallTex)
         {
             wallTex = myWallTex;
         }
 
-        // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (BasicObject bo in walls)
             {
-                Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
-                spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
+                if (isOn)
+                {
+                    Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+                    spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
+                }
             }
-            
+
             switchSource = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
             spriteBatch.Draw(wallTex, board.getPosition(this.X, this.Y), switchSource, Color.White);
         }
+
+        public void Update(KeyboardState ks)
+        {
+            toggleSwitch(ks);
+        }
+
+        private void toggleSwitch(KeyboardState ks)
+        {
+            if (ks.IsKeyDown(Keys.A))
+            {
+                if (isOn)
+                {
+                    turnOff();
+                }
+                else
+                {
+                    turnOn();
+                }
+            }
+        }
+
     }
 }

@@ -111,7 +111,7 @@ namespace LegendOfDarwin
         {
             return grid[x, y];
         }
- 
+
         public void setGridPositionOpen(int x, int y)
         {
             if ((x > 0 && x < gridWidth) && (y > 0 && y < gridLength))
@@ -119,7 +119,6 @@ namespace LegendOfDarwin
                 hasObject[x, y] = false;
             }
         }
-
         public void setGridPositionOpen(BasicObject bo)
         {
             if ((bo.X > 0 && bo.X < gridWidth) && (bo.Y > 0 && bo.Y < gridLength))
@@ -135,7 +134,6 @@ namespace LegendOfDarwin
                 hasObject[x, y] = true;
             }
         }
-
         public void setGridPositionOccupied(BasicObject bo)
         {
             if ((bo.X > 0 && bo.X < gridWidth) && (bo.Y > 0 && bo.Y < gridLength))

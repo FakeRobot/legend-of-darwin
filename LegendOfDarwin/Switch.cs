@@ -14,44 +14,41 @@ namespace LegendOfDarwin
         Texture2D wallTex;
 
         // squares that will be in the wall
-        BasicObject[] bos;
-
-        //the square that the switch will be drawn on
-        BasicObject switchSquare;
+        BasicObject[] walls;
 
         // The frame or cell of the sprite to show
         private Rectangle switchSource;
 
-        //GameBoard board;
+        GameBoard board;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
          * myboard is the gameboard
          * the bos array is an array of positions that the switch changed from occupied to open when switched
          **/
-        public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] bos) : base(myboard)
+        public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] walls) : base(myboard)
         {
             //switch inherits an X and Y from the basic object
-            this.switchSquare = switchSquare;
+            this.X = switchSquare.X;
+            this.Y = switchSquare.Y;
 
-            this.bos = bos;
+            this.walls = walls;
 
-            //this.board = myboard;
+            this.board = myboard;
 
-            // check that you aren't putting a switch on a spot that is already taken
-            /*
-            if (!myboard.isGridPositionOpen(this))
+            // initialize the square that the switch is on to be occupied
+            if (board.isGridPositionOpen(this.X, this.Y))
             {
+               // board.setGridPositionOccupied(this.X, this.Y);
             }
-            */
 
-            // initialize all 
-            foreach (BasicObject bo in bos)
+            // initialize all of the walls associated with this switch to be occupied
+            foreach (BasicObject bo in walls)
             {
                 // if it is open, fill it.
                 if (board.isGridPositionOpen(bo))
                 {
-                    //if its free it will be set by the function call in the if
+                    // board.setGridPositionOccupied(this.X, this.Y);
                 }
             }
         }
@@ -65,12 +62,17 @@ namespace LegendOfDarwin
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (BasicObject bo in bos)
+            foreach (BasicObject bo in walls)
             {
                 Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
                 spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
             }
+            
             switchSource = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+
+            BasicObject switchSquare = new BasicObject(board);
+            switchSquare.setPosition(this.X, this.Y);
+
             spriteBatch.Draw(wallTex, board.getPosition(switchSquare), switchSource, Color.White);
         }
     }

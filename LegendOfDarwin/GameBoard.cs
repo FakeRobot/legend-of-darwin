@@ -99,7 +99,6 @@ namespace LegendOfDarwin
             {
                 return false;
             }
-
             return true;
         }
 

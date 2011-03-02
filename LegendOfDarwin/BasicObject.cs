@@ -31,7 +31,6 @@ namespace LegendOfDarwin
          * */
         public void setPosition(int myX, int myY)
         {
-
             // Update the destination
             destination.X = myX;
             destination.Y = myY;

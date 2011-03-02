@@ -167,11 +167,18 @@ namespace LegendOfDarwin
                 this.background[i, 0] = content;
                 this.background[i, this.gridLength - 1] = content;
                 this.background[i, this.gridLength - 2] = content;
+
+                this.hasObject[i, 0] = true;
+                this.hasObject[i, this.gridLength - 1] = true;
+                this.hasObject[i, this.gridLength - 2] = true;
             }
             for (int i = 0; i < this.gridLength; i++)
             {
                 this.background[0, i] = content;
                 this.background[this.gridWidth - 1, i] = content;
+
+                this.hasObject[0, i] = true;
+                this.hasObject[this.gridWidth - 1, i] = true;
             }
         }
 

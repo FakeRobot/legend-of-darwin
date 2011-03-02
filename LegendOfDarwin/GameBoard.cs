@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfDarwin
 {
@@ -24,6 +25,9 @@ namespace LegendOfDarwin
         // Number of squares going right
         private int gridWidth;
 
+        // The background, has the same representation compared to the grid and hasObject vars
+        private Texture2D[,] background;
+
         /*
          * boardSize contains the x and y length and width of the whole gameboard.
          * boardSize.X = 25 and boardSize.Y = 25 would translate to a 25 X 25 board
@@ -40,6 +44,7 @@ namespace LegendOfDarwin
 
             grid = new Rectangle[(int)boardSize.X, (int)boardSize.Y];
             hasObject = new Boolean[(int)boardSize.X, (int)boardSize.Y];
+            background = new Texture2D[(int)boardSize.X, (int)boardSize.Y];
 
             for (int i = 0; i < boardSize.X; i++)
             {
@@ -47,6 +52,7 @@ namespace LegendOfDarwin
                 {
                     grid[i,j] = new Rectangle(i * squareWidth, j * squareLength, squareWidth, squareLength);
                     hasObject[i,j] = false;
+                    background[i, j] = null;
                 }
             }
         }
@@ -135,6 +141,52 @@ namespace LegendOfDarwin
         public int getSquareWidth()
         {
             return this.squareWidth;
+        }
+
+        /*
+         * Puts tiles onto every available grid
+         */ 
+        public void LoadContent(Texture2D content)
+        {
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                for (int j = 0; j < this.gridLength; j++)
+                {
+                    this.background[i, j] = content;
+                }
+            }
+        }
+
+        /*
+         * Hardcoded menu space to draw
+         */ 
+        public void LoadBackgroundContent(Texture2D content)
+        {
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                this.background[i, 0] = content;
+                this.background[i, this.gridLength - 1] = content;
+                this.background[i, this.gridLength - 2] = content;
+            }
+            for (int i = 0; i < this.gridLength; i++)
+            {
+                this.background[0, i] = content;
+                this.background[this.gridWidth - 1, i] = content;
+            }
+        }
+
+        /*
+         * Draws the background
+         */ 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                for (int j = 0; j < this.gridLength; j++)
+                {
+                    spriteBatch.Draw(background[i, j], grid[i, j], Color.White);
+                }
+            }
         }
     }
 }

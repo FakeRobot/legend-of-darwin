@@ -60,6 +60,8 @@ namespace LegendOfDarwin
             //darwin.setPosition(0.0f, 0.0f);
             device = graphics.GraphicsDevice;
 
+            InitializeGraphics();
+
             // Initializing board
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
 
@@ -96,6 +98,14 @@ namespace LegendOfDarwin
 
             Texture2D darwinTex = Content.Load<Texture2D>("Darwin");
             Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
+
+            // Test
+            Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
+            Texture2D basicMenuTex = Content.Load<Texture2D>("grid_menu_outline");
+
+            // Test
+            board.LoadContent(basicGridTex);
+            board.LoadBackgroundContent(basicMenuTex);
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieDarwinTex);
@@ -228,6 +238,8 @@ namespace LegendOfDarwin
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
+            board.Draw(spriteBatch);
+
 
             darwin.Draw(spriteBatch);
             d2.Draw(spriteBatch);
@@ -237,5 +249,13 @@ namespace LegendOfDarwin
 
             base.Draw(gameTime);
         }
+
+        private void InitializeGraphics()
+        {
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.ApplyChanges();
+        }
+
     }
 }

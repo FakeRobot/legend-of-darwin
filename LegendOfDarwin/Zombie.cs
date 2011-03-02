@@ -119,16 +119,49 @@ namespace LegendOfDarwin
             }
         }
 
+        /*
+         * moves the zombie on position to the left on the game board
+         * */
         public void MoveLeft()
         {
+            this.setGridPosition(this.X - 1, this.Y);
+            if (board.isGridPositionOpen(this))
+            {
+                board.setGridPositionOpen(this.X + 1, this.Y);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
+            else
+            {
+                this.setGridPosition(this.X + 1, this.Y);
+            }
         }
 
         public void MoveDown()
         {
+            this.setGridPosition(this.X, this.Y+1);
+            if (board.isGridPositionOpen(this))
+            {
+                board.setGridPositionOpen(this.X, this.Y-1);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
+            else
+            {
+                this.setGridPosition(this.X, this.Y-1);
+            }
         }
 
         public void MoveUp()
         {
+            this.setGridPosition(this.X, this.Y - 1);
+            if (board.isGridPositionOpen(this))
+            {
+                board.setGridPositionOpen(this.X, this.Y + 1);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
+            else
+            {
+                this.setGridPosition(this.X, this.Y + 1);
+            }
         }
 
 		/*
@@ -274,10 +307,21 @@ namespace LegendOfDarwin
             if (testcounter<300 && (testcounter % 50)==0)
             {
                 this.MoveRight();
-                
+            }
+            else if (testcounter <600 && testcounter > 300 && (testcounter % 50) == 0) 
+            {
+                this.MoveDown();
+            }
+            else if (testcounter > 600 && testcounter < 900 && (testcounter % 50) == 0)
+            {
+                this.MoveLeft();
+            }
+            else if (testcounter < 1200 && testcounter > 900 && (testcounter % 50) == 0)
+            {
+                this.MoveUp();
             }
 
-            if (testcounter<300)
+            if (testcounter<1200)
               testcounter++;
 
         }

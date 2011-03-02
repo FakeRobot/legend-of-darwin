@@ -89,20 +89,6 @@ namespace LegendOfDarwin
             zombieTexture = myZombieTexture;
         }
 
-        ///**
-        // * sets the position of the zombie
-        // * int myX, int myY screen positions of the zombie
-        // * */
-        //public void setPosition(int myX, int myY)
-        //{
-
-        //    // Update the destination
-        //    //destination.Height = ZOMBIE_HEIGHT;
-        //    //destination.Width = ZOMBIE_WIDTH;
-        //    destination.X = myX;
-        //    destination.Y = myY;
-        //}
-
         public void setPictureSize(int width, int height)
         {
             destination.Width = width;
@@ -195,8 +181,10 @@ namespace LegendOfDarwin
                     //move down
                     if (isZombieInRange(this.X, this.Y + 1))
                     {
-                        MoveDown();
-                        hasPicked = true;
+                        if (board.isGridPositionOpen(this.X, this.Y+1)){
+                            MoveDown();
+                            hasPicked = true;
+                        }
                     }
                 }
                 else if (direction == 1)
@@ -204,8 +192,10 @@ namespace LegendOfDarwin
                     //move up
                     if (isZombieInRange(this.X, this.Y - 1))
                     {
-                        MoveUp();
-                        hasPicked = true;
+                        if (board.isGridPositionOpen(this.X, this.Y-1)){
+                            MoveUp();
+                            hasPicked = true;
+                        }
                     }
                 }
                 else if (direction == 2)
@@ -213,8 +203,10 @@ namespace LegendOfDarwin
                     //move left
                     if (isZombieInRange(this.X - 1, this.Y))
                     {
-                        MoveLeft();
-                        hasPicked = true;
+                        if (board.isGridPositionOpen(this.X-1, this.Y)){
+                            MoveLeft();
+                            hasPicked = true;
+                        }
                     }
                 }
                 else if (direction == 3)
@@ -222,8 +214,10 @@ namespace LegendOfDarwin
                     //move right
                     if (isZombieInRange(this.X + 1, this.Y))
                     {
-                        MoveRight();
-                        hasPicked = true;
+                        if (board.isGridPositionOpen(this.X+1, this.Y)){
+                            MoveRight();
+                            hasPicked = true;
+                        }
                     }
                 }
             }
@@ -250,7 +244,9 @@ namespace LegendOfDarwin
                     //move right
                     if (isZombieInRange(this.X + 1, this.Y))
                     {
-                        MoveRight();
+                        // checks for board position to be open or occupied by darwin
+                        if (board.isGridPositionOpen(this.X+1, this.Y) || (darwin.X==this.X+1 && darwin.Y==this.Y))
+                          MoveRight();
                     }
                 }
                 else if (darwin.X < this.X)
@@ -258,7 +254,9 @@ namespace LegendOfDarwin
                     //move left
                     if (isZombieInRange(this.X - 1, this.Y))
                     {
-                        MoveLeft();
+                        // checks for board position to be open or occupied by darwin
+                        if (board.isGridPositionOpen(this.X - 1, this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y))
+                            MoveLeft();
                     }
                 }
             }
@@ -270,15 +268,19 @@ namespace LegendOfDarwin
                     //move down
                     if (isZombieInRange(this.X, this.Y + 1))
                     {
-                        MoveDown();
+                        // checks for board position to be open or occupied by darwin
+                        if (board.isGridPositionOpen(this.X, this.Y+1) || (darwin.X == this.X && darwin.Y == this.Y+1))
+                            MoveDown();
                     }
                 }
                 else if (darwin.Y < this.Y)
                 {
-                    //move down
+                    //move up
                     if (isZombieInRange(this.X, this.Y - 1))
                     {
-                        MoveUp();
+                        // checks for board position to be open or occupied by darwin
+                        if (board.isGridPositionOpen(this.X, this.Y - 1) || (darwin.X == this.X && darwin.Y == this.Y - 1))
+                            MoveUp();
                     }
                 }
             }

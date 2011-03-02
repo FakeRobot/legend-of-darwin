@@ -74,8 +74,5 @@ namespace LegendOfDarwin
             Y = y;
         }
 
-
-
-
     }
 }

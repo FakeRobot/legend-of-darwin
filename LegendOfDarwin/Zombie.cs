@@ -22,19 +22,19 @@ namespace LegendOfDarwin
         protected Rectangle destination;
 
         protected Texture2D zombieTexture;
-	
-	    //zombie range, designates an area that the zombie can be in
-		protected int maxX;
-		protected int minX;
-		protected int maxY;
-		protected int minY;
+
+        //zombie range, designates an area that the zombie can be in, done in game board tiles
+        protected int maxX;
+        protected int minX;
+        protected int maxY;
+        protected int minY;
 
         // zombie vision range, optional, does not have to be used
         protected bool allowVision;
 
         // max horizontal distance from zombie that darwin can be seen at
         // vision acts like a square centered at the zombie
-        protected int visionMaxX;  
+        protected int visionMaxX;
         protected int visionMaxY;
 
         // sets whether zombie will go after Darwin if he is in the zombie's movement range at all
@@ -44,39 +44,39 @@ namespace LegendOfDarwin
         protected GameBoard board;
 
         public int testcounter;
-	    
+
         /* constructor
-		*  sets an initial area for the zombie to take up
-		*  mymaxX, myminX are the max/min allowed horizontal range for the zombie
+        *  sets an initial area for the zombie to take up
+        *  mymaxX, myminX are the max/min allowed horizontal range for the zombie
         *  mymaxY, myminY are the max/min allowed vertical range for the zombie
         *  Gameboard myboard -- the board which the zombie is moving on
-		**/
-        public Zombie(int startX,int startY,int mymaxX,int myminX,int mymaxY,int myminY,GameBoard myboard)
+        **/
+        public Zombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard)
         {
-		  maxX = mymaxX;
-		  maxY = mymaxY;
-		  minX = myminX;
-		  minY = myminY;
+            maxX = mymaxX;
+            maxY = mymaxY;
+            minX = myminX;
+            minY = myminY;
 
-          // start with no zombie vision
-          allowVision = false;
-          visionMaxX = 0;
-          visionMaxY = 0;
+            // start with no zombie vision
+            allowVision = false;
+            visionMaxX = 0;
+            visionMaxY = 0;
 
-          allowRangeDetection = true;
-          board = myboard;
+            allowRangeDetection = true;
+            board = myboard;
 
-          this.X = startX;
-          this.Y = startY;
+            this.X = startX;
+            this.Y = startY;
 
-          board.isGridPositionOpen(this);
+            board.isGridPositionOpen(this);
 
-          destination = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
-          this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-          source = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
-		}
-		
-		// Load the content
+            destination = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            source = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+        }
+
+        // Load the content
         public void LoadContent(Texture2D myZombieTexture)
         {
             zombieTexture = myZombieTexture;
@@ -103,7 +103,7 @@ namespace LegendOfDarwin
         }
 
         /*
-         * moves the zombie on position to the right on the game board
+         * moves the zombie to the right of current position on the game board
          * */
         public void MoveRight()
         {
@@ -120,7 +120,7 @@ namespace LegendOfDarwin
         }
 
         /*
-         * moves the zombie on position to the left on the game board
+         * moves the zombie to the left of current position on the game board
          * */
         public void MoveLeft()
         {
@@ -136,20 +136,26 @@ namespace LegendOfDarwin
             }
         }
 
+        /*
+         * moves the zombie down one square on the game board
+         * */
         public void MoveDown()
         {
-            this.setGridPosition(this.X, this.Y+1);
+            this.setGridPosition(this.X, this.Y + 1);
             if (board.isGridPositionOpen(this))
             {
-                board.setGridPositionOpen(this.X, this.Y-1);
+                board.setGridPositionOpen(this.X, this.Y - 1);
                 this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             }
             else
             {
-                this.setGridPosition(this.X, this.Y-1);
+                this.setGridPosition(this.X, this.Y - 1);
             }
         }
 
+        /*
+         * moves the zombie one up on the game board
+         * */
         public void MoveUp()
         {
             this.setGridPosition(this.X, this.Y - 1);
@@ -164,40 +170,64 @@ namespace LegendOfDarwin
             }
         }
 
-		/*
-		*  makes the zombie walk randomly within its specified range 
-		*  does not allow zombie to leave range
-		**/
-		public void RandomWalk()
-		{
+        /*
+        *  makes the zombie walk randomly within its specified range 
+        *  does not allow zombie to leave range
+        **/
+        public void RandomWalk()
+        {
             Random rand = new Random();
-            int direction = rand.Next(4);
+            int direction = 0;
+            bool hasPicked = false; // has a direction been chosen
 
-            Console.Write("{0} ",direction);
-            if (direction == 0)
+            while (!(hasPicked))
             {
-                //move down
+                direction = rand.Next(4);
+                if (direction == 0)
+                {
+                    //move down
+                    if (isZombieInRange(this.X, this.Y + 1))
+                    {
+                        MoveDown();
+                        hasPicked = true;
+                    }
+                }
+                else if (direction == 1)
+                {
+                    //move up
+                    if (isZombieInRange(this.X, this.Y - 1))
+                    {
+                        MoveUp();
+                        hasPicked = true;
+                    }
+                }
+                else if (direction == 2)
+                {
+                    //move left
+                    if (isZombieInRange(this.X - 1, this.Y))
+                    {
+                        MoveLeft();
+                        hasPicked = true;
+                    }
+                }
+                else if (direction == 3)
+                {
+                    //move right
+                    if (isZombieInRange(this.X + 1, this.Y))
+                    {
+                        MoveRight();
+                        hasPicked = true;
+                    }
+                }
             }
-            else if (direction==1)
-            {
-                //move up
-            }
-            else if (direction == 2)
-            {
-                //move left
-            }
-            else if (direction == 3)
-            {
-                //move right
-            }
-		
-		}
-		
-		public void moveTowardsDarwin(Darwin darwin)
-		{
-            
-		
-		}
+
+        }
+
+        public void moveTowardsDarwin(Darwin darwin)
+        {
+
+
+        }
 
         /**
          *  checks whether zombie is in range or not
@@ -231,18 +261,18 @@ namespace LegendOfDarwin
                 return false;
             }
         }
-		
+
         /**
          *  checks whether or not darwin is in the zombies range
          *  returns true if he is, false otherwise
-         */ 
-		public bool isDarwinInRange(Darwin darwin)
-		{
-			if (darwin.X<=maxX && darwin.X>=minX && darwin.Y>=minY && darwin.Y<=maxY)
-				return true;
-			else
-				return false;
-		}
+         */
+        public bool isDarwinInRange(Darwin darwin)
+        {
+            if (darwin.X <= maxX && darwin.X >= minX && darwin.Y >= minY && darwin.Y <= maxY)
+                return true;
+            else
+                return false;
+        }
 
         /**
          * is vision enabled for zombie
@@ -296,19 +326,18 @@ namespace LegendOfDarwin
          * sets whether range detection is allowed or not
          * that is, will the zombie go after darwin if he is in the zombie's movement range
          * */
-        public void setIsRangeDetectionAllowed(bool myAllow) 
+        public void setIsRangeDetectionAllowed(bool myAllow)
         {
             allowRangeDetection = myAllow;
         }
 
-        // Update
-        public void Update(GameTime gameTime)
+        public void testRun()
         {
-            if (testcounter<300 && (testcounter % 50)==0)
+            if (testcounter < 300 && (testcounter % 50) == 0)
             {
                 this.MoveRight();
             }
-            else if (testcounter <600 && testcounter > 300 && (testcounter % 50) == 0) 
+            else if (testcounter < 600 && testcounter > 300 && (testcounter % 50) == 0)
             {
                 this.MoveDown();
             }
@@ -321,17 +350,34 @@ namespace LegendOfDarwin
                 this.MoveUp();
             }
 
-            if (testcounter<1200)
-              testcounter++;
+            if (testcounter < 1200)
+                testcounter++;
+        }
+
+        // Update
+        public void Update(GameTime gameTime)
+        {
+            //testRun();
+
+            
+            //Random rand1 = new Random();     
+            //Random rand2 = new Random();
+
+            if (testcounter > 50)
+            {
+                this.RandomWalk();
+                testcounter = 0;
+            }
+            testcounter++;
 
         }
-		
-		// Draw
+
+        // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(zombieTexture, this.destination, this.source, Color.White);
         }
-	
-	}
-	
+
+    }
+
 }

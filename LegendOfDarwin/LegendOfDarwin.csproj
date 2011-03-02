@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicObject.cs" />
+    <Compile Include="Stairs.cs" />
     <Compile Include="Switch.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="Darwin.cs" />

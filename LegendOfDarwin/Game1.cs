@@ -27,6 +27,9 @@ namespace LegendOfDarwin
         private int counter;
         private int counterReady;
 
+        Stairs firstStair;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -43,13 +46,9 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             //array of squares that the switch will control
-            BasicObject s1 = new BasicObject();
-            s1.X = 20;
-            s1.Y = 20;
+            BasicObject s1 = new BasicObject(20, 20);
 
-            BasicObject s2 = new BasicObject();
-            s2.X = 21;
-            s2.Y = 21;
+            BasicObject s2 = new BasicObject(21, 21);
            
             BasicObject[] squares = new BasicObject[2] {s1, s2};
 

@@ -19,7 +19,7 @@ namespace LegendOfDarwin
         protected Rectangle source;
 
         // The location to draw the sprite on the screen.
-        protected Rectangle destination;
+        //protected Rectangle destination;
 
         protected Texture2D zombieTexture;
 
@@ -41,7 +41,7 @@ namespace LegendOfDarwin
         protected bool allowRangeDetection;
 
         // the board that the zombie is moving on
-        protected GameBoard board;
+        //protected GameBoard board;
 
         // counter for pacing zombie's movements
         public int movecounter=0;
@@ -86,19 +86,19 @@ namespace LegendOfDarwin
             zombieTexture = myZombieTexture;
         }
 
-        /**
-         * sets the position of the zombie
-         * int myX, int myY screen positions of the zombie
-         * */
-        public void setPosition(int myX, int myY)
-        {
+        ///**
+        // * sets the position of the zombie
+        // * int myX, int myY screen positions of the zombie
+        // * */
+        //public void setPosition(int myX, int myY)
+        //{
 
-            // Update the destination
-            //destination.Height = ZOMBIE_HEIGHT;
-            //destination.Width = ZOMBIE_WIDTH;
-            destination.X = myX;
-            destination.Y = myY;
-        }
+        //    // Update the destination
+        //    //destination.Height = ZOMBIE_HEIGHT;
+        //    //destination.Width = ZOMBIE_WIDTH;
+        //    destination.X = myX;
+        //    destination.Y = myY;
+        //}
 
         public void setPictureSize(int width, int height)
         {
@@ -106,73 +106,73 @@ namespace LegendOfDarwin
             destination.Height = height;
         }
 
-        /*
-         * moves the zombie to the right of current position on the game board
-         * */
-        public void MoveRight()
-        {
-            this.setGridPosition(this.X + 1, this.Y);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOpen(this.X - 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X - 1, this.Y);
-            }
-        }
+        ///*
+        // * moves the zombie to the right of current position on the game board
+        // * */
+        //public void MoveRight()
+        //{
+        //    this.setGridPosition(this.X + 1, this.Y);
+        //    if (board.isGridPositionOpen(this))
+        //    {
+        //        board.setGridPositionOpen(this.X - 1, this.Y);
+        //        this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+        //    }
+        //    else
+        //    {
+        //        this.setGridPosition(this.X - 1, this.Y);
+        //    }
+        //}
 
-        /*
-         * moves the zombie to the left of current position on the game board
-         * */
-        public void MoveLeft()
-        {
-            this.setGridPosition(this.X - 1, this.Y);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOpen(this.X + 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X + 1, this.Y);
-            }
-        }
+        ///*
+        // * moves the zombie to the left of current position on the game board
+        // * */
+        //public void MoveLeft()
+        //{
+        //    this.setGridPosition(this.X - 1, this.Y);
+        //    if (board.isGridPositionOpen(this))
+        //    {
+        //        board.setGridPositionOpen(this.X + 1, this.Y);
+        //        this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+        //    }
+        //    else
+        //    {
+        //        this.setGridPosition(this.X + 1, this.Y);
+        //    }
+        //}
 
-        /*
-         * moves the zombie down one square on the game board
-         * */
-        public void MoveDown()
-        {
-            this.setGridPosition(this.X, this.Y + 1);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOpen(this.X, this.Y - 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X, this.Y - 1);
-            }
-        }
+        ///*
+        // * moves the zombie down one square on the game board
+        // * */
+        //public void MoveDown()
+        //{
+        //    this.setGridPosition(this.X, this.Y + 1);
+        //    if (board.isGridPositionOpen(this))
+        //    {
+        //        board.setGridPositionOpen(this.X, this.Y - 1);
+        //        this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+        //    }
+        //    else
+        //    {
+        //        this.setGridPosition(this.X, this.Y - 1);
+        //    }
+        //}
 
-        /*
-         * moves the zombie one up on the game board
-         * */
-        public void MoveUp()
-        {
-            this.setGridPosition(this.X, this.Y - 1);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOpen(this.X, this.Y + 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X, this.Y + 1);
-            }
-        }
+        ///*
+        // * moves the zombie one up on the game board
+        // * */
+        //public void MoveUp()
+        //{
+        //    this.setGridPosition(this.X, this.Y - 1);
+        //    if (board.isGridPositionOpen(this))
+        //    {
+        //        board.setGridPositionOpen(this.X, this.Y + 1);
+        //        this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+        //    }
+        //    else
+        //    {
+        //        this.setGridPosition(this.X, this.Y + 1);
+        //    }
+        //}
 
         /*
         *  makes the zombie walk randomly within its specified range 

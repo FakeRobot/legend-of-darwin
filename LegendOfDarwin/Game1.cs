@@ -38,11 +38,12 @@ namespace LegendOfDarwin
 
         protected override void Initialize()
         {
-            darwin = new Darwin(); 
+            
             device = graphics.GraphicsDevice;
             InitializeGraphics();
 
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
+            darwin = new Darwin(board); 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
             //array of squares that the switch will control

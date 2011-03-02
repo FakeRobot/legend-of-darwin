@@ -12,12 +12,19 @@ namespace LegendOfDarwin
         public int X;
         // The y coordinate to be put on the GameBoard class
         public int Y;
-
+        
+        /*
         public BasicObject(int x, int y)
         {
             setGridPosition(x, y);
         }
 
+        public BasicObject()
+        {
+            X = 0;
+            Y = 0;
+        }
+        */
         // Set their positions
         public void setGridPosition(int x, int y)
         {

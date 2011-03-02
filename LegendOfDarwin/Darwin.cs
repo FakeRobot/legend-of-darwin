@@ -114,19 +114,47 @@ namespace LegendOfDarwin
         {
             if (ks.IsKeyDown(Keys.Right))
             {
-                this.MoveRight();
+                if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY))
+                {
+                    this.MoveRight();
+                }
+                else
+                {
+                    //its a zombie or a wall
+                }
             }
             if (ks.IsKeyDown(Keys.Left))
             {
-                this.MoveLeft();
+                if(board.isGridPositionOpen(currentDarwinX -1, currentDarwinY))
+                {
+                    this.MoveLeft();
+                }
+                else
+                {
+                    //its a zombie or a wall
+                }
+                
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                this.MoveUp();
+                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1)){
+                    this.MoveUp();
+                }
+                else
+                {
+                    //its a zombie or a wall
+                }
             }
             if (ks.IsKeyDown(Keys.Down))
             {
-                this.MoveDown();
+                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1))
+                {
+                    this.MoveDown();
+                }
+                else
+                {
+                    //its a zombie or a wall
+                }
             }
         }
 

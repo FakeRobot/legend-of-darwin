@@ -19,7 +19,6 @@ namespace LegendOfDarwin
         // the board that the zombie is moving on
         public GameBoard board;
 
-
         public BasicObject(GameBoard myBoard)
         {
             board = myBoard;
@@ -36,76 +35,36 @@ namespace LegendOfDarwin
             destination.Y = myY;
         }
 
-        /*
-         * moves the object to the right of current position on the game board
-         * */
         public void MoveRight()
         {
             this.setGridPosition(this.X + 1, this.Y);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOccupied(this.X, this.Y);
-                board.setGridPositionOpen(this.X - 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X - 1, this.Y);
-            }
+            board.setGridPositionOccupied(this.X, this.Y);
+            board.setGridPositionOpen(this.X - 1, this.Y);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
-        /*
-         * moves the object to the left of current position on the game board
-         * */
         public void MoveLeft()
         {
             this.setGridPosition(this.X - 1, this.Y);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOccupied(this.X, this.Y);
-                board.setGridPositionOpen(this.X + 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X + 1, this.Y);
-            }
+            board.setGridPositionOccupied(this.X, this.Y);
+            board.setGridPositionOpen(this.X + 1, this.Y);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
-        /*
-         * moves the object down one square on the game board
-         * */
         public void MoveDown()
         {
             this.setGridPosition(this.X, this.Y + 1);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOccupied(this.X, this.Y);
-                board.setGridPositionOpen(this.X, this.Y - 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X, this.Y - 1);
-            }
+            board.setGridPositionOccupied(this.X, this.Y);
+            board.setGridPositionOpen(this.X, this.Y - 1);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
-        /*
-         * moves the object one up on the game board
-         * */
         public void MoveUp()
         {
             this.setGridPosition(this.X, this.Y - 1);
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOccupied(this.X, this.Y);
-                board.setGridPositionOpen(this.X, this.Y + 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            }
-            else
-            {
-                this.setGridPosition(this.X, this.Y + 1);
-            }
+            board.setGridPositionOccupied(this.X, this.Y);
+            board.setGridPositionOpen(this.X, this.Y + 1);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
         // Set their positions

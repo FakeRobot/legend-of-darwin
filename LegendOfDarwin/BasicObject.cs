@@ -19,18 +19,11 @@ namespace LegendOfDarwin
         // the board that the zombie is moving on
         public GameBoard board;
 
-        /*
-        public BasicObject(int x, int y)
-        {
-            setGridPosition(x, y);
-        }
 
-        public BasicObject()
+        public BasicObject(GameBoard myBoard)
         {
-            X = 0;
-            Y = 0;
+            board = myBoard;
         }
-        */
 
         /**
          * sets the screen position of the object

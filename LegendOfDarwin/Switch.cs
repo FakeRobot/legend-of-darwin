@@ -22,21 +22,21 @@ namespace LegendOfDarwin
         // The frame or cell of the sprite to show
         private Rectangle switchSource;
 
-        GameBoard board;
+        //GameBoard board;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
          * myboard is the gameboard
          * the bos array is an array of positions that the switch changed from occupied to open when switched
          **/
-        public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] bos)
+        public Switch(BasicObject switchSquare, GameBoard myboard, BasicObject[] bos) : base(myboard)
         {
             //switch inherits an X and Y from the basic object
             this.switchSquare = switchSquare;
 
             this.bos = bos;
 
-            this.board = myboard;
+            //this.board = myboard;
 
             // check that you aren't putting a switch on a spot that is already taken
             /*

@@ -12,7 +12,11 @@ namespace LegendOfDarwin
     {
         private Texture2D stairTex;
 
-        private Rectangle destination;
+        public Stairs(GameBoard myBoard)
+            : base(myBoard)
+        { 
+            // DO nothing
+        }
 
         public void LoadContent(Texture2D content)
         {

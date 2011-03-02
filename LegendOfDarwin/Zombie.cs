@@ -55,7 +55,7 @@ namespace LegendOfDarwin
         *  mymaxY, myminY are the max/min allowed vertical range for the zombie
         *  Gameboard myboard -- the board which the zombie is moving on
         **/
-        public Zombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard)
+        public Zombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard) : base(myboard)
         {
             maxX = mymaxX;
             maxY = mymaxY;

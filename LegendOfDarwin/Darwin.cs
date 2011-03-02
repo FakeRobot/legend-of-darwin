@@ -46,10 +46,10 @@ namespace LegendOfDarwin
         Texture2D darwinTex;
         Texture2D zombieDarwinTex;
 
-        BasicObject potentialGridPosition;
+        //BasicObject potentialGridPosition;
 
         //constructor
-        public Darwin(GameBoard myboard)
+        public Darwin(GameBoard myboard) : base(myboard)
         {
             // Init the frame or cell of the animation that will be shown. 
             source = new Rectangle();
@@ -58,10 +58,11 @@ namespace LegendOfDarwin
             source.X = 0;
             source.Y = 0;
 
-            potentialGridPosition = new BasicObject();
-            potentialGridPosition.setGridPosition(5, 5);
+            //potentialGridPosition.setGridPosition(5, 5);
 
             board = myboard;
+
+            this.setGridPosition(5, 5);
         }
 
         public void setSource(Rectangle rec)
@@ -78,6 +79,7 @@ namespace LegendOfDarwin
             destination.Height = height;
         }
 
+        /*
         public void setPosition(int startX, int startY)
         {
             // Set the initial position of Darwin
@@ -91,6 +93,7 @@ namespace LegendOfDarwin
             destination.X = (int)Math.Round(position.X);
             destination.Y = (int)Math.Round(position.Y);
         }
+        */
 
         public void LoadContent(GraphicsDevice newGraphics, Texture2D humanTex, Texture2D zombieTex)
         {

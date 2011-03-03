@@ -112,10 +112,10 @@ namespace LegendOfDarwin
                 firstStair.setGridPosition(20, 2);
                 firstStair.setDestination(board.getPosition(20, 2));
             }
-            if (board.isGridPositionOpen(19, 2))
+            if (board.isGridPositionOpen(21, 20))
             {
-                secondStair.setGridPosition(19, 2);
-                secondStair.setDestination(board.getPosition(19, 2));
+                secondStair.setGridPosition(21, 20);
+                secondStair.setDestination(board.getPosition(21, 20));
             }
 
 

@@ -141,15 +141,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="stairsDown.png">
-      <Name>stairsDown</Name>
+    <Compile Include="Switch.png">
+      <Name>Switch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Switch.png">
-      <Name>Switch</Name>
+    <Compile Include="stairsDown.png">
+      <Name>stairsDown</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

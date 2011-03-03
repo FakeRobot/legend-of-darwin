@@ -423,7 +423,7 @@ namespace LegendOfDarwin
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                if (isRangeDetectionAllowed() && isDarwinInRange(darwin))
+                if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
                     moveTowardsDarwin(darwin);
                 else
                     this.RandomWalk();

@@ -114,7 +114,7 @@ namespace LegendOfDarwin
         public void Update(KeyboardState ks, Darwin darwin)
         {
             // if we be a zombie, we cant use switches
-            if (!LegendOfDarwin.Darwin.isZombie)
+            if (darwin.isZombie())
             {
                 // grab us the current
                 LegendOfDarwin.Darwin.Dir facing = darwin.facing;

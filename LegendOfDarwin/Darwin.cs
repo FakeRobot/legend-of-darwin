@@ -25,7 +25,7 @@ namespace LegendOfDarwin
         public Dir facing = Dir.Down;
 
         //flag to show whether darwin is a zombie or not
-        public static bool isZombie;
+        private bool zombieFlag;
 
         //start darwin's humanity at 100
         public int humanityLevel = 100;
@@ -175,13 +175,13 @@ namespace LegendOfDarwin
             //need to add flag - buggy
             if (ks.IsKeyDown(Keys.Z))
             {
-                if (isZombie == true)
+                if (zombieFlag == true)
                 {
-                    isZombie = false;
+                    zombieFlag = false;
                 }
                 else
                 {
-                    isZombie = true;
+                    zombieFlag = true;
                 }
             }
         }
@@ -219,9 +219,14 @@ namespace LegendOfDarwin
             return false;
         }
 
+        public bool isZombie()
+        {
+            return this.zombieFlag;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isZombie == false)
+            if (zombieFlag == false)
             {
                 if (facing == Dir.Up)
                 {

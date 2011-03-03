@@ -51,10 +51,6 @@ namespace LegendOfDarwin
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
 
-            //array of squares that the switch will control
-
-
-
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
             s1.X = 20;
@@ -126,7 +122,6 @@ namespace LegendOfDarwin
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Texture2D darwinTex = Content.Load<Texture2D>("Darwin");
@@ -170,18 +165,9 @@ namespace LegendOfDarwin
 
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-
-
             KeyboardState ks = Keyboard.GetState();
 
-            if (ks.IsKeyDown(Keys.Q))
-            {
-                this.Exit();
-            }
+            checkForExitGame(ks);
 
             updateKeyHeldDown(ks);
 
@@ -215,6 +201,17 @@ namespace LegendOfDarwin
             base.Update(gameTime);
         }
 
+        private void checkForExitGame(KeyboardState ks)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                this.Exit();
+
+            if (ks.IsKeyDown(Keys.Q) || ks.IsKeyDown(Keys.Space))
+            {
+                this.Exit();
+            }
+        }
+
         private void checkForGameOver()
         {
             if (darwin.destination == firstZombie.destination)
@@ -224,29 +221,26 @@ namespace LegendOfDarwin
   
             if (darwin.collision)
             {
-                Rectangle rightSide = darwin.destination;
-                rightSide.X = rightSide.X + board.getSquareWidth();
+                Rectangle rightSideOfDarwin = darwin.destination;
+                rightSideOfDarwin.X = rightSideOfDarwin.X + board.getSquareWidth();
 
-                Rectangle leftSide = darwin.destination;
-                leftSide.X = leftSide.X - board.getSquareWidth();
+                Rectangle leftSideOfDarwin = darwin.destination;
+                leftSideOfDarwin.X = leftSideOfDarwin.X - board.getSquareWidth();
 
-                Rectangle onTop = darwin.destination;
-                onTop.Y = onTop.Y - board.getSquareLength();
+                Rectangle onTopOfDarwin = darwin.destination;
+                onTopOfDarwin.Y = onTopOfDarwin.Y - board.getSquareLength();
 
-                Rectangle onBottom = darwin.destination;
-                onBottom.Y = onBottom.Y + board.getSquareLength();
+                Rectangle onBottomOfDarwin = darwin.destination;
+                onBottomOfDarwin.Y = onBottomOfDarwin.Y + board.getSquareLength();
 
-
-                if (rightSide == firstZombie.destination || 
-                    leftSide == firstZombie.destination || 
-                    onTop == firstZombie.destination || 
-                    onBottom == firstZombie.destination)
+                if (rightSideOfDarwin == firstZombie.destination || 
+                    leftSideOfDarwin == firstZombie.destination || 
+                    onTopOfDarwin == firstZombie.destination || 
+                    onBottomOfDarwin == firstZombie.destination)
                 {
                     gameOver = true;
                 }
-
             }
-
         }
 
         private void updateKeyHeldDown(KeyboardState ks)
@@ -268,10 +262,8 @@ namespace LegendOfDarwin
             spriteBatch.Begin();
             board.Draw(spriteBatch);
 
-
             firstStair.Draw(spriteBatch);
             secondStair.Draw(spriteBatch);
-
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
@@ -283,7 +275,6 @@ namespace LegendOfDarwin
                 spriteBatch.Draw(gameOverTexture, gameOverPosition, Color.White);
             }
 
-
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -294,9 +285,6 @@ namespace LegendOfDarwin
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 1080;
             graphics.ApplyChanges();
-        }
-
-
-        
+        }     
     }
 }

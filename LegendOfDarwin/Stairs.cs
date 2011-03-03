@@ -66,7 +66,9 @@ namespace LegendOfDarwin
         }
 
         public void Update(GameTime gameTime, Darwin darwin)
-        { 
+        {
+            base.Update(gameTime);
+
             if (darwin.isOnTop(this))
             {
                 darwin.setAbsoluteDestination(2, 2);

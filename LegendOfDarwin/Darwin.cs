@@ -38,6 +38,7 @@ namespace LegendOfDarwin
 
         public bool collision = false;
 
+
         // The current position of Darwin on the floor
         // Might have to be changed to coordinates depending on the floor layout
         public Vector2 position = Vector2.Zero;
@@ -111,6 +112,7 @@ namespace LegendOfDarwin
 
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
         {
+            base.Update(gameTime);
             updateDarwinTransformState(ks);
             moveDarwin(ks, board, currentDarwinX, currentDarwinY);
             setPictureSize(board.getSquareWidth(), board.getSquareLength());
@@ -126,10 +128,10 @@ namespace LegendOfDarwin
                 {
                     this.MoveRight();
                 }
-                else
+                /*else
                 {
                     collision = true;
-                }
+                }*/
             }
             if (ks.IsKeyDown(Keys.Left))
             {
@@ -138,10 +140,10 @@ namespace LegendOfDarwin
                 {
                     this.MoveLeft();
                 }
-                else
+                /*else
                 {
                     collision = true;
-                }
+                }*/
                 
             }
             if (ks.IsKeyDown(Keys.Up))
@@ -151,10 +153,10 @@ namespace LegendOfDarwin
                 {
                     this.MoveUp();
                 }
-                else
+                /*else
                 {
                     collision = true;
-                }
+                }*/
             }
             if (ks.IsKeyDown(Keys.Down))
             {
@@ -163,10 +165,10 @@ namespace LegendOfDarwin
                 {
                     this.MoveDown();
                 }
-                else
+                /*else
                 {
                     collision = true;
-                }
+                }*/
             }
         }
 

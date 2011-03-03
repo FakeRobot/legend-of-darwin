@@ -13,6 +13,10 @@ namespace LegendOfDarwin
         // The y coordinate to be put on the GameBoard class
         public int Y;
 
+        private int eventLagMin, eventLagMax;
+
+        private bool eventFlag;
+
         // The location to draw the sprite on the screen.
         public Rectangle destination;
 
@@ -22,6 +26,9 @@ namespace LegendOfDarwin
         public BasicObject(GameBoard myBoard)
         {
             board = myBoard;
+
+            eventLagMax = eventLagMin = 5;
+            eventFlag = true;
         }
 
         /**
@@ -88,6 +95,26 @@ namespace LegendOfDarwin
                 return true;
             }
             return false;
+        }
+
+        public bool canEventHappen()
+        {
+            return this.eventFlag;
+        }
+
+        public void setEventFalse()
+        {
+            this.eventFlag = false;
+            eventLagMin = 0;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            eventLagMin++;
+            if (eventLagMin > eventLagMax)
+            {
+                this.eventFlag = true;
+            }
         }
     }
 }

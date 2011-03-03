@@ -416,6 +416,7 @@ namespace LegendOfDarwin
         public void Update(GameTime gameTime,Darwin darwin)
         {
             //testRun();
+            base.Update(gameTime);
 
             if( this.isOnTop(darwin) && !darwin.isZombie())
             {

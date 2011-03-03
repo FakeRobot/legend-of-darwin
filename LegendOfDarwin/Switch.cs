@@ -111,11 +111,14 @@ namespace LegendOfDarwin
             }
         }
 
-        public void Update(KeyboardState ks, Darwin darwin)
+        public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin)
         {
+            base.Update(gameTime);
             // if we be a zombie, we cant use switches
-            if (!darwin.isZombie())
+            if (!darwin.isZombie() && this.canEventHappen())
             {
+                this.setEventFalse();
+
                 // grab us the current
                 LegendOfDarwin.Darwin.Dir facing = darwin.facing;
 

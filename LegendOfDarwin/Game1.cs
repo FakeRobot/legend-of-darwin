@@ -143,12 +143,15 @@ namespace LegendOfDarwin
 
             Texture2D basicStairUpTex = Content.Load<Texture2D>("stairsUp");
             Texture2D basicStairDownTex = Content.Load<Texture2D>("stairsDown");
-            // Texture for the wall
+            
+            // Texture for the wall and switch
             Texture2D wallTex = Content.Load<Texture2D>("Wall");
+            Texture2D switchTex = Content.Load<Texture2D>("Switch");
 
             firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
-            firstSwitch.LoadContent(wallTex);
+            
+            firstSwitch.LoadContent(wallTex, switchTex);
 
             // Test
             board.LoadContent(basicGridTex);

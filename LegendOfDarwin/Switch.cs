@@ -10,14 +10,19 @@ namespace LegendOfDarwin
 {
     class Switch : BasicObject
     {
-        // the texture to draw on the wall squares
+        // the textures to draw on the wall squares and the switch square
         Texture2D wallTex;
+        Texture2D switchTex;
 
         // squares that will be in the wall
         BasicObject[] walls;
 
         // The frame or cell of the sprite to show
         private Rectangle switchSource;
+
+        // The dimensions of the switch image in pixels
+        private const int SWITCH_WIDTH = 250;
+        private const int SWITCH_HEIGHT = 250;
 
         private bool isOn;
 
@@ -77,24 +82,33 @@ namespace LegendOfDarwin
             isOn = false;
         }
 
-        public void LoadContent(Texture2D myWallTex)
+        public void LoadContent(Texture2D myWallTex, Texture2D mySwitchTex)
         {
             wallTex = myWallTex;
+            switchTex = mySwitchTex;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (BasicObject bo in walls)
+            if (isOn)
             {
-                if (isOn)
+                foreach (BasicObject bo in walls)
                 {
+                    // Draw the walls visible
                     Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
                     spriteBatch.Draw(wallTex, board.getPosition(bo), source, Color.White);
                 }
-            }
 
-            switchSource = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
-            spriteBatch.Draw(wallTex, board.getPosition(this.X, this.Y), switchSource, Color.White);
+                // Draw the Switch in the on position
+                switchSource = new Rectangle(0, 0, SWITCH_WIDTH, SWITCH_HEIGHT);
+                spriteBatch.Draw(switchTex, board.getPosition(this.X, this.Y), switchSource, Color.White);
+            }
+            else
+            {
+                // Draw the switch in the off position
+                switchSource = new Rectangle(SWITCH_WIDTH, 0, SWITCH_WIDTH, SWITCH_HEIGHT);
+                spriteBatch.Draw(switchTex, board.getPosition(this.X, this.Y), switchSource, Color.White);
+            }
         }
 
         public void Update(KeyboardState ks)

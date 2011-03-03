@@ -77,78 +77,78 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Darwin.png">
+    <Compile Include="DarwinPic\Darwin.png">
       <Name>Darwin</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="ZombieDarwin.png">
+    <Compile Include="DarwinPic\ZombieDarwin.png">
       <Name>ZombieDarwin</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="grid_outline.png">
+    <Compile Include="StaticPic\grid_outline.png">
       <Name>grid_outline</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="grid_menu_outline.png">
+    <Compile Include="StaticPic\grid_menu_outline.png">
       <Name>grid_menu_outline</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Zombie.png">
+    <Compile Include="ZombiePic\Zombie.png">
       <Name>Zombie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Wall.png">
+    <Compile Include="StaticPic\Wall.png">
       <Name>Wall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="stairsUp.png">
+    <Compile Include="StaticPic\stairsUp.png">
       <Name>stairsUp</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DarwinLeft.png">
+    <Compile Include="DarwinPic\DarwinLeft.png">
       <Name>DarwinLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="DarwinRight.png">
+    <Compile Include="DarwinPic\DarwinRight.png">
       <Name>DarwinRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="DarwinUp.png">
+    <Compile Include="DarwinPic\DarwinUp.png">
       <Name>DarwinUp</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Switch.png">
+    <Compile Include="StaticPic\Switch.png">
       <Name>Switch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="stairsDown.png">
+    <Compile Include="StaticPic\stairsDown.png">
       <Name>stairsDown</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

@@ -124,26 +124,26 @@ namespace LegendOfDarwin
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture2D darwinTex = Content.Load<Texture2D>("Darwin");
+            Texture2D darwinTex = Content.Load<Texture2D>("DarwinPic/Darwin");
 
-            Texture2D darwinUpTex = Content.Load<Texture2D>("DarwinUp");
-            Texture2D darwinDownTex = Content.Load<Texture2D>("Darwin");
-            Texture2D darwinRightTex = Content.Load<Texture2D>("DarwinRight");
-            Texture2D darwinLeftTex = Content.Load<Texture2D>("DarwinLeft");
+            Texture2D darwinUpTex = Content.Load<Texture2D>("DarwinPic/DarwinUp");
+            Texture2D darwinDownTex = Content.Load<Texture2D>("DarwinPic/Darwin");
+            Texture2D darwinRightTex = Content.Load<Texture2D>("DarwinPic/DarwinRight");
+            Texture2D darwinLeftTex = Content.Load<Texture2D>("DarwinPic/DarwinLeft");
+            Texture2D zombieDarwinTex = Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
 
-            Texture2D zombieDarwinTex = Content.Load<Texture2D>("ZombieDarwin");
-            Texture2D zombieTex = Content.Load<Texture2D>("Zombie");
+            Texture2D zombieTex = Content.Load<Texture2D>("ZombiePic/Zombie");
 
             // Test
-            Texture2D basicGridTex = Content.Load<Texture2D>("grid_outline");
-            Texture2D basicMenuTex = Content.Load<Texture2D>("grid_menu_outline");
+            Texture2D basicGridTex = Content.Load<Texture2D>("StaticPic/grid_outline");
+            Texture2D basicMenuTex = Content.Load<Texture2D>("StaticPic/grid_menu_outline");
 
-            Texture2D basicStairUpTex = Content.Load<Texture2D>("stairsUp");
-            Texture2D basicStairDownTex = Content.Load<Texture2D>("stairsDown");
+            Texture2D basicStairUpTex = Content.Load<Texture2D>("StaticPic/stairsUp");
+            Texture2D basicStairDownTex = Content.Load<Texture2D>("StaticPic/stairsDown");
             
             // Texture for the wall and switch
-            Texture2D wallTex = Content.Load<Texture2D>("Wall");
-            Texture2D switchTex = Content.Load<Texture2D>("Switch");
+            Texture2D wallTex = Content.Load<Texture2D>("StaticPic/Wall");
+            Texture2D switchTex = Content.Load<Texture2D>("StaticPic/Switch");
 
             gameOverTexture = Content.Load<Texture2D>("gameover");
 

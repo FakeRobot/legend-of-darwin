@@ -214,7 +214,7 @@ namespace LegendOfDarwin
 
         private void checkForGameOver()
         {
-            if (darwin.destination == firstZombie.destination)
+            if (darwin.isOnTop(firstZombie))
             {
                 gameOver = true;
             }

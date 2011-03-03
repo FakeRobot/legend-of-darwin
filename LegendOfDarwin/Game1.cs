@@ -18,6 +18,9 @@ namespace LegendOfDarwin
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        GameState gameState;
+        GameStart gameStart;
+
         Darwin darwin;
         Zombie firstZombie;
         Switch firstSwitch;
@@ -32,7 +35,6 @@ namespace LegendOfDarwin
         Texture2D gameOverTexture;
         Texture2D gameWinTexture;
 
-
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
@@ -45,12 +47,14 @@ namespace LegendOfDarwin
 
         protected override void Initialize()
         {
-
             gameOverPosition.X = 320;
             gameOverPosition.Y = 130;
 
             device = graphics.GraphicsDevice;
             InitializeGraphics();
+
+            gameState = new GameState();
+            gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board); 
@@ -168,11 +172,38 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
+
+            gameStart.LoadContent(Content.Load<Texture2D>("gamestart"));
         }
 
         protected override void UnloadContent(){}
 
         protected override void Update(GameTime gameTime)
+        {
+            switch (gameState.getState())
+            { 
+                case GameState.state.Start:
+                    UpdateStartState();
+                    break;
+                case GameState.state.Level:
+                    UpdateLevelState(gameTime);
+                    break;
+                case GameState.state.End:
+                    break;
+            
+            }
+            base.Update(gameTime);
+        }
+        private void UpdateStartState()
+        {
+            KeyboardState ks = Keyboard.GetState();
+            if(ks.IsKeyDown(Keys.Enter))
+            {
+                gameState.setState(GameState.state.Level);
+            }
+        }
+
+        private void UpdateLevelState(GameTime gameTime)
         {
             KeyboardState ks = Keyboard.GetState();
 
@@ -201,14 +232,13 @@ namespace LegendOfDarwin
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            firstZombie.Update(gameTime,darwin);
+            firstZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
 
             checkForGameOver();
             checkForGameWin();
 
-            base.Update(gameTime);
         }
 
         private void checkForExitGame(KeyboardState ks)
@@ -275,6 +305,31 @@ namespace LegendOfDarwin
 
         protected override void Draw(GameTime gameTime)
         {
+            switch (gameState.getState())
+            {
+                case GameState.state.Start:
+                    DrawStartState();
+                    break;
+                case GameState.state.Level:
+                    DrawLevelState(gameTime);
+                    break;
+                case GameState.state.End:
+                    break;
+            }
+            base.Draw(gameTime);
+        }
+
+        private void DrawStartState()
+        {
+            GraphicsDevice.Clear(Color.White);
+            spriteBatch.Begin();
+            gameStart.Draw(spriteBatch);
+            spriteBatch.End();
+            
+        }
+
+        private void DrawLevelState(GameTime gameTime)
+        {
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
@@ -287,7 +342,8 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
 
-            if(gameOver){
+            if (gameOver)
+            {
                 gameOverPosition.X = 320;
                 gameOverPosition.Y = 130;
                 spriteBatch.Draw(gameOverTexture, gameOverPosition, Color.White);
@@ -295,12 +351,10 @@ namespace LegendOfDarwin
 
             if (gameWin)
             {
-                spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);  
+                spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);
             }
 
-            spriteBatch.End();
-
-            base.Draw(gameTime);
+            spriteBatch.End();    
         }
 
         private void InitializeGraphics()

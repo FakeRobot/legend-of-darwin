@@ -115,6 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicObject.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="GameStart.cs" />
     <Compile Include="Stairs.cs" />
     <Compile Include="Switch.cs" />
     <Compile Include="GameBoard.cs" />

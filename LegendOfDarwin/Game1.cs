@@ -194,7 +194,7 @@ namespace LegendOfDarwin
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime,darwin);
 
-            firstSwitch.Update(ks);
+            firstSwitch.Update(ks, darwin);
 
             base.Update(gameTime);
         }

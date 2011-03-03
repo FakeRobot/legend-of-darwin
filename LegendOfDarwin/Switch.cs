@@ -111,9 +111,35 @@ namespace LegendOfDarwin
             }
         }
 
-        public void Update(KeyboardState ks)
+        public void Update(KeyboardState ks, Darwin darwin)
         {
-            toggleSwitch(ks);
+            // if we be a zombie, we cant use switches
+            if (!LegendOfDarwin.Darwin.isZombie)
+            {
+                // grab us the current
+                LegendOfDarwin.Darwin.Dir facing = darwin.facing;
+
+                // check switch position in relation to darwin's position + facing direction 
+                switch (facing)
+                {
+                    case (LegendOfDarwin.Darwin.Dir.Left):
+                        if (((this.X + 1) == darwin.X) && (this.Y == darwin.Y))
+                            toggleSwitch(ks);
+                        break;
+                    case (LegendOfDarwin.Darwin.Dir.Right):
+                        if (((this.X - 1) == darwin.X) && (this.Y == darwin.Y))
+                            toggleSwitch(ks);
+                        break;
+                    case (LegendOfDarwin.Darwin.Dir.Up):
+                        if ((this.X == darwin.X) && ((this.Y + 1) == darwin.Y))
+                            toggleSwitch(ks);
+                        break;
+                    case (LegendOfDarwin.Darwin.Dir.Down):
+                        if ((this.X == darwin.X) && ((this.Y - 1) == darwin.Y))
+                            toggleSwitch(ks);
+                        break;
+                }
+            }
         }
 
         private void toggleSwitch(KeyboardState ks)

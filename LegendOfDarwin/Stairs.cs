@@ -64,5 +64,14 @@ namespace LegendOfDarwin
             }
 
         }
+
+        public void Update(GameTime gameTime, Darwin darwin)
+        { 
+            if (darwin.isOnTop(this))
+            {
+                darwin.setAbsoluteDestination(2, 2);
+                board.setGridPositionOpen(this);
+            }
+        }
     }
 }

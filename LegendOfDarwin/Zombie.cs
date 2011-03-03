@@ -417,7 +417,11 @@ namespace LegendOfDarwin
         {
             //testRun();
 
-            
+            if( this.isOnTop(darwin) && !darwin.isZombie())
+            {
+                darwin.setAbsoluteDestination(2, 2);
+            }
+
             //Random rand1 = new Random();     
             //Random rand2 = new Random();
 

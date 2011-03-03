@@ -74,5 +74,20 @@ namespace LegendOfDarwin
             Y = y;
         }
 
+        public void setAbsoluteDestination(int x, int y)
+        {
+            this.setGridPosition(x, y);
+            board.setGridPositionOccupied(this.X, this.Y);
+            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+        }
+
+        public bool isOnTop(BasicObject bo)
+        {
+            if (bo.X == this.X && bo.Y == this.Y)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

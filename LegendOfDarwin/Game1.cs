@@ -170,6 +170,8 @@ namespace LegendOfDarwin
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+
+
             KeyboardState ks = Keyboard.GetState();
 
             updateKeyHeldDown(ks);
@@ -191,10 +193,14 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
+            firstStair.Update(gameTime, darwin);
+            secondStair.Update(gameTime, darwin);
+
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime,darwin);
 
             firstSwitch.Update(ks, darwin);
+
 
             base.Update(gameTime);
         }

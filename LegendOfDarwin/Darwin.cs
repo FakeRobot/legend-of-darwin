@@ -113,7 +113,12 @@ namespace LegendOfDarwin
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
         {
             base.Update(gameTime);
-            updateDarwinTransformState(ks);
+            if (this.canEventHappen())
+            {
+                updateDarwinTransformState(ks);
+                this.setEventFalse();
+            }
+
             moveDarwin(ks, board, currentDarwinX, currentDarwinY);
             setPictureSize(board.getSquareWidth(), board.getSquareLength());
 
@@ -174,7 +179,7 @@ namespace LegendOfDarwin
 
         private void updateDarwinTransformState(KeyboardState ks)
         {
-            //need to add flag - buggy
+            
             if (ks.IsKeyDown(Keys.Z))
             {
                 if (zombieFlag == true)

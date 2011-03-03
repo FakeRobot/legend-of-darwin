@@ -24,9 +24,11 @@ namespace LegendOfDarwin
         GameBoard board;
         GraphicsDevice device;
         bool keyIsHeldDown = false;
+        bool gameOver = false;
         private int counter;
         private int counterReady;
-
+        Texture2D gameOverTexture;
+        Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
 
@@ -148,6 +150,8 @@ namespace LegendOfDarwin
             Texture2D wallTex = Content.Load<Texture2D>("Wall");
             Texture2D switchTex = Content.Load<Texture2D>("Switch");
 
+            gameOverTexture = Content.Load<Texture2D>("gameover");
+
             firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
             
@@ -173,6 +177,11 @@ namespace LegendOfDarwin
 
 
             KeyboardState ks = Keyboard.GetState();
+
+            if (ks.IsKeyDown(Keys.Q))
+            {
+                this.Exit();
+            }
 
             updateKeyHeldDown(ks);
 
@@ -201,8 +210,43 @@ namespace LegendOfDarwin
 
             firstSwitch.Update(ks, darwin);
 
+            checkForGameOver();
 
             base.Update(gameTime);
+        }
+
+        private void checkForGameOver()
+        {
+            if (darwin.destination == firstZombie.destination)
+            {
+                gameOver = true;
+            }
+  
+            if (darwin.collision)
+            {
+                Rectangle rightSide = darwin.destination;
+                rightSide.X = rightSide.X + board.getSquareWidth();
+
+                Rectangle leftSide = darwin.destination;
+                leftSide.X = leftSide.X - board.getSquareWidth();
+
+                Rectangle onTop = darwin.destination;
+                onTop.Y = onTop.Y - board.getSquareLength();
+
+                Rectangle onBottom = darwin.destination;
+                onBottom.Y = onBottom.Y + board.getSquareLength();
+
+
+                if (rightSide == firstZombie.destination || 
+                    leftSide == firstZombie.destination || 
+                    onTop == firstZombie.destination || 
+                    onBottom == firstZombie.destination)
+                {
+                    gameOver = true;
+                }
+
+            }
+
         }
 
         private void updateKeyHeldDown(KeyboardState ks)
@@ -233,6 +277,13 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
 
+            if(gameOver){
+                gameOverPosition.X = 320;
+                gameOverPosition.Y = 130;
+                spriteBatch.Draw(gameOverTexture, gameOverPosition, Color.White);
+            }
+
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -245,5 +296,7 @@ namespace LegendOfDarwin
             graphics.ApplyChanges();
         }
 
+
+        
     }
 }

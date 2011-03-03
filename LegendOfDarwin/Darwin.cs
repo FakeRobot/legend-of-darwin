@@ -36,7 +36,7 @@ namespace LegendOfDarwin
         // The location to draw the sprite on the screen.
         //public Rectangle destination;
 
-        bool collision;
+        public bool collision = false;
 
         // The current position of Darwin on the floor
         // Might have to be changed to coordinates depending on the floor layout

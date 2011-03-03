@@ -69,7 +69,7 @@ namespace LegendOfDarwin
         {
             base.Update(gameTime);
 
-            if (darwin.isOnTop(this))
+            if (darwin.isOnTop(this) && this.view.Equals(Dir.Up))
             {
                 darwin.setAbsoluteDestination(2, 2);
                 board.setGridPositionOpen(this);

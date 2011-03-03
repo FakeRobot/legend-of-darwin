@@ -25,9 +25,14 @@ namespace LegendOfDarwin
         GraphicsDevice device;
         bool keyIsHeldDown = false;
         bool gameOver = false;
+        bool gameWin = false;
+
         private int counter;
         private int counterReady;
         Texture2D gameOverTexture;
+        Texture2D gameWinTexture;
+
+
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
@@ -40,7 +45,10 @@ namespace LegendOfDarwin
 
         protected override void Initialize()
         {
-            
+
+            gameOverPosition.X = 320;
+            gameOverPosition.Y = 130;
+
             device = graphics.GraphicsDevice;
             InitializeGraphics();
 
@@ -146,6 +154,7 @@ namespace LegendOfDarwin
             Texture2D switchTex = Content.Load<Texture2D>("StaticPic/Switch");
 
             gameOverTexture = Content.Load<Texture2D>("gameover");
+            gameWinTexture = Content.Load<Texture2D>("gamewin");
 
             firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
@@ -197,6 +206,7 @@ namespace LegendOfDarwin
             firstSwitch.Update(gameTime, ks, darwin);
 
             checkForGameOver();
+            checkForGameWin();
 
             base.Update(gameTime);
         }
@@ -243,6 +253,14 @@ namespace LegendOfDarwin
             }
         }
 
+        private void checkForGameWin()
+        {
+            if (darwin.isOnTop(secondStair))
+            {
+                gameWin = true;
+            }
+        }
+
         private void updateKeyHeldDown(KeyboardState ks)
         {
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down))
@@ -273,6 +291,11 @@ namespace LegendOfDarwin
                 gameOverPosition.X = 320;
                 gameOverPosition.Y = 130;
                 spriteBatch.Draw(gameOverTexture, gameOverPosition, Color.White);
+            }
+
+            if (gameWin)
+            {
+                spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);  
             }
 
             spriteBatch.End();

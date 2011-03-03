@@ -189,6 +189,7 @@ namespace LegendOfDarwin
                     UpdateLevelState(gameTime);
                     break;
                 case GameState.state.End:
+                    UpdateEndState();
                     break;
             
             }
@@ -239,6 +240,32 @@ namespace LegendOfDarwin
             checkForGameOver();
             checkForGameWin();
 
+            if (gameOver || gameWin)
+            {
+                gameState.setState(GameState.state.End);
+            }
+
+        }
+
+        private void UpdateEndState()
+        {
+            KeyboardState ks = Keyboard.GetState();
+
+            if (ks.IsKeyDown(Keys.Q)) 
+            {
+                this.Exit();
+            }
+            if (ks.IsKeyDown(Keys.R))
+            {
+                gameOver = false;
+                gameWin = false;
+
+                board.setGridPositionOpen(darwin);
+                darwin.setAbsoluteDestination(2, 2);
+
+                gameState.setState(GameState.state.Level);
+            }
+        
         }
 
         private void checkForExitGame(KeyboardState ks)
@@ -314,6 +341,7 @@ namespace LegendOfDarwin
                     DrawLevelState(gameTime);
                     break;
                 case GameState.state.End:
+                    DrawEndState();
                     break;
             }
             base.Draw(gameTime);
@@ -342,6 +370,14 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
 
+
+
+            spriteBatch.End();    
+        }
+
+        private void DrawEndState()
+        {
+            spriteBatch.Begin();
             if (gameOver)
             {
                 gameOverPosition.X = 320;
@@ -353,8 +389,7 @@ namespace LegendOfDarwin
             {
                 spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);
             }
-
-            spriteBatch.End();    
+            spriteBatch.End();
         }
 
         private void InitializeGraphics()

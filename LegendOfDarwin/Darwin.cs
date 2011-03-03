@@ -126,11 +126,15 @@ namespace LegendOfDarwin
 
         private void moveDarwin(KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
         {
+            // has a direction been picked to go in, used to get rid of diagonal movement
+            bool hasPicked = false;
+
             if (ks.IsKeyDown(Keys.Right))
             {
                 facing = Dir.Right;
-                if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY))
+                if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY) && !hasPicked)
                 {
+                    hasPicked = true;
                     this.MoveRight();
                 }
                 /*else
@@ -141,8 +145,9 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Left))
             {
                 facing = Dir.Left;
-                if(board.isGridPositionOpen(currentDarwinX -1, currentDarwinY))
+                if (board.isGridPositionOpen(currentDarwinX - 1, currentDarwinY) && !hasPicked)
                 {
+                    hasPicked = true;
                     this.MoveLeft();
                 }
                 /*else
@@ -154,8 +159,9 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Up))
             {
                 facing = Dir.Up;
-                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1))
+                if (board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1) && !hasPicked)
                 {
+                    hasPicked = true;
                     this.MoveUp();
                 }
                 /*else
@@ -166,8 +172,9 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Down))
             {
                 facing = Dir.Down;
-                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1))
+                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1) && !hasPicked)
                 {
+                    hasPicked = true;
                     this.MoveDown();
                 }
                 /*else

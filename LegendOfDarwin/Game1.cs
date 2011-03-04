@@ -90,7 +90,7 @@ namespace LegendOfDarwin
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
 
-            brain = new Brain(board, 5, 10);
+            brain = new Brain(board, 5, 18);
 
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
@@ -313,7 +313,7 @@ namespace LegendOfDarwin
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            firstZombie.Update(gameTime, darwin);
+            firstZombie.Update(gameTime, darwin, brain);
 
             firstSwitch.Update(gameTime, ks, darwin);
 

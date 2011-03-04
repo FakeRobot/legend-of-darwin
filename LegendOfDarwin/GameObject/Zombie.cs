@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LegendOfDarwin
+namespace LegendOfDarwin.GameObject
 {
     class Zombie : BasicObject
     {
@@ -245,7 +245,7 @@ namespace LegendOfDarwin
                     if (isZombieInRange(this.X + 1, this.Y))
                     {
                         // checks for board position to be open or occupied by darwin
-                        if (board.isGridPositionOpen(this.X+1, this.Y) || (darwin.X==this.X+1 && darwin.Y==this.Y))
+                        if (board.isGridPositionOpen(this.X + 1, this.Y) || (darwin.X == this.X + 1 && darwin.Y == this.Y && !darwin.isZombie()))
                           MoveRight();
                     }
                 }
@@ -255,7 +255,7 @@ namespace LegendOfDarwin
                     if (isZombieInRange(this.X - 1, this.Y))
                     {
                         // checks for board position to be open or occupied by darwin
-                        if (board.isGridPositionOpen(this.X - 1, this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y))
+                        if (board.isGridPositionOpen(this.X - 1, this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y && !darwin.isZombie()))
                             MoveLeft();
                     }
                 }
@@ -269,7 +269,7 @@ namespace LegendOfDarwin
                     if (isZombieInRange(this.X, this.Y + 1))
                     {
                         // checks for board position to be open or occupied by darwin
-                        if (board.isGridPositionOpen(this.X, this.Y+1) || (darwin.X == this.X && darwin.Y == this.Y+1))
+                        if (board.isGridPositionOpen(this.X, this.Y+1) || (darwin.X == this.X && darwin.Y == this.Y+1 && !darwin.isZombie()))
                             MoveDown();
                     }
                 }
@@ -279,7 +279,7 @@ namespace LegendOfDarwin
                     if (isZombieInRange(this.X, this.Y - 1))
                     {
                         // checks for board position to be open or occupied by darwin
-                        if (board.isGridPositionOpen(this.X, this.Y - 1) || (darwin.X == this.X && darwin.Y == this.Y - 1))
+                        if (board.isGridPositionOpen(this.X, this.Y - 1) || (darwin.X == this.X && darwin.Y == this.Y - 1 && !darwin.isZombie()))
                             MoveUp();
                     }
                 }
@@ -287,6 +287,68 @@ namespace LegendOfDarwin
 
         }
 
+        /**
+         * moves zombie in the direction that darwin currently is
+         * */
+        public void moveTowardsBrain(Brain brain)
+        {
+
+            int changeX = 0;
+            int changeY = 0;
+
+            changeX = brain.X - this.X;
+            changeY = brain.Y - this.Y;
+
+            if (Math.Abs(changeX) > Math.Abs(changeY))
+            {
+                //move in x direction
+                if (brain.X > this.X)
+                {
+                    //move right
+                    if (isZombieInRange(this.X + 1, this.Y))
+                    {
+                        // checks for board position to be open
+                        if (board.isGridPositionOpen(this.X + 1, this.Y))
+                            MoveRight();
+                    }
+                }
+                else if (brain.X < this.X)
+                {
+                    //move left
+                    if (isZombieInRange(this.X - 1, this.Y))
+                    {
+                        // checks for board position to be open or occupied by brain
+                        if (board.isGridPositionOpen(this.X - 1, this.Y))
+                            MoveLeft();
+                    }
+                }
+            }
+            else
+            {
+                //move in y direction
+                if (brain.Y > this.Y)
+                {
+                    //move down
+                    if (isZombieInRange(this.X, this.Y + 1))
+                    {
+                        // checks for board position to be open or occupied by brain
+                        if (board.isGridPositionOpen(this.X, this.Y + 1))
+                            MoveDown();
+                    }
+                }
+                else if (brain.Y < this.Y)
+                {
+                    //move up
+                    if (isZombieInRange(this.X, this.Y - 1))
+                    {
+                        // checks for board position to be open or occupied by brain
+                        if (board.isGridPositionOpen(this.X, this.Y - 1))
+                            MoveUp();
+                    }
+                }
+            }
+
+        }
         /**
          *  checks whether zombie is in range or not
          *  return True if it is, false if not
@@ -327,6 +389,18 @@ namespace LegendOfDarwin
         public bool isDarwinInRange(Darwin darwin)
         {
             if (darwin.X <= maxX && darwin.X >= minX && darwin.Y >= minY && darwin.Y <= maxY)
+                return true;
+            else
+                return false;
+        }
+
+        /**
+        *  checks whether or not brain is in the zombies range
+        *  returns true if he is, false otherwise
+        */
+        public bool isBrainInRange(Brain brain)
+        {
+            if (brain.X <= maxX && brain.X >= minX && brain.Y >= minY && brain.Y <= maxY)
                 return true;
             else
                 return false;
@@ -413,7 +487,7 @@ namespace LegendOfDarwin
         }
 
         // Update
-        public void Update(GameTime gameTime,Darwin darwin)
+        public void Update(GameTime gameTime,Darwin darwin,Brain brain)
         {
             //testRun();
             base.Update(gameTime);
@@ -428,7 +502,9 @@ namespace LegendOfDarwin
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                if (isRangeDetectionAllowed() && isBrainInRange(brain))
+                    moveTowardsBrain(brain);
+                else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
                     moveTowardsDarwin(darwin);
                 else
                     this.RandomWalk();

@@ -53,6 +53,8 @@ namespace LegendOfDarwin
 
         Vortex vortex;
 
+        Song song;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -227,6 +229,8 @@ namespace LegendOfDarwin
 
             vortex.LoadContent(Content.Load<Texture2D>("vortex"));
 
+            song = Content.Load<Song>("thriller");
+
         }
 
         protected override void UnloadContent(){}
@@ -272,6 +276,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if(ks.IsKeyDown(Keys.Enter))
             {
+                MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -367,8 +372,9 @@ namespace LegendOfDarwin
                 thirdZombie.setAbsoluteDestination(16, 10);
                 brain.reset();
                 darwin.setHuman();
-
                 gameState.setState(GameState.state.Level);
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
             }
         
         }

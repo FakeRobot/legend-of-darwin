@@ -28,9 +28,11 @@ namespace LegendOfDarwin
         Brain brain;
         GameBoard board;
         GraphicsDevice device;
+        SpriteFont messageFont;
         bool keyIsHeldDown = false;
         bool gameOver = false;
         bool gameWin = false;
+        bool messageMode = false;
 
         private int counter;
         private int counterReady;
@@ -40,7 +42,12 @@ namespace LegendOfDarwin
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
+<<<<<<< .mine
+        MessageBox zombieMessage;
+=======
         ZombieTime zTime;
+>>>>>>> .r95
+
 
         public Game1()
         {
@@ -62,6 +69,10 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board); 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
+
+            String zombieString = "This a zombie, don't near him as a human!!";
+            zombieMessage = new MessageBox(board.getPosition(10,10).X,board.getPosition(10,10).Y,zombieString);
+            messageMode = true;
 
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
@@ -133,14 +144,18 @@ namespace LegendOfDarwin
                 secondStair.setDestination(board.getPosition(21, 20));
             }
 
+<<<<<<< .mine
+=======
             zTime = new ZombieTime(board);
 
+>>>>>>> .r95
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            messageFont = Content.Load<SpriteFont>("TimesNewRoman");
 
             Texture2D darwinTex = Content.Load<Texture2D>("DarwinPic/Darwin");
 
@@ -151,6 +166,7 @@ namespace LegendOfDarwin
             Texture2D zombieDarwinTex = Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
 
             Texture2D zombieTex = Content.Load<Texture2D>("ZombiePic/Zombie");
+            Texture2D messagePic = Content.Load<Texture2D>("messageBox");
 
             // Test
             Texture2D basicGridTex = Content.Load<Texture2D>("StaticPic/grid_outline");
@@ -183,11 +199,16 @@ namespace LegendOfDarwin
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
 
+<<<<<<< .mine
+            zombieMessage.LoadContent(messagePic);
+            gameStart.LoadContent(Content.Load<Texture2D>("gamestart"));
+=======
             
 
             gameStart.LoadContent(Content.Load<Texture2D>("startScreen"));
 
             zTime.LoadContent(Content.Load<Texture2D>("humanities_bar"));
+>>>>>>> .r95
         }
 
         protected override void UnloadContent(){}
@@ -200,7 +221,10 @@ namespace LegendOfDarwin
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    UpdateLevelState(gameTime);
+                    if (!messageMode)
+                        UpdateLevelState(gameTime);
+                    else
+                        UpdateMessageMode();
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -209,6 +233,17 @@ namespace LegendOfDarwin
             }
             base.Update(gameTime);
         }
+
+        private void UpdateMessageMode()
+        {
+            KeyboardState ks = Keyboard.GetState();
+            if(ks.IsKeyDown(Keys.Enter))
+            {
+                 messageMode = false;
+            }
+
+        }
+
         private void UpdateStartState()
         {
             KeyboardState ks = Keyboard.GetState();
@@ -381,8 +416,7 @@ namespace LegendOfDarwin
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             gameStart.Draw(spriteBatch);
-            spriteBatch.End();
-            
+            spriteBatch.End();    
         }
 
         private void DrawLevelState(GameTime gameTime)
@@ -401,6 +435,12 @@ namespace LegendOfDarwin
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
+<<<<<<< .mine
+            if (messageMode)
+              zombieMessage.Draw(spriteBatch,messageFont);
+
+=======
+>>>>>>> .r95
             spriteBatch.End();    
         }
 

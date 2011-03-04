@@ -42,11 +42,11 @@ namespace LegendOfDarwin
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
-<<<<<<< .mine
+
         MessageBox zombieMessage;
-=======
+
         ZombieTime zTime;
->>>>>>> .r95
+
 
 
         public Game1()
@@ -144,11 +144,9 @@ namespace LegendOfDarwin
                 secondStair.setDestination(board.getPosition(21, 20));
             }
 
-<<<<<<< .mine
-=======
             zTime = new ZombieTime(board);
 
->>>>>>> .r95
+
             base.Initialize();
         }
 
@@ -198,17 +196,12 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
-
-<<<<<<< .mine
             zombieMessage.LoadContent(messagePic);
-            gameStart.LoadContent(Content.Load<Texture2D>("gamestart"));
-=======
-            
 
             gameStart.LoadContent(Content.Load<Texture2D>("startScreen"));
 
             zTime.LoadContent(Content.Load<Texture2D>("humanities_bar"));
->>>>>>> .r95
+
         }
 
         protected override void UnloadContent(){}
@@ -435,12 +428,9 @@ namespace LegendOfDarwin
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
-<<<<<<< .mine
             if (messageMode)
               zombieMessage.Draw(spriteBatch,messageFont);
 
-=======
->>>>>>> .r95
             spriteBatch.End();    
         }
 

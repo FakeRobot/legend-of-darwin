@@ -12,12 +12,8 @@ Content\DarwinPic\DarwinUp.xnb
 Content\StaticPic\Switch.xnb
 Content\StaticPic\stairsDown.xnb
 Content\gamewin.xnb
-<<<<<<< .mine
-Content\gamestart.xnb
-Content\messageBox.xnb
-Content\TimesNewRoman.xnb
-=======
 Content\humanities_bar.xnb
 Content\brain.xnb
 Content\startScreen.xnb
->>>>>>> .r95
+Content\messageBox.xnb
+Content\TimesNewRoman.xnb

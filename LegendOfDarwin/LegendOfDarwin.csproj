@@ -114,11 +114,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< .mine
+
     <Compile Include="MessageBox.cs" />
-=======
+
     <Compile Include="ZombieTime.cs" />
->>>>>>> .r95
+
     <Compile Include="GameObject\BasicObject.cs" />
     <Compile Include="GameObject\Brain.cs" />
     <Compile Include="GameState\GameState.cs" />

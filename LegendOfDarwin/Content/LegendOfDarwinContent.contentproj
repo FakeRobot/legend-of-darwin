@@ -175,7 +175,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-<<<<<<< .mine
   <ItemGroup>
     <Compile Include="messageBox.png">
       <Name>messageBox</Name>
@@ -190,7 +189,6 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
-=======
   <ItemGroup>
     <Compile Include="brain.png">
       <Name>brain</Name>
@@ -205,7 +203,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
->>>>>>> .r95
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

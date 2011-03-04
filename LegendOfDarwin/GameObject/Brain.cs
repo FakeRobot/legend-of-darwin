@@ -76,5 +76,11 @@ namespace LegendOfDarwin.GameObject
             spriteBatch.Draw(brainTexture, this.destination, Color.White);
         }
 
+        public void reset()
+        {
+            this.X = 5;
+            this.Y = 18;
+        }
+
     }
 }

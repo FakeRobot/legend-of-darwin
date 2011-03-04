@@ -23,7 +23,7 @@ namespace LegendOfDarwin
         GameStart gameStart;
 
         Darwin darwin;
-        Zombie firstZombie;
+        Zombie firstZombie, secondZombie, thirdZombie;
         Switch firstSwitch;
         Brain brain;
         GameBoard board;
@@ -73,6 +73,8 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board); 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
+            secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
+            thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12,8).X,board.getPosition(10,10).Y,zombieString);
@@ -212,6 +214,8 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
+            secondZombie.LoadContent(zombieTex);
+            thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
             switchMessage.LoadContent(messagePic);
@@ -314,6 +318,11 @@ namespace LegendOfDarwin
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
+            secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            secondZombie.Update(gameTime, darwin, brain);
+            thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            thirdZombie.Update(gameTime, darwin, brain);
+
 
             firstSwitch.Update(gameTime, ks, darwin);
 
@@ -353,6 +362,10 @@ namespace LegendOfDarwin
                 darwin.setAbsoluteDestination(2, 2);
                 zTime.reset();
 
+                firstZombie.setAbsoluteDestination(10,10);
+                secondZombie.setAbsoluteDestination(10, 16);
+                thirdZombie.setAbsoluteDestination(16, 10);
+                brain.reset();
                 darwin.setHuman();
 
                 gameState.setState(GameState.state.Level);
@@ -459,6 +472,8 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
+            secondZombie.Draw(spriteBatch);
+            thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);

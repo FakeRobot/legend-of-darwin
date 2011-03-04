@@ -291,6 +291,8 @@ namespace LegendOfDarwin
 
             firstSwitch.Update(gameTime, ks, darwin);
 
+            brain.Update(gameTime, ks, darwin);
+
             checkForGameOver();
             checkForGameWin();
 

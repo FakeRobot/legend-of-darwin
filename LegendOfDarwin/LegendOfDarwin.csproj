@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZombieTime.cs" />
     <Compile Include="GameObject\BasicObject.cs" />
     <Compile Include="GameState\GameState.cs" />
     <Compile Include="GameStart.cs" />

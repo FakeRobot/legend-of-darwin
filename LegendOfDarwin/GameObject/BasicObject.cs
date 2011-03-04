@@ -108,6 +108,11 @@ namespace LegendOfDarwin
             eventLagMin = 0;
         }
 
+        public void setEventLag(int lag)
+        {
+            this.eventLagMax = lag;
+        }
+
         public void Update(GameTime gameTime)
         {
             eventLagMin++;

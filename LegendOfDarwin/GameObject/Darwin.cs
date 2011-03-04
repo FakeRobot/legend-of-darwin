@@ -238,6 +238,16 @@ namespace LegendOfDarwin
             return this.zombieFlag;
         }
 
+        public void setHuman()
+        {
+            this.zombieFlag = false;
+        }
+
+        public void setZombie()
+        {
+            this.zombieFlag = true;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (zombieFlag == false)

@@ -38,6 +38,7 @@ namespace LegendOfDarwin
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
+        ZombieTime zTime;
 
         public Game1()
         {
@@ -128,6 +129,7 @@ namespace LegendOfDarwin
                 secondStair.setDestination(board.getPosition(21, 20));
             }
 
+            zTime = new ZombieTime(board);
 
             base.Initialize();
         }
@@ -174,6 +176,8 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(zombieTex);
 
             gameStart.LoadContent(Content.Load<Texture2D>("gamestart"));
+
+            zTime.LoadContent(Content.Load<Texture2D>("humanities_bar"));
         }
 
         protected override void UnloadContent(){}
@@ -206,6 +210,18 @@ namespace LegendOfDarwin
 
         private void UpdateLevelState(GameTime gameTime)
         {
+            if (darwin.isZombie())
+            {
+                if (zTime.isTimedOut())
+                {
+                    gameOver = true;
+                }
+                else
+                {
+                    zTime.UpdateBar(gameTime);
+                }
+            }
+
             KeyboardState ks = Keyboard.GetState();
 
             checkForExitGame(ks);
@@ -262,6 +278,9 @@ namespace LegendOfDarwin
 
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
+                zTime.reset();
+
+                darwin.setHuman();
 
                 gameState.setState(GameState.state.Level);
             }
@@ -370,7 +389,7 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
 
-
+            zTime.Draw(spriteBatch);
 
             spriteBatch.End();    
         }

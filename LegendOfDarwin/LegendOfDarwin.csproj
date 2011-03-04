@@ -116,6 +116,7 @@
   <ItemGroup>
     <Compile Include="ZombieTime.cs" />
     <Compile Include="GameObject\BasicObject.cs" />
+    <Compile Include="GameObject\Brain.cs" />
     <Compile Include="GameState\GameState.cs" />
     <Compile Include="GameStart.cs" />
     <Compile Include="GameObject\Stairs.cs" />

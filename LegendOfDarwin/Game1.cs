@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
+using LegendOfDarwin.GameObject;
 
 namespace LegendOfDarwin
 {
@@ -24,6 +25,7 @@ namespace LegendOfDarwin
         Darwin darwin;
         Zombie firstZombie;
         Switch firstSwitch;
+        Brain brain;
         GameBoard board;
         GraphicsDevice device;
         bool keyIsHeldDown = false;
@@ -63,6 +65,8 @@ namespace LegendOfDarwin
 
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
+
+            brain = new Brain(board, 5, 10);
 
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
@@ -159,6 +163,8 @@ namespace LegendOfDarwin
             Texture2D wallTex = Content.Load<Texture2D>("StaticPic/Wall");
             Texture2D switchTex = Content.Load<Texture2D>("StaticPic/Switch");
 
+            Texture2D brainTex = Content.Load<Texture2D>("brain");
+
             gameOverTexture = Content.Load<Texture2D>("gameover");
             gameWinTexture = Content.Load<Texture2D>("gamewin");
 
@@ -166,6 +172,8 @@ namespace LegendOfDarwin
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
             
             firstSwitch.LoadContent(wallTex, switchTex);
+
+            brain.LoadContent(brainTex);
 
             // Test
             board.LoadContent(basicGridTex);
@@ -175,7 +183,9 @@ namespace LegendOfDarwin
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
 
-            gameStart.LoadContent(Content.Load<Texture2D>("gamestart"));
+            
+
+            gameStart.LoadContent(Content.Load<Texture2D>("startScreen"));
 
             zTime.LoadContent(Content.Load<Texture2D>("humanities_bar"));
         }
@@ -388,7 +398,7 @@ namespace LegendOfDarwin
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
-
+            brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
             spriteBatch.End();    

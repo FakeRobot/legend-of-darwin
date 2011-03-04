@@ -15,8 +15,6 @@ namespace LegendOfDarwin.GameObject
         public const int BRAIN_WIDTH = 64;
 
         protected Texture2D brainTexture;
-        Vector2 brainPosition = Vector2.Zero;
-        protected Rectangle source;
 
         public Brain(GameBoard myboard, int startX, int startY) : base(myboard)
         {
@@ -30,9 +28,7 @@ namespace LegendOfDarwin.GameObject
                 board.setGridPositionOccupied(this.X, this.Y);
             }
 
-            destination = new Rectangle(0, 0, BRAIN_WIDTH, BRAIN_HEIGHT);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
-            source = new Rectangle(0, 0, BRAIN_WIDTH, BRAIN_HEIGHT);
+            destination = board.getPosition(startX, startY);
         }
 
         public void LoadContent(Texture2D brainTex)
@@ -49,7 +45,7 @@ namespace LegendOfDarwin.GameObject
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(brainTexture, this.destination, this.source, Color.White);
+            spriteBatch.Draw(brainTexture, this.destination, Color.White);
         }
 
     }

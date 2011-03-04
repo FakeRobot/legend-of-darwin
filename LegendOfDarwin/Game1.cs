@@ -48,7 +48,7 @@ namespace LegendOfDarwin
 
         ZombieTime zTime;
 
-
+        Vortex vortex;
 
         public Game1()
         {
@@ -150,7 +150,10 @@ namespace LegendOfDarwin
 
             zTime = new ZombieTime(board);
 
+            vortex = new Vortex(board);
 
+            vortex.setGridPosition(15, 15);
+            vortex.setDestination(board.getPosition(15,15));
             base.Initialize();
         }
 
@@ -205,6 +208,8 @@ namespace LegendOfDarwin
             gameStart.LoadContent(Content.Load<Texture2D>("startScreen"));
 
             zTime.LoadContent(Content.Load<Texture2D>("humanities_bar"));
+
+            vortex.LoadContent(Content.Load<Texture2D>("vortex"));
 
         }
 
@@ -436,6 +441,7 @@ namespace LegendOfDarwin
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
+            vortex.Draw(spriteBatch);
 
             if (messageMode)
               zombieMessage.Draw(spriteBatch,messageFont);

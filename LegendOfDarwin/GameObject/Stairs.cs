@@ -44,11 +44,6 @@ namespace LegendOfDarwin
 
         }
 
-        public void setDestination(Rectangle rectangle)
-        {
-            destination = rectangle;
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             switch (view)

@@ -114,11 +114,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
+    <Compile Include="GameObject\Vortex.cs" />
     <Compile Include="MessageBox.cs" />
-
     <Compile Include="ZombieTime.cs" />
-
     <Compile Include="GameObject\BasicObject.cs" />
     <Compile Include="GameObject\Brain.cs" />
     <Compile Include="GameState\GameState.cs" />

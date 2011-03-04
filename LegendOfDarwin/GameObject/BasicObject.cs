@@ -42,6 +42,11 @@ namespace LegendOfDarwin
             destination.Y = myY;
         }
 
+        public void setDestination(Rectangle rectangle)
+        {
+            destination = rectangle;
+        }
+
         public void MoveRight()
         {
             this.setGridPosition(this.X + 1, this.Y);

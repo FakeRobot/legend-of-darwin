@@ -25,7 +25,20 @@ namespace LegendOfDarwin
         {
             destination = new Rectangle(x,y,MESSAGE_WIDTH,MESSAGE_HEIGHT);
             Message = message;
-            position = new Vector2(x,y);
+            position = new Vector2(x+20,y+10);
+        }
+
+        // used to have message focus on a given gameboard square
+        public void pointToSquare(int x,int y,GameBoard board)
+        {
+            int newX = board.getPosition(x, y).X;
+            int newY = board.getPosition(x, y).Y;
+
+            destination.X = newX + 40;
+            destination.Y = newY - 94;
+
+            position.X = destination.X+20;
+            position.Y = destination.Y+10;
         }
 
         public void LoadContent(Texture2D messagePic){
@@ -35,7 +48,7 @@ namespace LegendOfDarwin
         public void Draw(SpriteBatch spriteBatch,SpriteFont myfont) 
         {
             spriteBatch.Draw(messageTex, destination, source, Color.White);
-            spriteBatch.DrawString(myfont,Message,position,Color.White);
+            spriteBatch.DrawString(myfont,Message,position,Color.Black);
         }
 
     }

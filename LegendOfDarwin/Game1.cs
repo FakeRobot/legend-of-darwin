@@ -44,6 +44,7 @@ namespace LegendOfDarwin
 
 
         MessageBox zombieMessage;
+        MessageBox darwinMessage;
 
         ZombieTime zTime;
 
@@ -70,9 +71,12 @@ namespace LegendOfDarwin
             darwin = new Darwin(board); 
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
 
-            String zombieString = "This a zombie, don't near him as a human!!";
-            zombieMessage = new MessageBox(board.getPosition(10,10).X,board.getPosition(10,10).Y,zombieString);
-            messageMode = true;
+            String zombieString = "This a zombie,\n don't near him \nas a human!!";
+            zombieMessage = new MessageBox(board.getPosition(12,8).X,board.getPosition(10,10).Y,zombieString);
+
+            String darwinString = "This a zombie,\n don't near him \nas a human!!";
+            darwinMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
+            
 
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
@@ -222,7 +226,6 @@ namespace LegendOfDarwin
                 case GameState.state.End:
                     UpdateEndState();
                     break;
-            
             }
             base.Update(gameTime);
         }
@@ -230,11 +233,12 @@ namespace LegendOfDarwin
         private void UpdateMessageMode()
         {
             KeyboardState ks = Keyboard.GetState();
-            if(ks.IsKeyDown(Keys.Enter))
+
+            zombieMessage.pointToSquare(firstZombie.X,firstZombie.Y,board);
+            if(ks.IsKeyDown(Keys.A))
             {
                  messageMode = false;
             }
-
         }
 
         private void UpdateStartState()
@@ -300,6 +304,9 @@ namespace LegendOfDarwin
             {
                 gameState.setState(GameState.state.End);
             }
+
+            if (ks.IsKeyDown(Keys.H)) 
+                messageMode=true;
 
         }
 

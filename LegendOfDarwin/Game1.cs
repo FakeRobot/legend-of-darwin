@@ -32,7 +32,6 @@ namespace LegendOfDarwin
         bool keyIsHeldDown = false;
         bool gameOver = false;
         bool gameWin = false;
-        bool messageMode = false;
 
         private int counter;
         private int counterReady;
@@ -42,9 +41,13 @@ namespace LegendOfDarwin
         Vector2 gameOverPosition = Vector2.Zero;
         Stairs firstStair, secondStair;
 
-
+        // things for managing message boxes
+        bool messageMode = false;
+        int messageModeCounter = 0;
         MessageBox zombieMessage;
         MessageBox darwinMessage;
+        MessageBox switchMessage;
+        MessageBox brainMessage;
 
         ZombieTime zTime;
 
@@ -74,8 +77,14 @@ namespace LegendOfDarwin
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12,8).X,board.getPosition(10,10).Y,zombieString);
 
-            String darwinString = "This a zombie,\n don't near him \nas a human!!";
-            darwinMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
+            String darwinString = "This is darwin,\n move with arrows, \n z to transform, \n a for actions";
+            darwinMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, darwinString);
+
+            String switchString = "This is a switch\n face it and press A\n to see what happens!!";
+            switchMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, switchString);
+
+            String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
+            brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
             
 
             firstStair = new Stairs(board);
@@ -204,6 +213,9 @@ namespace LegendOfDarwin
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
+            darwinMessage.LoadContent(messagePic);
+            switchMessage.LoadContent(messagePic);
+            brainMessage.LoadContent(messagePic);
 
             gameStart.LoadContent(Content.Load<Texture2D>("startScreen"));
 
@@ -238,11 +250,16 @@ namespace LegendOfDarwin
         private void UpdateMessageMode()
         {
             KeyboardState ks = Keyboard.GetState();
+            messageModeCounter++;
 
             zombieMessage.pointToSquare(firstZombie.X,firstZombie.Y,board);
-            if(ks.IsKeyDown(Keys.A))
+            darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
+            switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
+            brainMessage.pointToSquare(brain.X, brain.Y, board);
+            if(ks.IsKeyDown(Keys.H) && messageModeCounter>10)
             {
                  messageMode = false;
+                 messageModeCounter = 0;
             }
         }
 
@@ -310,8 +327,12 @@ namespace LegendOfDarwin
                 gameState.setState(GameState.state.End);
             }
 
-            if (ks.IsKeyDown(Keys.H)) 
-                messageMode=true;
+            if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
+            {
+                messageMode = true;
+                messageModeCounter = 0;
+            }
+            messageModeCounter++;
 
         }
 
@@ -444,7 +465,12 @@ namespace LegendOfDarwin
             vortex.Draw(spriteBatch);
 
             if (messageMode)
-              zombieMessage.Draw(spriteBatch,messageFont);
+            {
+                zombieMessage.Draw(spriteBatch, messageFont);
+                darwinMessage.Draw(spriteBatch, messageFont);
+                brainMessage.Draw(spriteBatch, messageFont);
+                //switchMessage.Draw(spriteBatch, messageFont);
+            }
 
             spriteBatch.End();    
         }

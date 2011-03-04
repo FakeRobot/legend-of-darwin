@@ -25,7 +25,7 @@ namespace LegendOfDarwin
         {
             destination = new Rectangle(x,y,MESSAGE_WIDTH,MESSAGE_HEIGHT);
             Message = message;
-            position = new Vector2(x+20,y+10);
+            position = new Vector2(x+20,y+7);
         }
 
         // used to have message focus on a given gameboard square
@@ -38,7 +38,7 @@ namespace LegendOfDarwin
             destination.Y = newY - 94;
 
             position.X = destination.X+20;
-            position.Y = destination.Y+10;
+            position.Y = destination.Y+7;
         }
 
         public void LoadContent(Texture2D messagePic){

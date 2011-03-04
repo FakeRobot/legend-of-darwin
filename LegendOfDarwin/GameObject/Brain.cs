@@ -78,8 +78,7 @@ namespace LegendOfDarwin.GameObject
 
         public void reset()
         {
-            this.X = 5;
-            this.Y = 18;
+            this.setAbsoluteDestination(5, 18);
         }
 
     }

@@ -7,26 +7,34 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin
 {
+    /*
+     * Darwin's Humanitie's bar.
+     */ 
     class ZombieTime : BasicObject
     {
         Texture2D bar;
         Rectangle source;
         bool timeOut;
 
+        // Where in the map this thing is placed
         private const int x = 5;
-        private const int y = 0;
+        private const int y = 24;
+
+
         private const int width = 60;
         private const int height = 20;
 
         private const int barLength = 5;
-        private const int eventLag = 10;
+
+        // How long it takes for the bar to go down
+        private const int eventLag = 20;
 
         private const int downTime = 60;
 
         public ZombieTime(GameBoard board) : base(board)
         {
             destination = new Rectangle(board.getPosition(x, y).X, board.getPosition(x, y).Y, board.getPosition(x,y).Width*barLength, board.getPosition(x, y).Height);
-            source = new Rectangle(y,y,width,height);
+            source = new Rectangle(0,0,width,height);
             timeOut = false;
 
             this.setEventLag(eventLag);
@@ -39,7 +47,7 @@ namespace LegendOfDarwin
 
         public void reset()
         {
-            source = new Rectangle(y, y, width, height);
+            source = new Rectangle(0, 0, width, height);
             timeOut = false;
         }
 

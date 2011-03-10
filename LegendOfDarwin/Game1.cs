@@ -333,7 +333,9 @@ namespace LegendOfDarwin
 
             brain.Update(gameTime, ks, darwin);
 
-            checkForGameOver();
+            checkForGameOver(firstZombie);
+            checkForGameOver(secondZombie);
+            checkForGameOver(thirdZombie);
             checkForGameWin();
 
             if (gameOver || gameWin)
@@ -390,9 +392,9 @@ namespace LegendOfDarwin
             }
         }
 
-        private void checkForGameOver()
+        private void checkForGameOver(Zombie myZombie)
         {
-            if (darwin.isOnTop(firstZombie))
+            if (darwin.isOnTop(myZombie))
             {
                 gameOver = true;
             }
@@ -411,10 +413,11 @@ namespace LegendOfDarwin
                 Rectangle onBottomOfDarwin = darwin.destination;
                 onBottomOfDarwin.Y = onBottomOfDarwin.Y + board.getSquareLength();
 
-                if (rightSideOfDarwin == firstZombie.destination || 
-                    leftSideOfDarwin == firstZombie.destination || 
-                    onTopOfDarwin == firstZombie.destination || 
-                    onBottomOfDarwin == firstZombie.destination)
+                
+                if (rightSideOfDarwin == myZombie.destination || 
+                    leftSideOfDarwin == myZombie.destination || 
+                    onTopOfDarwin == myZombie.destination || 
+                    onBottomOfDarwin == myZombie.destination)
                 {
                     gameOver = true;
                 }

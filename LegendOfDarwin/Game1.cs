@@ -187,7 +187,7 @@ namespace LegendOfDarwin
             Texture2D messagePic = Content.Load<Texture2D>("messageBox");
 
             // Test
-            Texture2D basicGridTex = Content.Load<Texture2D>("StaticPic/grid_outline");
+            Texture2D basicGridTex = Content.Load<Texture2D>("metal_tile");
             Texture2D basicMenuTex = Content.Load<Texture2D>("StaticPic/grid_menu_outline");
 
             Texture2D basicStairUpTex = Content.Load<Texture2D>("StaticPic/stairsUp");

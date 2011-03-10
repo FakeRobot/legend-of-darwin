@@ -137,10 +137,10 @@ namespace LegendOfDarwin
                     hasPicked = true;
                     this.MoveRight();
                 }
-                /*else
+                else
                 {
                     collision = true;
-                }*/
+                }
             }
             if (ks.IsKeyDown(Keys.Left))
             {

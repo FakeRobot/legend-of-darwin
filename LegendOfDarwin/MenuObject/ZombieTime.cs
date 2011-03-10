@@ -20,7 +20,7 @@ namespace LegendOfDarwin
         private const int x = 5;
         private const int y = 24;
 
-
+        // Used for the source rectangle and its respective variabless
         private const int width = 60;
         private const int height = 20;
 

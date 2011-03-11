@@ -219,8 +219,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="metal_tile.jpg">
+    <Compile Include="StaticPic\metal_tile.jpg">
       <Name>metal_tile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StaticPic\side_wall.jpg">
+      <Name>side_wall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

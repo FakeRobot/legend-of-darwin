@@ -5,12 +5,12 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace LegendOfDarwin
+namespace LegendOfDarwin.MenuObject
 {
     /*
      * Darwin's Humanitie's bar.
      */ 
-    class ZombieTime : BasicObject
+    public class ZombieTime : BasicObject
     {
         Texture2D bar;
         Rectangle source;
@@ -60,6 +60,17 @@ namespace LegendOfDarwin
         {
             return timeOut;
         }
+
+        public int getTime() 
+        {
+            return source.X;
+        }
+
+        public void setTime(int mytime) 
+        {
+            source.X = mytime;
+        }
+
 
         public void UpdateBar(GameTime gameTime)
         {

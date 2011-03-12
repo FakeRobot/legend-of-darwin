@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -13,10 +14,12 @@ using Microsoft.Xna.Framework.Storage;
 using LegendOfDarwin.GameObject;
 using LegendOfDarwin.MenuObject;
 
+
 namespace LegendOfDarwin
 {
-    public class Level1
+    public class Level2
     {
+
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
@@ -51,13 +54,14 @@ namespace LegendOfDarwin
         private MessageBox brainMessage;
 
         private ZombieTime zTime;
+        private ZombieTime zTimeReset; //what zTime should reset to
 
         private Vortex vortex;
 
         public Song song;
         public Game1 mainGame;
 
-        public Level1(Game1 myMainGame)
+        public Level2(Game1 myMainGame)
         {
             mainGame = myMainGame;
         }
@@ -70,13 +74,14 @@ namespace LegendOfDarwin
             device = graphics.GraphicsDevice;
 
             gameState = new GameState();
+            gameState.setState(GameState.state.Level);
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
-            secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
-            thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
+            //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
+            //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -162,6 +167,7 @@ namespace LegendOfDarwin
             }
 
             zTime = new ZombieTime(board);
+            zTimeReset = new ZombieTime(board);
 
             vortex = new Vortex(board);
 
@@ -214,8 +220,8 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
-            secondZombie.LoadContent(zombieTex);
-            thirdZombie.LoadContent(zombieTex);
+            //secondZombie.LoadContent(zombieTex);
+            //thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
             switchMessage.LoadContent(messagePic);
@@ -320,10 +326,10 @@ namespace LegendOfDarwin
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
-            secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            secondZombie.Update(gameTime, darwin, brain);
-            thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            thirdZombie.Update(gameTime, darwin, brain);
+            //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            //secondZombie.Update(gameTime, darwin, brain);
+            //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            //thirdZombie.Update(gameTime, darwin, brain);
 
 
             firstSwitch.Update(gameTime, ks, darwin);
@@ -331,10 +337,9 @@ namespace LegendOfDarwin
             brain.Update(gameTime, ks, darwin);
 
             checkForGameOver(firstZombie);
-            checkForGameOver(secondZombie);
-            checkForGameOver(thirdZombie);
-            //checkForGameWin();
-            checkForNextLevel();
+            //checkForGameOver(secondZombie);
+            //checkForGameOver(thirdZombie);
+            checkForGameWin();
 
             if (gameOver || gameWin)
             {
@@ -360,19 +365,33 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                gameOver = false;
-                gameWin = false;
+                
 
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
-                zTime.reset();
+                Console.Out.WriteLine(gameWin);
+                Console.Out.WriteLine(gameOver);
+                if (gameWin)
+                {
+                    zTime.reset();
+                    mainGame.setCurLevel(Game1.LevelState.Level1);
+                }
+                else if (gameOver) 
+                {
+                    zTime = new ZombieTime(board);
+                    zTime.reset();
+                    zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
+                    zTime.setTime(zTimeReset.getTime());
+                }
 
                 firstZombie.setAbsoluteDestination(10, 10);
-                secondZombie.setAbsoluteDestination(10, 16);
-                thirdZombie.setAbsoluteDestination(16, 10);
+                //secondZombie.setAbsoluteDestination(10, 16);
+                //thirdZombie.setAbsoluteDestination(16, 10);
                 brain.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
+                gameOver = false;
+                gameWin = false;
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
             }
@@ -430,15 +449,6 @@ namespace LegendOfDarwin
             }
         }
 
-        private void checkForNextLevel()
-        {
-            if (darwin.isOnTop(secondStair)) 
-            {
-                mainGame.setCurLevel(Game1.LevelState.Level2);
-                mainGame.setZTimeLevel(zTime,Game1.LevelState.Level2);
-            }
-        }
-
         private void updateKeyHeldDown(KeyboardState ks)
         {
             if (ks.IsKeyUp(Keys.Right) && ks.IsKeyUp(Keys.Left) && ks.IsKeyUp(Keys.Up) && ks.IsKeyUp(Keys.Down))
@@ -449,6 +459,15 @@ namespace LegendOfDarwin
             {
                 keyIsHeldDown = true;
             }
+        }
+
+        public void setZTime(ZombieTime mytime) 
+        {
+            zTime = mytime;
+
+            ZombieTime zTimeReset = new ZombieTime(board);
+            zTimeReset.reset();
+            zTimeReset.setTime(zTime.getTime());
         }
 
         public void Draw(GameTime gameTime)
@@ -488,8 +507,8 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
-            secondZombie.Draw(spriteBatch);
-            thirdZombie.Draw(spriteBatch);
+            //secondZombie.Draw(spriteBatch);
+            //thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
@@ -523,7 +542,5 @@ namespace LegendOfDarwin
             spriteBatch.End();
         }
 
-        
     }
 }
-

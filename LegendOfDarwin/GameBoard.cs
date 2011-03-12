@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfDarwin
 {
-    class GameBoard
+    public class GameBoard
     {
         // Length and width of each square/rectangle
         private int squareLength, squareWidth;

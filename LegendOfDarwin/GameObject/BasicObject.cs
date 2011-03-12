@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin
 {
-    class BasicObject
+    public class BasicObject
     {
         // The x coordinate to be put on the GameBoard class
         public int X;

@@ -116,6 +116,7 @@
   <ItemGroup>
     <Compile Include="Level1.cs" />
     <Compile Include="GameObject\Vortex.cs" />
+    <Compile Include="Level2.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="MenuObject\ZombieTime.cs" />
     <Compile Include="GameObject\BasicObject.cs" />

@@ -11,28 +11,45 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using LegendOfDarwin.GameObject;
+using LegendOfDarwin.MenuObject;
 
 namespace LegendOfDarwin
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        Level1 level1;
         SpriteBatch spriteBatch;
+
+        // for keeping track of what level player is on
+        public enum LevelState { Level1, Level2, Level3, Level4 };
+        LevelState curLevel;
+
+        Level1 level1;
+        Level2 level2;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            curLevel = LevelState.Level1;
             level1 = new Level1(this);
+            level2 = new Level2(this);
+        }
+
+        public void setZTimeLevel(MenuObject.ZombieTime mytime,LevelState myLevel)
+        {
+            if (myLevel == LevelState.Level2)
+                level2.setZTime(mytime);
         }
 
         protected override void Initialize()
         {
             
             level1.graphics = graphics;
+            level2.graphics = graphics;
             InitializeGraphics();
             level1.Initialize();
+            level2.Initialize();
             
             base.Initialize();
         }
@@ -41,13 +58,14 @@ namespace LegendOfDarwin
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             level1.spriteBatch = spriteBatch;
-            
-
-            
-
             level1.song = Content.Load<Song>("thriller");
             level1.LoadContent();
+
+            level2.spriteBatch = spriteBatch;
+            level2.song = Content.Load<Song>("thriller");
+            level2.LoadContent();
         }
 
         private void InitializeGraphics()
@@ -63,7 +81,10 @@ namespace LegendOfDarwin
 
         protected override void Update(GameTime gameTime)
         {
-            level1.Update(gameTime);
+            if (curLevel == LevelState.Level1)
+                level1.Update(gameTime);
+            else if (curLevel == LevelState.Level2)
+                level2.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -71,9 +92,16 @@ namespace LegendOfDarwin
 
         protected override void Draw(GameTime gameTime)
         {
-            level1.Draw(gameTime);
+            if (curLevel == LevelState.Level1)
+                level1.Draw(gameTime);
+            else if (curLevel == LevelState.Level2)
+                level2.Draw(gameTime);
             base.Draw(gameTime);
-            
+        }
+
+        public void setCurLevel(LevelState myLevel) 
+        {
+            curLevel = myLevel;
         }
 
     }

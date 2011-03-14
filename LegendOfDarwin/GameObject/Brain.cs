@@ -53,19 +53,33 @@ namespace LegendOfDarwin.GameObject
                 {
                     case (LegendOfDarwin.Darwin.Dir.Left):
                         if (((this.X + 1) == darwin.X) && (this.Y == darwin.Y))
-                            this.MoveLeft();
+                        {
+                            if (board.isGridPositionOpen(this.X - 1, this.Y))
+                            {
+                                this.MoveLeft();
+                            }
+                        }
                         break;
                     case (LegendOfDarwin.Darwin.Dir.Right):
                         if (((this.X - 1) == darwin.X) && (this.Y == darwin.Y))
-                            this.MoveRight();
+                            if (board.isGridPositionOpen(this.X + 1, this.Y))
+                            {
+                                this.MoveRight();
+                            }
                         break;
                     case (LegendOfDarwin.Darwin.Dir.Up):
                         if ((this.X == darwin.X) && ((this.Y + 1) == darwin.Y))
-                            this.MoveUp();
+                            if (board.isGridPositionOpen(this.X, this.Y - 1))
+                            {
+                                this.MoveUp();
+                            }
                         break;
                     case (LegendOfDarwin.Darwin.Dir.Down):
                         if ((this.X == darwin.X) && ((this.Y - 1) == darwin.Y))
-                            this.MoveDown();
+                            if (board.isGridPositionOpen(this.X, this.Y + 1))
+                            {
+                                this.MoveDown();
+                            }
                         break;
                 }
             }

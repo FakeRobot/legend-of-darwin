@@ -40,7 +40,7 @@ namespace LegendOfDarwin
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-        private Stairs firstStair, secondStair;
+        private Stairs secondStair;
 
         // things for managing message boxes
         bool messageMode = false;
@@ -90,8 +90,6 @@ namespace LegendOfDarwin
             String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
             brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
 
-
-            firstStair = new Stairs(board);
             secondStair = new Stairs(board);
 
             brain = new Brain(board, 5, 18);
@@ -149,12 +147,6 @@ namespace LegendOfDarwin
             // Darwin's lag movement
             counterReady = counter = 5;
 
-
-            if (board.isGridPositionOpen(20, 2))
-            {
-                firstStair.setGridPosition(20, 2);
-                firstStair.setDestination(board.getPosition(20, 2));
-            }
             if (board.isGridPositionOpen(21, 20))
             {
                 secondStair.setGridPosition(21, 20);
@@ -165,6 +157,13 @@ namespace LegendOfDarwin
 
             vortex = new Vortex(board, 15, 15);
         }
+
+        public void reset()
+        {
+            this.Initialize();
+        }
+
+
 
         public void LoadContent()
         {
@@ -197,7 +196,6 @@ namespace LegendOfDarwin
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
 
-            firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
             firstSwitch.LoadContent(wallTex, switchTex);
@@ -312,7 +310,6 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
-            firstStair.Update(gameTime, darwin);
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
@@ -360,12 +357,20 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
+                
                 gameOver = false;
                 gameWin = false;
 
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
+
                 zTime.reset();
+
+                board.setGridPositionOpen(firstZombie);
+                board.setGridPositionOpen(secondZombie);
+                board.setGridPositionOpen(thirdZombie);
+                board.setGridPositionOpen(brain);
+
 
                 firstZombie.setAbsoluteDestination(10, 10);
                 secondZombie.setAbsoluteDestination(10, 16);
@@ -375,6 +380,7 @@ namespace LegendOfDarwin
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                
             }
 
         }
@@ -501,8 +507,6 @@ namespace LegendOfDarwin
 
             spriteBatch.Begin();
             board.Draw(spriteBatch);
-
-            firstStair.Draw(spriteBatch);
             secondStair.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);

@@ -13,9 +13,9 @@ namespace LegendOfDarwin
         // The y coordinate to be put on the GameBoard class
         public int Y;
 
-        private int eventLagMin, eventLagMax;
+        protected int eventLagMin, eventLagMax;
 
-        private bool eventFlag;
+        protected bool eventFlag;
 
         // The location to draw the sprite on the screen.
         public Rectangle destination;

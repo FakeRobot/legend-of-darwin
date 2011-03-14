@@ -1,4 +1,3 @@
-Content\gameover.xnb
 Content\DarwinPic\Darwin.xnb
 Content\DarwinPic\ZombieDarwin.xnb
 Content\StaticPic\grid_outline.xnb
@@ -11,6 +10,7 @@ Content\DarwinPic\DarwinRight.xnb
 Content\DarwinPic\DarwinUp.xnb
 Content\StaticPic\Switch.xnb
 Content\StaticPic\stairsDown.xnb
+Content\gameover.xnb
 Content\gamewin.xnb
 Content\humanities_bar.xnb
 Content\brain.xnb

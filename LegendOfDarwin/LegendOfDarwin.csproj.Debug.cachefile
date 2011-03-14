@@ -13,12 +13,16 @@ Content\StaticPic\stairsDown.xnb
 Content\gameover.xnb
 Content\gamewin.xnb
 Content\humanities_bar.xnb
+Content\messageBox.xnb
 Content\brain.xnb
 Content\startScreen.xnb
-Content\TimesNewRoman.xnb
-Content\messageBox.xnb
 Content\vortex.xnb
+Content\metal_tile.xnb
+Content\TimesNewRoman.xnb
 Content\thriller.xnb
+<<<<<<< .mine
+=======
 Content\StaticPic\metal_tile.xnb
 Content\StaticPic\side_wall.xnb
+>>>>>>> .r123
 Content\thriller.wma

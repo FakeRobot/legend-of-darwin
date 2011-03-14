@@ -15,12 +15,19 @@ Content\gamewin.xnb
 Content\humanities_bar.xnb
 Content\brain.xnb
 Content\startScreen.xnb
+<<<<<<< .mine
+Content\vortex.xnb
+=======
+>>>>>>> .r125
 Content\TimesNewRoman.xnb
 Content\messageBox.xnb
 Content\vortex.xnb
 Content\thriller.xnb
 Content\StaticPic\metal_tile.xnb
 Content\StaticPic\side_wall.xnb
+<<<<<<< .mine
+=======
 Content\StaticPic\Level2\metal_tile_dark.xnb
 Content\StaticPic\Level2\side_wall_green.xnb
+>>>>>>> .r125
 Content\thriller.wma

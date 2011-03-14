@@ -168,11 +168,6 @@ namespace LegendOfDarwin
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
-
-            vortex = new Vortex(board);
-
-            vortex.setGridPosition(15, 15);
-            vortex.setDestination(board.getPosition(15, 15));
         }
 
         public void LoadContent()
@@ -229,10 +224,7 @@ namespace LegendOfDarwin
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             
-            zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-
-            vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
-        
+            zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar")); 
         }
             
 

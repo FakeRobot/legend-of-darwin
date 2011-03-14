@@ -163,10 +163,7 @@ namespace LegendOfDarwin
 
             zTime = new ZombieTime(board);
 
-            vortex = new Vortex(board);
-
-            vortex.setGridPosition(15, 15);
-            vortex.setDestination(board.getPosition(15, 15));
+            vortex = new Vortex(board, 15, 15);
         }
 
         public void LoadContent()
@@ -330,9 +327,12 @@ namespace LegendOfDarwin
 
             brain.Update(gameTime, ks, darwin);
 
+            vortex.Update(gameTime, ks, darwin);
+
             checkForGameOver(firstZombie);
             checkForGameOver(secondZombie);
             checkForGameOver(thirdZombie);
+            checkForGameOver(vortex);
             //checkForGameWin();
             checkForNextLevel();
 
@@ -419,6 +419,14 @@ namespace LegendOfDarwin
                 {
                     gameOver = true;
                 }
+            }
+        }
+
+        private void checkForGameOver(Vortex myVortex)
+        {
+            if (darwin.isOnTop(myVortex))
+            {
+                gameOver = true;
             }
         }
 

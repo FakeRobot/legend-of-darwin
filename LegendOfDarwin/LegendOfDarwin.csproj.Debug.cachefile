@@ -1,3 +1,4 @@
+Content\gameover.xnb
 Content\DarwinPic\Darwin.xnb
 Content\DarwinPic\ZombieDarwin.xnb
 Content\StaticPic\grid_outline.xnb
@@ -10,19 +11,16 @@ Content\DarwinPic\DarwinRight.xnb
 Content\DarwinPic\DarwinUp.xnb
 Content\StaticPic\Switch.xnb
 Content\StaticPic\stairsDown.xnb
-Content\gameover.xnb
 Content\gamewin.xnb
 Content\humanities_bar.xnb
-Content\messageBox.xnb
 Content\brain.xnb
 Content\startScreen.xnb
-Content\vortex.xnb
-Content\metal_tile.xnb
 Content\TimesNewRoman.xnb
+Content\messageBox.xnb
+Content\vortex.xnb
 Content\thriller.xnb
-<<<<<<< .mine
-=======
 Content\StaticPic\metal_tile.xnb
 Content\StaticPic\side_wall.xnb
->>>>>>> .r123
+Content\StaticPic\Level2\metal_tile_dark.xnb
+Content\StaticPic\Level2\side_wall_green.xnb
 Content\thriller.wma

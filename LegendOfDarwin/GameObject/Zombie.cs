@@ -164,9 +164,9 @@ namespace LegendOfDarwin.GameObject
         //}
 
         /*
-        *  makes the zombie walk randomly within its specified range 
-        *  does not allow zombie to leave range
-        **/
+         *  makes the zombie walk randomly within its specified range 
+         *  does not allow zombie to leave range
+         */
         public void RandomWalk()
         {
             Random rand = new Random();
@@ -395,9 +395,9 @@ namespace LegendOfDarwin.GameObject
         }
 
         /**
-        *  checks whether or not brain is in the zombies range
-        *  returns true if he is, false otherwise
-        */
+         *  checks whether or not brain is in the zombies range
+         *  returns true if he is, false otherwise
+         */
         public bool isBrainInRange(Brain brain)
         {
             if (brain.X <= maxX && brain.X >= minX && brain.Y >= minY && brain.Y <= maxY)
@@ -409,7 +409,7 @@ namespace LegendOfDarwin.GameObject
         /**
          * is vision enabled for zombie
          * return true if so, false otherwise
-         * */
+         */
         public bool isVisionAllowed()
         {
             return allowVision;
@@ -420,18 +420,18 @@ namespace LegendOfDarwin.GameObject
          * Vision determines if the zombie can see darwin if he comes into a specified range
          * vision range defaults to zero
          * myVision - true to enable vision, false to disable it
-         * */
+         */
         public void setVisionAllowed(bool myVision)
         {
             allowVision = myVision;
         }
 
-        /*
+        /**
          * sets vision range to a designated range
          * range is centered at zombie
          * int mymaxX - max x distance zombie can see
          * int mymaxY - max y distance zombie can see
-         * */
+         */
         public void setVisionRange(int mymaxX, int mymaxY)
         {
             if (mymaxX >= 0 && mymaxY >= 0)

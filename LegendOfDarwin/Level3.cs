@@ -222,11 +222,11 @@ namespace LegendOfDarwin
             brainMessage.LoadContent(messagePic);
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
-            
+
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-        
+
         }
-            
+
 
         //protected override void UnloadContent() { }
 
@@ -247,7 +247,7 @@ namespace LegendOfDarwin
                     UpdateEndState();
                     break;
             }
-            
+
         }
 
         private void UpdateMessageMode()
@@ -357,17 +357,17 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                
+
 
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
-                
+
                 if (gameWin)
                 {
                     zTime.reset();
                     mainGame.setCurLevel(Game1.LevelState.Level1);
                 }
-                else if (gameOver) 
+                else if (gameOver)
                 {
                     zTime = new ZombieTime(board);
                     zTime.reset();
@@ -452,7 +452,7 @@ namespace LegendOfDarwin
             }
         }
 
-        public void setZTime(ZombieTime mytime) 
+        public void setZTime(ZombieTime mytime)
         {
             zTime = mytime;
 
@@ -475,7 +475,7 @@ namespace LegendOfDarwin
                     DrawEndState();
                     break;
             }
-            
+
         }
 
         private void DrawStartState()

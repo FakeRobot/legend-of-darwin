@@ -18,12 +18,6 @@ namespace LegendOfDarwin.GameObject
             this.Y = startY;
 
             this.setGridPosition(startX, startY);
-            
-            if (board.isGridPositionOpen(this))
-            {
-                board.setGridPositionOccupied(this.X, this.Y);
-            }
-
             destination = board.getPosition(startX, startY);
         }
 

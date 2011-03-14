@@ -57,6 +57,8 @@ namespace LegendOfDarwin
         public Song song;
         public Game1 mainGame;
 
+        private Potion potion;
+
         public Level1(Game1 myMainGame)
         {
             mainGame = myMainGame;
@@ -156,6 +158,10 @@ namespace LegendOfDarwin
             zTime = new ZombieTime(board);
 
             vortex = new Vortex(board, 15, 15);
+
+            potion = new Potion(board);
+            potion.setDestination(board.getPosition(18, 5));
+            board.setGridPositionOccupied(18, 5);
         }
 
         public void reset()
@@ -221,7 +227,8 @@ namespace LegendOfDarwin
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
 
             vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
-        
+
+            potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
         }
             
 
@@ -326,6 +333,8 @@ namespace LegendOfDarwin
 
             vortex.Update(gameTime, ks, darwin);
 
+            potion.Update(gameTime, ks, darwin, zTime);
+
             checkForGameOver(firstZombie);
             checkForGameOver(secondZombie);
             checkForGameOver(thirdZombie);
@@ -370,11 +379,14 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(secondZombie);
                 board.setGridPositionOpen(thirdZombie);
                 board.setGridPositionOpen(brain);
-
+                board.setGridPositionOpen(potion);
 
                 firstZombie.setAbsoluteDestination(10, 10);
                 secondZombie.setAbsoluteDestination(10, 16);
                 thirdZombie.setAbsoluteDestination(16, 10);
+                potion.setAbsoluteDestination(18, 5);
+
+                potion.reset();
                 brain.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
@@ -517,6 +529,7 @@ namespace LegendOfDarwin
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             vortex.Draw(spriteBatch);
+            potion.Draw(spriteBatch);
 
             if (messageMode)
             {

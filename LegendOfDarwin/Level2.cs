@@ -369,8 +369,7 @@ namespace LegendOfDarwin
 
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
-                Console.Out.WriteLine(gameWin);
-                Console.Out.WriteLine(gameOver);
+                
                 if (gameWin)
                 {
                     zTime.reset();
@@ -465,9 +464,9 @@ namespace LegendOfDarwin
         {
             zTime = mytime;
 
-            ZombieTime zTimeReset = new ZombieTime(board);
+            zTimeReset = new ZombieTime(board);
             zTimeReset.reset();
-            zTimeReset.setTime(zTime.getTime());
+            zTimeReset.setTime(mytime.getTime());
         }
 
         public void Draw(GameTime gameTime)

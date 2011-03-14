@@ -434,8 +434,19 @@ namespace LegendOfDarwin
         {
             if (darwin.isOnTop(secondStair)) 
             {
+                board.setGridPositionOpen(darwin);
+                darwin.setAbsoluteDestination(2, 2);
                 mainGame.setCurLevel(Game1.LevelState.Level2);
                 mainGame.setZTimeLevel(zTime,Game1.LevelState.Level2);
+                firstZombie.setAbsoluteDestination(10, 10);
+                secondZombie.setAbsoluteDestination(10, 16);
+                thirdZombie.setAbsoluteDestination(16, 10);
+                brain.reset();
+                darwin.setHuman();
+                gameState.setState(GameState.state.Level);
+                gameOver = false;
+                gameWin = false;
+                firstSwitch.turnOn();
             }
         }
 

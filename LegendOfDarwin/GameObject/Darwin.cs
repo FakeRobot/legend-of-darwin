@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin
 {
-    class Darwin : BasicObject
+    public class Darwin : BasicObject
     {
         GraphicsDevice graphics;
 

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace LegendOfDarwin.GameObject
 {
 
-    class Brain: BasicObject
+    public class Brain: BasicObject
     {
         public const int BRAIN_HEIGHT = 64;
         public const int BRAIN_WIDTH = 64;

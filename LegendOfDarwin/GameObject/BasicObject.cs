@@ -49,34 +49,46 @@ namespace LegendOfDarwin
 
         public void MoveRight()
         {
-            this.setGridPosition(this.X + 1, this.Y);
-            board.setGridPositionOccupied(this.X, this.Y);
-            board.setGridPositionOpen(this.X - 1, this.Y);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            if(board.isGridPositionOpen(this.X + 1, this.Y))
+            {
+                this.setGridPosition(this.X + 1, this.Y);
+                board.setGridPositionOccupied(this.X, this.Y);
+                board.setGridPositionOpen(this.X - 1, this.Y);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
         }
 
         public void MoveLeft()
         {
-            this.setGridPosition(this.X - 1, this.Y);
-            board.setGridPositionOccupied(this.X, this.Y);
-            board.setGridPositionOpen(this.X + 1, this.Y);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            if(board.isGridPositionOpen(this.X - 1, this.Y))
+            {
+                this.setGridPosition(this.X - 1, this.Y);
+                board.setGridPositionOccupied(this.X, this.Y);
+                board.setGridPositionOpen(this.X + 1, this.Y);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
         }
 
         public void MoveDown()
         {
-            this.setGridPosition(this.X, this.Y + 1);
-            board.setGridPositionOccupied(this.X, this.Y);
-            board.setGridPositionOpen(this.X, this.Y - 1);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            if(board.isGridPositionOpen(this.X, this.Y + 1))
+            {
+                this.setGridPosition(this.X, this.Y + 1);
+                board.setGridPositionOccupied(this.X, this.Y);
+                board.setGridPositionOpen(this.X, this.Y - 1);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
         }
 
         public void MoveUp()
         {
-            this.setGridPosition(this.X, this.Y - 1);
-            board.setGridPositionOccupied(this.X, this.Y);
-            board.setGridPositionOpen(this.X, this.Y + 1);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            if(board.isGridPositionOpen(this.X, this.Y - 1))
+            {
+                this.setGridPosition(this.X, this.Y - 1);
+                board.setGridPositionOccupied(this.X, this.Y);
+                board.setGridPositionOpen(this.X, this.Y + 1);
+                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            }
         }
 
         // Set their positions

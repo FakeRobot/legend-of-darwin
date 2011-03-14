@@ -331,7 +331,7 @@ namespace LegendOfDarwin
             checkForGameOver(thirdZombie);
             checkForGameOver(vortex);
             //checkForGameWin();
-            checkForNextLevel();
+            checkForSwitchToLevelTwo();
 
             if (gameOver || gameWin)
             {
@@ -444,7 +444,7 @@ namespace LegendOfDarwin
             }
         }
 
-        private void checkForNextLevel()
+        private void checkForSwitchToLevelTwo()
         {
             if (darwin.isOnTop(secondStair)) 
             {

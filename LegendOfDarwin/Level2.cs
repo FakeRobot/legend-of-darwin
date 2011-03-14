@@ -56,8 +56,6 @@ namespace LegendOfDarwin
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
 
-        private Vortex vortex;
-
         public Song song;
         public Game1 mainGame;
 
@@ -318,20 +316,15 @@ namespace LegendOfDarwin
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
-            //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            //secondZombie.Update(gameTime, darwin, brain);
-            //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            //thirdZombie.Update(gameTime, darwin, brain);
-
 
             firstSwitch.Update(gameTime, ks, darwin);
 
             brain.Update(gameTime, ks, darwin);
 
             checkForGameOver(firstZombie);
-            //checkForGameOver(secondZombie);
-            //checkForGameOver(thirdZombie);
-            checkForGameWin();
+
+            //checkForGameWin();
+            checkForSwitchToLevelThree();
 
             if (gameOver || gameWin)
             {
@@ -376,8 +369,6 @@ namespace LegendOfDarwin
                 }
 
                 firstZombie.setAbsoluteDestination(10, 10);
-                //secondZombie.setAbsoluteDestination(10, 16);
-                //thirdZombie.setAbsoluteDestination(16, 10);
                 brain.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
@@ -429,6 +420,24 @@ namespace LegendOfDarwin
                 {
                     gameOver = true;
                 }
+            }
+        }
+
+        private void checkForSwitchToLevelThree()
+        {
+            if (darwin.isOnTop(secondStair))
+            {
+                board.setGridPositionOpen(darwin);
+                darwin.setAbsoluteDestination(2, 2);
+                mainGame.setCurLevel(Game1.LevelState.Level3);
+                mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
+                firstZombie.setAbsoluteDestination(10, 10);
+                brain.reset();
+                darwin.setHuman();
+                gameState.setState(GameState.state.Level);
+                gameOver = false;
+                gameWin = false;
+                firstSwitch.turnOn();
             }
         }
 
@@ -503,7 +512,6 @@ namespace LegendOfDarwin
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
-            vortex.Draw(spriteBatch);
 
             if (messageMode)
             {

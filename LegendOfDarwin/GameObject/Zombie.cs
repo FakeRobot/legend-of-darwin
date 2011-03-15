@@ -76,10 +76,8 @@ namespace LegendOfDarwin.GameObject
             if (board.isGridPositionOpen(this))
             {
                 board.setGridPositionOccupied(this.X, this.Y);
+                this.destination = board.getPosition(X, Y);
             }
-
-            destination = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
             source = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
         }
 
@@ -519,7 +517,7 @@ namespace LegendOfDarwin.GameObject
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(zombieTexture, this.destination, this.source, Color.White);
+            spriteBatch.Draw(zombieTexture, this.destination, Color.White);
         }
 
     }

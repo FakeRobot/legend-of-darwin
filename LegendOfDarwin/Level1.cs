@@ -293,11 +293,11 @@ namespace LegendOfDarwin
 
             stairs.Update(gameTime, darwin);
 
-            firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            //firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
-            secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             secondZombie.Update(gameTime, darwin, brain);
-            thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin, brain);
 
 

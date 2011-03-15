@@ -19,6 +19,7 @@ namespace LegendOfDarwin
     {
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
+        public GraphicsDevice device;
 
         private GameState gameState;
         private GameStart gameStart;
@@ -28,7 +29,11 @@ namespace LegendOfDarwin
         private Switch firstSwitch;
         private Brain brain;
         private GameBoard board;
-        public GraphicsDevice device;
+        private ZombieTime zTime;
+        private Vortex vortex;
+        private Potion potion;
+        private Stairs stairs;
+
         public SpriteFont messageFont;
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
@@ -40,7 +45,7 @@ namespace LegendOfDarwin
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-        private Stairs secondStair;
+
 
         // things for managing message boxes
         bool messageMode = false;
@@ -50,14 +55,8 @@ namespace LegendOfDarwin
         private MessageBox switchMessage;
         private MessageBox brainMessage;
 
-        private ZombieTime zTime;
-
-        private Vortex vortex;
-
         public Song song;
         public Game1 mainGame;
-
-        private Potion potion;
 
         public Level1(Game1 myMainGame)
         {
@@ -92,7 +91,7 @@ namespace LegendOfDarwin
             String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
             brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
 
-            secondStair = new Stairs(board);
+            stairs = new Stairs(board);
 
             brain = new Brain(board, 5, 18);
 
@@ -151,8 +150,8 @@ namespace LegendOfDarwin
 
             if (board.isGridPositionOpen(21, 20))
             {
-                secondStair.setGridPosition(21, 20);
-                secondStair.setDestination(board.getPosition(21, 20));
+                stairs.setGridPosition(21, 20);
+                stairs.setDestination(board.getPosition(21, 20));
             }
 
             zTime = new ZombieTime(board);
@@ -164,70 +163,45 @@ namespace LegendOfDarwin
             board.setGridPositionOccupied(18, 5);
         }
 
-        public void reset()
-        {
-            this.Initialize();
-        }
-
-
-
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
-
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
             Texture2D darwinDownTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinRightTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinRight");
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
-
-            Texture2D zombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
-            Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
-
-            // Test
-            Texture2D basicGridTex = mainGame.Content.Load<Texture2D>("StaticPic/metal_tile");
-            Texture2D basicMenuTex = mainGame.Content.Load<Texture2D>("StaticPic/side_wall");
-
-            Texture2D basicStairUpTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsUp");
-            Texture2D basicStairDownTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsDown");
-
-            // Texture for the wall and switch
-            Texture2D wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
-            Texture2D switchTex = mainGame.Content.Load<Texture2D>("StaticPic/Switch");
-
-            Texture2D brainTex = mainGame.Content.Load<Texture2D>("brain");
+            darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
 
-            secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
+            stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
+                mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
 
-            firstSwitch.LoadContent(wallTex, switchTex);
+            firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
+                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
-            brain.LoadContent(brainTex);
+            brain.LoadContent(mainGame.Content.Load<Texture2D>("brain"));
 
-            // Test
-            board.LoadContent(basicGridTex);
-            board.LoadBackgroundContent(basicMenuTex);
+            board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
+            board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
-            darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
-            firstZombie.LoadContent(zombieTex);
-            secondZombie.LoadContent(zombieTex);
-            thirdZombie.LoadContent(zombieTex);
-            zombieMessage.LoadContent(messagePic);
-            darwinMessage.LoadContent(messagePic);
-            switchMessage.LoadContent(messagePic);
-            brainMessage.LoadContent(messagePic);
+
+            firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
+            darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
+            switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
+            brainMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
-            
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-
             vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
-
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
         }
             
@@ -290,7 +264,7 @@ namespace LegendOfDarwin
                 }
                 else
                 {
-                    zTime.UpdateBar(gameTime);
+                    zTime.Update(gameTime);
                 }
             }
 
@@ -317,7 +291,7 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
-            secondStair.Update(gameTime, darwin);
+            stairs.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
@@ -453,7 +427,7 @@ namespace LegendOfDarwin
 
         private void checkForGameWin()
         {
-            if (darwin.isOnTop(secondStair))
+            if (darwin.isOnTop(stairs))
             {
                 gameWin = true;
             }
@@ -461,7 +435,7 @@ namespace LegendOfDarwin
 
         private void checkForSwitchToLevelTwo()
         {
-            if (darwin.isOnTop(secondStair)) 
+            if (darwin.isOnTop(stairs)) 
             {
                 board.setGridPositionOpen(darwin);
                 darwin.setAbsoluteDestination(2, 2);
@@ -522,7 +496,7 @@ namespace LegendOfDarwin
 
             spriteBatch.Begin();
             board.Draw(spriteBatch);
-            secondStair.Draw(spriteBatch);
+            stairs.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);

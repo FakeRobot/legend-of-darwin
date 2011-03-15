@@ -284,7 +284,7 @@ namespace LegendOfDarwin
                 }
                 else
                 {
-                    zTime.UpdateBar(gameTime);
+                    zTime.Update(gameTime);
                 }
             }
 

@@ -223,9 +223,32 @@ namespace LegendOfDarwin
             }
         }
 
-        /*internal Rectangle getPosition(int x, int y)
+        /*
+         * Resets the grid's hasObjects to false in place area and true in menu area
+         */
+        public void reset()
         {
-            return grid[x, y];
-        }*/
+
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                for (int j = 0; j < this.gridLength; j++)
+                {
+                    this.hasObject[i, j] = false;
+                }
+            }
+
+
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                this.hasObject[i, 0] = true;
+                this.hasObject[i, this.gridLength - 1] = true;
+                this.hasObject[i, this.gridLength - 2] = true;
+            }
+            for (int i = 0; i < this.gridLength; i++)
+            {
+                this.hasObject[0, i] = true;
+                this.hasObject[this.gridWidth - 1, i] = true;
+            }        
+        }
     }
 }

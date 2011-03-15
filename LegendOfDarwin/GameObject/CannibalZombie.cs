@@ -33,7 +33,77 @@ namespace LegendOfDarwin.GameObject
                 return false;
         }
 
-        public void Update(GameTime gameTime, Darwin darwin, Brain brain) 
+        /**
+         * moves cannibal towards a specified point within the cannibals range
+         * will go around stuff to get there
+         * */
+        public void moveTowardsPoint(int ptX, int ptY) 
+        { 
+            int changeX = 0;
+            int changeY = 0;
+            int intendedPathX = 0;
+            int intendedPathY = 0;
+
+            changeX = ptX - this.X;
+            changeY = ptY - this.Y;
+
+            if (Math.Abs(changeX) > Math.Abs(changeY))
+            {
+                //move in x direction
+                if (ptX > this.X)
+                {
+                    //intend to move right
+                    intendedPathX = this.X + 1;
+                    intendedPathY = this.Y;
+                    
+                }
+                else if (ptX < this.X)
+                {
+                    //intend to move left
+                    intendedPathX = this.X - 1;
+                    intendedPathY = this.Y;
+                }
+            }
+            else
+            {
+                //move in y direction
+                if (ptY > this.Y)
+                {
+                    //intend to move down
+                    intendedPathX = this.X;
+                    intendedPathY = this.Y+1;
+                }
+                else if (ptY < this.Y)
+                {
+                    //intend to move up
+                    intendedPathX = this.X;
+                    intendedPathY = this.Y-1;
+                }
+            }
+
+            if (isZombieInRange(intendedPathX, intendedPathY))
+            {
+                // checks for board position to be open
+                if (board.isGridPositionOpen(intendedPathX, intendedPathY))
+                {
+                    if (intendedPathX == this.X + 1)
+                        MoveRight();
+                    else if (intendedPathX == this.X - 1)
+                        MoveLeft();
+                    else if (intendedPathY == this.Y + 1)
+                        MoveDown();
+                    else if (intendedPathX == this.Y - 1)
+                        MoveUp();
+                }
+                else
+                    ;
+            }
+
+
+        }
+
+
+        public new void Update(GameTime gameTime, Darwin darwin, Brain brain) 
         {
             eventLagMin++;
             if (eventLagMin > eventLagMax)
@@ -61,7 +131,6 @@ namespace LegendOfDarwin.GameObject
             movecounter++;
 
         }
-
 
     }
 }

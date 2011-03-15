@@ -288,7 +288,7 @@ namespace LegendOfDarwin.GameObject
         }
 
         /**
-         * moves zombie in the direction that darwin currently is
+         * moves zombie in the direction that brain currently is
          * */
         public void moveTowardsBrain(Brain brain, Darwin darwin)
         {

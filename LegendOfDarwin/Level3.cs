@@ -328,7 +328,8 @@ namespace LegendOfDarwin
 
             brain.Update(gameTime, ks, darwin);
 
-            checkForGameOver(firstZombie);
+            if (!darwin.isZombie())
+                checkForGameOver(firstZombie);
             //checkForGameOver(secondZombie);
             //checkForGameOver(thirdZombie);
             checkForGameWin();

@@ -23,6 +23,10 @@ Content\StaticPic\metal_tile.xnb
 Content\StaticPic\side_wall.xnb
 Content\StaticPic\Level2\metal_tile_dark.xnb
 Content\StaticPic\Level2\side_wall_green.xnb
+<<<<<<< .mine
+Content\StaticPic\potion.xnb
+=======
 Content\StaticPic\Level3\side_wall_yellow.xnb
 Content\StaticPic\Level3\metal_tile_light.xnb
+>>>>>>> .r131
 Content\thriller.wma

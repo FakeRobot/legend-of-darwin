@@ -47,7 +47,7 @@ namespace LegendOfDarwin.GameObject
         public int movecounter=0;
 
         //rate that the zombie moves at, increase to slow down, decrease to speed up
-        public const int ZOMBIE_MOVE_RATE=50;
+        public int ZOMBIE_MOVE_RATE=50;
 
         /* constructor
         *  sets an initial area for the zombie to take up

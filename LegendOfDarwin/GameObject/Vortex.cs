@@ -28,6 +28,7 @@ namespace LegendOfDarwin.GameObject
             if (this.isOnTop(darwin))
             {
                 darwin.setGridPosition(2, 2);
+                board.setGridPositionOpen(this);
             }
         }
 

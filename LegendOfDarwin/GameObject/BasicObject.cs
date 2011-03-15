@@ -52,7 +52,6 @@ namespace LegendOfDarwin
                 this.setGridPosition(this.X + 1, this.Y);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X - 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
         public void MoveLeft()
@@ -60,7 +59,6 @@ namespace LegendOfDarwin
                 this.setGridPosition(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X + 1, this.Y);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
         public void MoveDown()
@@ -68,7 +66,6 @@ namespace LegendOfDarwin
                 this.setGridPosition(this.X, this.Y + 1);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y - 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
         public void MoveUp()
@@ -76,7 +73,6 @@ namespace LegendOfDarwin
                 this.setGridPosition(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y + 1);
-                this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
         }
 
         // Set their positions
@@ -84,13 +80,8 @@ namespace LegendOfDarwin
         {
             X = x;
             Y = y;
-        }
 
-        public void setAbsoluteDestination(int x, int y)
-        {
-            this.setGridPosition(x, y);
-            board.setGridPositionOccupied(this.X, this.Y);
-            this.setPosition(board.getPosition(this).X, board.getPosition(this).Y);
+            setDestination(board.getPosition(X, Y));
         }
 
         public bool isOnTop(BasicObject bo)

@@ -72,7 +72,7 @@ namespace LegendOfDarwin.MenuObject
         }
 
 
-        public void Update(GameTime gameTime)
+        public new void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 

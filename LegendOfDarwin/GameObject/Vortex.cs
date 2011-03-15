@@ -27,7 +27,7 @@ namespace LegendOfDarwin.GameObject
 
             if (this.isOnTop(darwin))
             {
-                darwin.setAbsoluteDestination(2, 2);
+                darwin.setGridPosition(2, 2);
             }
         }
 

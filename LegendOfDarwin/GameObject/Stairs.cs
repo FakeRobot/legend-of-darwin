@@ -66,7 +66,7 @@ namespace LegendOfDarwin
 
             if (darwin.isOnTop(this) && this.view.Equals(Dir.Up))
             {
-                darwin.setAbsoluteDestination(2, 2);
+                darwin.setGridPosition(2, 2);
                 board.setGridPositionOpen(this);
             }
         }

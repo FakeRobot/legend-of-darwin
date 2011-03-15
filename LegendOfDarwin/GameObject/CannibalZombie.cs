@@ -96,7 +96,7 @@ namespace LegendOfDarwin.GameObject
                         MoveUp();
                 }
                 else
-                    ;
+                { }
             }
 
 
@@ -113,7 +113,7 @@ namespace LegendOfDarwin.GameObject
 
             if (this.isOnTop(darwin) && darwin.isZombie())
             {
-                darwin.setAbsoluteDestination(2, 2);
+                darwin.setGridPosition(2, 2);
             }
 
             if (movecounter > ZOMBIE_MOVE_RATE)

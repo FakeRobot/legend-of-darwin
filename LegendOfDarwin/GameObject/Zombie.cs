@@ -492,7 +492,7 @@ namespace LegendOfDarwin.GameObject
 
             if( this.isOnTop(darwin) && !darwin.isZombie())
             {
-                darwin.setAbsoluteDestination(2, 2);
+                darwin.setGridPosition(2, 2);
             }
 
             //Random rand1 = new Random();     

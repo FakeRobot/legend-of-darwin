@@ -90,10 +90,5 @@ namespace LegendOfDarwin.GameObject
             spriteBatch.Draw(brainTexture, this.destination, Color.White);
         }
 
-        public void reset()
-        {
-            this.setAbsoluteDestination(5, 18);
-        }
-
     }
 }

@@ -34,6 +34,9 @@ namespace LegendOfDarwin
         private Potion potion;
         private Stairs stairs;
 
+        private BasicObject[] walls;
+        private Texture2D wallTex;
+
         public SpriteFont messageFont;
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
@@ -162,6 +165,39 @@ namespace LegendOfDarwin
             potion.setDestination(board.getPosition(18, 5));
             potion.setGridPosition(18,5);
             board.setGridPositionOccupied(18, 5);
+
+            BasicObject w1 = new BasicObject(board);
+            BasicObject w2 = new BasicObject(board);
+            BasicObject w3 = new BasicObject(board);
+            BasicObject w4 = new BasicObject(board);
+            BasicObject w5 = new BasicObject(board);
+            BasicObject w6 = new BasicObject(board);
+            BasicObject w7 = new BasicObject(board);
+            BasicObject w8 = new BasicObject(board);
+            BasicObject w9 = new BasicObject(board);
+            BasicObject w10 = new BasicObject(board);
+
+            w1.setGridPosition(9, 1);
+            board.setGridPositionOccupied(9, 1);
+            w2.setGridPosition(9, 2);
+            board.setGridPositionOccupied(9, 2);
+            w3.setGridPosition(9, 3);
+            board.setGridPositionOccupied(9, 3);
+            w4.setGridPosition(9, 4);
+            board.setGridPositionOccupied(9, 4);
+            w5.setGridPosition(10, 4);
+            board.setGridPositionOccupied(10, 4);
+            w6.setGridPosition(13, 1);
+            board.setGridPositionOccupied(13, 1);
+            w7.setGridPosition(13, 2);
+            board.setGridPositionOccupied(13, 2);
+            w8.setGridPosition(13, 3);
+            board.setGridPositionOccupied(13, 3);
+            w9.setGridPosition(13, 4);
+            board.setGridPositionOccupied(13, 4);
+            w10.setGridPosition(12, 4);
+            board.setGridPositionOccupied(12, 4);
+            walls = new BasicObject[10] {w1, w2, w3, w4, w5, w6, w7, w8, w9, w10};
         }
 
         public void LoadContent()
@@ -189,6 +225,8 @@ namespace LegendOfDarwin
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
+
+            wallTex = mainGame.Content.Load<Texture2D>("StaticPic/side_wall");
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
 
@@ -513,6 +551,11 @@ namespace LegendOfDarwin
                 darwinMessage.Draw(spriteBatch, messageFont);
                 brainMessage.Draw(spriteBatch, messageFont);
                 //switchMessage.Draw(spriteBatch, messageFont);
+            }
+
+            foreach(BasicObject a in walls)
+            {
+                spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
             }
 
             spriteBatch.End();

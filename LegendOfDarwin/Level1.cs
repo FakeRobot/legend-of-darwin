@@ -335,9 +335,12 @@ namespace LegendOfDarwin
 
             potion.Update(gameTime, ks, darwin, zTime);
 
-            checkForGameOver(firstZombie);
-            checkForGameOver(secondZombie);
-            checkForGameOver(thirdZombie);
+            if (!darwin.isZombie())
+            {
+                checkForGameOver(firstZombie);
+                checkForGameOver(secondZombie);
+                checkForGameOver(thirdZombie);
+            }
             checkForGameOver(vortex);
             //checkForGameWin();
             checkForSwitchToLevelTwo();

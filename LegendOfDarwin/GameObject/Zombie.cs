@@ -308,7 +308,7 @@ namespace LegendOfDarwin.GameObject
                     if (isZombieInRange(this.X + 1, this.Y))
                     {
                         // checks for board position to be open
-                        if (board.isGridPositionOpen(this.X + 1, this.Y) || (darwin.X==this.X+1 && darwin.Y==this.Y))
+                        if (board.isGridPositionOpen(this.X + 1, this.Y) || (darwin.X==this.X+1 && darwin.Y==this.Y && !darwin.isZombie()))
                             MoveRight();
                     }
                 }
@@ -318,7 +318,7 @@ namespace LegendOfDarwin.GameObject
                     if (isZombieInRange(this.X - 1, this.Y))
                     {
                         // checks for board position to be open or occupied by brain
-                        if (board.isGridPositionOpen(this.X - 1, this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y))
+                        if (board.isGridPositionOpen(this.X - 1, this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y && !darwin.isZombie()))
                             MoveLeft();
                     }
                 }
@@ -332,7 +332,7 @@ namespace LegendOfDarwin.GameObject
                     if (isZombieInRange(this.X, this.Y + 1))
                     {
                         // checks for board position to be open or occupied by brain
-                        if (board.isGridPositionOpen(this.X, this.Y + 1) || (darwin.X==this.X && darwin.Y==this.Y+1))
+                        if (board.isGridPositionOpen(this.X, this.Y + 1) || (darwin.X==this.X && darwin.Y==this.Y+1 && !darwin.isZombie()))
                             MoveDown();
                     }
                 }
@@ -342,7 +342,7 @@ namespace LegendOfDarwin.GameObject
                     if (isZombieInRange(this.X, this.Y - 1))
                     {
                         // checks for board position to be open or occupied by brain
-                        if (board.isGridPositionOpen(this.X, this.Y - 1) || (darwin.X == this.X && darwin.Y == this.Y-1))
+                        if (board.isGridPositionOpen(this.X, this.Y - 1) || (darwin.X == this.X && darwin.Y == this.Y-1 && !darwin.isZombie()))
                             MoveUp();
                     }
                 }

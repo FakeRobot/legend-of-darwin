@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameObject\CannibalZombie.cs" />
+    <Compile Include="GameObject\Leaf.cs" />
     <Compile Include="GameObject\Potion.cs" />
     <Compile Include="GameObject\FastZombie.cs" />
     <Compile Include="Level\Level1.cs" />

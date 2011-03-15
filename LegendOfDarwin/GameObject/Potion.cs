@@ -13,7 +13,7 @@ namespace LegendOfDarwin.GameObject
     {
         private Texture2D potionTex;
         private bool isConsumed;
-        private const int healthReplenished = 15;
+        private const int healthReplenished = 5;
 
         public Potion(GameBoard board) : base(board)
         {

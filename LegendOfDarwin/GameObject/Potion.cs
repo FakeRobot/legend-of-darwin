@@ -68,7 +68,7 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this);
             isConsumed = true;
 
-            int updateTime = zTime.getTime() + healthReplenished;
+            int updateTime = zTime.getTime() - healthReplenished;
             zTime.setTime(updateTime);
 
         }

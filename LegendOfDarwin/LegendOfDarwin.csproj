@@ -117,10 +117,10 @@
     <Compile Include="GameObject\CannibalZombie.cs" />
     <Compile Include="GameObject\Potion.cs" />
     <Compile Include="GameObject\FastZombie.cs" />
-    <Compile Include="Level1.cs" />
+    <Compile Include="Level\Level1.cs" />
     <Compile Include="GameObject\Vortex.cs" />
-    <Compile Include="Level2.cs" />
-    <Compile Include="Level3.cs" />
+    <Compile Include="Level\Level2.cs" />
+    <Compile Include="Level\Level3.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="MenuObject\ZombieTime.cs" />
     <Compile Include="GameObject\BasicObject.cs" />

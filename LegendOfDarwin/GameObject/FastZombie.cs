@@ -24,6 +24,9 @@ namespace LegendOfDarwin.GameObject
         public Dir chaseDir;
 
         private Boolean sleeping = true;
+        private Boolean lookingForDarwin = false;
+
+        private Texture2D fastZombieSleepTex;
 
         public FastZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
@@ -33,9 +36,10 @@ namespace LegendOfDarwin.GameObject
             this.watchedLeaves = new LinkedList<Leaf>();
         }
 
-        public void LoadContent(Texture2D fastZombieTexture)
+        public void LoadContent(Texture2D fastZombieTexture, Texture2D fastZombieSleepTexture)
         {
             zombieTexture = fastZombieTexture;
+            this.fastZombieSleepTex = fastZombieSleepTexture;
         }
 
         /// <summary>
@@ -112,7 +116,10 @@ namespace LegendOfDarwin.GameObject
         /// </summary>
         public void lookForDarwin()
         {
-
+            // if see darwin
+                // chaseDarwin()
+            // else
+                // this.goBackToSleep()
         }
 
         /// <summary>
@@ -126,7 +133,28 @@ namespace LegendOfDarwin.GameObject
         public void Update(GameTime gametime, Darwin darwin, Brain brain)
         {
             //base.Update(gametime, darwin, brain);
-            //if(le
+            /*if(this.isOnTop(brokenLeaf))
+                lookForDarwin();
+            else */
+            if (!this.isSleeping())
+            {
+                this.goToLeaf(brokenLeaf);
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            switch (this.isSleeping())
+            {
+                case (true):
+                    spriteBatch.Draw(fastZombieSleepTex, destination, Color.White);
+                    break;
+                case (false):
+                    spriteBatch.Draw(zombieTexture, destination, Color.White);
+                    break;
+                default:
+                    throw new Exception("lolwut");
+            }
         }
 
     }

@@ -49,6 +49,9 @@ namespace LegendOfDarwin.GameObject
         //rate that the zombie moves at, increase to slow down, decrease to speed up
         public int ZOMBIE_MOVE_RATE=50;
 
+        // if the zombie is "killed" by a vortex or another zombie, it isn't alive so don't draw it
+        protected bool isAlive;
+
         /* constructor
         *  sets an initial area for the zombie to take up
         *  mymaxX, myminX are the max/min allowed horizontal range for the zombie
@@ -64,8 +67,10 @@ namespace LegendOfDarwin.GameObject
 
             // start with no zombie vision
             allowVision = false;
-            visionMaxX = 0;
-            visionMaxY = 0;
+            visionMaxX = 3;
+            visionMaxY = 3;
+
+            isAlive = true;
 
             allowRangeDetection = true;
             board = myboard;
@@ -403,6 +408,29 @@ namespace LegendOfDarwin.GameObject
             else
                 return false;
         }
+        
+        /**
+         * is the zombie "alive"
+         * return true if so, false otherwise
+        */
+        public bool isZombieAlive()
+        {
+            return isAlive;
+        }
+
+        /**
+         * sets the zombie to alive (true) or dead (false)
+         * if it is dead it won't be drawn
+         */
+        public void setZombieAlive(bool living)
+        {
+            isAlive = living;
+            if (isAlive == false)
+            {
+                // if you are killing the zombie, free up his space
+                board.setGridPositionOpen(this.X, this.Y);
+            }
+        }
 
         /**
          * is vision enabled for zombie
@@ -490,34 +518,40 @@ namespace LegendOfDarwin.GameObject
             //testRun();
             base.Update(gameTime);
 
-            if( this.isOnTop(darwin) && !darwin.isZombie())
+            if (this.isZombieAlive())
             {
-                darwin.setGridPosition(2, 2);
+                if (this.isOnTop(darwin) && !darwin.isZombie())
+                {
+                    darwin.setGridPosition(2, 2);
+                }
+
+                //Random rand1 = new Random();     
+                //Random rand2 = new Random();
+
+                if (movecounter > ZOMBIE_MOVE_RATE)
+                {
+                    if (isRangeDetectionAllowed() && isBrainInRange(brain))
+                        moveTowardsBrain(brain, darwin);
+                    else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                        moveTowardsDarwin(darwin);
+                    else
+                        this.RandomWalk();
+
+
+                    movecounter = 0;
+                }
+                movecounter++;
             }
-
-            //Random rand1 = new Random();     
-            //Random rand2 = new Random();
-
-            if (movecounter > ZOMBIE_MOVE_RATE)
-            {
-                if (isRangeDetectionAllowed() && isBrainInRange(brain))
-                    moveTowardsBrain(brain,darwin);
-                else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
-                    moveTowardsDarwin(darwin);
-                else
-                    this.RandomWalk();
-
-
-                movecounter = 0;
-            }
-            movecounter++;
 
         }
 
         // Draw
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(zombieTexture, this.destination, Color.White);
+            if (this.isZombieAlive())
+            {
+                spriteBatch.Draw(zombieTexture, this.destination, Color.White);
+            }
         }
 
     }

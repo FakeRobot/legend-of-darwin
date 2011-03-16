@@ -404,7 +404,10 @@ namespace LegendOfDarwin
 
             brain.Update(gameTime, ks, darwin);
 
-            vortex.Update(gameTime, ks, darwin);
+            vortex.Update(gameTime, ks);
+            vortex.CollisionWithZombie(firstZombie);
+            vortex.CollisionWithZombie(secondZombie);
+            vortex.CollisionWithZombie(thirdZombie);
 
             potion.Update(gameTime, ks, darwin, zTime);
 
@@ -458,8 +461,11 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(potion);
 
                 firstZombie.setGridPosition(10, 10);
+                firstZombie.setZombieAlive(true);
                 secondZombie.setGridPosition(10, 16);
+                secondZombie.setZombieAlive(true);
                 thirdZombie.setGridPosition(16, 10);
+                thirdZombie.setZombieAlive(true);
                 potion.setGridPosition(18, 5);
 
                 potion.reset();

@@ -17,18 +17,19 @@ namespace LegendOfDarwin.GameObject
             this.X = startX;
             this.Y = startY;
 
-            this.setGridPosition(startX, startY);
             destination = board.getPosition(startX, startY);
         }
 
-        public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin)
+        public void Update(GameTime gameTime, KeyboardState ks)
         {
             base.Update(gameTime);
+        }
 
-            if (this.isOnTop(darwin))
+        public void CollisionWithZombie(Zombie zombie)
+        {
+            if (this.isOnTop(zombie))
             {
-                darwin.setGridPosition(2, 2);
-                board.setGridPositionOpen(this);
+                zombie.setZombieAlive(false);
             }
         }
 

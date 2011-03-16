@@ -82,6 +82,15 @@ namespace LegendOfDarwin.GameObject
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leaf"></param>
+        public void assignLeaf(Leaf leaf)
+        {
+            this.brokenLeaf = leaf;
+        }
+
+        /// <summary>
         /// Moves the Zombie towards the newly broken leaf.
         /// </summary>
         /// <param name="leaf">The leaf that was broken by Darwin</param>
@@ -116,7 +125,7 @@ namespace LegendOfDarwin.GameObject
 
         public void Update(GameTime gametime, Darwin darwin, Brain brain)
         {
-            base.Update(gametime, darwin, brain);
+            //base.Update(gametime, darwin, brain);
             //if(le
         }
 

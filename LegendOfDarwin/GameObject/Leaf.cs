@@ -79,6 +79,7 @@ namespace LegendOfDarwin.GameObject
                 // we want to break it, and wake up the zombie who is listening to it
                 breakLeaf();
                 parentZombie.wakeUp();
+                parentZombie.assignLeaf(this);
             }
         }
     }

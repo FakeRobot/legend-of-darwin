@@ -84,8 +84,8 @@ namespace LegendOfDarwin
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
-            fastZombie1 = new FastZombie(5, 5, 15, 0, 15, 0, board);
-            leaf = new Leaf(15, 15, board, fastZombie1);
+            fastZombie1 = new FastZombie(15, 15, 15, 0, 15, 0, board);
+            leaf = new Leaf(7, 7, board, fastZombie1);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -190,7 +190,7 @@ namespace LegendOfDarwin
             Texture2D zombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
             Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
 
-            Texture2D zombieFastTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
+            Texture2D zombieFastTex = mainGame.Content.Load<Texture2D>("ZombiePic/FastZombie");
             Texture2D wholeLeafTex = mainGame.Content.Load<Texture2D>("leaf");
             Texture2D brokeLeafTex = mainGame.Content.Load<Texture2D>("brokenleaf");
 
@@ -349,7 +349,10 @@ namespace LegendOfDarwin
             brain.Update(gameTime, ks, darwin);
 
             if (!darwin.isZombie())
+            {
                 checkForGameOver(firstZombie);
+                checkForGameOver(fastZombie1);
+            }
             //checkForGameOver(secondZombie);
             //checkForGameOver(thirdZombie);
             checkForGameWin();
@@ -400,8 +403,8 @@ namespace LegendOfDarwin
                 //secondZombie.setAbsoluteDestination(10, 16);
                 //thirdZombie.setAbsoluteDestination(16, 10);
 
-                leaf.setGridPosition(15, 15);
-                fastZombie1.setGridPosition(5, 5);
+                leaf.setGridPosition(7, 7);
+                fastZombie1.setGridPosition(15, 15);
 
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);

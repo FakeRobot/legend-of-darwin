@@ -18,6 +18,10 @@ namespace LegendOfDarwin.GameObject
         public Potion(GameBoard board) : base(board)
         {
             isConsumed = false;
+            if (board.isGridPositionOpen(this))
+            {
+                board.setGridPositionOccupied(this);
+            }
         }
 
         public void LoadContent(Texture2D potTex)
@@ -30,36 +34,33 @@ namespace LegendOfDarwin.GameObject
             // grab us the current
             LegendOfDarwin.Darwin.Dir facing = darwin.facing;
 
-            if (ks.IsKeyDown(Keys.A))
+            // check switch position in relation to darwin's position + facing direction 
+            switch (facing)
             {
-                // check switch position in relation to darwin's position + facing direction 
-                switch (facing)
-                {
-                    case (LegendOfDarwin.Darwin.Dir.Left):
-                        if (((this.X + 1) == darwin.X) && (this.Y == darwin.Y))
-                        {
-                            consumePotion(zTime);
-                        }
-                        break;
-                    case (LegendOfDarwin.Darwin.Dir.Right):
-                        if (((this.X - 1) == darwin.X) && (this.Y == darwin.Y))
-                        {
-                            consumePotion(zTime);
-                        }
-                        break;
-                    case (LegendOfDarwin.Darwin.Dir.Up):
-                        if ((this.X == darwin.X) && ((this.Y + 1) == darwin.Y))
-                        {
-                            consumePotion(zTime);
-                        }
-                        break;
-                    case (LegendOfDarwin.Darwin.Dir.Down):
-                        if ((this.X == darwin.X) && ((this.Y - 1) == darwin.Y))
-                        {
-                            consumePotion(zTime);
-                        }
-                        break;
-                }
+                case (LegendOfDarwin.Darwin.Dir.Left):
+                    if (((this.X + 1) == darwin.X) && (this.Y == darwin.Y))
+                    {
+                        consumePotion(zTime);
+                    }
+                    break;
+                case (LegendOfDarwin.Darwin.Dir.Right):
+                    if (((this.X - 1) == darwin.X) && (this.Y == darwin.Y))
+                    {
+                        consumePotion(zTime);
+                    }
+                    break;
+                case (LegendOfDarwin.Darwin.Dir.Up):
+                    if ((this.X == darwin.X) && ((this.Y + 1) == darwin.Y))
+                    {
+                        consumePotion(zTime);
+                    }
+                    break;
+                case (LegendOfDarwin.Darwin.Dir.Down):
+                    if ((this.X == darwin.X) && ((this.Y - 1) == darwin.Y))
+                    {
+                        consumePotion(zTime);
+                    }
+                    break;
             }
         }
 

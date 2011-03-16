@@ -433,7 +433,6 @@ namespace LegendOfDarwin
                 messageModeCounter = 0;
             }
             messageModeCounter++;
-
         }
 
         private void UpdateEndState()

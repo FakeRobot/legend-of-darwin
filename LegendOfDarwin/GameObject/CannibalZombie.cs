@@ -17,17 +17,21 @@ namespace LegendOfDarwin.GameObject
         protected Vector2[] path;
         protected int pathCount;
         protected int pathLimit;
+        protected Darwin darwin;
+        protected List<Zombie> zombies;
 
-        public CannibalZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard):
+        public CannibalZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY,List<Zombie> myListZombies,Darwin mydarwin,GameBoard myboard):
             base(startX,startY,mymaxX,myminX, mymaxY, myminY, myboard)
             {
                 allowRangeDetection = false;
                 allowVision = true;
                 goAroundMode = false;
-                visionMaxX = 5;
-                visionMaxY = 5;
+                visionMaxX = 8;
+                visionMaxY = 8;
                 pathCount = 0;
                 pathLimit = 0;
+                darwin = mydarwin;
+                zombies = myListZombies;
             }
 
         // checks if a given game board point is in the zombie's vision
@@ -89,8 +93,22 @@ namespace LegendOfDarwin.GameObject
 
             if (isZombieInRange(intendedPathX, intendedPathY))
             {
+
+                bool canMoveThere = false;
+                foreach (Zombie zombieToEat in zombies) 
+                {
+                    if (zombieToEat.X == intendedPathX && zombieToEat.Y == intendedPathY) 
+                    {
+                        canMoveThere = true;
+                    }
+ 
+                }
+
+                if (darwin.X == intendedPathX && darwin.Y == intendedPathY && darwin.isZombie())
+                    canMoveThere = true;
+
                 // checks for board position to be open
-                if (board.isGridPositionOpen(intendedPathX, intendedPathY))
+                if (board.isGridPositionOpen(intendedPathX, intendedPathY) || canMoveThere)
                 {
                     if (intendedPathX == this.X + 1)
                         MoveRight();
@@ -121,15 +139,8 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
-        // used to pick which way around a obstacle zombie should go
-        // zombie should be right next to an obstacle when this is called
-        public void findBestDir(int ptX, int ptY)
-        {
-            
-
-        }
-
-        public void goAroundObstacle(int ptX, int ptY)
+        // used when zombie is running towards something and an obstacle is in the way
+        public void goAroundObstacle()
         {
             if (goAroundMode) 
             {
@@ -138,9 +149,10 @@ namespace LegendOfDarwin.GameObject
                 {
                     Vector2 nextPoint = path[pathCount];
 
-                    this.setGridPosition((int)nextPoint.X, (int)nextPoint.Y);
+                    
                     board.setGridPositionOccupied((int)nextPoint.X, (int)nextPoint.Y);
-                    board.setGridPositionOpen((int)nextPoint.X, (int)nextPoint.Y);
+                    board.setGridPositionOpen((int)this.X, (int)this.Y);
+                    this.setGridPosition((int)nextPoint.X, (int)nextPoint.Y);
 
                     pathCount++;
                 }
@@ -152,11 +164,24 @@ namespace LegendOfDarwin.GameObject
 
             }
 
-
         }
-        
 
-        public new void Update(GameTime gameTime, Darwin darwin) 
+        // lets the cannibal know which zombies are still on the level
+        public void updateListOfZombies(List<Zombie> myZombieList) 
+        {
+            zombies = myZombieList;
+        }
+
+        public void CollisionWithZombie(Zombie zombie)
+        {
+            if (this.isOnTop(zombie))
+            {
+                zombie.setZombieAlive(false);
+                //zombies.Remove(zombie);
+            }
+        }
+
+        public void Update(GameTime gameTime, Darwin darwin) 
         {
             eventLagMin++;
             if (eventLagMin > eventLagMax)
@@ -171,8 +196,22 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                
-                if (isVisionAllowed() && isDarwinInRange(darwin) && darwin.isZombie())
+                foreach (Zombie myzombie in zombies)
+                    CollisionWithZombie(myzombie);
+                //these loops are sperate because the top loop could potentially remove zombies from the list
+
+                int intendedptX = 0;
+                int intendedptY = 0;
+                bool hasZombieDest = false;
+
+                foreach (Zombie myzombie in zombies) 
+                { 
+
+                }
+
+                if (goAroundMode)
+                    goAroundObstacle();
+                else if (isVisionAllowed() && isPointInVision(darwin.X,darwin.Y) && darwin.isZombie())
                     this.moveTowardsPoint(darwin.X,darwin.Y);
                 else
                     this.RandomWalk();

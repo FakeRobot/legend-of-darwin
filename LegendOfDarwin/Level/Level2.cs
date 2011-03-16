@@ -83,10 +83,13 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
 
-            cannibalZombie = new CannibalZombie(20, 20, board.getNumSquaresX()-1, 1,board.getNumSquaresY()-1,1, board);
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
+
+            List<Zombie> myZombieList= new List<Zombie>();
+            myZombieList.Add(firstZombie);
+            cannibalZombie = new CannibalZombie(20,5,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);

@@ -26,6 +26,9 @@ namespace LegendOfDarwin
         private GameState gameState;
         private GameStart gameStart;
 
+        private FastZombie fastZombie1;
+        private Leaf leaf;
+
         private Darwin darwin;
         private Zombie firstZombie;
         private Switch firstSwitch;
@@ -80,6 +83,9 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
+
+            fastZombie1 = new FastZombie(5, 5, 15, 0, 15, 0, board);
+            leaf = new Leaf(15, 15, board, fastZombie1);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -184,6 +190,10 @@ namespace LegendOfDarwin
             Texture2D zombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
             Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
 
+            Texture2D zombieFastTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
+            Texture2D wholeLeafTex = mainGame.Content.Load<Texture2D>("leaf");
+            Texture2D brokeLeafTex = mainGame.Content.Load<Texture2D>("brokenleaf");
+
             // Test
             Texture2D basicGridTex = mainGame.Content.Load<Texture2D>("StaticPic/Level3/metal_tile_light");
             Texture2D basicMenuTex = mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow");
@@ -214,6 +224,10 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
+
+            fastZombie1.LoadContent(zombieFastTex);
+            leaf.LoadContent(brokeLeafTex, wholeLeafTex);
+
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
@@ -318,6 +332,12 @@ namespace LegendOfDarwin
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
+
+            fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            fastZombie1.Update(gameTime, darwin, brain);
+
+            leaf.Update(darwin);
+            
             //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             //secondZombie.Update(gameTime, darwin, brain);
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
@@ -379,6 +399,10 @@ namespace LegendOfDarwin
                 firstZombie.setGridPosition(10, 10);
                 //secondZombie.setAbsoluteDestination(10, 16);
                 //thirdZombie.setAbsoluteDestination(16, 10);
+
+                leaf.setGridPosition(15, 15);
+                fastZombie1.setGridPosition(5, 5);
+
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
@@ -498,6 +522,10 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
+            
+            fastZombie1.Draw(spriteBatch);
+            leaf.Draw(spriteBatch);
+
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);

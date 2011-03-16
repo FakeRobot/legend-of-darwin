@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LegendOfDarwin.GameObject
 {
@@ -28,8 +29,13 @@ namespace LegendOfDarwin.GameObject
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {
             // fast zombies should move faster, obviously
-            ZOMBIE_MOVE_RATE = 200;
+            ZOMBIE_MOVE_RATE = 15;
             this.watchedLeaves = new LinkedList<Leaf>();
+        }
+
+        public void LoadContent(Texture2D fastZombieTexture)
+        {
+            zombieTexture = fastZombieTexture;
         }
 
         /// <summary>
@@ -111,6 +117,7 @@ namespace LegendOfDarwin.GameObject
         public void Update(GameTime gametime, Darwin darwin, Brain brain)
         {
             base.Update(gametime, darwin, brain);
+            //if(le
         }
 
     }

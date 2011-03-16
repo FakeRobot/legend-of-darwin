@@ -156,7 +156,7 @@ namespace LegendOfDarwin.GameObject
         }
         
 
-        public new void Update(GameTime gameTime, Darwin darwin, Brain brain) 
+        public new void Update(GameTime gameTime, Darwin darwin) 
         {
             eventLagMin++;
             if (eventLagMin > eventLagMax)

@@ -28,6 +28,7 @@ namespace LegendOfDarwin
 
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie;
+        private CannibalZombie cannibalZombie;
         private Switch firstSwitch;
         private Brain brain;
         private GameBoard board;
@@ -77,6 +78,7 @@ namespace LegendOfDarwin
 
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
+            cannibalZombie = new CannibalZombie(20,5,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,board);
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
@@ -181,6 +183,7 @@ namespace LegendOfDarwin
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
 
             Texture2D zombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
+            Texture2D cannibalTex = mainGame.Content.Load<Texture2D>("ZombiePic/CannibalZombie");
             Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
 
             // Test
@@ -213,6 +216,7 @@ namespace LegendOfDarwin
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
+            cannibalZombie.LoadContent(cannibalTex);
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
@@ -316,6 +320,9 @@ namespace LegendOfDarwin
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
+
+            cannibalZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            cannibalZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
 
@@ -506,6 +513,7 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
+            cannibalZombie.Draw(spriteBatch);
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);

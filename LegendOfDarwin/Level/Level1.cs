@@ -342,7 +342,8 @@ namespace LegendOfDarwin
             // aStar tests happen when J is pressed, this will be removed shortly
             if (ks.IsKeyDown(Keys.J)) 
             {
-                Vector2[] mypath = board.aStar(6, 20, 23, 8);
+                Search mysearch = new Search(board);
+                Vector2[] mypath = mysearch.aStar(6, 20, 23, 8);
 
                 int i = 0;
                 foreach (Vector2 thispt in mypath) 

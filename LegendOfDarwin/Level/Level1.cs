@@ -339,6 +339,19 @@ namespace LegendOfDarwin
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin, brain);
 
+            // aStar tests happen when J is pressed, this will be removed shortly
+            if (ks.IsKeyDown(Keys.J)) 
+            {
+                Vector2[] mypath = board.aStar(6, 20, 23, 8);
+
+                int i = 0;
+                foreach (Vector2 thispt in mypath) 
+                {
+                    if (thispt.X!=0)
+                        Console.Out.WriteLine("{0} xpt: {1} ypt: {2}",i,thispt.X,thispt.Y);
+                    i++;
+                }
+            }
 
             firstSwitch.Update(gameTime, ks, darwin);
 

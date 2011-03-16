@@ -11,14 +11,15 @@ namespace LegendOfDarwin.GameObject
     public class CannibalZombie : Zombie
     {
 
-
-
+        //flag for if zombie is in 'bug2' mode
+        protected bool goAroundMode;
 
         public CannibalZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard):
             base(startX,startY,mymaxX,myminX, mymaxY, myminY, myboard)
             {
                 allowRangeDetection = false;
                 allowVision = true;
+                goAroundMode = false;
                 visionMaxX = 5;
                 visionMaxY = 5;
 
@@ -96,12 +97,28 @@ namespace LegendOfDarwin.GameObject
                         MoveUp();
                 }
                 else
-                { }
+                {
+                    //implement some sort of bug2 here
+                    goAroundMode = true;
+                
+                }
             }
 
 
         }
 
+        // used to pick which way around a obstacle zombie should go
+        // zombie should be right next to an obstacle when this is called
+        public void findBestDir(int ptX, int ptY)
+        {
+            
+
+        }
+
+        public void goAroundObstacle(int ptX, int ptY)
+        {
+        }
+        
 
         public new void Update(GameTime gameTime, Darwin darwin, Brain brain) 
         {

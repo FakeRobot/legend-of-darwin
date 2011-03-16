@@ -100,6 +100,7 @@ namespace LegendOfDarwin
                 level2.Update(gameTime);
             if (curLevel == LevelState.Level3)
                 level3.Update(gameTime);
+            
             base.Update(gameTime);
         }
 

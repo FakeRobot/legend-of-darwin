@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 using LegendOfDarwin.GameObject;
 using LegendOfDarwin.MenuObject;
 
-namespace LegendOfDarwin
+namespace LegendOfDarwin.Level
 {
     public class Level1
     {

@@ -96,7 +96,7 @@ namespace LegendOfDarwin
 
             stairs = new Stairs(board);
 
-            brain = new Brain(board, 5, 18);
+            brain = new Brain(board, 2, 18);
 
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
@@ -161,11 +161,21 @@ namespace LegendOfDarwin
 
             vortex = new Vortex(board, 15, 15);
 
-            potion = new Potion(board);
-            potion.setDestination(board.getPosition(18, 5));
-            potion.setGridPosition(18,5);
-            board.setGridPositionOccupied(18, 5);
+            setPotionPositionInLevelOne(20, 4);
 
+            setWalls();
+        }
+
+        private void setPotionPositionInLevelOne(int x, int y)
+        {
+            potion = new Potion(board);
+            potion.setDestination(board.getPosition(x, y));
+            potion.setGridPosition(x, y);
+            board.setGridPositionOccupied(x, y);
+        }
+
+        private void setWalls()
+        {
             BasicObject w1 = new BasicObject(board);
             BasicObject w2 = new BasicObject(board);
             BasicObject w3 = new BasicObject(board);
@@ -177,27 +187,63 @@ namespace LegendOfDarwin
             BasicObject w9 = new BasicObject(board);
             BasicObject w10 = new BasicObject(board);
 
+            BasicObject w11 = new BasicObject(board);
+            BasicObject w12 = new BasicObject(board);
+            BasicObject w13 = new BasicObject(board);
+            BasicObject w14 = new BasicObject(board);
+            BasicObject w15 = new BasicObject(board);
+            BasicObject w16 = new BasicObject(board);
+            BasicObject w17 = new BasicObject(board);
+            BasicObject w18 = new BasicObject(board);
+            BasicObject w19 = new BasicObject(board);
+            BasicObject w20 = new BasicObject(board);
+            BasicObject w21 = new BasicObject(board);
+
             w1.setGridPosition(9, 1);
             board.setGridPositionOccupied(9, 1);
             w2.setGridPosition(9, 2);
             board.setGridPositionOccupied(9, 2);
             w3.setGridPosition(9, 3);
             board.setGridPositionOccupied(9, 3);
-            w4.setGridPosition(9, 4);
-            board.setGridPositionOccupied(9, 4);
-            w5.setGridPosition(10, 4);
-            board.setGridPositionOccupied(10, 4);
+            w4.setGridPosition(9, 5);
+            board.setGridPositionOccupied(9, 5);
+            w5.setGridPosition(10, 5);
+            board.setGridPositionOccupied(10, 5);
             w6.setGridPosition(13, 1);
             board.setGridPositionOccupied(13, 1);
             w7.setGridPosition(13, 2);
             board.setGridPositionOccupied(13, 2);
             w8.setGridPosition(13, 3);
             board.setGridPositionOccupied(13, 3);
-            w9.setGridPosition(13, 4);
-            board.setGridPositionOccupied(13, 4);
-            w10.setGridPosition(12, 4);
-            board.setGridPositionOccupied(12, 4);
-            walls = new BasicObject[10] {w1, w2, w3, w4, w5, w6, w7, w8, w9, w10};
+            w9.setGridPosition(9, 4);
+            board.setGridPositionOccupied(9, 4);
+            w10.setGridPosition(11, 5);
+            board.setGridPositionOccupied(11, 5);
+
+            w11.setGridPosition(5, 18);
+            board.setGridPositionOccupied(5, 18);
+            w12.setGridPosition(5, 19);
+            board.setGridPositionOccupied(5, 19);
+            w13.setGridPosition(5, 20);
+            board.setGridPositionOccupied(5, 20);
+            w14.setGridPosition(5, 17);
+            board.setGridPositionOccupied(5, 17);
+            w15.setGridPosition(5, 16);
+            board.setGridPositionOccupied(5, 16);
+            w18.setGridPosition(5, 21);
+            board.setGridPositionOccupied(5, 21);
+            w16.setGridPosition(5, 22);
+            board.setGridPositionOccupied(5, 22);
+            w17.setGridPosition(5, 15);
+            board.setGridPositionOccupied(5, 15);
+            w19.setGridPosition(5, 14);
+            board.setGridPositionOccupied(5, 14);
+            w20.setGridPosition(5, 13);
+            board.setGridPositionOccupied(5, 13);
+            w21.setGridPosition(5, 12);
+            board.setGridPositionOccupied(5, 12);
+
+            walls = new BasicObject[21] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16, w17, w18, w19, w20, w21 };
         }
 
         public void LoadContent()

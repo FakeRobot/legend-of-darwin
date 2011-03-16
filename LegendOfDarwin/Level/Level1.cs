@@ -408,6 +408,7 @@ namespace LegendOfDarwin
             vortex.CollisionWithZombie(firstZombie);
             vortex.CollisionWithZombie(secondZombie);
             vortex.CollisionWithZombie(thirdZombie);
+            vortex.CollisionWithBO(brain, board);
 
             potion.Update(gameTime, ks, darwin, zTime);
 

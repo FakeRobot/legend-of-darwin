@@ -33,6 +33,14 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        public void CollisionWithBO(BasicObject bo, GameBoard board)
+        {
+            if (this.isOnTop(bo))
+            {
+                board.setGridPositionOpen(this.X, this.Y);
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(vortexTex, destination, Color.White);

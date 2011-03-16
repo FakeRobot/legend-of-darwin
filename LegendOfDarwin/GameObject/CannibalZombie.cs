@@ -14,6 +14,10 @@ namespace LegendOfDarwin.GameObject
         //flag for if zombie is in 'bug2' mode
         protected bool goAroundMode;
 
+        protected Vector2[] path;
+        protected int pathCount;
+        protected int pathLimit;
+
         public CannibalZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard):
             base(startX,startY,mymaxX,myminX, mymaxY, myminY, myboard)
             {
@@ -22,7 +26,8 @@ namespace LegendOfDarwin.GameObject
                 goAroundMode = false;
                 visionMaxX = 5;
                 visionMaxY = 5;
-
+                pathCount = 0;
+                pathLimit = 0;
             }
 
         // checks if a given game board point is in the zombie's vision
@@ -100,11 +105,20 @@ namespace LegendOfDarwin.GameObject
                 {
                     //implement some sort of bug2 here
                     goAroundMode = true;
+                    pathCount = 0;
+                    Search mysearch = new Search(board);
+                    path = mysearch.aStar(this.X,this.Y,ptX,ptY);
+                    pathLimit = mysearch.getLength();
+                    
+                    if (!mysearch.isSolution()) 
+                    {
+                        //if there is no path, just randomwalk to change things up
+                        goAroundMode = false;
+                        RandomWalk();
+                    }
                 
                 }
             }
-
-
         }
 
         // used to pick which way around a obstacle zombie should go
@@ -117,6 +131,28 @@ namespace LegendOfDarwin.GameObject
 
         public void goAroundObstacle(int ptX, int ptY)
         {
+            if (goAroundMode) 
+            {
+
+                if (pathCount < pathLimit)
+                {
+                    Vector2 nextPoint = path[pathCount];
+
+                    this.setGridPosition((int)nextPoint.X, (int)nextPoint.Y);
+                    board.setGridPositionOccupied((int)nextPoint.X, (int)nextPoint.Y);
+                    board.setGridPositionOpen((int)nextPoint.X, (int)nextPoint.Y);
+
+                    pathCount++;
+                }
+                else 
+                {
+                    goAroundMode = false;
+ 
+                }
+
+            }
+
+
         }
         
 
@@ -135,10 +171,9 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                if (isVisionAllowed() && isBrainInRange(brain))
-                    moveTowardsBrain(brain, darwin);
-                else if (isVisionAllowed() && isDarwinInRange(darwin) && darwin.isZombie())
-                    moveTowardsDarwin(darwin);
+                
+                if (isVisionAllowed() && isDarwinInRange(darwin) && darwin.isZombie())
+                    this.moveTowardsPoint(darwin.X,darwin.Y);
                 else
                     this.RandomWalk();
 

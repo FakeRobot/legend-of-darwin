@@ -148,5 +148,10 @@ namespace LegendOfDarwin
             return foundSolution;
         }
 
+        public int getLength() 
+        {
+            return curSpot+1;
+        }
+
     }
 }

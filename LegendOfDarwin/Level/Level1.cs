@@ -461,12 +461,22 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(potion);
 
                 firstZombie.setGridPosition(10, 10);
+                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
                 firstZombie.setZombieAlive(true);
+
                 secondZombie.setGridPosition(10, 16);
+                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
                 secondZombie.setZombieAlive(true);
+
                 thirdZombie.setGridPosition(16, 10);
+                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 thirdZombie.setZombieAlive(true);
-                potion.setGridPosition(18, 5);
+
+                potion.setGridPosition(20, 4);
+                board.setGridPositionOccupied(potion.X, potion.Y);
+
+                brain.setGridPosition(2, 18);
+                board.setGridPositionOccupied(brain.X, brain.Y);
 
                 potion.reset();
                 darwin.setHuman();

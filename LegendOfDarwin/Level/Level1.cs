@@ -98,6 +98,43 @@ namespace LegendOfDarwin
 
             brain = new Brain(board, 2, 18);
 
+            BasicObject[] removableWalls = setRemovableWallsInLevelOne();
+
+            BasicObject switchSquare = new BasicObject(board);
+            switchSquare.X = 11;
+            switchSquare.Y = 2;
+
+            firstSwitch = new Switch(switchSquare, board, removableWalls);
+
+            // Initial starting position
+            darwin.setGridPosition(5, 5);
+
+            if (board.isGridPositionOpen(darwin))
+            {
+                board.setGridPositionOccupied(darwin.X, darwin.Y);
+                darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+            }
+
+            // Darwin's lag movement
+            counterReady = counter = 5;
+
+            if (board.isGridPositionOpen(21, 20))
+            {
+                stairs.setGridPosition(21, 20);
+                stairs.setDestination(board.getPosition(21, 20));
+            }
+
+            zTime = new ZombieTime(board);
+
+            vortex = new Vortex(board, 15, 15);
+
+            setPotionPositionInLevelOne(20, 4);
+
+            setWalls();
+        }
+
+        private BasicObject[] setRemovableWallsInLevelOne()
+        {
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
             s1.X = 20;
@@ -131,39 +168,8 @@ namespace LegendOfDarwin
             s8.X = 23;
             s8.Y = 19;
 
-            BasicObject[] squares = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
-
-            BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 10;
-            switchSquare.Y = 3;
-
-            firstSwitch = new Switch(switchSquare, board, squares);
-
-            // Initial starting position
-            darwin.setGridPosition(5, 5);
-
-            if (board.isGridPositionOpen(darwin))
-            {
-                board.setGridPositionOccupied(darwin.X, darwin.Y);
-                darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-            }
-
-            // Darwin's lag movement
-            counterReady = counter = 5;
-
-            if (board.isGridPositionOpen(21, 20))
-            {
-                stairs.setGridPosition(21, 20);
-                stairs.setDestination(board.getPosition(21, 20));
-            }
-
-            zTime = new ZombieTime(board);
-
-            vortex = new Vortex(board, 15, 15);
-
-            setPotionPositionInLevelOne(20, 4);
-
-            setWalls();
+            BasicObject[] removableWalls = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
+            return removableWalls;
         }
 
         private void setPotionPositionInLevelOne(int x, int y)
@@ -551,18 +557,12 @@ namespace LegendOfDarwin
         {
             if (darwin.isOnTop(stairs)) 
             {
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
                 mainGame.setCurLevel(Game1.LevelState.Level2);
                 mainGame.setZTimeLevel(zTime,Game1.LevelState.Level2);
-                firstZombie.setGridPosition(10, 10);
-                secondZombie.setGridPosition(10, 16);
-                thirdZombie.setGridPosition(16, 10);
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
                 gameWin = false;
-                firstSwitch.turnOn();
             }
         }
 

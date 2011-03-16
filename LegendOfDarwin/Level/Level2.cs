@@ -39,12 +39,13 @@ namespace LegendOfDarwin
         public bool gameWin = false;
 
         private int counter;
+
         private int counterReady;
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-        private Stairs firstStair, secondStair;
+        private Stairs stairs;
 
         // things for managing message boxes
         bool messageMode = false;
@@ -56,6 +57,9 @@ namespace LegendOfDarwin
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
+
+        private BasicObject[] walls;
+        private Texture2D wallTex;
 
         public Song song;
         public Game1 mainGame;
@@ -78,7 +82,8 @@ namespace LegendOfDarwin
 
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
-            cannibalZombie = new CannibalZombie(20,5,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,board);
+
+            cannibalZombie = new CannibalZombie(20, 20, board.getNumSquaresX()-1, 1,board.getNumSquaresY()-1,1, board);
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
@@ -95,46 +100,11 @@ namespace LegendOfDarwin
             String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
             brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
 
+            stairs = new Stairs(board);
 
-            firstStair = new Stairs(board);
-            secondStair = new Stairs(board);
+            brain = new Brain(board, 10, 18);
 
-            brain = new Brain(board, 5, 18);
-
-            //later add an x and y to the constructor
-            BasicObject s1 = new BasicObject(board);
-            s1.X = 20;
-            s1.Y = 19;
-
-            BasicObject s2 = new BasicObject(board);
-            s2.X = 20;
-            s2.Y = 20;
-
-            BasicObject s3 = new BasicObject(board);
-            s3.X = 20;
-            s3.Y = 21;
-
-            BasicObject s4 = new BasicObject(board);
-            s4.X = 20;
-            s4.Y = 22;
-
-            BasicObject s5 = new BasicObject(board);
-            s5.X = 20;
-            s5.Y = 19;
-
-            BasicObject s6 = new BasicObject(board);
-            s6.X = 21;
-            s6.Y = 19;
-
-            BasicObject s7 = new BasicObject(board);
-            s7.X = 22;
-            s7.Y = 19;
-
-            BasicObject s8 = new BasicObject(board);
-            s8.X = 23;
-            s8.Y = 19;
-
-            BasicObject[] squares = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
+            BasicObject[] squares = setRemovableWallsInLevelTwo();
 
             BasicObject switchSquare = new BasicObject(board);
             switchSquare.X = 10;
@@ -155,19 +125,40 @@ namespace LegendOfDarwin
             counterReady = counter = 5;
 
 
-            if (board.isGridPositionOpen(20, 2))
-            {
-                firstStair.setGridPosition(20, 2);
-                firstStair.setDestination(board.getPosition(20, 2));
-            }
             if (board.isGridPositionOpen(21, 20))
             {
-                secondStair.setGridPosition(21, 20);
-                secondStair.setDestination(board.getPosition(21, 20));
+                stairs.setGridPosition(21, 20);
+                stairs.setDestination(board.getPosition(21, 20));
             }
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
+
+            setWallsInLevelTwo();
+        }
+
+        private BasicObject[] setRemovableWallsInLevelTwo()
+        {
+            //later add an x and y to the constructor
+            BasicObject s1 = new BasicObject(board);
+            s1.X = 20;
+            s1.Y = 19;
+
+            BasicObject s2 = new BasicObject(board);
+            s2.X = 20;
+            s2.Y = 20;
+
+            BasicObject s3 = new BasicObject(board);
+            s3.X = 20;
+            s3.Y = 21;
+
+            BasicObject s4 = new BasicObject(board);
+            s4.X = 20;
+            s4.Y = 22;
+
+
+            BasicObject[] squares = new BasicObject[4] { s1, s2, s3, s4};
+            return squares;
         }
 
         public void LoadContent()
@@ -186,26 +177,25 @@ namespace LegendOfDarwin
             Texture2D cannibalTex = mainGame.Content.Load<Texture2D>("ZombiePic/CannibalZombie");
             Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
 
-            // Test
             Texture2D basicGridTex = mainGame.Content.Load<Texture2D>("StaticPic/Level2/metal_tile_dark");
             Texture2D basicMenuTex = mainGame.Content.Load<Texture2D>("StaticPic/Level2/side_wall_green");
 
             Texture2D basicStairUpTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsUp");
             Texture2D basicStairDownTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsDown");
 
-            // Texture for the wall and switch
-            Texture2D wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
+            Texture2D removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
             Texture2D switchTex = mainGame.Content.Load<Texture2D>("StaticPic/Switch");
 
             Texture2D brainTex = mainGame.Content.Load<Texture2D>("brain");
 
+            wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level2/side_wall_green");
+
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
 
-            firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
-            secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
+            stairs.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
-            firstSwitch.LoadContent(wallTex, switchTex);
+            firstSwitch.LoadContent(removableWallTex, switchTex);
 
             brain.LoadContent(brainTex);
 
@@ -315,8 +305,7 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
-            firstStair.Update(gameTime, darwin);
-            secondStair.Update(gameTime, darwin);
+            stairs.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
@@ -432,7 +421,7 @@ namespace LegendOfDarwin
 
         private void checkForSwitchToLevelThree()
         {
-            if (darwin.isOnTop(secondStair))
+            if (darwin.isOnTop(stairs))
             {
                 board.setGridPositionOpen(darwin);
                 darwin.setGridPosition(2, 2);
@@ -449,7 +438,7 @@ namespace LegendOfDarwin
 
         private void checkForGameWin()
         {
-            if (darwin.isOnTop(secondStair))
+            if (darwin.isOnTop(stairs))
             {
                 gameWin = true;
             }
@@ -508,8 +497,7 @@ namespace LegendOfDarwin
             spriteBatch.Begin();
             board.Draw(spriteBatch);
 
-            firstStair.Draw(spriteBatch);
-            secondStair.Draw(spriteBatch);
+            stairs.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
@@ -519,6 +507,11 @@ namespace LegendOfDarwin
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
+
+            foreach (BasicObject a in walls)
+            {
+                spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
+            }
 
             if (messageMode)
             {
@@ -546,6 +539,99 @@ namespace LegendOfDarwin
                 spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);
             }
             spriteBatch.End();
+        }
+
+        private void setWallsInLevelTwo()
+        {
+            BasicObject w1 = new BasicObject(board);
+            BasicObject w2 = new BasicObject(board);
+            BasicObject w3 = new BasicObject(board);
+            BasicObject w4 = new BasicObject(board);
+            BasicObject w5 = new BasicObject(board);
+            BasicObject w6 = new BasicObject(board);
+            BasicObject w7 = new BasicObject(board);
+            BasicObject w8 = new BasicObject(board);
+            BasicObject w9 = new BasicObject(board);
+            BasicObject w10 = new BasicObject(board);
+            BasicObject w11 = new BasicObject(board);
+            BasicObject w12 = new BasicObject(board);
+            BasicObject w13 = new BasicObject(board);
+            BasicObject w14 = new BasicObject(board);
+            BasicObject w15 = new BasicObject(board);
+            BasicObject w16 = new BasicObject(board);
+            BasicObject w17 = new BasicObject(board);
+            BasicObject w18 = new BasicObject(board);
+
+            w1.setGridPosition(20, 17);
+            w2.setGridPosition(21, 17);
+            w3.setGridPosition(22, 17);
+            w4.setGridPosition(23, 17);
+            w5.setGridPosition(19, 17);
+            w6.setGridPosition(18, 17);
+            w7.setGridPosition(17, 17);
+            w8.setGridPosition(16, 17);
+            w9.setGridPosition(15, 17);
+            w10.setGridPosition(14, 17);
+            w11.setGridPosition(13, 17);
+            w12.setGridPosition(12, 17);
+            w13.setGridPosition(11, 17);
+            w14.setGridPosition(10, 17);
+            w15.setGridPosition(9, 17);
+            w16.setGridPosition(8, 17);
+            w17.setGridPosition(7, 17);
+            w18.setGridPosition(6, 17);
+
+            for (int m = 6; m < 24; m++)
+            {
+                board.setGridPositionOccupied(m, 17);
+            }
+
+            BasicObject w19 = new BasicObject(board);
+            BasicObject w20 = new BasicObject(board);
+            BasicObject w21 = new BasicObject(board);
+            BasicObject w22 = new BasicObject(board);
+            BasicObject w23 = new BasicObject(board);
+            BasicObject w24 = new BasicObject(board);
+            BasicObject w25 = new BasicObject(board);
+            BasicObject w26 = new BasicObject(board);
+            BasicObject w27 = new BasicObject(board);
+            BasicObject w28 = new BasicObject(board);
+            BasicObject w29 = new BasicObject(board);
+            BasicObject w30 = new BasicObject(board);
+            BasicObject w31 = new BasicObject(board);
+            BasicObject w32 = new BasicObject(board);
+            BasicObject w33 = new BasicObject(board);
+            BasicObject w34 = new BasicObject(board);
+            BasicObject w35 = new BasicObject(board);
+            BasicObject w36 = new BasicObject(board);
+
+            w19.setGridPosition(1, 10);
+            w20.setGridPosition(2, 10);
+            w21.setGridPosition(2, 10);
+            w22.setGridPosition(3, 10);
+            w23.setGridPosition(4, 10);
+            w24.setGridPosition(5, 10);
+            w25.setGridPosition(6, 10);
+            w26.setGridPosition(7, 10);
+            w27.setGridPosition(8, 10);
+            w28.setGridPosition(9, 10);
+            w29.setGridPosition(10, 10);
+            w30.setGridPosition(11, 10);
+            w31.setGridPosition(12, 10);
+            w32.setGridPosition(13, 10);
+            w33.setGridPosition(14, 10);
+            w34.setGridPosition(15, 10);
+            w35.setGridPosition(16, 10);
+            w36.setGridPosition(17, 10);
+
+            for (int n = 1; n < 18; n++)
+            {
+                board.setGridPositionOccupied(n, 10);
+            }
+
+            walls = new BasicObject[36] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, 
+                w12, w13, w14, w15, w16, w17, w18, w19, w20, w21, w22, w23, w24, w25, 
+                w26, w27, w28, w29, w30, w31, w32, w33, w34, w35, w36 };
         }
 
     }

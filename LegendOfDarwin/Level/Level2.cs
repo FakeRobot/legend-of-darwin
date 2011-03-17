@@ -154,8 +154,12 @@ namespace LegendOfDarwin
             s4.X = 20;
             s4.Y = 22;
 
+            BasicObject s5 = new BasicObject(board);
+            s5.X = 20;
+            s5.Y = 18;
 
-            BasicObject[] squares = new BasicObject[4] { s1, s2, s3, s4};
+
+            BasicObject[] squares = new BasicObject[5] { s1, s2, s3, s4, s5};
             return squares;
         }
 

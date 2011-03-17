@@ -110,8 +110,8 @@ namespace LegendOfDarwin
             BasicObject[] squares = setRemovableWallsInLevelTwo();
 
             BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 10;
-            switchSquare.Y = 3;
+            switchSquare.X = 16;
+            switchSquare.Y = 20;
 
             firstSwitch = new Switch(switchSquare, board, squares);
 

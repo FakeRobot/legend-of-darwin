@@ -177,7 +177,6 @@ namespace LegendOfDarwin.GameObject
             if (this.isOnTop(zombie))
             {
                 zombie.setZombieAlive(false);
-                //zombies.Remove(zombie);
             }
         }
 
@@ -198,21 +197,46 @@ namespace LegendOfDarwin.GameObject
             {
                 foreach (Zombie myzombie in zombies)
                     CollisionWithZombie(myzombie);
-                //these loops are sperate because the top loop could potentially remove zombies from the list
+                //these loops are seperate because the top loop could potentially remove zombies from the list
 
                 int intendedptX = 0;
                 int intendedptY = 0;
                 bool hasZombieDest = false;
+                bool goForDarwin = true;
+                int closestZombieDist = 10000;
 
                 foreach (Zombie myzombie in zombies) 
-                { 
+                {
+                    if (isVisionAllowed() && isPointInVision(myzombie.X, myzombie.Y) && myzombie.isZombieAlive()) 
+                    {
+                        int dist = Math.Abs(this.X - myzombie.X) + Math.Abs(this.Y - myzombie.Y);
+                        if (dist < closestZombieDist)
+                        {
+                            closestZombieDist = dist;
+                            intendedptX = myzombie.X;
+                            intendedptY = myzombie.Y;
+                            hasZombieDest = true;
+                            goForDarwin = false;
+                        }
+ 
+                    }
+                }
 
+                if (hasZombieDest)
+                {
+                    if (Math.Abs(this.X - darwin.X) + Math.Abs(this.Y - darwin.Y) <= closestZombieDist)
+                    {
+                        goForDarwin = true;
+                        hasZombieDest = false;
+                    }
                 }
 
                 if (goAroundMode)
                     goAroundObstacle();
-                else if (isVisionAllowed() && isPointInVision(darwin.X,darwin.Y) && darwin.isZombie())
-                    this.moveTowardsPoint(darwin.X,darwin.Y);
+                else if (isVisionAllowed() && isPointInVision(darwin.X, darwin.Y) && darwin.isZombie() && goForDarwin)
+                    this.moveTowardsPoint(darwin.X, darwin.Y);
+                else if (hasZombieDest)
+                    this.moveTowardsPoint(intendedptX,intendedptY);
                 else
                     this.RandomWalk();
 

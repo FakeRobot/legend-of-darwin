@@ -140,6 +140,29 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        //public void RandomWalk() 
+        //{
+        //    Random rand1 = new Random();
+
+        //    bool rightNext = false;
+
+        //    foreach (Zombie someZombie in zombies) 
+        //    {
+        //        if (isZombieOneSquareAway(someZombie))
+        //            rightNext = true;
+        //    }
+
+        //    if (rand1.Next(4) == 2 || rightNext)
+        //        base.RandomWalk();
+ 
+        //}
+
+        // checks if a zombie is one square away or not
+        public bool isZombieOneSquareAway(Zombie someZombie)
+        {
+            return (someZombie.X + 1 == this.X || someZombie.X - 1 == this.X || someZombie.Y + 1 == this.Y || someZombie.Y - 1 == this.Y);
+
+        }
         // used when zombie is running towards something and an obstacle is in the way
         public void goAroundObstacle()
         {
@@ -250,7 +273,6 @@ namespace LegendOfDarwin.GameObject
                     goAroundObstacle();
                 else if (isVisionAllowed() && isPointInVision(darwin.X, darwin.Y) && darwin.isZombie() && goForDarwin)
                 {
-                    Console.Out.WriteLine("going for darwin");
                     this.moveTowardsPoint(darwin.X, darwin.Y);
                 }
                 else if (hasZombieDest)

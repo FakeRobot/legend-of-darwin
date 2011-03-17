@@ -512,11 +512,38 @@ namespace LegendOfDarwin.GameObject
                 movecounter++;
         }
 
-        // Update
         public void Update(GameTime gameTime,Darwin darwin,Brain brain)
         {
             //testRun();
             
+            if (this.isZombieAlive())
+            {
+                base.Update(gameTime);
+                if (this.isOnTop(darwin) && !darwin.isZombie())
+                {
+                    darwin.setGridPosition(2, 2);
+                }
+
+                if (movecounter > ZOMBIE_MOVE_RATE)
+                {
+                    if (isRangeDetectionAllowed() && isBrainInRange(brain))
+                        moveTowardsBrain(brain, darwin);
+                    else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                        moveTowardsDarwin(darwin);
+                    else
+                        this.RandomWalk();
+
+
+                    movecounter = 0;
+                }
+                movecounter++;
+            }
+
+        }
+
+        public void Update(GameTime gameTime, Darwin darwin)
+        {
+            //testRun();
 
             if (this.isZombieAlive())
             {
@@ -526,14 +553,9 @@ namespace LegendOfDarwin.GameObject
                     darwin.setGridPosition(2, 2);
                 }
 
-                //Random rand1 = new Random();     
-                //Random rand2 = new Random();
-
                 if (movecounter > ZOMBIE_MOVE_RATE)
                 {
-                    if (isRangeDetectionAllowed() && isBrainInRange(brain))
-                        moveTowardsBrain(brain, darwin);
-                    else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                    if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
                         moveTowardsDarwin(darwin);
                     else
                         this.RandomWalk();

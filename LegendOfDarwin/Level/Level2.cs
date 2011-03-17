@@ -30,7 +30,6 @@ namespace LegendOfDarwin
         private Zombie firstZombie, secondZombie, thirdZombie;
         private CannibalZombie cannibalZombie;
         private Switch firstSwitch;
-        private Brain brain;
         private GameBoard board;
         public GraphicsDevice device;
         public SpriteFont messageFont;
@@ -53,7 +52,6 @@ namespace LegendOfDarwin
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
         private MessageBox switchMessage;
-        private MessageBox brainMessage;
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
@@ -102,12 +100,7 @@ namespace LegendOfDarwin
             String switchString = "This is a switch\n face it and press A\n to see what happens!!";
             switchMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, switchString);
 
-            String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
-            brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
-
             stairs = new Stairs(board);
-
-            brain = new Brain(board, 10, 18);
 
             BasicObject[] squares = setRemovableWallsInLevelTwo();
 
@@ -191,8 +184,6 @@ namespace LegendOfDarwin
             Texture2D removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
             Texture2D switchTex = mainGame.Content.Load<Texture2D>("StaticPic/Switch");
 
-            Texture2D brainTex = mainGame.Content.Load<Texture2D>("brain");
-
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level2/side_wall_green");
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
@@ -201,8 +192,6 @@ namespace LegendOfDarwin
             stairs.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
             firstSwitch.LoadContent(removableWallTex, switchTex);
-
-            brain.LoadContent(brainTex);
 
             // Test
             board.LoadContent(basicGridTex);
@@ -219,7 +208,6 @@ namespace LegendOfDarwin
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
             switchMessage.LoadContent(messagePic);
-            brainMessage.LoadContent(messagePic);
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             
@@ -257,7 +245,6 @@ namespace LegendOfDarwin
             zombieMessage.pointToSquare(firstZombie.X, firstZombie.Y, board);
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
             switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
-            brainMessage.pointToSquare(brain.X, brain.Y, board);
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
                 messageMode = false;
@@ -315,20 +302,18 @@ namespace LegendOfDarwin
             stairs.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            firstZombie.Update(gameTime, darwin, brain);
+            firstZombie.Update(gameTime, darwin);
 
             secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            secondZombie.Update(gameTime, darwin, brain);
+            secondZombie.Update(gameTime, darwin);
 
             thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            thirdZombie.Update(gameTime, darwin, brain);
+            thirdZombie.Update(gameTime, darwin);
 
             cannibalZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             cannibalZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
-
-            brain.Update(gameTime, ks, darwin);
 
             if (!darwin.isZombie())
             {
@@ -528,7 +513,6 @@ namespace LegendOfDarwin
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
-            brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
             foreach (BasicObject a in walls)
@@ -540,7 +524,6 @@ namespace LegendOfDarwin
             {
                 zombieMessage.Draw(spriteBatch, messageFont);
                 darwinMessage.Draw(spriteBatch, messageFont);
-                brainMessage.Draw(spriteBatch, messageFont);
                 //switchMessage.Draw(spriteBatch, messageFont);
             }
 
@@ -644,10 +627,8 @@ namespace LegendOfDarwin
             w32.setGridPosition(13, 10);
             w33.setGridPosition(14, 10);
             w34.setGridPosition(15, 10);
-            w35.setGridPosition(16, 10);
-            w36.setGridPosition(17, 10);
 
-            for (int n = 1; n < 18; n++)
+            for (int n = 1; n < 16; n++)
             {
                 board.setGridPositionOccupied(n, 10);
             }

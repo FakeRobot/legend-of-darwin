@@ -24,7 +24,7 @@ namespace LegendOfDarwin.GameObject
         public Dir chaseDir;
 
         private Boolean sleeping = true;
-        private Boolean lookingForDarwin = false;
+        private Boolean chasingDarwin = false;
 
         private Texture2D fastZombieSleepTex;
 
@@ -32,7 +32,7 @@ namespace LegendOfDarwin.GameObject
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {
             // fast zombies should move faster, obviously
-            ZOMBIE_MOVE_RATE = 15;
+            ZOMBIE_MOVE_RATE = 5;
             this.watchedLeaves = new LinkedList<Leaf>();
         }
 
@@ -128,18 +128,36 @@ namespace LegendOfDarwin.GameObject
         public void chaseDarwin(Darwin darwin)
         {
             // do this better later
+            if (this.X < darwin.X)
+                this.MoveRight();
+            else if (this.X > darwin.X)
+                this.MoveLeft();
+            else if (this.Y < darwin.Y)
+                this.MoveDown();
+            else if (this.Y > darwin.Y)
+                this.MoveUp();
         }
 
         public void Update(GameTime gametime, Darwin darwin, Brain brain)
         {
             //base.Update(gametime, darwin, brain);
-            /*if(this.isOnTop(brokenLeaf))
-                lookForDarwin();
-            else */
-            if (!this.isSleeping())
+            
+            if (!isSleeping())
             {
-                this.goToLeaf(brokenLeaf);
-            }
+                if (isOnTop(brokenLeaf))
+                    lookForDarwin();
+
+                if (movecounter > this.ZOMBIE_MOVE_RATE)
+                {
+                    if (!chasingDarwin)
+                        this.goToLeaf(brokenLeaf);
+                    else
+                        chaseDarwin(darwin);
+
+                    movecounter = 0;
+                }
+                movecounter++;
+            }         
         }
 
         public void Draw(SpriteBatch spriteBatch)

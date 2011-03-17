@@ -634,9 +634,28 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(n, 10);
             }
 
-            walls = new BasicObject[36] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, 
+            BasicObject w37 = new BasicObject(board);
+            BasicObject w38 = new BasicObject(board);
+            BasicObject w39 = new BasicObject(board);
+            BasicObject w40 = new BasicObject(board);
+            BasicObject w41 = new BasicObject(board);
+            BasicObject w42 = new BasicObject(board);
+
+            w37.setGridPosition(19, 1);
+            w38.setGridPosition(19, 2);
+            w39.setGridPosition(19, 3);
+            w40.setGridPosition(19, 4);
+            w41.setGridPosition(19, 5);
+            w42.setGridPosition(19, 6);
+
+            for (int k = 1; k < 7; k++)
+            {
+                board.setGridPositionOccupied(19, k);
+            }
+
+            walls = new BasicObject[40] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, 
                 w12, w13, w14, w15, w16, w17, w18, w19, w20, w21, w22, w23, w24, w25, 
-                w26, w27, w28, w29, w30, w31, w32, w33, w34, w35, w36 };
+                w26, w27, w28, w29, w30, w31, w32, w33, w34, w37, w38, w39, w40, w41, w42 };
         }
 
     }

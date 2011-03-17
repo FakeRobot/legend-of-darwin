@@ -321,9 +321,12 @@ namespace LegendOfDarwin
 
             if (!darwin.isZombie())
             {
-                checkForGameOver(firstZombie);
-                checkForGameOver(secondZombie);
-                checkForGameOver(thirdZombie);
+                if (firstZombie.isZombieAlive())
+                    checkForGameOver(firstZombie);
+                if (secondZombie.isZombieAlive())
+                    checkForGameOver(secondZombie);
+                if (thirdZombie.isZombieAlive())
+                    checkForGameOver(thirdZombie);
             }
             if (darwin.isZombie())
             {

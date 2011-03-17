@@ -110,13 +110,14 @@ namespace LegendOfDarwin.GameObject
                 // checks for board position to be open
                 if (board.isGridPositionOpen(intendedPathX, intendedPathY) || canMoveThere)
                 {
+                    
                     if (intendedPathX == this.X + 1)
                         MoveRight();
                     else if (intendedPathX == this.X - 1)
                         MoveLeft();
                     else if (intendedPathY == this.Y + 1)
                         MoveDown();
-                    else if (intendedPathX == this.Y - 1)
+                    else if (intendedPathY == this.Y - 1)
                         MoveUp();
                 }
                 else
@@ -243,12 +244,17 @@ namespace LegendOfDarwin.GameObject
                     }
                 }
 
+                Console.Out.WriteLine("goAround:{0} hasZombieDest:{1} goForDarwin:{2}",goAroundMode,hasZombieDest,goForDarwin);
+
                 if (goAroundMode)
                     goAroundObstacle();
                 else if (isVisionAllowed() && isPointInVision(darwin.X, darwin.Y) && darwin.isZombie() && goForDarwin)
+                {
+                    Console.Out.WriteLine("going for darwin");
                     this.moveTowardsPoint(darwin.X, darwin.Y);
+                }
                 else if (hasZombieDest)
-                    this.moveTowardsPoint(intendedptX,intendedptY);
+                    this.moveTowardsPoint(intendedptX, intendedptY);
                 else
                     this.RandomWalk();
 

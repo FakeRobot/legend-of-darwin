@@ -32,6 +32,7 @@ namespace LegendOfDarwin.GameObject
                 pathLimit = 0;
                 darwin = mydarwin;
                 zombies = myListZombies;
+                ZOMBIE_MOVE_RATE=40;
             }
 
         // checks if a given game board point is in the zombie's vision
@@ -140,22 +141,23 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
-        //public void RandomWalk() 
-        //{
-        //    Random rand1 = new Random();
+        // like normal zombie's random walk but happens less frequently
+        public void RandomWalk()
+        {
+            Random rand1 = new Random();
 
-        //    bool rightNext = false;
+            bool rightNext = false;
 
-        //    foreach (Zombie someZombie in zombies) 
-        //    {
-        //        if (isZombieOneSquareAway(someZombie))
-        //            rightNext = true;
-        //    }
+            foreach (Zombie someZombie in zombies)
+            {
+                if (isZombieOneSquareAway(someZombie))
+                    rightNext = true;
+            }
 
-        //    if (rand1.Next(4) == 2 || rightNext)
-        //        base.RandomWalk();
- 
-        //}
+            if (rand1.Next(4) == 2 || rightNext)
+                base.RandomWalk();
+
+        }
 
         // checks if a zombie is one square away or not
         public bool isZombieOneSquareAway(Zombie someZombie)

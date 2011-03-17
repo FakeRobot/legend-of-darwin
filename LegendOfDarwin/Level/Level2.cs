@@ -83,7 +83,7 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
 
-            firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
+            firstZombie = new Zombie(10, 9, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
@@ -322,6 +322,8 @@ namespace LegendOfDarwin
 
             if (!darwin.isZombie())
                 checkForGameOver(firstZombie);
+            if (darwin.isZombie())
+                checkForGameOver(cannibalZombie);
 
             //checkForGameWin();
             checkForSwitchToLevelThree();

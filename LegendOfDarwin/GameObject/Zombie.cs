@@ -516,10 +516,11 @@ namespace LegendOfDarwin.GameObject
         public void Update(GameTime gameTime,Darwin darwin,Brain brain)
         {
             //testRun();
-            base.Update(gameTime);
+            
 
             if (this.isZombieAlive())
             {
+                base.Update(gameTime);
                 if (this.isOnTop(darwin) && !darwin.isZombie())
                 {
                     darwin.setGridPosition(2, 2);

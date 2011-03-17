@@ -176,8 +176,23 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.isOnTop(zombie))
             {
+                Console.Out.WriteLine("got here");
                 zombie.setZombieAlive(false);
             }
+        }
+
+        // takes in list of zombies, returns new list with dead zombies removed
+        public List<Zombie> removeDeadZombies(List<Zombie> myZList) 
+        {
+            List<Zombie> newList = new List<Zombie>();
+
+            foreach (Zombie deadZombie in myZList) 
+            {
+                if (deadZombie.isZombieAlive())
+                    newList.Add(deadZombie);
+            }
+
+            return newList;
         }
 
         public void Update(GameTime gameTime, Darwin darwin) 
@@ -187,17 +202,14 @@ namespace LegendOfDarwin.GameObject
             {
                 this.eventFlag = true;
             }
-
-            if (this.isOnTop(darwin) && darwin.isZombie())
-            {
-                darwin.setGridPosition(2, 2);
-            }
+            foreach (Zombie myzombie in zombies)
+                CollisionWithZombie(myzombie);
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                foreach (Zombie myzombie in zombies)
-                    CollisionWithZombie(myzombie);
+                
                 //these loops are seperate because the top loop could potentially remove zombies from the list
+                this.updateListOfZombies(this.removeDeadZombies(zombies));
 
                 int intendedptX = 0;
                 int intendedptY = 0;

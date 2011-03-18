@@ -86,7 +86,7 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 9, 15, 5, 15, 5, board);
             secondZombie = new Zombie(12, 9, 15, 5, 15, 5, board);
             thirdZombie = new Zombie(8, 8, 15, 5, 15, 5, board);
-            fourthZombie = new Zombie(8, 5, 15, 5, 15, 5, board);
+            fourthZombie = new Zombie(8, 12, 17, 5, 20, 10, board);
 
             myZombieList= new List<Zombie>();
             myZombieList.Add(firstZombie);
@@ -422,7 +422,7 @@ namespace LegendOfDarwin
                 thirdZombie.setZombieAlive(true);
 
                 board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
-                fourthZombie.setGridPosition(8, 8);
+                fourthZombie.setGridPosition(8, 12);
                 board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
                 fourthZombie.setZombieAlive(true);
 
@@ -467,7 +467,7 @@ namespace LegendOfDarwin
             thirdZombie.setZombieAlive(true);
 
             board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
-            fourthZombie.setGridPosition(8, 8);
+            fourthZombie.setGridPosition(8, 12);
             board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
             fourthZombie.setZombieAlive(true);
 

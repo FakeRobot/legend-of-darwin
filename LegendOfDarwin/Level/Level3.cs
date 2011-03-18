@@ -412,6 +412,8 @@ namespace LegendOfDarwin
                     zTime.setTime(zTimeReset.getTime());
                 }
 
+                board.setGridPositionOpen(firstZombie);
+
                 firstZombie.setGridPosition(10, 10);
                 //secondZombie.setAbsoluteDestination(10, 16);
                 //thirdZombie.setAbsoluteDestination(16, 10);
@@ -422,6 +424,7 @@ namespace LegendOfDarwin
                 leaf2.setGridPosition(5, 15);
                 leaf2.resetLeaf();
 
+                board.setGridPositionOpen(fastZombie1);
                 fastZombie1.chasingDarwin = false;
                 fastZombie1.goBackToSleep();
                 fastZombie1.setGridPosition(15, 15);

@@ -378,7 +378,32 @@ namespace LegendOfDarwin
                     zTime.setTime(zTimeReset.getTime());
                 }
 
-                //firstZombie.setGridPosition(10, 10);
+                board.setGridPositionOpen(firstZombie.X, firstZombie.Y);
+                firstZombie.setGridPosition(10, 9);
+                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+                firstZombie.setZombieAlive(true);
+
+                board.setGridPositionOpen(secondZombie.X, secondZombie.Y);
+                secondZombie.setGridPosition(12, 9);
+                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+                secondZombie.setZombieAlive(true);
+
+                board.setGridPositionOpen(thirdZombie.X, thirdZombie.Y);
+                thirdZombie.setGridPosition(8, 8);
+                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+                thirdZombie.setZombieAlive(true);
+
+                List<Zombie> myZombieList = new List<Zombie>();
+                myZombieList.Add(firstZombie);
+                myZombieList.Add(secondZombie);
+                myZombieList.Add(thirdZombie);
+                cannibalZombie.updateListOfZombies(myZombieList);
+
+                board.setGridPositionOpen(cannibalZombie.X,cannibalZombie.Y);
+                cannibalZombie.setGridPosition(21,3);
+                board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
+                cannibalZombie.setZombieAlive(true);
+
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
@@ -387,6 +412,36 @@ namespace LegendOfDarwin
                 MediaPlayer.Play(song);
             }
 
+        }
+
+        // rests enemy positions and reset their presence on the gameboard
+        public void resetZombies() 
+        {
+            board.setGridPositionOpen(firstZombie.X, firstZombie.Y);
+            firstZombie.setGridPosition(10, 9);
+            board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+            firstZombie.setZombieAlive(true);
+
+            board.setGridPositionOpen(secondZombie.X, secondZombie.Y);
+            secondZombie.setGridPosition(12, 9);
+            board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+            secondZombie.setZombieAlive(true);
+
+            board.setGridPositionOpen(thirdZombie.X, thirdZombie.Y);
+            thirdZombie.setGridPosition(8, 8);
+            board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+            thirdZombie.setZombieAlive(true);
+
+            List<Zombie> myZombieList = new List<Zombie>();
+            myZombieList.Add(firstZombie);
+            myZombieList.Add(secondZombie);
+            myZombieList.Add(thirdZombie);
+            cannibalZombie.updateListOfZombies(myZombieList);
+
+            board.setGridPositionOpen(cannibalZombie.X, cannibalZombie.Y);
+            cannibalZombie.setGridPosition(21, 3);
+            board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
+            cannibalZombie.setZombieAlive(true);
         }
 
         private void checkForExitGame(KeyboardState ks)
@@ -440,7 +495,8 @@ namespace LegendOfDarwin
                 darwin.setGridPosition(2, 2);
                 mainGame.setCurLevel(Game1.LevelState.Level3);
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
-                //firstZombie.setGridPosition(10, 10);
+
+                resetZombies();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;

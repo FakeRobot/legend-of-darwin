@@ -57,7 +57,10 @@ namespace LegendOfDarwin
         private ZombieTime zTimeReset; //what zTime should reset to
 
         private BasicObject[] walls;
+        Texture2D removableWallTex;
+        private BasicObject[] squares;
         private Texture2D wallTex;
+        List<Zombie> myZombieList;
 
         public Song song;
         public Game1 mainGame;
@@ -85,7 +88,7 @@ namespace LegendOfDarwin
             secondZombie = new Zombie(12, 9, 15, 5, 15, 5, board);
             thirdZombie = new Zombie(8, 8, 15, 5, 15, 5, board);
 
-            List<Zombie> myZombieList= new List<Zombie>();
+            myZombieList= new List<Zombie>();
             myZombieList.Add(firstZombie);
             myZombieList.Add(secondZombie);
             myZombieList.Add(thirdZombie);
@@ -102,7 +105,7 @@ namespace LegendOfDarwin
 
             stairs = new Stairs(board);
 
-            BasicObject[] squares = setRemovableWallsInLevelTwo();
+            squares = setRemovableWallsInLevelTwo();
 
             BasicObject switchSquare = new BasicObject(board);
             switchSquare.X = 16;
@@ -159,7 +162,7 @@ namespace LegendOfDarwin
             s5.Y = 18;
 
 
-            BasicObject[] squares = new BasicObject[5] { s1, s2, s3, s4, s5};
+            squares = new BasicObject[5] { s1, s2, s3, s4, s5};
             return squares;
         }
 
@@ -185,7 +188,7 @@ namespace LegendOfDarwin
             Texture2D basicStairUpTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsUp");
             Texture2D basicStairDownTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsDown");
 
-            Texture2D removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
+            removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
             Texture2D switchTex = mainGame.Content.Load<Texture2D>("StaticPic/Switch");
 
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level2/side_wall_green");
@@ -334,6 +337,17 @@ namespace LegendOfDarwin
             }
 
             //checkForGameWin();
+            if (isAllZombiesDead())
+            {
+                foreach (BasicObject bo in squares)
+                {
+                    if (!board.isGridPositionOpen(bo))
+                    {
+                        board.setGridPositionOpen(bo);
+                    }
+                }
+            }
+
             checkForSwitchToLevelThree();
 
             if (gameOver || gameWin)
@@ -348,6 +362,15 @@ namespace LegendOfDarwin
             }
             messageModeCounter++;
 
+        }
+
+        private bool isAllZombiesDead()
+        {
+            if (!firstZombie.isZombieAlive() && !secondZombie.isZombieAlive() && !thirdZombie.isZombieAlive())
+            {
+                return true;
+            }
+            return false;
         }
 
         private void UpdateEndState()
@@ -575,8 +598,19 @@ namespace LegendOfDarwin
             cannibalZombie.Draw(spriteBatch);
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
-            firstSwitch.Draw(spriteBatch);
+            //firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
+
+            if(!isAllZombiesDead())
+            {
+                foreach (BasicObject bo in squares)
+                {
+                    // Draw the walls visible
+                    Rectangle source = new Rectangle(0, 0, board.getSquareLength(), board.getSquareLength());
+                    spriteBatch.Draw(removableWallTex, board.getPosition(bo), source, Color.White);
+                }
+            }
+
 
             foreach (BasicObject a in walls)
             {

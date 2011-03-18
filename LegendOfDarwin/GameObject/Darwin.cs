@@ -123,6 +123,11 @@ namespace LegendOfDarwin
             base.Update(gameTime);
             if (this.canEventHappen())
             {
+                if (downCount > 2)
+                {
+                    downCount = 0;
+                }
+
                 updateDarwinTransformState(ks);
                 moveDarwin(ks, board, currentDarwinX, currentDarwinY);
                 this.setEventFalse();
@@ -183,14 +188,7 @@ namespace LegendOfDarwin
                 {
                     facing = Dir.Down;
                 }
-                if (downCount > 2)
-                {
-                    downCount = 0;
-                }
-                else
-                {
-                    downCount++;
-                }
+                downCount++;
 
             }
         }
@@ -269,7 +267,7 @@ namespace LegendOfDarwin
                 }
                 else if (facing == Dir.Down)
                 {
-                    spriteBatch.Draw(darwinDownTex, destination, downSource[downCount], Color.White);
+                    spriteBatch.Draw(darwinDownTex, destination, source, Color.White);
                 }
                 else if (facing == Dir.Left)
                 {

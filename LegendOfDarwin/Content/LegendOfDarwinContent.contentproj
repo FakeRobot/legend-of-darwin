@@ -110,13 +110,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StaticPic\Wall.png">
-      <Name>Wall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="StaticPic\stairsUp.png">
       <Name>stairsUp</Name>
       <Importer>TextureImporter</Importer>
@@ -299,6 +292,13 @@
   <ItemGroup>
     <Compile Include="ZombiePic\FastZombieSleeping.png">
       <Name>FastZombieSleeping</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StaticPic\Wall.png">
+      <Name>Wall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

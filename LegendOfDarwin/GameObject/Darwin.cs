@@ -116,12 +116,9 @@ namespace LegendOfDarwin
             if (this.canEventHappen())
             {
                 updateDarwinTransformState(ks);
+                moveDarwin(ks, board, currentDarwinX, currentDarwinY);
                 this.setEventFalse();
             }
-
-            moveDarwin(ks, board, currentDarwinX, currentDarwinY);
-            setPictureSize(board.getSquareWidth(), board.getSquareLength());
-
         }
 
         private void moveDarwin(KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
@@ -131,56 +128,53 @@ namespace LegendOfDarwin
 
             if (ks.IsKeyDown(Keys.Right))
             {
-                facing = Dir.Right;
-                if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY) && !hasPicked)
+                if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY) && !hasPicked && facing == Dir.Right)
                 {
                     hasPicked = true;
                     this.MoveRight();
                 }
                 else
                 {
-                    collision = true;
+                    facing = Dir.Right;
                 }
             }
             if (ks.IsKeyDown(Keys.Left))
             {
-                facing = Dir.Left;
-                if (board.isGridPositionOpen(currentDarwinX - 1, currentDarwinY) && !hasPicked)
+                if (board.isGridPositionOpen(currentDarwinX - 1, currentDarwinY) && !hasPicked && facing == Dir.Left)
                 {
                     hasPicked = true;
                     this.MoveLeft();
                 }
-                /*else
+                else
                 {
-                    collision = true;
-                }*/
+                    facing = Dir.Left;
+                }
                 
             }
             if (ks.IsKeyDown(Keys.Up))
             {
-                facing = Dir.Up;
-                if (board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1) && !hasPicked)
+
+                if (board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1) && !hasPicked && facing == Dir.Up)
                 {
                     hasPicked = true;
                     this.MoveUp();
                 }
-                /*else
+                else
                 {
-                    collision = true;
-                }*/
+                    facing = Dir.Up;
+                }
             }
             if (ks.IsKeyDown(Keys.Down))
             {
-                facing = Dir.Down;
-                if(board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1) && !hasPicked)
+                if (board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1) && !hasPicked && facing == Dir.Down)
                 {
                     hasPicked = true;
                     this.MoveDown();
                 }
-                /*else
+                else
                 {
-                    collision = true;
-                }*/
+                    facing = Dir.Down;
+                }
             }
         }
 

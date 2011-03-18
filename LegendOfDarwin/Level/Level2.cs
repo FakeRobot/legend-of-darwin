@@ -50,6 +50,7 @@ namespace LegendOfDarwin
         int messageModeCounter = 0;
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
+        private MessageBox cannibalMessage;
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
@@ -97,6 +98,9 @@ namespace LegendOfDarwin
 
             String darwinString = "This is darwin,\n move with arrows, \n z to transform, \n a for actions";
             darwinMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, darwinString);
+
+            String cannibalString = "Cannibal Zombies eat\n other zombies!!\n  Use this to\n your advantage!!";
+            cannibalMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, cannibalString);
 
             stairs = new Stairs(board);
 
@@ -200,6 +204,7 @@ namespace LegendOfDarwin
             //thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
+            cannibalMessage.LoadContent(messagePic);
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             
@@ -236,6 +241,7 @@ namespace LegendOfDarwin
 
             zombieMessage.pointToSquare(firstZombie.X, firstZombie.Y, board);
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
+            cannibalMessage.pointToSquare(cannibalZombie.X,cannibalZombie.Y,board);
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -601,6 +607,7 @@ namespace LegendOfDarwin
             {
                 zombieMessage.Draw(spriteBatch, messageFont);
                 darwinMessage.Draw(spriteBatch, messageFont);
+                cannibalMessage.Draw(spriteBatch, messageFont);
             }
 
             spriteBatch.End();

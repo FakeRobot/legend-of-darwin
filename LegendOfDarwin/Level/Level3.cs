@@ -88,6 +88,7 @@ namespace LegendOfDarwin
             fastZombie1 = new FastZombie(15, 15, 15, 0, 15, 0, board);
             leaf = new Leaf(7, 7, board, fastZombie1);
             leaf2 = new Leaf(5, 15, board, fastZombie1);
+            
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -175,6 +176,8 @@ namespace LegendOfDarwin
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
 
+            leaf.resetLeaf();
+            leaf2.resetLeaf();
         }
 
         public void LoadContent()
@@ -389,8 +392,6 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
-
-
                 board.setGridPositionOpen(darwin);
                 darwin.setGridPosition(2, 2);
 

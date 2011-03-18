@@ -37,6 +37,11 @@ namespace LegendOfDarwin
             destination.X = newX + 40;
             destination.Y = newY - 94;
 
+            while ((destination.X + destination.Width) > 1080)
+                destination.X -= 5;
+            while ((destination.Y) < 0)
+                destination.Y += 5;
+
             position.X = destination.X+20;
             position.Y = destination.Y+7;
         }

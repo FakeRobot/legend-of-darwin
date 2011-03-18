@@ -89,7 +89,7 @@ namespace LegendOfDarwin
             myZombieList.Add(firstZombie);
             myZombieList.Add(secondZombie);
             myZombieList.Add(thirdZombie);
-            cannibalZombie = new CannibalZombie(20,5,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
+            cannibalZombie = new CannibalZombie(21,3,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);

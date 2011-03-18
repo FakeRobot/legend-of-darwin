@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    /**
+     * Cannibal's eat other zombies
+     * attack/seek out zombie Darwin or other zombies when they get in a certain range, other wise just shift around
+     */
     public class CannibalZombie : Zombie
     {
 
@@ -20,14 +24,24 @@ namespace LegendOfDarwin.GameObject
         protected Darwin darwin;
         protected List<Zombie> zombies;
 
+        /**
+         * Initalizes a cannibal on the game board
+         * 
+         * Arguments
+         * int startX, startY -- start position of cannibal
+         * int mymaxX, mymaxY, myminX, myminY -- range that cannibal can walk around in
+         * List myListZombies -- list of the other non-cannibal zombies on the board
+         * Darwin mydarwin -- reference to Darwin
+         * Gameboard myboard -- board that cannibal is to be played on
+         */
         public CannibalZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY,List<Zombie> myListZombies,Darwin mydarwin,GameBoard myboard):
             base(startX,startY,mymaxX,myminX, mymaxY, myminY, myboard)
             {
                 allowRangeDetection = false;
                 allowVision = true;
                 goAroundMode = false;
-                visionMaxX = 8;
-                visionMaxY = 8;
+                visionMaxX = 6;
+                visionMaxY = 6;
                 pathCount = 0;
                 pathLimit = 0;
                 darwin = mydarwin;
@@ -123,38 +137,130 @@ namespace LegendOfDarwin.GameObject
                 }
                 else
                 {
-                    //implement some sort of bug2 here
-                    goAroundMode = true;
-                    pathCount = 0;
-                    Search mysearch = new Search(board);
-                    path = mysearch.aStar(this.X,this.Y,ptX,ptY);
-                    pathLimit = mysearch.getLength();
-                    
-                    if (!mysearch.isSolution()) 
+                    //attempt to find way around obstacle
+                    FindWhichWay(intendedPathX, intendedPathY);
+
+                    if (!goAroundMode)
                     {
-                        //if there is no path, just randomwalk to change things up
-                        goAroundMode = false;
                         RandomWalk();
                     }
+                    else
+                        goAroundObstacle();
+                    
                 
                 }
             }
         }
 
+        // Used to help cannibal shift around small obstalces
+        public void FindWhichWay(int intendedptX, int intendedptY) 
+        { 
+            Vector2 firstMove = new Vector2();
+            Vector2 secondMove = new Vector2();
+
+            Console.Out.WriteLine("trying to find way around");
+
+            // there is an obstacle either up or down so we should check left or right, check left first by default
+            if (intendedptX==this.X && (intendedptY==this.Y-1 || intendedptY==this.Y+1))
+            {
+                firstMove.X = this.X-1;
+                firstMove.Y = this.Y;
+
+                secondMove.X = this.X-1;
+                secondMove.Y = intendedptY;
+                
+            }
+            else 
+            {
+                //assume obstacle is to left or right, so check up or down, down first by default
+                firstMove.X = this.X;
+                firstMove.Y = this.Y+1;
+
+                secondMove.X = intendedptX;
+                secondMove.Y = this.Y+1;
+            }
+
+
+            if (!(canMoveToPoint(firstMove) && canMoveToPoint(secondMove))) 
+            {
+                // there is an obstacle either up or down so we should check left or right, check right second by default
+                if (intendedptX == this.X && (intendedptY == this.Y - 1 || intendedptY == this.Y + 1))
+                {
+                    firstMove.X = this.X + 1;
+                    firstMove.Y = this.Y;
+
+                    secondMove.X = this.X + 1;
+                    secondMove.Y = intendedptY;
+
+                }
+                else
+                {
+                    //assume obstacle is to left or right, so check up or down, up second by default
+                    firstMove.X = this.X;
+                    firstMove.Y = this.Y - 1;
+
+                    secondMove.X = intendedptX;
+                    secondMove.Y = this.Y - 1;
+                }
+
+            }
+
+            if (canMoveToPoint(firstMove) && canMoveToPoint(secondMove)) 
+            {
+                //implement some sort of bug2 here
+                goAroundMode = true;
+                pathCount = 0;
+                
+                Vector2[] newPath = new Vector2[2];
+                newPath[0] = firstMove;
+                newPath[1] = secondMove;
+                path = newPath;
+                pathLimit = 2; 
+ 
+            }
+            else
+                    goAroundMode = false;
+            Console.Out.WriteLine("found a way: {0}",goAroundMode);
+               
+        }
+
+        /*
+         * checks if given point is either free, has a zombie, or has zombie darwin
+         * */
+        public bool canMoveToPoint(Vector2 movePt) 
+        {
+            bool canMove = false;
+
+            foreach (Zombie zombieToEat in zombies)
+            {
+                if (zombieToEat.X == movePt.X && zombieToEat.Y == movePt.Y)
+                {
+                    canMove = true;
+                }
+
+            }
+
+            if ((darwin.X == movePt.X && darwin.Y == movePt.Y && darwin.isZombie())
+                || board.isGridPositionOpen((int)movePt.X, (int)movePt.Y))
+                canMove = true;
+
+            return canMove;
+        }
+
         // like normal zombie's random walk but happens less frequently
-        public void RandomWalk()
+        new public void RandomWalk()
         {
             Random rand1 = new Random();
 
-            bool rightNext = false;
+            //bool rightNext = false;
 
-            foreach (Zombie someZombie in zombies)
-            {
-                if (isZombieOneSquareAway(someZombie))
-                    rightNext = true;
-            }
+            //foreach (Zombie someZombie in zombies)
+            //{
+            //    if (isZombieOneSquareAway(someZombie))
+            //        rightNext = true;
+            //}
 
-            if (rand1.Next(4) == 2 || rightNext)
+            if (rand1.Next(7) == 2)
                 base.RandomWalk();
 
         }
@@ -181,6 +287,8 @@ namespace LegendOfDarwin.GameObject
                     this.setGridPosition((int)nextPoint.X, (int)nextPoint.Y);
 
                     pathCount++;
+                    if (pathCount >= pathLimit)
+                        goAroundMode = false;
                 }
                 else 
                 {
@@ -202,7 +310,7 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.isOnTop(zombie))
             {
-                Console.Out.WriteLine("got here");
+                
                 zombie.setZombieAlive(false);
             }
         }
@@ -221,7 +329,7 @@ namespace LegendOfDarwin.GameObject
             return newList;
         }
 
-        public void Update(GameTime gameTime, Darwin darwin) 
+        public new void Update(GameTime gameTime, Darwin darwin) 
         {
             eventLagMin++;
             if (eventLagMin > eventLagMax)

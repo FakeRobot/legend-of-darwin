@@ -17,11 +17,13 @@ namespace LegendOfDarwin
         private int curSpot;
         private bool[,] hasBeenChecked;
         private bool foundSolution;
+        private int foundLength;
 
         public Search(GameBoard myboard) 
         {
             board = myboard;
             foundSolution = true;
+            foundLength = 0;
         }
 
 
@@ -32,6 +34,7 @@ namespace LegendOfDarwin
          * Make sure both points are within board bounds
          * returns array of points which represents path
          * This is not a true a-star, really more of a pseudo-astar
+         * DO NOT USE, IT IS VERY BAD ATM
          * */
         public Vector2[] aStar(int startX, int startY, int goalX, int goalY)
         {
@@ -50,8 +53,6 @@ namespace LegendOfDarwin
                 }
             }
 
-            hasBeenChecked[curSpotX, curSpotY] = true;
-
             double costSoFar = 0;
             //double costToPoint = Math.Sqrt(Math.Pow((double)(goalX-curSpotX),2.0) + Math.Pow((double)(goalY-curSpotY),2.0));
             double costToPoint = Math.Abs(goalX - curSpotX) + Math.Abs(goalY - curSpotY);
@@ -61,13 +62,24 @@ namespace LegendOfDarwin
         }
 
         // used for recursion
+        // This is currently a huge mess, do not use this
         private void aStarHelper(Vector2 curPt, Vector2 goalPt, double costSoFar)
         {
             Vector2 minCostPt = new Vector2(100000, 100000);
+            Vector2 secCostPt = new Vector2(100000, 100000);
             double minCost = 7000000000;
             double curCostEst = 70000000;
+            double secMinCost = 70000000;
             bool foundGoal = false;
+            List<Vector2> ptsToCheck = new List<Vector2>();
 
+            //set cur node to checked
+            hasBeenChecked[(int)curPt.X, (int)curPt.Y] = true;
+
+            aStarSolution[curSpot] = curPt;
+            curSpot++;
+
+            Console.Out.WriteLine("x:{0},y:{1},num:{2}",curPt.X,curPt.Y,curSpot);
             //check all neighbours to curPt
             if (board.isGridPositionOpen((int)curPt.X + 1, (int)curPt.Y) && !hasBeenChecked[(int)curPt.X + 1, (int)curPt.Y])
             {
@@ -77,10 +89,15 @@ namespace LegendOfDarwin
                     minCost = curCostEst;
                     minCostPt = new Vector2(curPt.X + 1, curPt.Y);
                 }
+                else if (secMinCost >= curCostEst)
+                {
+                    secMinCost = curCostEst;
+                    secCostPt = new Vector2(curPt.X+1, curPt.Y);
+                }
 
                 if (goalPt.X == curPt.X + 1 && goalPt.Y == curPt.Y)
                     foundGoal = true;
-                hasBeenChecked[(int)curPt.X + 1, (int)curPt.Y] = true;
+                
             }
             if (board.isGridPositionOpen((int)curPt.X - 1, (int)curPt.Y) && !hasBeenChecked[(int)curPt.X - 1, (int)curPt.Y])
             {
@@ -90,10 +107,15 @@ namespace LegendOfDarwin
                     minCost = curCostEst;
                     minCostPt = new Vector2(curPt.X - 1, curPt.Y);
                 }
+                else if (secMinCost >= curCostEst)
+                {
+                    secMinCost = curCostEst;
+                    secCostPt = new Vector2(curPt.X - 1, curPt.Y);
+                }
 
                 if (goalPt.X == curPt.X - 1 && goalPt.Y == curPt.Y)
                     foundGoal = true;
-                hasBeenChecked[(int)curPt.X + 1, (int)curPt.Y] = true;
+                
             }
             if (board.isGridPositionOpen((int)curPt.X, (int)curPt.Y + 1) && !hasBeenChecked[(int)curPt.X, (int)curPt.Y + 1])
             {
@@ -103,11 +125,16 @@ namespace LegendOfDarwin
                     minCost = curCostEst;
                     minCostPt = new Vector2(curPt.X, curPt.Y + 1);
                 }
+                else if (secMinCost >= curCostEst)
+                {
+                    secMinCost = curCostEst;
+                    secCostPt = new Vector2(curPt.X, curPt.Y+1);
+                }
 
                 if (goalPt.X == curPt.X && goalPt.Y == curPt.Y + 1)
                     foundGoal = true;
 
-                hasBeenChecked[(int)curPt.X, (int)curPt.Y + 1] = true;
+                
             }
             if (board.isGridPositionOpen((int)curPt.X, (int)curPt.Y - 1) && !hasBeenChecked[(int)curPt.X, (int)curPt.Y - 1])
             {
@@ -117,16 +144,24 @@ namespace LegendOfDarwin
                     minCost = curCostEst;
                     minCostPt = new Vector2(curPt.X, curPt.Y - 1);
                 }
+                else if (secMinCost >= curCostEst)
+                {
+                    secMinCost = curCostEst;
+                    secCostPt = new Vector2(curPt.X, curPt.Y-1);
+                }
 
                 if (goalPt.X == curPt.X && goalPt.Y == curPt.Y - 1)
                     foundGoal = true;
 
-                hasBeenChecked[(int)curPt.X + 1, (int)curPt.Y] = true;
+                
             }
 
             if (foundGoal)
             {
+                curSpot++;
                 aStarSolution[curSpot] = goalPt;
+                foundLength = curSpot+1;
+                foundSolution = true;
             }
             else if (minCostPt.X == 100000 || curSpot > 90)
             {
@@ -134,13 +169,21 @@ namespace LegendOfDarwin
                 foundSolution = false;
 
             }
-            else
+            else if (foundGoal==false)
             {
                 //Console.Out.WriteLine("{0},{1},{2},{3}",curSpot,minCostPt.X,minCostPt.Y,costSoFar);
-                aStarSolution[curSpot] = minCostPt;
-                curSpot++;
                 aStarHelper(minCostPt, goalPt, costSoFar + 1);
+                
+                if (secMinCost < 70000000)
+                {
+                    curSpot--;
+                    aStarHelper(secCostPt, goalPt, costSoFar + 1);
+                    
+                }
             }
+
+            hasBeenChecked[(int)curPt.X, (int)curPt.Y] = false;
+            curSpot--;
         }
 
         public bool isSolution() 
@@ -150,7 +193,7 @@ namespace LegendOfDarwin
 
         public int getLength() 
         {
-            return curSpot+1;
+            return foundLength;
         }
 
     }

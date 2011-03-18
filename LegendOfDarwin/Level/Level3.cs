@@ -32,7 +32,7 @@ namespace LegendOfDarwin
 
         private Darwin darwin;
         private Zombie firstZombie;
-        private Switch firstSwitch;
+        private Switch firstSwitch, secondSwitch;
         private Brain brain;
         private GameBoard board;
         public GraphicsDevice device;
@@ -145,11 +145,15 @@ namespace LegendOfDarwin
 
             BasicObject[] squares = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
 
-            BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 10;
-            switchSquare.Y = 3;
+            BasicObject switchSquareOne = new BasicObject(board);
+            switchSquareOne.X = 22;
+            switchSquareOne.Y = 2;
+            firstSwitch = new Switch(switchSquareOne, board, squares);
 
-            firstSwitch = new Switch(switchSquare, board, squares);
+            BasicObject switchSquareTwo = new BasicObject(board);
+            switchSquareTwo.X = 2;
+            switchSquareTwo.Y = 20;
+            secondSwitch = new Switch(switchSquareTwo, board, squares);
 
             // Initial starting position
             darwin.setGridPosition(5, 5);
@@ -219,6 +223,7 @@ namespace LegendOfDarwin
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
             firstSwitch.LoadContent(wallTex, switchTex);
+            secondSwitch.LoadContent(wallTex, switchTex);
 
             brain.LoadContent(brainTex);
 
@@ -356,6 +361,7 @@ namespace LegendOfDarwin
 
 
             firstSwitch.Update(gameTime, ks, darwin);
+            secondSwitch.Update(gameTime, ks, darwin);
 
             brain.Update(gameTime, ks, darwin);
 
@@ -553,6 +559,7 @@ namespace LegendOfDarwin
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
+            secondSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 

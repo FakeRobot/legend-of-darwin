@@ -56,6 +56,7 @@ namespace LegendOfDarwin
         private MessageBox darwinMessage;
         private MessageBox switchMessage;
         private MessageBox brainMessage;
+        private MessageBox fastMessage;
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
@@ -102,6 +103,8 @@ namespace LegendOfDarwin
             String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
             brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
 
+            String fastString = "This one likes\n to sleep.\n Be careful\n not to wake him!!";
+            fastMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, fastString);
 
             firstStair = new Stairs(board);
             secondStair = new Stairs(board);
@@ -245,6 +248,7 @@ namespace LegendOfDarwin
             darwinMessage.LoadContent(messagePic);
             switchMessage.LoadContent(messagePic);
             brainMessage.LoadContent(messagePic);
+            fastMessage.LoadContent(messagePic);
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
 
@@ -284,6 +288,7 @@ namespace LegendOfDarwin
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
             switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
             brainMessage.pointToSquare(brain.X, brain.Y, board);
+            fastMessage.pointToSquare(fastZombie1.X, fastZombie1.Y, board);
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
                 messageMode = false;
@@ -546,11 +551,11 @@ namespace LegendOfDarwin
             firstStair.Draw(spriteBatch);
             secondStair.Draw(spriteBatch);
 
-            darwin.Draw(spriteBatch);
-            firstZombie.Draw(spriteBatch);
-
             leaf.Draw(spriteBatch);
             leaf2.Draw(spriteBatch);
+
+            darwin.Draw(spriteBatch);
+            firstZombie.Draw(spriteBatch);
 
             fastZombie1.Draw(spriteBatch);
             
@@ -563,9 +568,10 @@ namespace LegendOfDarwin
 
             if (messageMode)
             {
-                zombieMessage.Draw(spriteBatch, messageFont);
+                //zombieMessage.Draw(spriteBatch, messageFont);
                 darwinMessage.Draw(spriteBatch, messageFont);
-                brainMessage.Draw(spriteBatch, messageFont);
+                //brainMessage.Draw(spriteBatch, messageFont);
+                fastMessage.Draw(spriteBatch, messageFont);
                 //switchMessage.Draw(spriteBatch, messageFont);
             }
 

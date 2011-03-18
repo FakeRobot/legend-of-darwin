@@ -103,7 +103,7 @@ namespace LegendOfDarwin
             removableWalls = setRemovableWallsInLevelTwo();
 
             // Initial starting position
-            darwin.setGridPosition(5, 5);
+            darwin.setGridPosition(18, 19);
 
             if (board.isGridPositionOpen(darwin))
             {
@@ -115,10 +115,10 @@ namespace LegendOfDarwin
             counterReady = counter = 5;
 
 
-            if (board.isGridPositionOpen(21, 20))
+            if (board.isGridPositionOpen(22, 20))
             {
-                stairs.setGridPosition(21, 20);
-                stairs.setDestination(board.getPosition(21, 20));
+                stairs.setGridPosition(22, 20);
+                stairs.setDestination(board.getPosition(22, 20));
             }
 
             zTime = new ZombieTime(board);

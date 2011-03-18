@@ -96,7 +96,7 @@ namespace LegendOfDarwin
 
             stairs = new Stairs(board);
 
-            brain = new Brain(board, 2, 18);
+            brain = new Brain(board, 3, 3);
 
             BasicObject[] removableWalls = setRemovableWallsInLevelOne();
 
@@ -107,7 +107,7 @@ namespace LegendOfDarwin
             firstSwitch = new Switch(switchSquare, board, removableWalls);
 
             // Initial starting position
-            darwin.setGridPosition(5, 5);
+            darwin.setGridPosition(2, 20);
 
             if (board.isGridPositionOpen(darwin))
             {
@@ -441,7 +441,7 @@ namespace LegendOfDarwin
                 gameWin = false;
 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
+                darwin.setGridPosition(2, 20);
 
                 zTime.reset();
 
@@ -466,7 +466,7 @@ namespace LegendOfDarwin
                 potion.setGridPosition(20, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
-                brain.setGridPosition(2, 18);
+                brain.setGridPosition(3, 3);
                 board.setGridPositionOccupied(brain.X, brain.Y);
 
                 potion.reset();

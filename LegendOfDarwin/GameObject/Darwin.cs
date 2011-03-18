@@ -32,6 +32,8 @@ namespace LegendOfDarwin
 
         // The frame or cell of the sprite to show
         private Rectangle source;
+        private Rectangle[] downSource;
+        private int downCount;
 
         // The location to draw the sprite on the screen.
         //public Rectangle destination;
@@ -62,6 +64,12 @@ namespace LegendOfDarwin
             source.Height = DARWIN_WIDTH;
             source.X = 0;
             source.Y = 0;
+
+            downSource = new Rectangle[3];
+            downSource[0] = new Rectangle(0, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
+            downSource[1] = new Rectangle(DARWIN_WIDTH, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
+            downSource[2] = new Rectangle(DARWIN_WIDTH * 2, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
+            downCount = 0;
 
             //potentialGridPosition.setGridPosition(5, 5);
 
@@ -175,6 +183,15 @@ namespace LegendOfDarwin
                 {
                     facing = Dir.Down;
                 }
+                if (downCount > 2)
+                {
+                    downCount = 0;
+                }
+                else
+                {
+                    downCount++;
+                }
+
             }
         }
 
@@ -252,7 +269,7 @@ namespace LegendOfDarwin
                 }
                 else if (facing == Dir.Down)
                 {
-                    spriteBatch.Draw(darwinDownTex, destination, source, Color.White);
+                    spriteBatch.Draw(darwinDownTex, destination, downSource[downCount], Color.White);
                 }
                 else if (facing == Dir.Left)
                 {

@@ -400,7 +400,7 @@ namespace LegendOfDarwin
             checkForExitGame(ks);
 
             updateKeyHeldDown(ks);
-
+            /*
             if (keyIsHeldDown)
             {
                 if (counter > counterReady)
@@ -416,8 +416,9 @@ namespace LegendOfDarwin
             else
             {
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-            }
+            }*/
 
+            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());

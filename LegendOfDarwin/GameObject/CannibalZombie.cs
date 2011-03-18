@@ -158,8 +158,6 @@ namespace LegendOfDarwin.GameObject
             Vector2 firstMove = new Vector2();
             Vector2 secondMove = new Vector2();
 
-            Console.Out.WriteLine("trying to find way around");
-
             // there is an obstacle either up or down so we should check left or right, check left first by default
             if (intendedptX==this.X && (intendedptY==this.Y-1 || intendedptY==this.Y+1))
             {
@@ -220,7 +218,6 @@ namespace LegendOfDarwin.GameObject
             }
             else
                     goAroundMode = false;
-            Console.Out.WriteLine("found a way: {0}",goAroundMode);
                
         }
 

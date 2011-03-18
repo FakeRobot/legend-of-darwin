@@ -86,13 +86,13 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 9, 15, 5, 15, 5, board);
             secondZombie = new Zombie(12, 9, 15, 5, 15, 5, board);
             thirdZombie = new Zombie(8, 8, 15, 5, 15, 5, board);
-            //fourthZombie = new Zombie(8, 5, 15, 5, 15, 5, board);
+            fourthZombie = new Zombie(8, 5, 15, 5, 15, 5, board);
 
             myZombieList= new List<Zombie>();
             myZombieList.Add(firstZombie);
             myZombieList.Add(secondZombie);
             myZombieList.Add(thirdZombie);
-            //myZombieList.Add(fourthZombie);
+            myZombieList.Add(fourthZombie);
             cannibalZombie = new CannibalZombie(21,3,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
@@ -209,7 +209,7 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(zombieTex);
             secondZombie.LoadContent(zombieTex);
             thirdZombie.LoadContent(zombieTex);
-            //fourthZombie.LoadContent(zombieTex);
+            fourthZombie.LoadContent(zombieTex);
             cannibalZombie.LoadContent(cannibalTex);
 
             zombieMessage.LoadContent(messagePic);
@@ -319,8 +319,8 @@ namespace LegendOfDarwin
             thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin);
 
-            //fourthZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            //fourthZombie.Update(gameTime, darwin);
+            fourthZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
+            fourthZombie.Update(gameTime, darwin);
 
             cannibalZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             cannibalZombie.Update(gameTime, darwin);
@@ -333,8 +333,8 @@ namespace LegendOfDarwin
                     checkForGameOver(secondZombie);
                 if (thirdZombie.isZombieAlive())
                     checkForGameOver(thirdZombie);
-                //if (fourthZombie.isZombieAlive())
-                 //   checkForGameOver(fourthZombie);
+                if (fourthZombie.isZombieAlive())
+                    checkForGameOver(fourthZombie);
             }
             if (darwin.isZombie())
             {
@@ -371,7 +371,7 @@ namespace LegendOfDarwin
 
         private bool isAllZombiesDead()
         {
-            if (!firstZombie.isZombieAlive() && !secondZombie.isZombieAlive() && !thirdZombie.isZombieAlive() )
+            if (!firstZombie.isZombieAlive() && !secondZombie.isZombieAlive() && !thirdZombie.isZombieAlive() && !fourthZombie.isZombieAlive())
             {
                 return true;
             }
@@ -421,16 +421,16 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 thirdZombie.setZombieAlive(true);
 
-                //board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
-                //fourthZombie.setGridPosition(8, 8);
-                //board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
-                //fourthZombie.setZombieAlive(true);
+                board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
+                fourthZombie.setGridPosition(8, 8);
+                board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+                fourthZombie.setZombieAlive(true);
 
                 List<Zombie> myZombieList = new List<Zombie>();
                 myZombieList.Add(firstZombie);
                 myZombieList.Add(secondZombie);
                 myZombieList.Add(thirdZombie);
-                //myZombieList.Add(fourthZombie);
+                myZombieList.Add(fourthZombie);
                 cannibalZombie.updateListOfZombies(myZombieList);
 
                 board.setGridPositionOpen(cannibalZombie.X,cannibalZombie.Y);
@@ -466,16 +466,16 @@ namespace LegendOfDarwin
             board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
             thirdZombie.setZombieAlive(true);
 
-            //board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
-            //fourthZombie.setGridPosition(8, 8);
-            //board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
-            //fourthZombie.setZombieAlive(true);
+            board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
+            fourthZombie.setGridPosition(8, 8);
+            board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+            fourthZombie.setZombieAlive(true);
 
             List<Zombie> myZombieList = new List<Zombie>();
             myZombieList.Add(firstZombie);
             myZombieList.Add(secondZombie);
             myZombieList.Add(thirdZombie);
-            //myZombieList.Add(fourthZombie);
+            myZombieList.Add(fourthZombie);
             cannibalZombie.updateListOfZombies(myZombieList);
 
             board.setGridPositionOpen(cannibalZombie.X, cannibalZombie.Y);
@@ -611,7 +611,7 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             secondZombie.Draw(spriteBatch);
             thirdZombie.Draw(spriteBatch);
-            //fourthZombie.Draw(spriteBatch);
+            fourthZombie.Draw(spriteBatch);
             cannibalZombie.Draw(spriteBatch);
 
             zTime.Draw(spriteBatch);

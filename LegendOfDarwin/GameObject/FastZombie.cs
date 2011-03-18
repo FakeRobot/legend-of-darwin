@@ -24,7 +24,7 @@ namespace LegendOfDarwin.GameObject
         public Dir chaseDir;
 
         private Boolean sleeping = true;
-        private Boolean chasingDarwin = false;
+        public Boolean chasingDarwin = false;
 
         private Texture2D fastZombieSleepTex;
 
@@ -32,8 +32,10 @@ namespace LegendOfDarwin.GameObject
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {
             // fast zombies should move faster, obviously
-            ZOMBIE_MOVE_RATE = 5;
+            ZOMBIE_MOVE_RATE = 4;
             this.watchedLeaves = new LinkedList<Leaf>();
+            visionMaxX = 2;
+            visionMaxY = 2;
         }
 
         public void LoadContent(Texture2D fastZombieTexture, Texture2D fastZombieSleepTexture)
@@ -114,8 +116,12 @@ namespace LegendOfDarwin.GameObject
         /// <summary>
         /// At this point on the grid, look around for Darwin.
         /// </summary>
-        public void lookForDarwin()
+        public void lookForDarwin(Darwin darwin)
         {
+            if (isDarwinInRange(darwin))
+                chaseDarwin(darwin);
+            else
+                this.goBackToSleep();
             // if see darwin
                 // chaseDarwin()
             // else
@@ -141,23 +147,24 @@ namespace LegendOfDarwin.GameObject
         public void Update(GameTime gametime, Darwin darwin, Brain brain)
         {
             //base.Update(gametime, darwin, brain);
-            
-            if (!isSleeping())
+            if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                if (isOnTop(brokenLeaf))
-                    lookForDarwin();
-
-                if (movecounter > this.ZOMBIE_MOVE_RATE)
+                // if the zombie is not sleeping
+                if (!this.isSleeping())
                 {
                     if (!chasingDarwin)
                         this.goToLeaf(brokenLeaf);
-                    else
-                        chaseDarwin(darwin);
 
-                    movecounter = 0;
+                    if (this.isOnTop(brokenLeaf))
+                        lookForDarwin(darwin);
+                    
+                 //   if (
                 }
-                movecounter++;
-            }         
+
+                movecounter = 0;
+            }
+
+            movecounter++;
         }
 
         public void Draw(SpriteBatch spriteBatch)

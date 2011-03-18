@@ -56,6 +56,11 @@ namespace LegendOfDarwin.GameObject
             leafBroken = true;
         }
 
+        public void resetLeaf()
+        {
+            leafBroken = false;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             switch (leafBroken)

@@ -28,6 +28,7 @@ namespace LegendOfDarwin
 
         private FastZombie fastZombie1;
         private Leaf leaf;
+        private Leaf leaf2;
 
         private Darwin darwin;
         private Zombie firstZombie;
@@ -86,6 +87,7 @@ namespace LegendOfDarwin
 
             fastZombie1 = new FastZombie(15, 15, 15, 0, 15, 0, board);
             leaf = new Leaf(7, 7, board, fastZombie1);
+            leaf2 = new Leaf(5, 15, board, fastZombie1);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -228,6 +230,7 @@ namespace LegendOfDarwin
 
             fastZombie1.LoadContent(zombieFastTex, zombieFastSleepTex);
             leaf.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf2.LoadContent(brokeLeafTex, wholeLeafTex);
 
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
@@ -334,10 +337,14 @@ namespace LegendOfDarwin
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
 
+            leaf.Update(darwin);
+            leaf2.Update(darwin);
+
             fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             fastZombie1.Update(gameTime, darwin, brain);
 
             leaf.Update(darwin);
+            leaf2.Update(darwin);
             
             //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             //secondZombie.Update(gameTime, darwin, brain);
@@ -405,6 +412,13 @@ namespace LegendOfDarwin
                 //thirdZombie.setAbsoluteDestination(16, 10);
 
                 leaf.setGridPosition(7, 7);
+                leaf.resetLeaf();
+
+                leaf2.setGridPosition(5, 15);
+                leaf2.resetLeaf();
+
+                fastZombie1.chasingDarwin = false;
+                fastZombie1.goBackToSleep();
                 fastZombie1.setGridPosition(15, 15);
 
                 darwin.setHuman();
@@ -526,9 +540,12 @@ namespace LegendOfDarwin
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
-            
-            fastZombie1.Draw(spriteBatch);
+
             leaf.Draw(spriteBatch);
+            leaf2.Draw(spriteBatch);
+
+            fastZombie1.Draw(spriteBatch);
+            
 
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);

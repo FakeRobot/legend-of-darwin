@@ -47,7 +47,7 @@ namespace LegendOfDarwin
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-        private Stairs firstStair, secondStair;
+        private Stairs secondStair;
 
         // things for managing message boxes
         bool messageMode = false;
@@ -106,7 +106,6 @@ namespace LegendOfDarwin
             String fastString = "This one likes\n to sleep.\n Be careful\n not to wake him!!";
             fastMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, fastString);
 
-            firstStair = new Stairs(board);
             secondStair = new Stairs(board);
 
             brain = new Brain(board, 5, 18);
@@ -164,12 +163,6 @@ namespace LegendOfDarwin
             // Darwin's lag movement
             counterReady = counter = 5;
 
-
-            if (board.isGridPositionOpen(20, 2))
-            {
-                firstStair.setGridPosition(20, 2);
-                firstStair.setDestination(board.getPosition(20, 2));
-            }
             if (board.isGridPositionOpen(21, 20))
             {
                 secondStair.setGridPosition(21, 20);
@@ -223,7 +216,6 @@ namespace LegendOfDarwin
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
 
-            firstStair.LoadContent(basicStairUpTex, basicStairDownTex, "Up");
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
             firstSwitch.LoadContent(wallTex, switchTex);
@@ -343,7 +335,6 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
-            firstStair.Update(gameTime, darwin);
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
@@ -548,7 +539,6 @@ namespace LegendOfDarwin
             spriteBatch.Begin();
             board.Draw(spriteBatch);
 
-            firstStair.Draw(spriteBatch);
             secondStair.Draw(spriteBatch);
 
             leaf.Draw(spriteBatch);

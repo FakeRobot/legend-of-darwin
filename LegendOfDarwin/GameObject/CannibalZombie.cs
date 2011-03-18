@@ -377,7 +377,7 @@ namespace LegendOfDarwin.GameObject
                     }
                 }
 
-                Console.Out.WriteLine("goAround:{0} hasZombieDest:{1} goForDarwin:{2}",goAroundMode,hasZombieDest,goForDarwin);
+                //Console.Out.WriteLine("goAround:{0} hasZombieDest:{1} goForDarwin:{2}",goAroundMode,hasZombieDest,goForDarwin);
 
                 if (goAroundMode)
                     goAroundObstacle();

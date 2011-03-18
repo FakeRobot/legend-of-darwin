@@ -391,21 +391,6 @@ namespace LegendOfDarwin
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin, brain);
 
-            // aStar tests happen when J is pressed, this will be removed shortly
-            //if (ks.IsKeyDown(Keys.J)) 
-            //{
-            //    Search mysearch = new Search(board);
-            //    Vector2[] mypath = mysearch.aStar(6, 20, 23, 8);
-
-            //    int i = 0;
-            //    foreach (Vector2 thispt in mypath) 
-            //    {
-            //        if (thispt.X!=0)
-            //            Console.Out.WriteLine("{0} xpt: {1} ypt: {2}",i,thispt.X,thispt.Y);
-            //        i++;
-            //    }
-            //}
-
             firstSwitch.Update(gameTime, ks, darwin);
 
             brain.Update(gameTime, ks, darwin);
@@ -557,8 +542,38 @@ namespace LegendOfDarwin
         {
             if (darwin.isOnTop(stairs)) 
             {
+                //reset everything dynamic on the level
+                board.setGridPositionOpen(darwin);
+                darwin.setGridPosition(2, 2);
+
                 mainGame.setCurLevel(Game1.LevelState.Level2);
                 mainGame.setZTimeLevel(zTime,Game1.LevelState.Level2);
+                board.setGridPositionOpen(firstZombie);
+                board.setGridPositionOpen(secondZombie);
+                board.setGridPositionOpen(thirdZombie);
+                board.setGridPositionOpen(brain);
+                board.setGridPositionOpen(potion);
+
+                firstZombie.setGridPosition(10, 10);
+                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+                firstZombie.setZombieAlive(true);
+
+                secondZombie.setGridPosition(10, 16);
+                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+                secondZombie.setZombieAlive(true);
+
+                thirdZombie.setGridPosition(16, 10);
+                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+                thirdZombie.setZombieAlive(true);
+
+                potion.setGridPosition(20, 4);
+                board.setGridPositionOccupied(potion.X, potion.Y);
+
+                brain.setGridPosition(2, 18);
+                board.setGridPositionOccupied(brain.X, brain.Y);
+
+                potion.reset();
+                firstSwitch.turnOn();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;

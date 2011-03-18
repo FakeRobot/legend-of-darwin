@@ -173,6 +173,10 @@ namespace LegendOfDarwin
                 secondStair.setDestination(board.getPosition(21, 20));
             }
 
+            leaf.setGridPosition(7, 7);
+
+            leaf2.setGridPosition(5, 15);
+
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
 

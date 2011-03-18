@@ -124,7 +124,7 @@ namespace LegendOfDarwin
             switchSquareTwo.Y = 21;
             secondSwitch = new Switch(switchSquareTwo, board, removableWallsAroundStairs);
 
-            darwin.setGridPosition(5, 5);
+            darwin.setGridPosition(2, 2);
 
             if (board.isGridPositionOpen(darwin))
             {
@@ -465,6 +465,8 @@ namespace LegendOfDarwin
                 //secondZombie.setAbsoluteDestination(10, 16);
                 //thirdZombie.setAbsoluteDestination(16, 10);
 
+                
+
                 leaf.setGridPosition(7, 7);
                 leaf.resetLeaf();
 
@@ -477,6 +479,9 @@ namespace LegendOfDarwin
                 fastZombie1.setGridPosition(15, 15);
 
                 darwin.setHuman();
+                firstSwitch.turnOn();
+                secondSwitch.turnOn();
+
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
                 gameWin = false;

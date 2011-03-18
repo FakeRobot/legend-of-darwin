@@ -29,6 +29,7 @@ namespace LegendOfDarwin
         private FastZombie fastZombie1;
         private Leaf leaf;
         private Leaf leaf2;
+        private Leaf leaf3;
 
         private Darwin darwin;
         private Zombie firstZombie;
@@ -87,10 +88,10 @@ namespace LegendOfDarwin
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
             fastZombie1 = new FastZombie(15, 15, 15, 0, 15, 0, board);
-            leaf = new Leaf(7, 7, board, fastZombie1);
-            leaf2 = new Leaf(5, 15, board, fastZombie1);
+            leaf = new Leaf(board, fastZombie1);
+            leaf2 = new Leaf(board, fastZombie1);
+            leaf3 = new Leaf(board, fastZombie1);
             
-
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
 
@@ -142,14 +143,11 @@ namespace LegendOfDarwin
             }
 
             leaf.setGridPosition(7, 7);
-
             leaf2.setGridPosition(5, 15);
+            leaf3.setGridPosition(5, 7);
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
-
-            leaf.resetLeaf();
-            leaf2.resetLeaf();
         }
 
         private BasicObject[] setRemovableWallsAroundStairs()
@@ -283,6 +281,7 @@ namespace LegendOfDarwin
             fastZombie1.LoadContent(zombieFastTex, zombieFastSleepTex);
             leaf.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf2.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf3.LoadContent(brokeLeafTex, wholeLeafTex);
 
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
@@ -392,18 +391,15 @@ namespace LegendOfDarwin
 
             leaf.Update(darwin);
             leaf2.Update(darwin);
+            leaf3.Update(darwin);
 
             fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             fastZombie1.Update(gameTime, darwin, brain);
-
-            leaf.Update(darwin);
-            leaf2.Update(darwin);
             
             //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             //secondZombie.Update(gameTime, darwin, brain);
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             //thirdZombie.Update(gameTime, darwin, brain);
-
 
             firstSwitch.Update(gameTime, ks, darwin);
             secondSwitch.Update(gameTime, ks, darwin);
@@ -463,15 +459,11 @@ namespace LegendOfDarwin
 
                 firstZombie.setGridPosition(10, 10);
                 //secondZombie.setAbsoluteDestination(10, 16);
-                //thirdZombie.setAbsoluteDestination(16, 10);
+                //thirdZombie.setAbsoluteDestination(16, 10); 
 
-                
-
-                leaf.setGridPosition(7, 7);
                 leaf.resetLeaf();
-
-                leaf2.setGridPosition(5, 15);
                 leaf2.resetLeaf();
+                leaf3.resetLeaf();
 
                 board.setGridPositionOpen(fastZombie1);
                 fastZombie1.chasingDarwin = false;
@@ -599,6 +591,7 @@ namespace LegendOfDarwin
 
             leaf.Draw(spriteBatch);
             leaf2.Draw(spriteBatch);
+            leaf3.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);

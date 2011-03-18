@@ -19,12 +19,12 @@ namespace LegendOfDarwin.GameObject
         // bool for whether or not the leaf is broken
         private Boolean leafBroken;
 
-        public Leaf(int x, int y, GameBoard myBoard, FastZombie parentZombie)
+        public Leaf( GameBoard myBoard, FastZombie parentZombie)
             : base(myBoard)
         {
             // grid location
-            this.X = x;
-            this.Y = y;
+            //this.X = x;
+            //this.Y = y;
 
             this.parentZombie = parentZombie;
 

@@ -172,7 +172,9 @@ namespace LegendOfDarwin.GameObject
             switch (this.isSleeping())
             {
                 case (true):
-                    spriteBatch.Draw(fastZombieSleepTex, destination, Color.White);
+                    // hard code the source rectangle size here incase we want to animate the sleeping
+                    Rectangle source = new Rectangle(0, 0, 64, 64);
+                    spriteBatch.Draw(fastZombieSleepTex, destination, source, Color.White);
                     break;
                 case (false):
                     spriteBatch.Draw(zombieTexture, destination, Color.White);

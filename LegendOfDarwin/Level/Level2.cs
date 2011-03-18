@@ -51,6 +51,8 @@ namespace LegendOfDarwin
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
         private MessageBox cannibalMessage;
+        
+        private Potion potion;
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
@@ -131,6 +133,11 @@ namespace LegendOfDarwin
             zTimeReset = new ZombieTime(board);
 
             setWallsInLevelTwo();
+
+            potion = new Potion(board);
+            potion.setDestination(board.getPosition(3,3));
+            potion.setGridPosition(3, 3);
+            board.setGridPositionOccupied(3, 3);
         }
 
         private BasicObject[] setRemovableWallsInLevelTwo()
@@ -218,7 +225,8 @@ namespace LegendOfDarwin
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             
-            zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar")); 
+            zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
+            potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
         }
             
 
@@ -324,6 +332,8 @@ namespace LegendOfDarwin
 
             cannibalZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             cannibalZombie.Update(gameTime, darwin);
+
+            potion.Update(gameTime, ks, darwin, zTime);
 
             if (!darwin.isZombie())
             {
@@ -438,6 +448,9 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
                 cannibalZombie.setZombieAlive(true);
 
+                potion.setGridPosition(3, 3);
+                board.setGridPositionOccupied(potion.X, potion.Y);
+
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
@@ -482,6 +495,9 @@ namespace LegendOfDarwin
             cannibalZombie.setGridPosition(21, 3);
             board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
             cannibalZombie.setZombieAlive(true);
+
+            potion.setGridPosition(20, 4);
+            board.setGridPositionOccupied(potion.X, potion.Y);
         }
 
         private void checkForExitGame(KeyboardState ks)
@@ -614,6 +630,7 @@ namespace LegendOfDarwin
             fourthZombie.Draw(spriteBatch);
             cannibalZombie.Draw(spriteBatch);
 
+            potion.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
             if(!isAllZombiesDead())

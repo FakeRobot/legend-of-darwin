@@ -27,7 +27,7 @@ namespace LegendOfDarwin
         private GameStart gameStart;
 
         private FastZombie fastZombie1;
-        private Leaf leaf, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, leaf8, leaf9, leaf10, leaf11, leaf12, leaf13, leaf14, leaf15, leaf16, leaf17, leaf18, leaf19, leaf20, leaf21, leaf22, leaf23, leaf24, leaf25;
+        private Leaf leaf, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, leaf8, leaf9, leaf10, leaf11, leaf12, leaf13, leaf14, leaf15, leaf16, leaf17, leaf18, leaf19, leaf20, leaf21, leaf22, leaf23, leaf24, leaf25, leaf26, leaf27, leaf28, leaf29, leaf30;
 
         private Darwin darwin;
         private Zombie firstZombie;
@@ -111,6 +111,11 @@ namespace LegendOfDarwin
             leaf23 = new Leaf(board, fastZombie1);
             leaf24 = new Leaf(board, fastZombie1);
             leaf25 = new Leaf(board, fastZombie1);
+            leaf26 = new Leaf(board, fastZombie1);
+            leaf27 = new Leaf(board, fastZombie1);
+            leaf28 = new Leaf(board, fastZombie1);
+            leaf29 = new Leaf(board, fastZombie1);
+            leaf30 = new Leaf(board, fastZombie1);
             
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -186,7 +191,12 @@ namespace LegendOfDarwin
             leaf22.setGridPosition(9, 5);
             leaf23.setGridPosition(2, 6);
             leaf24.setGridPosition(8, 8);
-            leaf25.setGridPosition(10, 10);
+            leaf25.setGridPosition(14, 6);
+            leaf26.setGridPosition(15, 7);
+            leaf27.setGridPosition(15, 8);
+            leaf28.setGridPosition(14, 10);
+            leaf29.setGridPosition(16, 18);
+            leaf30.setGridPosition(14, 22);
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
@@ -346,6 +356,11 @@ namespace LegendOfDarwin
             leaf23.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf24.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf25.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf26.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf27.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf28.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf29.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf30.LoadContent(brokeLeafTex, wholeLeafTex);
 
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
@@ -479,6 +494,11 @@ namespace LegendOfDarwin
             leaf23.Update(darwin);
             leaf24.Update(darwin);
             leaf25.Update(darwin);
+            leaf26.Update(darwin);
+            leaf27.Update(darwin);
+            leaf28.Update(darwin);
+            leaf29.Update(darwin);
+            leaf30.Update(darwin);
 
             fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             fastZombie1.Update(gameTime, darwin, brain);
@@ -573,6 +593,11 @@ namespace LegendOfDarwin
                 leaf23.resetLeaf();
                 leaf24.resetLeaf();
                 leaf25.resetLeaf();
+                leaf26.resetLeaf();
+                leaf27.resetLeaf();
+                leaf28.resetLeaf();
+                leaf29.resetLeaf();
+                leaf30.resetLeaf();
 
                 board.setGridPositionOpen(fastZombie1);
                 fastZombie1.chasingDarwin = false;
@@ -723,7 +748,11 @@ namespace LegendOfDarwin
             leaf23.Draw(spriteBatch);
             leaf24.Draw(spriteBatch);
             leaf25.Draw(spriteBatch);
-            
+            leaf26.Draw(spriteBatch);
+            leaf27.Draw(spriteBatch);
+            leaf28.Draw(spriteBatch);
+            leaf29.Draw(spriteBatch);
+            leaf30.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);

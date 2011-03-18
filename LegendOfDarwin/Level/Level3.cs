@@ -110,6 +110,50 @@ namespace LegendOfDarwin
 
             brain = new Brain(board, 5, 18);
 
+            BasicObject[] removableWallsAroundStairs = setRemovableWallsAroundStairs();
+
+            BasicObject[] removableWallsAroundSwitch = setRemovableWallsAroundSwitch();
+
+            BasicObject switchSquareOne = new BasicObject(board);
+            switchSquareOne.X = 22;
+            switchSquareOne.Y = 2;
+            firstSwitch = new Switch(switchSquareOne, board, removableWallsAroundSwitch);
+
+            BasicObject switchSquareTwo = new BasicObject(board);
+            switchSquareTwo.X = 2;
+            switchSquareTwo.Y = 21;
+            secondSwitch = new Switch(switchSquareTwo, board, removableWallsAroundStairs);
+
+            darwin.setGridPosition(5, 5);
+
+            if (board.isGridPositionOpen(darwin))
+            {
+                board.setGridPositionOccupied(darwin.X, darwin.Y);
+                darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
+            }
+
+            // Darwin's lag movement
+            counterReady = counter = 5;
+
+            if (board.isGridPositionOpen(21, 20))
+            {
+                secondStair.setGridPosition(21, 20);
+                secondStair.setDestination(board.getPosition(21, 20));
+            }
+
+            leaf.setGridPosition(7, 7);
+
+            leaf2.setGridPosition(5, 15);
+
+            zTime = new ZombieTime(board);
+            zTimeReset = new ZombieTime(board);
+
+            leaf.resetLeaf();
+            leaf2.resetLeaf();
+        }
+
+        private BasicObject[] setRemovableWallsAroundStairs()
+        {
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
             s1.X = 20;
@@ -144,44 +188,45 @@ namespace LegendOfDarwin
             s8.Y = 19;
 
             BasicObject[] squares = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
+            return squares;
+        }
 
-            BasicObject switchSquareOne = new BasicObject(board);
-            switchSquareOne.X = 22;
-            switchSquareOne.Y = 2;
-            firstSwitch = new Switch(switchSquareOne, board, squares);
+        private BasicObject[] setRemovableWallsAroundSwitch()
+        {
+            BasicObject s1 = new BasicObject(board);
+            s1.X = 1;
+            s1.Y = 19;
 
-            BasicObject switchSquareTwo = new BasicObject(board);
-            switchSquareTwo.X = 2;
-            switchSquareTwo.Y = 20;
-            secondSwitch = new Switch(switchSquareTwo, board, squares);
+            BasicObject s2 = new BasicObject(board);
+            s2.X = 2;
+            s2.Y = 19;
 
-            // Initial starting position
-            darwin.setGridPosition(5, 5);
+            BasicObject s3 = new BasicObject(board);
+            s3.X = 3;
+            s3.Y = 19;
 
-            if (board.isGridPositionOpen(darwin))
-            {
-                board.setGridPositionOccupied(darwin.X, darwin.Y);
-                darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
-            }
+            BasicObject s4 = new BasicObject(board);
+            s4.X = 4;
+            s4.Y = 19;
 
-            // Darwin's lag movement
-            counterReady = counter = 5;
+            //BasicObject s5 = new BasicObject(board);
+            //s5.X = 4;
+            //s5.Y = 22;
 
-            if (board.isGridPositionOpen(21, 20))
-            {
-                secondStair.setGridPosition(21, 20);
-                secondStair.setDestination(board.getPosition(21, 20));
-            }
+            BasicObject s6 = new BasicObject(board);
+            s6.X = 4;
+            s6.Y = 20;
 
-            leaf.setGridPosition(7, 7);
+            BasicObject s7 = new BasicObject(board);
+            s7.X = 4;
+            s7.Y = 21;
 
-            leaf2.setGridPosition(5, 15);
+            BasicObject s8 = new BasicObject(board);
+            s8.X = 4;
+            s8.Y = 22;
 
-            zTime = new ZombieTime(board);
-            zTimeReset = new ZombieTime(board);
-
-            leaf.resetLeaf();
-            leaf2.resetLeaf();
+            BasicObject[] squares = new BasicObject[7] { s1, s2, s3, s4, s6, s7, s8 };
+            return squares;
         }
 
         public void LoadContent()

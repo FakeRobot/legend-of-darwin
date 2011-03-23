@@ -82,7 +82,7 @@ namespace LegendOfDarwin
             gameState.setState(GameState.state.Level);
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
-            board = new GameBoard(new Vector2(25, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
+            board = new GameBoard(new Vector2(30, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
 
             firstZombie = new Zombie(10, 9, 15, 5, 15, 5, board);
@@ -382,7 +382,6 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.R))
             {
                 
-
                 board.setGridPositionOpen(darwin);
                 darwin.setGridPosition(18, 19);
                 board.setGridPositionOccupied(darwin);

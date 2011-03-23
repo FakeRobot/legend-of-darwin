@@ -83,10 +83,13 @@ namespace LegendOfDarwin
             level3.LoadContent();
         }
 
+        /*
+         * 
+         */ 
         private void InitializeGraphics()
         {
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1300;
             graphics.ApplyChanges();
         }
 

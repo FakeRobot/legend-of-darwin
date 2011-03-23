@@ -137,7 +137,6 @@ namespace LegendOfDarwin
             potion = new Potion(board);
             potion.setDestination(board.getPosition(3,3));
             potion.setGridPosition(3, 3);
-            board.setGridPositionOccupied(3, 3);
         }
 
         private BasicObject[] setRemovableWallsInLevelTwo()
@@ -297,23 +296,7 @@ namespace LegendOfDarwin
             checkForExitGame(ks);
 
             updateKeyHeldDown(ks);
-            /*
-            if (keyIsHeldDown)
-            {
-                if (counter > counterReady)
-                {
-                    darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-                    counter = 0;
-                }
-                else
-                {
-                    counter++;
-                }
-            }
-            else
-            {
-                            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-            }*/
+
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
 
             stairs.Update(gameTime, darwin);
@@ -401,7 +384,8 @@ namespace LegendOfDarwin
                 
 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
+                darwin.setGridPosition(18, 19);
+                board.setGridPositionOccupied(darwin);
                 
                 if (gameWin)
                 {
@@ -449,7 +433,6 @@ namespace LegendOfDarwin
                 cannibalZombie.setZombieAlive(true);
 
                 potion.setGridPosition(3, 3);
-                board.setGridPositionOccupied(potion.X, potion.Y);
 
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
@@ -496,8 +479,9 @@ namespace LegendOfDarwin
             board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
             cannibalZombie.setZombieAlive(true);
 
-            potion.setGridPosition(20, 4);
-            board.setGridPositionOccupied(potion.X, potion.Y);
+            potion.setGridPosition(3, 3);
+            potion.reset();
+
         }
 
         private void checkForExitGame(KeyboardState ks)

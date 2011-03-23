@@ -71,11 +71,10 @@ namespace LegendOfDarwin
             downSource[2] = new Rectangle(DARWIN_WIDTH * 2, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
             downCount = 0;
 
-            //potentialGridPosition.setGridPosition(5, 5);
-
+            this.setEventLag(10);
+            
             board = myboard;
 
-            this.setGridPosition(5, 5);
         }
 
         public void setSource(Rectangle rec)
@@ -203,10 +202,12 @@ namespace LegendOfDarwin
                 if (zombieFlag == true)
                 {
                     zombieFlag = false;
+                    this.setEventLag(10);
                 }
                 else
                 {
                     zombieFlag = true;
+                    this.setEventLag(15);
                 }
             }
         }

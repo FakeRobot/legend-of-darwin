@@ -111,7 +111,7 @@ namespace LegendOfDarwin
             removableWalls = setRemovableWallsInLevelTwo();
 
             // Initial starting position
-            darwin.setGridPosition(18, 19);
+            darwin.setGridPosition(21, 20);
 
             if (board.isGridPositionOpen(darwin))
             {
@@ -383,7 +383,7 @@ namespace LegendOfDarwin
             {
                 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(18, 19);
+                darwin.setGridPosition(21, 20);
                 board.setGridPositionOccupied(darwin);
                 
                 if (gameWin)

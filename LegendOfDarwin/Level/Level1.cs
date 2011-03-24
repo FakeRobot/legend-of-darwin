@@ -25,7 +25,7 @@ namespace LegendOfDarwin
         private GameStart gameStart;
 
         private Darwin darwin;
-        private Zombie firstZombie, secondZombie, thirdZombie;
+        private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie;
         private Switch firstSwitch;
         private Brain brain;
         private GameBoard board;
@@ -80,7 +80,8 @@ namespace LegendOfDarwin
             darwin = new Darwin(board);
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
-            thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
+            thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
+            //fourthZombie = new Zombie(20, 7, 5, 2, 5, 5, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -101,7 +102,7 @@ namespace LegendOfDarwin
             BasicObject[] removableWalls = setRemovableWallsInLevelOne();
 
             BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 11;
+            switchSquare.X = 13;
             switchSquare.Y = 2;
 
             firstSwitch = new Switch(switchSquare, board, removableWalls);
@@ -120,15 +121,15 @@ namespace LegendOfDarwin
 
             if (board.isGridPositionOpen(21, 20))
             {
-                stairs.setGridPosition(21, 20);
-                stairs.setDestination(board.getPosition(21, 20));
+                stairs.setGridPosition(27, 21);
+                stairs.setDestination(board.getPosition(27, 21));
             }
 
             zTime = new ZombieTime(board);
 
-            vortex = new Vortex(board, 15, 15);
+            vortex = new Vortex(board, 19, 20);
 
-            setPotionPositionInLevelOne(20, 4);
+            setPotionPosition(25, 4);
 
             setWalls();
         }
@@ -136,43 +137,43 @@ namespace LegendOfDarwin
         private BasicObject[] setRemovableWallsInLevelOne()
         {
             //later add an x and y to the constructor
-            BasicObject s1 = new BasicObject(board);
-            s1.X = 20;
-            s1.Y = 19;
+            //BasicObject s1 = new BasicObject(board);
+            //s1.X = 20;
+            //s1.Y = 19;
 
-            BasicObject s2 = new BasicObject(board);
-            s2.X = 20;
-            s2.Y = 20;
+            //BasicObject s2 = new BasicObject(board);
+            //s2.X = 20;
+            //s2.Y = 20;
 
-            BasicObject s3 = new BasicObject(board);
-            s3.X = 20;
-            s3.Y = 21;
+            //BasicObject s3 = new BasicObject(board);
+            //s3.X = 20;
+            //s3.Y = 21;
 
-            BasicObject s4 = new BasicObject(board);
-            s4.X = 20;
-            s4.Y = 22;
+            //BasicObject s4 = new BasicObject(board);
+            //s4.X = 20;
+            //s4.Y = 22;
 
             BasicObject s5 = new BasicObject(board);
-            s5.X = 20;
+            s5.X = 25;
             s5.Y = 19;
 
             BasicObject s6 = new BasicObject(board);
-            s6.X = 21;
+            s6.X = 26;
             s6.Y = 19;
 
             BasicObject s7 = new BasicObject(board);
-            s7.X = 22;
+            s7.X = 27;
             s7.Y = 19;
 
             BasicObject s8 = new BasicObject(board);
-            s8.X = 23;
+            s8.X = 28;
             s8.Y = 19;
 
-            BasicObject[] removableWalls = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
+            BasicObject[] removableWalls = new BasicObject[4] {s5, s6, s7, s8 };
             return removableWalls;
         }
 
-        private void setPotionPositionInLevelOne(int x, int y)
+        private void setPotionPosition(int x, int y)
         {
             potion = new Potion(board);
             potion.setDestination(board.getPosition(x, y));
@@ -205,51 +206,130 @@ namespace LegendOfDarwin
             BasicObject w20 = new BasicObject(board);
             BasicObject w21 = new BasicObject(board);
 
-            w1.setGridPosition(9, 1);
-            board.setGridPositionOccupied(9, 1);
-            w2.setGridPosition(9, 2);
-            board.setGridPositionOccupied(9, 2);
-            w3.setGridPosition(9, 3);
-            board.setGridPositionOccupied(9, 3);
-            w4.setGridPosition(9, 5);
-            board.setGridPositionOccupied(9, 5);
-            w5.setGridPosition(10, 5);
-            board.setGridPositionOccupied(10, 5);
-            w6.setGridPosition(13, 1);
-            board.setGridPositionOccupied(13, 1);
-            w7.setGridPosition(13, 2);
-            board.setGridPositionOccupied(13, 2);
-            w8.setGridPosition(13, 3);
-            board.setGridPositionOccupied(13, 3);
-            w9.setGridPosition(9, 4);
-            board.setGridPositionOccupied(9, 4);
-            w10.setGridPosition(11, 5);
+            BasicObject w22 = new BasicObject(board);
+            BasicObject w23 = new BasicObject(board);
+            BasicObject w24 = new BasicObject(board);
+            BasicObject w25 = new BasicObject(board);
+            BasicObject w26 = new BasicObject(board);
+            BasicObject w27 = new BasicObject(board);
+            BasicObject w28 = new BasicObject(board);
+            BasicObject w29 = new BasicObject(board);
+            BasicObject w30 = new BasicObject(board);
+            BasicObject w31 = new BasicObject(board);
+            BasicObject w32 = new BasicObject(board);
+
+            BasicObject w33 = new BasicObject(board);
+            BasicObject w34 = new BasicObject(board);
+            BasicObject w35 = new BasicObject(board);
+            BasicObject w36 = new BasicObject(board);
+            BasicObject w37 = new BasicObject(board);
+            BasicObject w38 = new BasicObject(board);
+            BasicObject w39 = new BasicObject(board);
+            BasicObject w40 = new BasicObject(board);
+            BasicObject w41 = new BasicObject(board);
+            BasicObject w42 = new BasicObject(board);
+            BasicObject w43 = new BasicObject(board);
+            BasicObject w44 = new BasicObject(board);
+            BasicObject w45 = new BasicObject(board);
+            BasicObject w46 = new BasicObject(board);
+
+            w1.setGridPosition(11, 1);
+            board.setGridPositionOccupied(11, 1);
+            w2.setGridPosition(11, 2);
+            board.setGridPositionOccupied(11, 2);
+            w3.setGridPosition(11, 3);
+            board.setGridPositionOccupied(11, 3);
+            w4.setGridPosition(11, 5);
             board.setGridPositionOccupied(11, 5);
+            w5.setGridPosition(12, 5);
+            board.setGridPositionOccupied(12, 5);
+            w6.setGridPosition(15, 1);
+            board.setGridPositionOccupied(15, 1);
+            w7.setGridPosition(15, 2);
+            board.setGridPositionOccupied(15, 2);
+            w8.setGridPosition(15, 3);
+            board.setGridPositionOccupied(15, 3);
+            w9.setGridPosition(11, 4);
+            board.setGridPositionOccupied(11, 4);
+            w10.setGridPosition(13, 5);
+            board.setGridPositionOccupied(13, 5);
 
-            w11.setGridPosition(5, 18);
-            board.setGridPositionOccupied(5, 18);
-            w12.setGridPosition(5, 19);
-            board.setGridPositionOccupied(5, 19);
-            w13.setGridPosition(5, 20);
-            board.setGridPositionOccupied(5, 20);
-            w14.setGridPosition(5, 17);
-            board.setGridPositionOccupied(5, 17);
-            w15.setGridPosition(5, 16);
-            board.setGridPositionOccupied(5, 16);
-            w18.setGridPosition(5, 21);
-            board.setGridPositionOccupied(5, 21);
-            w16.setGridPosition(5, 22);
-            board.setGridPositionOccupied(5, 22);
-            w17.setGridPosition(5, 15);
-            board.setGridPositionOccupied(5, 15);
-            w19.setGridPosition(5, 14);
-            board.setGridPositionOccupied(5, 14);
-            w20.setGridPosition(5, 13);
-            board.setGridPositionOccupied(5, 13);
-            w21.setGridPosition(5, 12);
-            board.setGridPositionOccupied(5, 12);
+            w11.setGridPosition(6, 18);
+            board.setGridPositionOccupied(6, 18);
+            w12.setGridPosition(6, 19);
+            board.setGridPositionOccupied(6, 19);
+            w13.setGridPosition(6, 20);
+            board.setGridPositionOccupied(6, 20);
+            w14.setGridPosition(6, 17);
+            board.setGridPositionOccupied(6, 17);
+            w15.setGridPosition(6, 16);
+            board.setGridPositionOccupied(6, 16);
+            w18.setGridPosition(6, 21);
+            board.setGridPositionOccupied(6, 21);
+            w16.setGridPosition(6, 22);
+            board.setGridPositionOccupied(6, 22);
+            w17.setGridPosition(6, 15);
+            board.setGridPositionOccupied(6, 15);
+            w19.setGridPosition(6, 14);
+            board.setGridPositionOccupied(6, 14);
+            w20.setGridPosition(6, 13);
+            board.setGridPositionOccupied(6, 13);
+            w21.setGridPosition(6, 12);
+            board.setGridPositionOccupied(6, 12);
 
-            walls = new BasicObject[21] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16, w17, w18, w19, w20, w21 };
+            w22.setGridPosition(24, 18);
+            board.setGridPositionOccupied(24, 18);
+            w23.setGridPosition(24, 19);
+            board.setGridPositionOccupied(24, 19);
+            w24.setGridPosition(24, 20);
+            board.setGridPositionOccupied(24, 20);
+            w25.setGridPosition(24, 17);
+            board.setGridPositionOccupied(24, 17);
+            w26.setGridPosition(24, 16);
+            board.setGridPositionOccupied(24, 16);
+            w27.setGridPosition(24, 21);
+            board.setGridPositionOccupied(24, 21);
+            w28.setGridPosition(24, 22);
+            board.setGridPositionOccupied(24, 22);
+            w29.setGridPosition(24, 15);
+            board.setGridPositionOccupied(24, 15);
+            w30.setGridPosition(24, 14);
+            board.setGridPositionOccupied(24, 14);
+            w31.setGridPosition(24, 13);
+            board.setGridPositionOccupied(24, 13);
+            w32.setGridPosition(24, 12);
+            board.setGridPositionOccupied(24, 12);
+
+            w33.setGridPosition(15, 4);
+            board.setGridPositionOccupied(15, 4);
+            w34.setGridPosition(15, 5);
+            board.setGridPositionOccupied(15, 5);
+            w35.setGridPosition(15, 6);
+            board.setGridPositionOccupied(15, 6);
+            w36.setGridPosition(15, 7);
+            board.setGridPositionOccupied(15, 7);
+            w37.setGridPosition(15, 8);
+            board.setGridPositionOccupied(15, 8);
+            w38.setGridPosition(15, 9);
+            board.setGridPositionOccupied(15, 9);
+            w39.setGridPosition(15, 10);
+            board.setGridPositionOccupied(15, 10);
+            w40.setGridPosition(15, 11);
+            board.setGridPositionOccupied(15, 11);
+            w41.setGridPosition(15, 12);
+            board.setGridPositionOccupied(15, 12);
+            w42.setGridPosition(15, 13);
+            board.setGridPositionOccupied(15, 13);
+            w43.setGridPosition(15, 14);
+            board.setGridPositionOccupied(15, 14);
+            w44.setGridPosition(15, 15);
+            board.setGridPositionOccupied(15, 15);
+            w45.setGridPosition(15, 16);
+            board.setGridPositionOccupied(15, 16);
+            w46.setGridPosition(15, 17);
+            board.setGridPositionOccupied(15, 17);
+
+            walls = new BasicObject[46] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16, w17, w18, w19, w20, w21, w22, w23, w24, w25, w26, w27, w28, w29, w30, w31, w32, w33, w34, w35, w36, w37, w38, w39, w40, w41, w42, w43, w44, w45, w46 };
         }
 
         public void LoadContent()
@@ -285,6 +365,7 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            //fourthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -393,6 +474,7 @@ namespace LegendOfDarwin
             secondZombie.Update(gameTime, darwin, brain);
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin, brain);
+            //fourthZombie.Update(gameTime, darwin, brain);
 
             firstSwitch.Update(gameTime, ks, darwin);
 
@@ -402,6 +484,7 @@ namespace LegendOfDarwin
             vortex.CollisionWithZombie(firstZombie);
             vortex.CollisionWithZombie(secondZombie);
             vortex.CollisionWithZombie(thirdZombie);
+            //vortex.CollisionWithZombie(fourthZombie);
             vortex.CollisionWithBO(brain, board);
 
             potion.Update(gameTime, ks, darwin, zTime);
@@ -411,6 +494,7 @@ namespace LegendOfDarwin
                 checkForGameOver(firstZombie);
                 checkForGameOver(secondZombie);
                 checkForGameOver(thirdZombie);
+                //checkForGameOver(fourthZombie);
             }
             checkForGameOver(vortex);
             //checkForGameWin();
@@ -451,6 +535,7 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(firstZombie);
                 board.setGridPositionOpen(secondZombie);
                 board.setGridPositionOpen(thirdZombie);
+                //board.setGridPositionOpen(fourthZombie);
                 board.setGridPositionOpen(brain);
                 board.setGridPositionOpen(potion);
 
@@ -462,11 +547,15 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
                 secondZombie.setZombieAlive(true);
 
-                thirdZombie.setGridPosition(16, 10);
+                thirdZombie.setGridPosition(12, 10);
                 board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 thirdZombie.setZombieAlive(true);
 
-                potion.setGridPosition(20, 4);
+                //fourthZombie.setGridPosition(20, 7);
+                //board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+                //fourthZombie.setZombieAlive(true);
+
+                potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
                 brain.setGridPosition(3, 3);
@@ -546,37 +635,42 @@ namespace LegendOfDarwin
             if (darwin.isOnTop(stairs)) 
             {
                 //reset everything dynamic on the level
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
+                //board.setGridPositionOpen(darwin);
+                //darwin.setGridPosition(2, 2);
 
                 mainGame.setCurLevel(Game1.LevelState.Level2);
                 mainGame.setZTimeLevel(zTime,Game1.LevelState.Level2);
-                board.setGridPositionOpen(firstZombie);
-                board.setGridPositionOpen(secondZombie);
-                board.setGridPositionOpen(thirdZombie);
-                board.setGridPositionOpen(brain);
-                board.setGridPositionOpen(potion);
+                //board.setGridPositionOpen(firstZombie);
+                //board.setGridPositionOpen(secondZombie);
+                //board.setGridPositionOpen(thirdZombie);
+                //board.setGridPositionOpen(fourthZombie);
+                //board.setGridPositionOpen(brain);
+                //board.setGridPositionOpen(potion);
 
-                firstZombie.setGridPosition(10, 10);
-                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
-                firstZombie.setZombieAlive(true);
+                //firstZombie.setGridPosition(10, 10);
+                //board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+                //firstZombie.setZombieAlive(true);
 
-                secondZombie.setGridPosition(10, 16);
-                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
-                secondZombie.setZombieAlive(true);
+                //secondZombie.setGridPosition(10, 16);
+                //board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+                //secondZombie.setZombieAlive(true);
 
-                thirdZombie.setGridPosition(16, 10);
-                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
-                thirdZombie.setZombieAlive(true);
+                //thirdZombie.setGridPosition(16, 10);
+                //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+                //thirdZombie.setZombieAlive(true);
 
-                potion.setGridPosition(20, 4);
-                board.setGridPositionOccupied(potion.X, potion.Y);
+                //thirdZombie.setGridPosition(16, 10);
+                //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+                //thirdZombie.setZombieAlive(true);
 
-                brain.setGridPosition(2, 18);
-                board.setGridPositionOccupied(brain.X, brain.Y);
+                //potion.setGridPosition(20, 4);
+                //board.setGridPositionOccupied(potion.X, potion.Y);
 
-                potion.reset();
-                firstSwitch.turnOn();
+                //brain.setGridPosition(2, 18);
+                //board.setGridPositionOccupied(brain.X, brain.Y);
+
+                //potion.reset();
+                //firstSwitch.turnOn();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
@@ -633,6 +727,7 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             secondZombie.Draw(spriteBatch);
             thirdZombie.Draw(spriteBatch);
+            //fourthZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);

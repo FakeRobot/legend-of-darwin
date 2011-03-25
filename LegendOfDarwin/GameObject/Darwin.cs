@@ -149,21 +149,21 @@ namespace LegendOfDarwin
                 {
                     darwinCount++;
                 }
-                if (isZombie() && zombieCount%2 == 0)
+                if (isZombie())
                 {
                     switch (moveDirection)
                     {
                         case Dir.Left:
-                            this.destination.X = this.destination.X - zombieWidthLength * 2;
+                            this.destination.X = this.destination.X - zombieWidthLength;
                             break;
                         case Dir.Down:
-                            this.destination.Y = this.destination.Y + zombieHeightLength*2;
+                            this.destination.Y = this.destination.Y + zombieHeightLength;
                             break;
                         case Dir.Right:
-                            this.destination.X = this.destination.X + zombieWidthLength*2;
+                            this.destination.X = this.destination.X + zombieWidthLength;
                             break;
                         case Dir.Up:
-                            this.destination.Y = this.destination.Y - zombieHeightLength*2;
+                            this.destination.Y = this.destination.Y - zombieHeightLength;
                             break;
                     }
 
@@ -189,7 +189,7 @@ namespace LegendOfDarwin
                         }
                     }
                 }
-                else if (!isZombie() && darwinCount%2 == 0)
+                else if (!isZombie())
                 {
                     if (darwinCount > darwinLag / 2)
                     {
@@ -199,16 +199,16 @@ namespace LegendOfDarwin
                     switch (moveDirection)
                     {
                         case Dir.Left:
-                            this.destination.X = this.destination.X - darwinWidthLength*2;
+                            this.destination.X = this.destination.X - darwinWidthLength;
                             break;
                         case Dir.Down:
-                            this.destination.Y = this.destination.Y + darwinHeightLength*2;
+                            this.destination.Y = this.destination.Y + darwinHeightLength;
                             break;
                         case Dir.Right:
-                            this.destination.X = this.destination.X + darwinWidthLength*2;
+                            this.destination.X = this.destination.X + darwinWidthLength;
                             break;
                         case Dir.Up:
-                            this.destination.Y = this.destination.Y - darwinHeightLength*2;
+                            this.destination.Y = this.destination.Y - darwinHeightLength;
                             break;
                     }
 
@@ -330,12 +330,10 @@ namespace LegendOfDarwin
                 if (zombieFlag == true)
                 {
                     zombieFlag = false;
-                    this.setEventLag(darwinLag);
                 }
                 else
                 {
                     zombieFlag = true;
-                    this.setEventLag(zombieLag);
                 }
             }
         }

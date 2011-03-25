@@ -53,6 +53,11 @@ namespace LegendOfDarwin
         Texture2D darwinLeftTex;
         Texture2D zombieDarwinTex;
 
+        private int widthLength, heightLength, darwinLag, zombieLag, darwinCount, zombieCount;
+        private int darwinWidthLength, darwinHeightLength, zombieWidthLength, zombieHeightLength;
+        private bool inMotion;
+        private Dir moveDirection;
+
         //BasicObject potentialGridPosition;
 
         //constructor
@@ -71,9 +76,23 @@ namespace LegendOfDarwin
             downSource[2] = new Rectangle(DARWIN_WIDTH * 2, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
             downCount = 0;
 
-            this.setEventLag(10);
-            
-            board = myboard;
+            darwinLag = 10;
+            zombieLag = 15;
+            darwinCount = 0;
+            zombieCount = 0;
+
+            widthLength = board.getPosition(10, 10).X - board.getPosition(9, 10).X;
+            heightLength = board.getPosition(10, 10).Y - board.getPosition(10, 9).Y;
+
+            darwinWidthLength = widthLength / darwinLag;
+            darwinHeightLength = heightLength / darwinLag;
+            zombieWidthLength = widthLength / zombieLag;
+            zombieHeightLength = heightLength / zombieLag;
+
+            this.setEventLag(darwinLag);
+
+            inMotion = false;
+
 
         }
 
@@ -120,10 +139,110 @@ namespace LegendOfDarwin
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
         {
             base.Update(gameTime);
-            if (this.canEventHappen())
+            if (inMotion)
+            {
+                if (isZombie())
+                {
+                    zombieCount++;
+                }
+                else
+                {
+                    darwinCount++;
+                }
+                if (isZombie() && zombieCount%2 == 0)
+                {
+                    switch (moveDirection)
+                    {
+                        case Dir.Left:
+                            this.destination.X = this.destination.X - zombieWidthLength * 2;
+                            break;
+                        case Dir.Down:
+                            this.destination.Y = this.destination.Y + zombieHeightLength*2;
+                            break;
+                        case Dir.Right:
+                            this.destination.X = this.destination.X + zombieWidthLength*2;
+                            break;
+                        case Dir.Up:
+                            this.destination.Y = this.destination.Y - zombieHeightLength*2;
+                            break;
+                    }
+
+                    if (zombieCount > zombieLag)
+                    {
+                        inMotion = false;
+                        zombieCount = 0;
+
+                        switch (moveDirection)
+                        {
+                            case Dir.Left:
+                                this.MoveLeft();
+                                break;
+                            case Dir.Down:
+                                this.MoveDown();
+                                break;
+                            case Dir.Right:
+                                this.MoveRight();
+                                break;
+                            case Dir.Up:
+                                this.MoveUp();
+                                break;
+                        }
+                    }
+                }
+                else if (!isZombie() && darwinCount%2 == 0)
+                {
+                    if (darwinCount > darwinLag / 2)
+                    {
+                        downCount = 2;
+                    }
+
+                    switch (moveDirection)
+                    {
+                        case Dir.Left:
+                            this.destination.X = this.destination.X - darwinWidthLength*2;
+                            break;
+                        case Dir.Down:
+                            this.destination.Y = this.destination.Y + darwinHeightLength*2;
+                            break;
+                        case Dir.Right:
+                            this.destination.X = this.destination.X + darwinWidthLength*2;
+                            break;
+                        case Dir.Up:
+                            this.destination.Y = this.destination.Y - darwinHeightLength*2;
+                            break;
+                    }
+
+                    if (darwinCount > darwinLag)
+                    {
+                        inMotion = false;
+                        darwinCount = 0;
+                        switch (moveDirection)
+                        {
+                            case Dir.Left:
+                                this.MoveLeft();
+                                break;
+                            case Dir.Down:
+                                this.MoveDown();
+                                downCount = 0;
+                                break;
+                            case Dir.Right:
+                                this.MoveRight();
+                                break;
+                            case Dir.Up:
+                                this.MoveUp();
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                moveDarwin(ks, board, currentDarwinX, currentDarwinY);
+            }
+
+            if (canEventHappen())
             {
                 updateDarwinTransformState(ks);
-                moveDarwin(ks, board, currentDarwinX, currentDarwinY);
                 this.setEventFalse();
             }
         }
@@ -138,7 +257,8 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(currentDarwinX + 1, currentDarwinY) && !hasPicked && facing == Dir.Right)
                 {
                     hasPicked = true;
-                    this.MoveRight();
+                    moveDirection = Dir.Right;
+                    inMotion = true;
                 }
                 else
                 {
@@ -150,7 +270,8 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(currentDarwinX - 1, currentDarwinY) && !hasPicked && facing == Dir.Left)
                 {
                     hasPicked = true;
-                    this.MoveLeft();
+                    moveDirection = Dir.Left;
+                    inMotion = true;
                 }
                 else
                 {
@@ -164,7 +285,8 @@ namespace LegendOfDarwin
                 if (board.isGridPositionOpen(currentDarwinX, currentDarwinY - 1) && !hasPicked && facing == Dir.Up)
                 {
                     hasPicked = true;
-                    this.MoveUp();
+                    moveDirection = Dir.Up;
+                    inMotion = true;
                 }
                 else
                 {
@@ -175,21 +297,27 @@ namespace LegendOfDarwin
             {
                 if (board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1) && !hasPicked && facing == Dir.Down)
                 {
+                    /*
                     if (downCount > 1)
                     {
-                        downCount = 0;
+                        downCount = 1;
                     }
                     else
                     {
                         downCount++;
                     }
-                    hasPicked = true;
-                    this.MoveDown();
                     
+                    this.MoveDown();
+                     * */
+                    hasPicked = true;
+                    moveDirection = Dir.Down;
+                    inMotion = true;
+                    downCount = 1;
                 }
                 else
                 {
                     facing = Dir.Down;
+                    downCount = 0;
                 }
             }
         }
@@ -202,12 +330,12 @@ namespace LegendOfDarwin
                 if (zombieFlag == true)
                 {
                     zombieFlag = false;
-                    this.setEventLag(10);
+                    this.setEventLag(darwinLag);
                 }
                 else
                 {
                     zombieFlag = true;
-                    this.setEventLag(15);
+                    this.setEventLag(zombieLag);
                 }
             }
         }

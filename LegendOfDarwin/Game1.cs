@@ -34,7 +34,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level4;
+            curLevel = LevelState.Level2;
 
             level1 = new Level1(this);
             level2 = new Level2(this);

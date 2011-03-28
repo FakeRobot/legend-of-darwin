@@ -169,7 +169,19 @@ namespace LegendOfDarwin
             s8.X = 28;
             s8.Y = 19;
 
-            BasicObject[] removableWalls = new BasicObject[4] {s5, s6, s7, s8 };
+            BasicObject s9 = new BasicObject(board);
+            s9.X = 29;
+            s9.Y = 19;
+
+            BasicObject s10 = new BasicObject(board);
+            s10.X = 30;
+            s10.Y = 19;
+
+            BasicObject s11 = new BasicObject(board);
+            s11.X = 31;
+            s11.Y = 19;
+
+            BasicObject[] removableWalls = new BasicObject[7] {s5, s6, s7, s8, s9, s10, s11 };
             return removableWalls;
         }
 
@@ -421,7 +433,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -564,8 +576,8 @@ namespace LegendOfDarwin
                 potion.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
                 
             }
 

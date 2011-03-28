@@ -85,9 +85,9 @@ namespace LegendOfDarwin
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
 
-            firstZombie = new Zombie(10, 9, 15, 5, 15, 5, board);
-            secondZombie = new Zombie(12, 9, 15, 5, 15, 5, board);
-            thirdZombie = new Zombie(8, 8, 15, 5, 15, 5, board);
+            firstZombie = new Zombie(10, 9, 24, 5, 15, 5, board);
+            secondZombie = new Zombie(12, 9, 24, 5, 15, 5, board);
+            thirdZombie = new Zombie(8, 8, 24, 5, 15, 5, board);
             fourthZombie = new Zombie(8, 12, 17, 5, 20, 10, board);
 
             myZombieList= new List<Zombie>();
@@ -95,7 +95,7 @@ namespace LegendOfDarwin
             myZombieList.Add(secondZombie);
             myZombieList.Add(thirdZombie);
             myZombieList.Add(fourthZombie);
-            cannibalZombie = new CannibalZombie(26,3,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
+            cannibalZombie = new CannibalZombie(29,3,board.getNumSquaresX()-1,1,board.getNumSquaresY()-1,1,myZombieList,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -685,6 +685,9 @@ namespace LegendOfDarwin
             BasicObject w45 = new BasicObject(board);
             BasicObject w46 = new BasicObject(board);
             BasicObject w47 = new BasicObject(board);
+            BasicObject w53 = new BasicObject(board);
+            BasicObject w54 = new BasicObject(board);
+            BasicObject w55 = new BasicObject(board);
 
             w1.setGridPosition(20, 17);
             w2.setGridPosition(21, 17);
@@ -709,8 +712,11 @@ namespace LegendOfDarwin
             w45.setGridPosition(26, 17);
             w46.setGridPosition(27, 17);
             w47.setGridPosition(28, 17);
+            w53.setGridPosition(29, 17);
+            w54.setGridPosition(30, 17);
+            w55.setGridPosition(31, 17);
 
-            for (int m = 6; m < 29; m++)
+            for (int m = 6; m < 32; m++)
             {
                 board.setGridPositionOccupied(m, 17);
             }
@@ -776,21 +782,22 @@ namespace LegendOfDarwin
             BasicObject w41 = new BasicObject(board);
             BasicObject w42 = new BasicObject(board);
 
-            w37.setGridPosition(23, 1);
-            w38.setGridPosition(23, 2);
-            w39.setGridPosition(23, 3);
-            w40.setGridPosition(23, 4);
-            w41.setGridPosition(23, 5);
-            w42.setGridPosition(23, 6);
+            w37.setGridPosition(26, 1);
+            w38.setGridPosition(26, 2);
+            w39.setGridPosition(26, 3);
+            w40.setGridPosition(26, 4);
+            w41.setGridPosition(26, 5);
+            w42.setGridPosition(26, 6);
 
             for (int k = 1; k < 7; k++)
             {
-                board.setGridPositionOccupied(23, k);
+                board.setGridPositionOccupied(26, k);
             }
 
-            walls = new BasicObject[50] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, 
+            walls = new BasicObject[53] { w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, 
                 w12, w13, w14, w15, w16, w17, w18, w19, w20, w21, w22, w23, w24, w25, 
-                w26, w27, w28, w29, w30, w31, w32, w33, w34, w37, w38, w39, w40, w41, w42, w43, w44, w45, w46, w47, w48, w49, w50, w51, w52 };
+                w26, w27, w28, w29, w30, w31, w32, w33, w34, w37, w38, w39, w40, w41,
+                w42, w43, w44, w45, w46, w47, w48, w49, w50, w51, w52, w53, w54, w55};
         }
 
     }

@@ -118,6 +118,7 @@
     <Compile Include="GameObject\Leaf.cs" />
     <Compile Include="GameObject\Potion.cs" />
     <Compile Include="GameObject\FastZombie.cs" />
+    <Compile Include="Level\Level4.cs" />
     <Compile Include="Level\Level1.cs" />
     <Compile Include="GameObject\Vortex.cs" />
     <Compile Include="Level\Level2.cs" />

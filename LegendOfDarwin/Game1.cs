@@ -27,15 +27,19 @@ namespace LegendOfDarwin
         Level1 level1;
         Level2 level2;
         Level3 level3;
+        Level.Level4 level4;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            curLevel = LevelState.Level3;
+
+            curLevel = LevelState.Level4;
+
             level1 = new Level1(this);
             level2 = new Level2(this);
             level3 = new Level3(this);
+            level4 = new Level.Level4(this);
         }
 
         public void setZTimeLevel(MenuObject.ZombieTime mytime,LevelState myLevel)
@@ -44,9 +48,13 @@ namespace LegendOfDarwin
             {
                 level2.setZTime(mytime);
             }
-            if (myLevel == LevelState.Level3)
+            else if (myLevel == LevelState.Level3)
             {
                 level3.setZTime(mytime);
+            }
+            else if (myLevel == LevelState.Level4) 
+            {
+                level4.setZTime(mytime);
             }
         }
 
@@ -56,11 +64,13 @@ namespace LegendOfDarwin
             level1.graphics = graphics;
             level2.graphics = graphics;
             level3.graphics = graphics;
+            level4.graphics = graphics;
 
             InitializeGraphics();
             level1.Initialize();
             level2.Initialize();
             level3.Initialize();
+            level4.Initialize();
             
             base.Initialize();
         }
@@ -81,6 +91,10 @@ namespace LegendOfDarwin
             level3.spriteBatch = spriteBatch;
             level3.song = Content.Load<Song>("thriller");
             level3.LoadContent();
+
+            level4.spriteBatch = spriteBatch;
+            level4.song = Content.Load<Song>("thriller");
+            level4.LoadContent();
         }
 
         /*
@@ -99,10 +113,12 @@ namespace LegendOfDarwin
         {
             if (curLevel == LevelState.Level1)
                 level1.Update(gameTime);
-            if (curLevel == LevelState.Level2)
+            else if (curLevel == LevelState.Level2)
                 level2.Update(gameTime);
-            if (curLevel == LevelState.Level3)
+            else if (curLevel == LevelState.Level3)
                 level3.Update(gameTime);
+            else if (curLevel == LevelState.Level4)
+                level4.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -113,10 +129,13 @@ namespace LegendOfDarwin
         {
             if (curLevel == LevelState.Level1)
                 level1.Draw(gameTime);
-            if (curLevel == LevelState.Level2)
+            else if (curLevel == LevelState.Level2)
                 level2.Draw(gameTime);
-            if (curLevel == LevelState.Level3)
+            else if (curLevel == LevelState.Level3)
                 level3.Draw(gameTime);
+            else if (curLevel == LevelState.Level4)
+                level4.Draw(gameTime);
+
             base.Draw(gameTime);
         }
 

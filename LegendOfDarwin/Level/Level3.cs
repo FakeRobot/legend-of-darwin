@@ -672,7 +672,7 @@ namespace LegendOfDarwin
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 mainGame.Exit();
 
-            if (ks.IsKeyDown(Keys.Q) || ks.IsKeyDown(Keys.Space))
+            if (ks.IsKeyDown(Keys.Q))
             {
                 mainGame.Exit();
             }

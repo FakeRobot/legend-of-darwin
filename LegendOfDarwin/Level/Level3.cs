@@ -151,7 +151,7 @@ namespace LegendOfDarwin
             BasicObject[] removableWallsAroundSwitch = setRemovableWallsAroundSwitch();
 
             BasicObject switchSquareOne = new BasicObject(board);
-            switchSquareOne.X = 27;
+            switchSquareOne.X = 30;
             switchSquareOne.Y = 2;
             firstSwitch = new Switch(switchSquareOne, board, removableWallsAroundSwitch);
 
@@ -173,8 +173,8 @@ namespace LegendOfDarwin
 
             if (board.isGridPositionOpen(27, 21))
             {
-                secondStair.setGridPosition(27, 21);
-                secondStair.setDestination(board.getPosition(27, 21));
+                secondStair.setGridPosition(30, 21);
+                secondStair.setDestination(board.getPosition(30, 21));
             }
 
             leaf.setGridPosition(7, 7);
@@ -226,35 +226,35 @@ namespace LegendOfDarwin
         {
             //later add an x and y to the constructor
             BasicObject s1 = new BasicObject(board);
-            s1.X = 25;
+            s1.X = 28;
             s1.Y = 19;
 
             BasicObject s2 = new BasicObject(board);
-            s2.X = 25;
+            s2.X = 28;
             s2.Y = 20;
 
             BasicObject s3 = new BasicObject(board);
-            s3.X = 25;
+            s3.X = 28;
             s3.Y = 21;
 
             BasicObject s4 = new BasicObject(board);
-            s4.X = 25;
+            s4.X = 28;
             s4.Y = 22;
 
             BasicObject s5 = new BasicObject(board);
-            s5.X = 25;
+            s5.X = 28;
             s5.Y = 19;
 
             BasicObject s6 = new BasicObject(board);
-            s6.X = 26;
+            s6.X = 29;
             s6.Y = 19;
 
             BasicObject s7 = new BasicObject(board);
-            s7.X = 27;
+            s7.X = 30;
             s7.Y = 19;
 
             BasicObject s8 = new BasicObject(board);
-            s8.X = 28;
+            s8.X = 31;
             s8.Y = 19;
 
             BasicObject[] squares = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };

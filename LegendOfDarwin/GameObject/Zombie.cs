@@ -52,6 +52,11 @@ namespace LegendOfDarwin.GameObject
         // if the zombie is "killed" by a vortex or another zombie, it isn't alive so don't draw it
         protected bool isAlive;
 
+        // used for when the zombies spot darwin
+        protected bool darwinAlert;
+
+        protected int darwinAlertCount = 0;
+
         /* constructor
         *  sets an initial area for the zombie to take up
         *  mymaxX, myminX are the max/min allowed horizontal range for the zombie
@@ -84,6 +89,8 @@ namespace LegendOfDarwin.GameObject
                 this.destination = board.getPosition(X, Y);
             }
             source = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+
+            darwinAlert = false;
         }
 
         // Load the content
@@ -527,12 +534,33 @@ namespace LegendOfDarwin.GameObject
                 if (movecounter > ZOMBIE_MOVE_RATE)
                 {
                     if (isRangeDetectionAllowed() && isBrainInRange(brain))
+                    {
+                        this.source.X = 64;
                         moveTowardsBrain(brain, darwin);
+                    }
                     else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                    {
+                        this.source.X = 64;
+                        this.darwinAlert = true;
                         moveTowardsDarwin(darwin);
+                    }
                     else
+                    {
+                        if (darwinAlert)
+                        {
+                            source.X = 128;
+                            darwinAlertCount++;
+                            if (darwinAlertCount > 2) 
+                            {
+                                darwinAlert = false;
+                                darwinAlertCount = 0;
+                            }
+                        }
+                        else
+                            this.source.X = 0;
+                        
                         this.RandomWalk();
-
+                    }
 
                     movecounter = 0;
                 }
@@ -556,10 +584,28 @@ namespace LegendOfDarwin.GameObject
                 if (movecounter > ZOMBIE_MOVE_RATE)
                 {
                     if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
+                    {
+                        this.source.X = 64;
+                        this.darwinAlert = true;
                         moveTowardsDarwin(darwin);
+                    }
                     else
-                        this.RandomWalk();
+                    {
+                        if (darwinAlert)
+                        {
+                            source.X = 128;
+                            darwinAlertCount++;
+                            if (darwinAlertCount > 2)
+                            {
+                                darwinAlert = false;
+                                darwinAlertCount = 0;
+                            }
+                        }
+                        else
+                            this.source.X = 0;
 
+                        this.RandomWalk();
+                    }
 
                     movecounter = 0;
                 }
@@ -572,8 +618,7 @@ namespace LegendOfDarwin.GameObject
         public void Draw(SpriteBatch spriteBatch)
         {
             if (this.isZombieAlive())
-            {
-                
+            {   
                 spriteBatch.Draw(zombieTexture, this.destination,this.source, Color.White);
             }
         }

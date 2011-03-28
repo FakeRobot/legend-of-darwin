@@ -573,7 +573,8 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.isZombieAlive())
             {
-                spriteBatch.Draw(zombieTexture, this.destination, Color.White);
+                
+                spriteBatch.Draw(zombieTexture, this.destination,this.source, Color.White);
             }
         }
 

@@ -26,7 +26,7 @@ namespace LegendOfDarwin.GameObject
         private Boolean sleeping = true;
         public Boolean chasingDarwin = false;
 
-        private Texture2D fastZombieSleepTex;
+        int sleepyTime = 0;
 
         public FastZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
@@ -38,10 +38,9 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 2;
         }
 
-        public void LoadContent(Texture2D fastZombieTexture, Texture2D fastZombieSleepTexture)
+        public void LoadContent(Texture2D fastZombieTexture)
         {
             zombieTexture = fastZombieTexture;
-            this.fastZombieSleepTex = fastZombieSleepTexture;
         }
 
         /// <summary>
@@ -157,8 +156,6 @@ namespace LegendOfDarwin.GameObject
 
                     if (this.isOnTop(brokenLeaf))
                         lookForDarwin(darwin);
-                    
-                 //   if (
                 }
 
                 movecounter = 0;
@@ -169,15 +166,27 @@ namespace LegendOfDarwin.GameObject
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            // hard code the source rectangle size here incase we want to animate the sleeping
+            Rectangle source;
             switch (this.isSleeping())
             {
                 case (true):
-                    // hard code the source rectangle size here incase we want to animate the sleeping
-                    Rectangle source = new Rectangle(0, 0, 64, 64);
-                    spriteBatch.Draw(fastZombieSleepTex, destination, source, Color.White);
+                    source = new Rectangle(64, 0, 64, 64);
+                    // cycle through the sleeping ones
+                    sleepyTime++;
+                    if (sleepyTime > 100)
+                        sleepyTime = 0;
+                    else if (sleepyTime < 50)
+                        source.X = 64;
+                    else
+                        source.X = 128;
+
+                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 case (false):
-                    spriteBatch.Draw(zombieTexture, destination, Color.White);
+                    // the first sprite is the awake one
+                    source = new Rectangle(0, 0, 64, 64);
+                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 default:
                     throw new Exception("lolwut");

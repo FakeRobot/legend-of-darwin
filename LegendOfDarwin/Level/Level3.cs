@@ -315,7 +315,6 @@ namespace LegendOfDarwin
             Texture2D messagePic = mainGame.Content.Load<Texture2D>("messageBox");
 
             Texture2D zombieFastTex = mainGame.Content.Load<Texture2D>("ZombiePic/FastZombie");
-            Texture2D zombieFastSleepTex = mainGame.Content.Load<Texture2D>("ZombiePic/FastZombieSleeping");
             Texture2D wholeLeafTex = mainGame.Content.Load<Texture2D>("leaf");
             Texture2D brokeLeafTex = mainGame.Content.Load<Texture2D>("brokenleaf");
 
@@ -350,7 +349,7 @@ namespace LegendOfDarwin
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
             firstZombie.LoadContent(zombieTex);
 
-            fastZombie1.LoadContent(zombieFastTex, zombieFastSleepTex);
+            fastZombie1.LoadContent(zombieFastTex);
             leaf.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf2.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf3.LoadContent(brokeLeafTex, wholeLeafTex);

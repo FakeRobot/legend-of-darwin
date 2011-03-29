@@ -349,8 +349,8 @@ namespace LegendOfDarwin.Level
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
                 mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
-            board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
-            board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
+            board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/metal_tile_medium"));
+            board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple"));
 
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/side_wall");
 

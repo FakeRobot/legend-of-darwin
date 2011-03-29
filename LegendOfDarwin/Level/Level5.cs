@@ -16,7 +16,7 @@ using LegendOfDarwin.MenuObject;
 
 namespace LegendOfDarwin.Level
 {
-    public class Level4
+    public class Level5
     {
 
         public GraphicsDeviceManager graphics;
@@ -63,7 +63,7 @@ namespace LegendOfDarwin.Level
         public Song song;
         public Game1 mainGame;
 
-        public Level4(Game1 myMainGame)
+        public Level5(Game1 myMainGame)
         {
             mainGame = myMainGame;
         }
@@ -165,7 +165,7 @@ namespace LegendOfDarwin.Level
             s8.X = 28;
             s8.Y = 19;
 
-            BasicObject[] removableWalls = new BasicObject[4] {s5, s6, s7, s8 };
+            BasicObject[] removableWalls = new BasicObject[4] { s5, s6, s7, s8 };
             return removableWalls;
         }
 
@@ -349,17 +349,17 @@ namespace LegendOfDarwin.Level
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
                 mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
-            board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/metal_tile_medium"));
-            board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple"));
+            board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/metal_tile_light"));
+            board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow"));
 
-            wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple");
+            wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow");
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
 
             //firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             //secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             //thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-        
+
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -368,7 +368,7 @@ namespace LegendOfDarwin.Level
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
         }
-            
+
 
         //protected override void UnloadContent() { }
 
@@ -389,7 +389,7 @@ namespace LegendOfDarwin.Level
                     UpdateEndState();
                     break;
             }
-            
+
         }
 
         private void UpdateMessageMode()
@@ -475,8 +475,8 @@ namespace LegendOfDarwin.Level
                 //checkForGameOver(thirdZombie);
             }
 
-            //checkForGameWin();
-            checkForSwitchToLevelFive();
+            checkForGameWin();
+            //checkForSwitchToLevelSix();
 
             if (gameOver || gameWin)
             {
@@ -501,8 +501,8 @@ namespace LegendOfDarwin.Level
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                
-                
+
+
                 if (gameWin)
                 {
                     zTime.reset();
@@ -547,7 +547,7 @@ namespace LegendOfDarwin.Level
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
-                
+
             }
         }
 
@@ -602,12 +602,13 @@ namespace LegendOfDarwin.Level
             }
         }
 
-        private void checkForSwitchToLevelFive()
+        private void checkForSwitchToLevelSix()
         {
-            if (darwin.isOnTop(stairs)) 
+            if (darwin.isOnTop(stairs))
             {
-                mainGame.setCurLevel(Game1.LevelState.Level5);
-                mainGame.setZTimeLevel(zTime,Game1.LevelState.Level5);
+                //need to changwe this to level 5 once it's created!!
+                mainGame.setCurLevel(Game1.LevelState.Level3);
+                mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
 
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
@@ -651,7 +652,7 @@ namespace LegendOfDarwin.Level
                     DrawEndState();
                     break;
             }
-            
+
         }
 
         private void DrawStartState()
@@ -686,7 +687,7 @@ namespace LegendOfDarwin.Level
                 //switchMessage.Draw(spriteBatch, messageFont);
             }
 
-            foreach(BasicObject a in walls)
+            foreach (BasicObject a in walls)
             {
                 spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
             }

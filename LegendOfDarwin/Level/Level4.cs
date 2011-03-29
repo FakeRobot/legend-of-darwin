@@ -29,13 +29,11 @@ namespace LegendOfDarwin.Level
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie;
         private Switch firstSwitch;
-        private Brain brain;
         private GameBoard board;
 
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
 
-        private Vortex vortex;
         private Potion potion;
         private Stairs stairs;
 
@@ -61,7 +59,6 @@ namespace LegendOfDarwin.Level
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
         private MessageBox switchMessage;
-        private MessageBox brainMessage;
 
         public Song song;
         public Game1 mainGame;
@@ -98,12 +95,7 @@ namespace LegendOfDarwin.Level
             String switchString = "This is a switch\n face it and press A\n to see what happens!!";
             switchMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, switchString);
 
-            String brainString = "Move the brain as a \nzombie.\n Zombie's like brains!!";
-            brainMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, brainString);
-
             stairs = new Stairs(board);
-
-            brain = new Brain(board, 3, 3);
 
             BasicObject[] removableWalls = setRemovableWallsInLevelOne();
 
@@ -133,8 +125,6 @@ namespace LegendOfDarwin.Level
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
-
-            vortex = new Vortex(board, 19, 20);
 
             setPotionPosition(25, 4);
 
@@ -360,8 +350,6 @@ namespace LegendOfDarwin.Level
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
                 mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
-            brain.LoadContent(mainGame.Content.Load<Texture2D>("brain"));
-
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
 
@@ -376,11 +364,9 @@ namespace LegendOfDarwin.Level
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
-            brainMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-            vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
         }
             
@@ -415,7 +401,7 @@ namespace LegendOfDarwin.Level
             zombieMessage.pointToSquare(firstZombie.X, firstZombie.Y, board);
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
             switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
-            brainMessage.pointToSquare(brain.X, brain.Y, board);
+
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
                 messageMode = false;
@@ -476,23 +462,14 @@ namespace LegendOfDarwin.Level
             stairs.Update(gameTime, darwin);
 
             //firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            firstZombie.Update(gameTime, darwin, brain);
+            firstZombie.Update(gameTime, darwin);
             //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            secondZombie.Update(gameTime, darwin, brain);
+            secondZombie.Update(gameTime, darwin);
             //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
-            thirdZombie.Update(gameTime, darwin, brain);
-            //fourthZombie.Update(gameTime, darwin, brain);
+            thirdZombie.Update(gameTime, darwin);
+            //fourthZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
-
-            brain.Update(gameTime, ks, darwin);
-
-            vortex.Update(gameTime, ks);
-            vortex.CollisionWithZombie(firstZombie);
-            vortex.CollisionWithZombie(secondZombie);
-            vortex.CollisionWithZombie(thirdZombie);
-            //vortex.CollisionWithZombie(fourthZombie);
-            vortex.CollisionWithBO(brain, board);
 
             potion.Update(gameTime, ks, darwin, zTime);
 
@@ -503,7 +480,6 @@ namespace LegendOfDarwin.Level
                 checkForGameOver(thirdZombie);
                 //checkForGameOver(fourthZombie);
             }
-            checkForGameOver(vortex);
             //checkForGameWin();
             checkForSwitchToLevelTwo();
 
@@ -555,7 +531,6 @@ namespace LegendOfDarwin.Level
                 board.setGridPositionOpen(secondZombie);
                 board.setGridPositionOpen(thirdZombie);
                 //board.setGridPositionOpen(fourthZombie);
-                board.setGridPositionOpen(brain);
                 board.setGridPositionOpen(potion);
 
                 firstZombie.setGridPosition(10, 10);
@@ -577,9 +552,6 @@ namespace LegendOfDarwin.Level
                 potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
-                brain.setGridPosition(3, 3);
-                board.setGridPositionOccupied(brain.X, brain.Y);
-
                 potion.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
@@ -587,7 +559,6 @@ namespace LegendOfDarwin.Level
                 MediaPlayer.Play(song);
                 
             }
-
         }
 
         private void checkForExitGame(KeyboardState ks)
@@ -633,14 +604,6 @@ namespace LegendOfDarwin.Level
             }
         }
 
-        private void checkForGameOver(Vortex myVortex)
-        {
-            if (darwin.isOnTop(myVortex))
-            {
-                gameOver = true;
-            }
-        }
-
         private void checkForGameWin()
         {
             if (darwin.isOnTop(stairs))
@@ -663,7 +626,6 @@ namespace LegendOfDarwin.Level
                 //board.setGridPositionOpen(secondZombie);
                 //board.setGridPositionOpen(thirdZombie);
                 //board.setGridPositionOpen(fourthZombie);
-                //board.setGridPositionOpen(brain);
                 //board.setGridPositionOpen(potion);
 
                 //firstZombie.setGridPosition(10, 10);
@@ -684,9 +646,6 @@ namespace LegendOfDarwin.Level
 
                 //potion.setGridPosition(20, 4);
                 //board.setGridPositionOccupied(potion.X, potion.Y);
-
-                //brain.setGridPosition(2, 18);
-                //board.setGridPositionOccupied(brain.X, brain.Y);
 
                 //potion.reset();
                 //firstSwitch.turnOn();
@@ -757,16 +716,13 @@ namespace LegendOfDarwin.Level
             thirdZombie.Draw(spriteBatch);
             //fourthZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
-            brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
-            vortex.Draw(spriteBatch);
             potion.Draw(spriteBatch);
 
             if (messageMode)
             {
                 zombieMessage.Draw(spriteBatch, messageFont);
                 darwinMessage.Draw(spriteBatch, messageFont);
-                brainMessage.Draw(spriteBatch, messageFont);
                 //switchMessage.Draw(spriteBatch, messageFont);
             }
 

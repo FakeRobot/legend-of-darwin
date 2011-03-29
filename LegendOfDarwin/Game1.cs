@@ -21,25 +21,27 @@ namespace LegendOfDarwin
         SpriteBatch spriteBatch;
 
         // for keeping track of what level player is on
-        public enum LevelState { Level1, Level2, Level3, Level4 };
+        public enum LevelState { Level1, Level2, Level3, Level4, Level5 };
         LevelState curLevel;
 
         Level1 level1;
         Level2 level2;
         Level3 level3;
         Level.Level4 level4;
+        Level.Level5 level5;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level1;
+            curLevel = LevelState.Level4;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
             level3 = new Level3(this);
             level4 = new Level.Level4(this);
+            level5 = new Level.Level5(this);
         }
 
         public void setZTimeLevel(MenuObject.ZombieTime mytime,LevelState myLevel)
@@ -56,6 +58,10 @@ namespace LegendOfDarwin
             {
                 level4.setZTime(mytime);
             }
+            else if (myLevel == LevelState.Level5)
+            {
+                level5.setZTime(mytime);
+            }
         }
 
         protected override void Initialize()
@@ -65,12 +71,14 @@ namespace LegendOfDarwin
             level2.graphics = graphics;
             level3.graphics = graphics;
             level4.graphics = graphics;
+            level5.graphics = graphics;
 
             InitializeGraphics();
             level1.Initialize();
             level2.Initialize();
             level3.Initialize();
             level4.Initialize();
+            level5.Initialize();
             
             base.Initialize();
         }
@@ -95,6 +103,10 @@ namespace LegendOfDarwin
             level4.spriteBatch = spriteBatch;
             level4.song = Content.Load<Song>("thriller");
             level4.LoadContent();
+
+            level5.spriteBatch = spriteBatch;
+            level5.song = Content.Load<Song>("thriller");
+            level5.LoadContent();
         }
 
         /*
@@ -119,6 +131,8 @@ namespace LegendOfDarwin
                 level3.Update(gameTime);
             else if (curLevel == LevelState.Level4)
                 level4.Update(gameTime);
+            else if (curLevel == LevelState.Level5)
+                level5.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -135,6 +149,8 @@ namespace LegendOfDarwin
                 level3.Draw(gameTime);
             else if (curLevel == LevelState.Level4)
                 level4.Draw(gameTime);
+            else if (curLevel == LevelState.Level5)
+                level5.Draw(gameTime);
 
             base.Draw(gameTime);
         }

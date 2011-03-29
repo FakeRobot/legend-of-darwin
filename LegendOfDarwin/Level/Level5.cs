@@ -37,8 +37,9 @@ namespace LegendOfDarwin.Level
         private Potion potion;
         private Stairs stairs;
 
+        private Box[] boxes;
+
         private Snake snake;
-        private Box box;
 
         private BasicObject[] walls;
         private Texture2D wallTex;
@@ -125,8 +126,7 @@ namespace LegendOfDarwin.Level
 
             setPotionPosition(25, 4);
 
-            box = new Box(board, 25, 5);
-
+            setBoxes();
             setWalls();
 
             snake = new Snake(10, 10, 15, 5, 15, 5, board);
@@ -159,6 +159,16 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(11, 1);
  
             walls = new BasicObject[1] { w1 };
+        }
+
+        private void setBoxes()
+        {
+            Box b1 = new Box(board, 25, 6);
+            Box b2 = new Box(board, 25, 8);
+            Box b3 = new Box(board, 25, 10);
+            Box b4 = new Box(board, 25, 12);
+
+            boxes = new Box[4] { b1, b2, b3, b4 };
         }
 
         public void LoadContent()
@@ -198,11 +208,13 @@ namespace LegendOfDarwin.Level
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
 
+            foreach (Box b in boxes)
+            {
+                b.LoadContent(mainGame.Content.Load<Texture2D>("box"));
+            }
+
             Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
             snake.LoadContent(snakeTexture);
-  
-            box.LoadContent(mainGame.Content.Load<Texture2D>("box"));
-
         }
 
 
@@ -278,9 +290,12 @@ namespace LegendOfDarwin.Level
             firstSwitch.Update(gameTime, ks, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
 
-            snake.Update(gameTime, darwin);
+            foreach (Box b in boxes)
+            {
+                b.Update(gameTime, ks, darwin);
+            }
 
-            box.Update(gameTime, ks, darwin);
+            snake.Update(gameTime, darwin);
 
             if (!darwin.isZombie())
             {
@@ -484,8 +499,6 @@ namespace LegendOfDarwin.Level
 
             snake.Draw(spriteBatch);
 
-            box.Draw(spriteBatch);
-
             if (messageMode)
             {
                 zombieMessage.Draw(spriteBatch, messageFont);
@@ -495,6 +508,11 @@ namespace LegendOfDarwin.Level
             foreach (BasicObject a in walls)
             {
                 spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
+            }
+
+            foreach (Box b in boxes)
+            {
+                b.Draw(spriteBatch);
             }
 
             spriteBatch.End();

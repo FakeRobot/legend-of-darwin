@@ -21,8 +21,8 @@ namespace LegendOfDarwin
         private Rectangle switchSource;
 
         // The dimensions of the switch image in pixels
-        private const int SWITCH_WIDTH = 250;
-        private const int SWITCH_HEIGHT = 250;
+        private const int SWITCH_WIDTH = 64;
+        private const int SWITCH_HEIGHT = 64;
 
         private bool isOn;
 

@@ -380,13 +380,33 @@ namespace LegendOfDarwin.GameObject
                     goAroundObstacle();
                 else if (isVisionAllowed() && isPointInVision(darwin.X, darwin.Y) && darwin.isZombie() && goForDarwin)
                 {
+                    source.X = 64;
+                    this.enemyAlert = true;
                     this.moveTowardsPoint(darwin.X, darwin.Y);
                 }
                 else if (hasZombieDest)
+                {
+                    source.X = 64;
+                    this.enemyAlert = true;
                     this.moveTowardsPoint(intendedptX, intendedptY);
+                }
                 else
-                    this.RandomWalk();
+                {
+                    if (enemyAlert)
+                    {
+                        source.X = 128;
+                        enemyAlertCount++;
+                        if (enemyAlertCount > 2)
+                        {
+                            enemyAlert = false;
+                            enemyAlertCount = 0;
+                        }
+                    }
+                    else
+                        this.source.X = 0;
 
+                    this.RandomWalk();
+                }
 
                 movecounter = 0;
             }

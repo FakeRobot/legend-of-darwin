@@ -52,10 +52,10 @@ namespace LegendOfDarwin.GameObject
         // if the zombie is "killed" by a vortex or another zombie, it isn't alive so don't draw it
         protected bool isAlive;
 
-        // used for when the zombies spot darwin
-        protected bool darwinAlert;
+        // used for when the zombies spot an enemy
+        protected bool enemyAlert;
 
-        protected int darwinAlertCount = 0;
+        protected int enemyAlertCount = 0;
 
         /* constructor
         *  sets an initial area for the zombie to take up
@@ -90,7 +90,7 @@ namespace LegendOfDarwin.GameObject
             }
             source = new Rectangle(0, 0, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
 
-            darwinAlert = false;
+            enemyAlert = false;
         }
 
         // Load the content
@@ -541,19 +541,19 @@ namespace LegendOfDarwin.GameObject
                     else if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
                     {
                         this.source.X = 64;
-                        this.darwinAlert = true;
+                        this.enemyAlert = true;
                         moveTowardsDarwin(darwin);
                     }
                     else
                     {
-                        if (darwinAlert)
+                        if (enemyAlert)
                         {
                             source.X = 128;
-                            darwinAlertCount++;
-                            if (darwinAlertCount > 2) 
+                            enemyAlertCount++;
+                            if (enemyAlertCount > 2) 
                             {
-                                darwinAlert = false;
-                                darwinAlertCount = 0;
+                                enemyAlert = false;
+                                enemyAlertCount = 0;
                             }
                         }
                         else
@@ -586,19 +586,19 @@ namespace LegendOfDarwin.GameObject
                     if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())
                     {
                         this.source.X = 64;
-                        this.darwinAlert = true;
+                        this.enemyAlert = true;
                         moveTowardsDarwin(darwin);
                     }
                     else
                     {
-                        if (darwinAlert)
+                        if (enemyAlert)
                         {
                             source.X = 128;
-                            darwinAlertCount++;
-                            if (darwinAlertCount > 2)
+                            enemyAlertCount++;
+                            if (enemyAlertCount > 2)
                             {
-                                darwinAlert = false;
-                                darwinAlertCount = 0;
+                                enemyAlert = false;
+                                enemyAlertCount = 0;
                             }
                         }
                         else

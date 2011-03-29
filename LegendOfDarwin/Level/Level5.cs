@@ -37,6 +37,8 @@ namespace LegendOfDarwin.Level
         private Potion potion;
         private Stairs stairs;
 
+        private Box box;
+
         private BasicObject[] walls;
         private Texture2D wallTex;
 
@@ -122,6 +124,8 @@ namespace LegendOfDarwin.Level
 
             setPotionPosition(25, 4);
 
+            box = new Box(board, 25, 5);
+
             setWalls();
         }
 
@@ -189,6 +193,8 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
+            
+            box.LoadContent(mainGame.Content.Load<Texture2D>("box"));
         }
 
 
@@ -263,6 +269,8 @@ namespace LegendOfDarwin.Level
 
             firstSwitch.Update(gameTime, ks, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
+
+            box.Update(gameTime, ks, darwin);
 
             if (!darwin.isZombie())
             {
@@ -454,6 +462,8 @@ namespace LegendOfDarwin.Level
             firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             potion.Draw(spriteBatch);
+
+            box.Draw(spriteBatch);
 
             if (messageMode)
             {

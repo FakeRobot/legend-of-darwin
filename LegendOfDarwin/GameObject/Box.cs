@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Input;
 namespace LegendOfDarwin.GameObject
 {
 
-    public class Brain: BasicObject
+    public class Box: BasicObject
     {
-        public const int BRAIN_HEIGHT = 64;
-        public const int BRAIN_WIDTH = 64;
+        public const int BOX_HEIGHT = 64;
+        public const int BOX_WIDTH = 64;
 
-        protected Texture2D brainTexture;
+        protected Texture2D BoxTexture;
 
-        public Brain(GameBoard myboard, int startX, int startY) : base(myboard)
+        public Box(GameBoard myboard, int startX, int startY) : base(myboard)
         {
             this.X = startX;
             this.Y = startY;
@@ -32,20 +32,20 @@ namespace LegendOfDarwin.GameObject
             destination = board.getPosition(startX, startY);
         }
 
-        public void LoadContent(Texture2D brainTex)
+        public void LoadContent(Texture2D BoxTex)
         {
-            brainTexture = brainTex;
+            BoxTexture = BoxTex;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin)
         {
             base.Update(gameTime);
-            // Darwin only pushes brains as a zombie
-            if (darwin.isZombie() && this.canEventHappen() && ks.IsKeyDown(Keys.A))
+            // if we be a zombie, he cant push boxes
+            if (!darwin.isZombie() && this.canEventHappen() && ks.IsKeyDown(Keys.A))
             {
                 this.setEventFalse();
 
-                // grab us the current
+                // get Darwin's current facing direction
                 LegendOfDarwin.Darwin.Dir facing = darwin.facing;
 
                 // check switch position in relation to darwin's position + facing direction 
@@ -87,7 +87,7 @@ namespace LegendOfDarwin.GameObject
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(brainTexture, this.destination, Color.White);
+            spriteBatch.Draw(BoxTexture, this.destination, Color.White);
         }
 
     }

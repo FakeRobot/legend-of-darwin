@@ -52,8 +52,6 @@ namespace LegendOfDarwin.Level
 
         Vector2 gameOverPosition = Vector2.Zero;
 
-
-        // things for managing message boxes
         bool messageMode = false;
         int messageModeCounter = 0;
         private MessageBox zombieMessage;
@@ -81,9 +79,6 @@ namespace LegendOfDarwin.Level
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
-            //firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
-            //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
-            //thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -187,10 +182,6 @@ namespace LegendOfDarwin.Level
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
 
-            //firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            //secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            //thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -228,7 +219,6 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             messageModeCounter++;
 
-            //zombieMessage.pointToSquare(firstZombie.X, firstZombie.Y, board);
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
             switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
 
@@ -271,18 +261,12 @@ namespace LegendOfDarwin.Level
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             stairs.Update(gameTime, darwin);
 
-            //firstZombie.Update(gameTime, darwin);
-            //secondZombie.Update(gameTime, darwin);
-            //thirdZombie.Update(gameTime, darwin);
-
             firstSwitch.Update(gameTime, ks, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
 
             if (!darwin.isZombie())
             {
-                //checkForGameOver(firstZombie);
-                //checkForGameOver(secondZombie);
-                //checkForGameOver(thirdZombie);
+                //checkForGameOver(zombie...)
             }
 
             checkForGameWin();
@@ -312,7 +296,6 @@ namespace LegendOfDarwin.Level
             if (ks.IsKeyDown(Keys.R))
             {
 
-
                 if (gameWin)
                 {
                     zTime.reset();
@@ -332,22 +315,7 @@ namespace LegendOfDarwin.Level
                 gameOver = false;
                 gameWin = false;
 
-                //board.setGridPositionOpen(firstZombie);
-                //board.setGridPositionOpen(secondZombie);
-                //board.setGridPositionOpen(thirdZombie);
                 board.setGridPositionOpen(potion);
-
-                //firstZombie.setGridPosition(10, 10);
-                //board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
-                //firstZombie.setZombieAlive(true);
-
-                //secondZombie.setGridPosition(10, 16);
-                //board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
-                //secondZombie.setZombieAlive(true);
-
-                //thirdZombie.setGridPosition(12, 10);
-                //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
-                //thirdZombie.setZombieAlive(true);
 
                 potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
@@ -416,7 +384,7 @@ namespace LegendOfDarwin.Level
         {
             if (darwin.isOnTop(stairs))
             {
-                //need to changwe this to level 5 once it's created!!
+                //need to changwe this to level 6 once it's created!!
                 mainGame.setCurLevel(Game1.LevelState.Level3);
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
 
@@ -482,9 +450,6 @@ namespace LegendOfDarwin.Level
             stairs.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
-            //firstZombie.Draw(spriteBatch);
-            //secondZombie.Draw(spriteBatch);
-            //thirdZombie.Draw(spriteBatch);
 
             firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
@@ -494,7 +459,6 @@ namespace LegendOfDarwin.Level
             {
                 zombieMessage.Draw(spriteBatch, messageFont);
                 darwinMessage.Draw(spriteBatch, messageFont);
-                //switchMessage.Draw(spriteBatch, messageFont);
             }
 
             foreach (BasicObject a in walls)

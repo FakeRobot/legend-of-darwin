@@ -297,6 +297,22 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
+            if (!darwin.isZombie())
+            {
+                if (firstZombie.isZombieAlive())
+                    checkForGameOver(firstZombie);
+                if (secondZombie.isZombieAlive())
+                    checkForGameOver(secondZombie);
+                if (thirdZombie.isZombieAlive())
+                    checkForGameOver(thirdZombie);
+                if (fourthZombie.isZombieAlive())
+                    checkForGameOver(fourthZombie);
+            }
+            if (darwin.isZombie())
+            {
+                checkForGameOver(cannibalZombie);
+            }
+
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
 
             stairs.Update(gameTime, darwin);
@@ -318,21 +334,7 @@ namespace LegendOfDarwin
 
             potion.Update(gameTime, ks, darwin, zTime);
 
-            if (!darwin.isZombie())
-            {
-                if (firstZombie.isZombieAlive())
-                    checkForGameOver(firstZombie);
-                if (secondZombie.isZombieAlive())
-                    checkForGameOver(secondZombie);
-                if (thirdZombie.isZombieAlive())
-                    checkForGameOver(thirdZombie);
-                if (fourthZombie.isZombieAlive())
-                    checkForGameOver(fourthZombie);
-            }
-            if (darwin.isZombie())
-            {
-                checkForGameOver(cannibalZombie);
-            }
+            
 
             //checkForGameWin();
             if (isAllZombiesDead())

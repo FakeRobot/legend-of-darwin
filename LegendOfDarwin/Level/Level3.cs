@@ -493,6 +493,12 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
+            if (!darwin.isZombie())
+            {
+                checkForGameOver(firstZombie);
+                checkForGameOver(fastZombie1);
+            }
+
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             secondStair.Update(gameTime, darwin);
 
@@ -552,14 +558,6 @@ namespace LegendOfDarwin
             secondSwitch.Update(gameTime, ks, darwin);
 
             brain.Update(gameTime, ks, darwin);
-
-            if (!darwin.isZombie())
-            {
-                checkForGameOver(firstZombie);
-                checkForGameOver(fastZombie1);
-            }
-            //checkForGameOver(secondZombie);
-            //checkForGameOver(thirdZombie);
 
             checkForSwitchToLevelFour();
             //checkForGameWin();

@@ -296,6 +296,11 @@ namespace LegendOfDarwin.Level
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
+            if (!darwin.isZombie())
+            {
+                checkForGameOver(leaderZombie);
+            }
+
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
 
             stairs.Update(gameTime, darwin);
@@ -309,13 +314,7 @@ namespace LegendOfDarwin.Level
 
             potion.Update(gameTime, ks, darwin, zTime);
 
-            if (!darwin.isZombie())
-            {
-                //checkForGameOver(firstZombie);
-                //checkForGameOver(secondZombie);
-                //checkForGameOver(thirdZombie);
-                checkForGameOver(leaderZombie);
-            }
+            
 
             //checkForGameWin();
             checkForSwitchToLevelFive();

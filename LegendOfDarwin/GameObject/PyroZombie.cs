@@ -10,8 +10,8 @@ namespace LegendOfDarwin.GameObject
     {
 
         // directional stuffs
-        protected enum Dir {Up, Down, Left, Right};
-    
+        protected enum Dir { Up, Down, Left, Right };
+
         // need directions to shoot flames and directions to walk
         protected Dir flameDir;
         protected Dir walkDir;

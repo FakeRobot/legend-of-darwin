@@ -37,6 +37,7 @@ namespace LegendOfDarwin.Level
         private Potion potion;
         private Stairs stairs;
 
+        private Snake snake;
         private Box box;
 
         private BasicObject[] walls;
@@ -127,6 +128,8 @@ namespace LegendOfDarwin.Level
             box = new Box(board, 25, 5);
 
             setWalls();
+
+            snake = new Snake(10, 10, 15, 5, 15, 5, board);
         }
 
         private BasicObject[] setRemovableWallsInLevelOne()
@@ -168,6 +171,7 @@ namespace LegendOfDarwin.Level
             Texture2D darwinRightTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinRight");
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
+            
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
@@ -193,8 +197,12 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
-            
+
+            Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
+            snake.LoadContent(snakeTexture);
+  
             box.LoadContent(mainGame.Content.Load<Texture2D>("box"));
+
         }
 
 
@@ -270,12 +278,16 @@ namespace LegendOfDarwin.Level
             firstSwitch.Update(gameTime, ks, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
 
+            snake.Update(gameTime, darwin);
+
             box.Update(gameTime, ks, darwin);
 
             if (!darwin.isZombie())
             {
-                //checkForGameOver(zombie...)
+                //checkForGameOver(zombie...);
             }
+
+            updateSnakeCollision(snake, darwin);
 
             checkForGameWin();
             //checkForSwitchToLevelSix();
@@ -291,6 +303,13 @@ namespace LegendOfDarwin.Level
                 messageModeCounter = 0;
             }
             messageModeCounter++;
+        }
+
+        private void updateSnakeCollision(Snake snake, Darwin darwin)
+        {
+            
+
+            
         }
 
         private void UpdateEndState()
@@ -350,7 +369,7 @@ namespace LegendOfDarwin.Level
 
         private void checkForGameOver(Zombie myZombie)
         {
-            if (darwin.isOnTop(myZombie))
+            if (myZombie.isOnTop(darwin))
             {
                 gameOver = true;
             }
@@ -462,6 +481,8 @@ namespace LegendOfDarwin.Level
             firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             potion.Draw(spriteBatch);
+
+            snake.Draw(spriteBatch);
 
             box.Draw(spriteBatch);
 

@@ -109,9 +109,6 @@ namespace LegendOfDarwin
             level5.LoadContent();
         }
 
-        /*
-         * 
-         */ 
         private void InitializeGraphics()
         {
             graphics.PreferredBackBufferHeight = 800;
@@ -136,8 +133,6 @@ namespace LegendOfDarwin
             
             base.Update(gameTime);
         }
-
-
 
         protected override void Draw(GameTime gameTime)
         {

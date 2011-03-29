@@ -28,6 +28,7 @@ namespace LegendOfDarwin.Level
 
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie;
+        private CongaLeaderZombie leaderZombie;
         private Switch firstSwitch;
         private GameBoard board;
 
@@ -84,6 +85,14 @@ namespace LegendOfDarwin.Level
             //firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
+
+            Vector2[] myPath = new Vector2[4]; 
+            myPath[0] = new Vector2(7,7);
+            myPath[1] = new Vector2(7,20);
+            myPath[2] = new Vector2(20,20);
+            myPath[3] = new Vector2(20,7);
+
+            leaderZombie = new CongaLeaderZombie(7,7,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -188,6 +197,8 @@ namespace LegendOfDarwin.Level
             //firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             //secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             //thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+
+            leaderZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
         
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -292,6 +303,7 @@ namespace LegendOfDarwin.Level
             //firstZombie.Update(gameTime, darwin);
             //secondZombie.Update(gameTime, darwin);
             //thirdZombie.Update(gameTime, darwin);
+            leaderZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
 
@@ -302,6 +314,7 @@ namespace LegendOfDarwin.Level
                 //checkForGameOver(firstZombie);
                 //checkForGameOver(secondZombie);
                 //checkForGameOver(thirdZombie);
+                checkForGameOver(leaderZombie);
             }
 
             //checkForGameWin();
@@ -367,6 +380,10 @@ namespace LegendOfDarwin.Level
                 //thirdZombie.setGridPosition(12, 10);
                 //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 //thirdZombie.setZombieAlive(true);
+
+                leaderZombie.setGridPosition(7, 7);
+                board.setGridPositionOccupied(leaderZombie.X, leaderZombie.Y);
+                leaderZombie.setZombieAlive(true);
 
                 potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
@@ -503,6 +520,7 @@ namespace LegendOfDarwin.Level
             //firstZombie.Draw(spriteBatch);
             //secondZombie.Draw(spriteBatch);
             //thirdZombie.Draw(spriteBatch);
+            leaderZombie.Draw(spriteBatch);
 
             firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);

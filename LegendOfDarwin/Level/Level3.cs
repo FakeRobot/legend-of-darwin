@@ -560,7 +560,9 @@ namespace LegendOfDarwin
             }
             //checkForGameOver(secondZombie);
             //checkForGameOver(thirdZombie);
-            checkForGameWin();
+
+            checkForSwitchToLevelFour();
+            //checkForGameWin();
 
             if (gameOver || gameWin)
             {
@@ -707,6 +709,20 @@ namespace LegendOfDarwin
                 {
                     gameOver = true;
                 }
+            }
+        }
+
+        private void checkForSwitchToLevelFour()
+        {
+            if (darwin.isOnTop(secondStair))
+            {
+                mainGame.setCurLevel(Game1.LevelState.Level4);
+                mainGame.setZTimeLevel(zTime, Game1.LevelState.Level4);
+
+                darwin.setHuman();
+                gameState.setState(GameState.state.Level);
+                gameOver = false;
+                gameWin = false;
             }
         }
 

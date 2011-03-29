@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace LegendOfDarwin.GameObject
 {
 
-    public class Box: BasicObject
+    public class Box : BasicObject
     {
         public const int BOX_HEIGHT = 64;
         public const int BOX_WIDTH = 64;

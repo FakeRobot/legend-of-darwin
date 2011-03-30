@@ -153,6 +153,8 @@ namespace LegendOfDarwin.GameObject
                 {
                     
                         RandomWalk();
+                        destination.Height = (100 / 64) * board.getSquareWidth() + 10;
+                        destination.Y -= amtShiftUp;
 
 
                 }

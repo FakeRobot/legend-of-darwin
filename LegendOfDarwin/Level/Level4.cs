@@ -88,8 +88,8 @@ namespace LegendOfDarwin.Level
 
             Vector2[] myPath = new Vector2[4]; 
             myPath[0] = new Vector2(7,7);
-            myPath[1] = new Vector2(7,20);
-            myPath[2] = new Vector2(20,20);
+            myPath[1] = new Vector2(7,19);
+            myPath[2] = new Vector2(20,19);
             myPath[3] = new Vector2(20,7);
 
             leaderZombie = new CongaLeaderZombie(7,7,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
@@ -114,7 +114,7 @@ namespace LegendOfDarwin.Level
             firstSwitch = new Switch(switchSquare, board, removableWalls);
 
             // Initial starting position
-            darwin.setGridPosition(2, 20);
+            darwin.setGridPosition(16, 22);
 
             if (board.isGridPositionOpen(darwin))
             {
@@ -136,7 +136,7 @@ namespace LegendOfDarwin.Level
 
             setPotionPosition(25, 4);
 
-            setWalls();
+            setWallsInLevelFour();
         }
 
         private BasicObject[] setRemovableWallsInLevelOne()
@@ -210,7 +210,303 @@ namespace LegendOfDarwin.Level
 
             
         }
-            
+
+        private void setWallsInLevelFour()
+        {
+            //lower left area wall
+            BasicObject w0 = new BasicObject(board);
+            BasicObject w1 = new BasicObject(board);
+            BasicObject w2 = new BasicObject(board);
+            BasicObject w3 = new BasicObject(board);
+            BasicObject w4 = new BasicObject(board);
+            BasicObject w5 = new BasicObject(board);
+            BasicObject w6 = new BasicObject(board);
+            BasicObject w7 = new BasicObject(board);
+            BasicObject w8 = new BasicObject(board);
+            BasicObject w9 = new BasicObject(board);
+            BasicObject w9p = new BasicObject(board);
+            BasicObject w10 = new BasicObject(board);
+            BasicObject w11 = new BasicObject(board);
+            BasicObject w12 = new BasicObject(board);
+            BasicObject w13 = new BasicObject(board);
+            BasicObject w14 = new BasicObject(board);
+            BasicObject w15 = new BasicObject(board);
+            BasicObject w16 = new BasicObject(board);
+            BasicObject w17 = new BasicObject(board);
+            BasicObject w18 = new BasicObject(board);
+            BasicObject w19 = new BasicObject(board);
+            BasicObject w20 = new BasicObject(board);
+            BasicObject w21 = new BasicObject(board);
+            BasicObject w22 = new BasicObject(board);
+            BasicObject w23 = new BasicObject(board);
+            BasicObject w24 = new BasicObject(board);
+            BasicObject w25 = new BasicObject(board);
+            BasicObject w26 = new BasicObject(board);
+            BasicObject w27 = new BasicObject(board);
+            BasicObject w28 = new BasicObject(board);
+            BasicObject w29 = new BasicObject(board);
+            BasicObject w30 = new BasicObject(board);
+            BasicObject w31 = new BasicObject(board);
+            BasicObject w32 = new BasicObject(board);
+            BasicObject w33 = new BasicObject(board);
+            BasicObject w34 = new BasicObject(board);
+            BasicObject w35 = new BasicObject(board);
+            BasicObject w36 = new BasicObject(board);
+            BasicObject w37 = new BasicObject(board);
+            BasicObject w38 = new BasicObject(board);
+            BasicObject w39 = new BasicObject(board);
+            BasicObject w40 = new BasicObject(board);
+            BasicObject w41 = new BasicObject(board);
+            BasicObject w42 = new BasicObject(board);
+            BasicObject w43 = new BasicObject(board);
+            BasicObject w44 = new BasicObject(board);
+            BasicObject w45 = new BasicObject(board);
+            BasicObject w46 = new BasicObject(board);
+            BasicObject w47 = new BasicObject(board);
+            BasicObject w48 = new BasicObject(board);
+            BasicObject w49 = new BasicObject(board);
+            BasicObject w50 = new BasicObject(board);
+            BasicObject w51 = new BasicObject(board);
+            BasicObject w52 = new BasicObject(board);
+            BasicObject w53 = new BasicObject(board);
+            BasicObject w54 = new BasicObject(board);
+            BasicObject w55 = new BasicObject(board);
+            BasicObject w56 = new BasicObject(board);
+            BasicObject w57 = new BasicObject(board);
+            BasicObject w58 = new BasicObject(board);
+            BasicObject w59 = new BasicObject(board);
+            BasicObject w60 = new BasicObject(board);
+            BasicObject w61 = new BasicObject(board);
+            BasicObject w62 = new BasicObject(board);
+            BasicObject w63 = new BasicObject(board);
+            BasicObject w64 = new BasicObject(board);
+            BasicObject w65 = new BasicObject(board);
+            BasicObject w66 = new BasicObject(board);
+            BasicObject w67 = new BasicObject(board);
+            BasicObject w68 = new BasicObject(board);
+            BasicObject w69 = new BasicObject(board);
+            BasicObject w70 = new BasicObject(board);
+            BasicObject w71 = new BasicObject(board);
+            BasicObject w72 = new BasicObject(board);
+            BasicObject w73 = new BasicObject(board);
+            BasicObject w74 = new BasicObject(board);
+            BasicObject w75 = new BasicObject(board);
+            BasicObject w76 = new BasicObject(board);
+            BasicObject w77 = new BasicObject(board);
+            BasicObject w78 = new BasicObject(board);
+            BasicObject w79 = new BasicObject(board);
+            BasicObject w80 = new BasicObject(board);
+            BasicObject w81 = new BasicObject(board);
+            BasicObject w82 = new BasicObject(board);
+            BasicObject w83 = new BasicObject(board);
+            BasicObject w84 = new BasicObject(board);
+            BasicObject w85 = new BasicObject(board);
+
+            // first lower row
+            w0.setGridPosition(1, 22);
+            w1.setGridPosition(2, 22);
+            w2.setGridPosition(3, 22);
+            w3.setGridPosition(4, 22);
+            w4.setGridPosition(5, 22);
+            w5.setGridPosition(6, 22);
+            w6.setGridPosition(7, 22);
+            w7.setGridPosition(8, 22);
+            w8.setGridPosition(9, 22);
+            w9p.setGridPosition(10,22);
+            w9.setGridPosition(11, 22);
+            w10.setGridPosition(12, 22);
+            w11.setGridPosition(13, 22);
+            w12.setGridPosition(14, 22);
+            w13.setGridPosition(18, 22);
+            w14.setGridPosition(19, 22);
+            w15.setGridPosition(20, 22);
+            w16.setGridPosition(21, 22);
+            w17.setGridPosition(22, 22);
+            w18.setGridPosition(23, 22);
+            w19.setGridPosition(24, 22);
+            w20.setGridPosition(25, 22);
+            w21.setGridPosition(26, 22);
+            w22.setGridPosition(27, 22);
+            w23.setGridPosition(28, 22);
+            w24.setGridPosition(29, 22);
+            w25.setGridPosition(30, 22);
+            w26.setGridPosition(31, 22);
+            w27.setGridPosition(32, 22);
+
+            for (int m = 1; m < 15; m++)
+            {
+                board.setGridPositionOccupied(m, 22);
+            }
+            for (int m = 18; m < 33; m++)
+            {
+                board.setGridPositionOccupied(m, 22);
+            }
+
+            //second lower row
+            w28.setGridPosition(1, 21);
+            w29.setGridPosition(2, 21);
+            w30.setGridPosition(3, 21);
+            w31.setGridPosition(4, 21);
+            w32.setGridPosition(5, 21);
+            w33.setGridPosition(6, 21);
+            w34.setGridPosition(7, 21);
+            w35.setGridPosition(8, 21);
+            w36.setGridPosition(9, 21);
+            w37.setGridPosition(10, 21);
+            w38.setGridPosition(11, 21);
+            w39.setGridPosition(12, 21);
+            w40.setGridPosition(13, 21);
+            w41.setGridPosition(14, 21);
+            w42.setGridPosition(18, 21);
+            w43.setGridPosition(19, 21);
+            w44.setGridPosition(20, 21);
+            w45.setGridPosition(21, 21);
+            w46.setGridPosition(22, 21);
+            w47.setGridPosition(23, 21);
+            w48.setGridPosition(24, 21);
+            w49.setGridPosition(25, 21);
+            w50.setGridPosition(26, 21);
+            w51.setGridPosition(27, 21);
+            w52.setGridPosition(28, 21);
+            w53.setGridPosition(29, 21);
+            w54.setGridPosition(30, 21);
+            w55.setGridPosition(31, 21);
+            w56.setGridPosition(32, 21);
+
+            for (int m = 1; m < 15; m++)
+            {
+                board.setGridPositionOccupied(m, 21);
+            }
+            for (int m = 18; m < 33; m++)
+            {
+                board.setGridPositionOccupied(m, 21);
+            }
+
+            //third lower row
+            w57.setGridPosition(1, 20);
+            w58.setGridPosition(2, 20);
+            w59.setGridPosition(3, 20);
+            w60.setGridPosition(4, 20);
+            w61.setGridPosition(5, 20);
+            w62.setGridPosition(6, 20);
+            w63.setGridPosition(7, 20);
+            w64.setGridPosition(8, 20);
+            w65.setGridPosition(9, 20);
+            w66.setGridPosition(10, 20);
+            w67.setGridPosition(11, 20);
+            w68.setGridPosition(12, 20);
+            w69.setGridPosition(13, 20);
+            w70.setGridPosition(14, 20);
+            w71.setGridPosition(18, 20);
+            w72.setGridPosition(19, 20);
+            w73.setGridPosition(20, 20);
+            w74.setGridPosition(21, 20);
+            w75.setGridPosition(22, 20);
+            w76.setGridPosition(23, 20);
+            w77.setGridPosition(24, 20);
+            w78.setGridPosition(25, 20);
+            w79.setGridPosition(26, 20);
+            w80.setGridPosition(27, 20);
+            w81.setGridPosition(28, 20);
+            w82.setGridPosition(29, 20);
+            w83.setGridPosition(30, 20);
+            w84.setGridPosition(31, 20);
+            w85.setGridPosition(32, 20);
+
+            for (int m = 1; m < 15; m++)
+            {
+                board.setGridPositionOccupied(m, 20);
+            }
+            for (int m = 18; m < 33; m++)
+            {
+                board.setGridPositionOccupied(m, 20);
+            }
+
+            ////upper long horizontal wall
+            //BasicObject w19 = new BasicObject(board);
+            //BasicObject w20 = new BasicObject(board);
+            //BasicObject w21 = new BasicObject(board);
+            //BasicObject w22 = new BasicObject(board);
+            //BasicObject w23 = new BasicObject(board);
+            //BasicObject w24 = new BasicObject(board);
+            //BasicObject w25 = new BasicObject(board);
+            //BasicObject w26 = new BasicObject(board);
+            //BasicObject w27 = new BasicObject(board);
+            //BasicObject w28 = new BasicObject(board);
+            //BasicObject w29 = new BasicObject(board);
+            //BasicObject w30 = new BasicObject(board);
+            //BasicObject w31 = new BasicObject(board);
+            //BasicObject w32 = new BasicObject(board);
+            //BasicObject w33 = new BasicObject(board);
+            //BasicObject w34 = new BasicObject(board);
+            //BasicObject w35 = new BasicObject(board);
+            //BasicObject w36 = new BasicObject(board);
+            //BasicObject w48 = new BasicObject(board);
+            //BasicObject w49 = new BasicObject(board);
+            //BasicObject w50 = new BasicObject(board);
+            //BasicObject w51 = new BasicObject(board);
+            //BasicObject w52 = new BasicObject(board);
+
+            //w19.setGridPosition(1, 10);
+            //w20.setGridPosition(2, 10);
+            //w21.setGridPosition(2, 10);
+            //w22.setGridPosition(3, 10);
+            //w23.setGridPosition(4, 10);
+            //w24.setGridPosition(5, 10);
+            //w25.setGridPosition(6, 10);
+            //w26.setGridPosition(7, 10);
+            //w27.setGridPosition(8, 10);
+            //w28.setGridPosition(9, 10);
+            //w29.setGridPosition(10, 10);
+            //w30.setGridPosition(11, 10);
+            //w31.setGridPosition(12, 10);
+            //w32.setGridPosition(13, 10);
+            //w33.setGridPosition(14, 10);
+            //w34.setGridPosition(15, 10);
+            //w48.setGridPosition(16, 10);
+            //w49.setGridPosition(17, 10);
+            //w50.setGridPosition(18, 10);
+            //w51.setGridPosition(19, 10);
+            //w52.setGridPosition(20, 10);
+
+            //for (int n = 1; n < 21; n++)
+            //{
+            //    board.setGridPositionOccupied(n, 10);
+            //}
+
+            ////short vertical wall
+            //BasicObject w37 = new BasicObject(board);
+            //BasicObject w38 = new BasicObject(board);
+            //BasicObject w39 = new BasicObject(board);
+            //BasicObject w40 = new BasicObject(board);
+            //BasicObject w41 = new BasicObject(board);
+            //BasicObject w42 = new BasicObject(board);
+
+            //w37.setGridPosition(26, 1);
+            //w38.setGridPosition(26, 2);
+            //w39.setGridPosition(26, 3);
+            //w40.setGridPosition(26, 4);
+            //w41.setGridPosition(26, 5);
+            //w42.setGridPosition(26, 6);
+
+            //for (int k = 1; k < 7; k++)
+            //{
+            //    board.setGridPositionOccupied(26, k);
+            //}
+
+            walls = new BasicObject[87] {w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w9p,w10, w11, 
+                w12, w13, w14, w15, w16, w17, w18, 
+                 w19, w20, w21, w22, w23, w24, w25,w26,w27,
+            w28, w29, w30, w31, w32, w33, w34, w35, w36, w37, w38,w39, w40, 
+                w41, w42, w43, w44, w45, w46, w47, 
+                 w48, w49, w50, w51, w52, w53, w54,w55,w56,
+            w57, w58, w59, w60, w61, w62, w63, w64, w65, w66, w67,w68, w69, 
+                w70, w71, w72, w73, w74, w75, w76, 
+                 w77, w78, w79, w80, w81, w82, w83,w84,w85};
+        }
+
+
+
 
         //protected override void UnloadContent() { }
 
@@ -360,7 +656,7 @@ namespace LegendOfDarwin.Level
                 }
 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 20);
+                darwin.setGridPosition(16, 20);
 
                 gameOver = false;
                 gameWin = false;

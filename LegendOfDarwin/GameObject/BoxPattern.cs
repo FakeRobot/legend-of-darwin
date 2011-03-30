@@ -18,6 +18,9 @@ namespace LegendOfDarwin.GameObject
 
         private int numberOfSpotsToCheck;
 
+        bool showSparkles;
+        int sparkleCount = 0;
+
         public BoxPattern(GameBoard board, BasicObject[] mySpots)
         {
             int i = 0;
@@ -69,10 +72,28 @@ namespace LegendOfDarwin.GameObject
 
             if (matchCount == numberOfSpotsToCheck)
             {
+                if (sparkleCount < 50)
+                {
+                    showSparkles = true;
+                    sparkleCount++;
+                }
+                else if (sparkleCount > 50)
+                {
+                    showSparkles = false;
+                }
                 return true;
             }
-
+            else
+            {
+                showSparkles = false;
+                sparkleCount = 0;
+            }
             return false;
+        }
+
+        public bool shouldSparkle()
+        {
+            return showSparkles;
         }
 
     }

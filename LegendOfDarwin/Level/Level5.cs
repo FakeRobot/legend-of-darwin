@@ -27,8 +27,6 @@ namespace LegendOfDarwin.Level
         private GameStart gameStart;
 
         private Darwin darwin;
-        private Zombie firstZombie, secondZombie, thirdZombie;
-        private Switch firstSwitch;
         private GameBoard board;
 
         private ZombieTime zTime;
@@ -42,11 +40,15 @@ namespace LegendOfDarwin.Level
         private Box[] boxes;
         private BasicObject[] spotsForPattern;
         private BoxPattern pattern;
+        private Texture2D sparkleTex;
 
         private Snake snake;
 
         private BasicObject[] walls;
         private Texture2D wallTex;
+
+        // These are the holes
+        private Vortex[] vortexes;
 
         public SpriteFont messageFont;
         public bool keyIsHeldDown = false;
@@ -64,7 +66,6 @@ namespace LegendOfDarwin.Level
         int messageModeCounter = 0;
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
-        private MessageBox switchMessage;
 
         public Song song;
         public Game1 mainGame;
@@ -94,22 +95,14 @@ namespace LegendOfDarwin.Level
             String darwinString = "This is darwin,\n move with arrows, \n z to transform, \n a for actions";
             darwinMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, darwinString);
 
-            String switchString = "This is a switch\n face it and press A\n to see what happens!!";
-            switchMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, switchString);
-
             stairs = new Stairs(board);
-
-            BasicObject[] removableWalls = setRemovableWallsInLevelOne();
-
-            BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 5;
-            switchSquare.Y = 10;
-
-            firstSwitch = new Switch(switchSquare, board, removableWalls);
+            if (board.isGridPositionOpen(5, 18))
+            {
+                stairs.setGridPosition(5, 18);
+            }
 
             // Initial starting position
-            darwin.setGridPosition(2, 20);
-
+            darwin.setGridPosition(6, 18);
             if (board.isGridPositionOpen(darwin))
             {
                 board.setGridPositionOccupied(darwin.X, darwin.Y);
@@ -119,20 +112,16 @@ namespace LegendOfDarwin.Level
             // Darwin's lag movement
             counterReady = counter = 5;
 
-            if (board.isGridPositionOpen(13, 2))
-            {
-                stairs.setGridPosition(13, 2);
-                stairs.setDestination(board.getPosition(13, 2));
-            }
-
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
 
-            setPotionPosition(25, 4);
+            setPotionPosition(18, 10);
 
             setBoxes();
             setBoxPattern();
             pattern = new BoxPattern(board, spotsForPattern);
+
+            setVortexes();
 
             setWalls();
 
@@ -154,17 +143,6 @@ namespace LegendOfDarwin.Level
             westZombie.setGridPosition(3, 11);
             westZombie.setDirection(3);
 
-        }
-
-        private BasicObject[] setRemovableWallsInLevelOne()
-        {
-
-            BasicObject s1 = new BasicObject(board);
-            s1.X = 28;
-            s1.Y = 19;
-
-            BasicObject[] removableWalls = new BasicObject[1] { s1 };
-            return removableWalls;
         }
 
         private void setPotionPosition(int x, int y)
@@ -209,6 +187,96 @@ namespace LegendOfDarwin.Level
             spotsForPattern = new BasicObject[4] { bo1, bo2, bo3, bo4 };
         }
 
+        private void setVortexes()
+        {
+            Vortex vn1 = new Vortex(board, 4, 4);
+            Vortex vn2 = new Vortex(board, 5, 4);
+            Vortex vn3 = new Vortex(board, 6, 4);
+            Vortex vn4 = new Vortex(board, 7, 4);
+            Vortex vn5 = new Vortex(board, 8, 4);
+            Vortex vn6 = new Vortex(board, 9, 4);
+            Vortex vn7 = new Vortex(board, 10, 4);
+            Vortex vn8 = new Vortex(board, 11, 4);
+            Vortex vn9 = new Vortex(board, 12, 4);
+            Vortex vn10 = new Vortex(board, 13, 4);
+            Vortex vn11 = new Vortex(board, 14, 4);
+            Vortex vn12 = new Vortex(board, 15, 4);
+            Vortex vn13 = new Vortex(board, 16, 4);
+            Vortex vn14 = new Vortex(board, 17, 4);
+            Vortex vn15 = new Vortex(board, 18, 4);
+            Vortex vn16 = new Vortex(board, 19, 4);
+            Vortex vn17 = new Vortex(board, 20, 4);
+            Vortex vn18 = new Vortex(board, 21, 4);
+            Vortex vn19 = new Vortex(board, 22, 4);
+            Vortex vn20 = new Vortex(board, 23, 4);
+            Vortex vn21 = new Vortex(board, 24, 4);
+            Vortex vn22 = new Vortex(board, 25, 4);
+            Vortex vn23 = new Vortex(board, 26, 4);
+            Vortex vn24 = new Vortex(board, 27, 4);
+            Vortex vn25 = new Vortex(board, 28, 4);
+
+            Vortex vs1 = new Vortex(board, 4, 19);
+            Vortex vs2 = new Vortex(board, 5, 19);
+            Vortex vs3 = new Vortex(board, 6, 19);
+            Vortex vs4 = new Vortex(board, 7, 19);
+            Vortex vs5 = new Vortex(board, 8, 19);
+            Vortex vs6 = new Vortex(board, 9, 19);
+            Vortex vs7 = new Vortex(board, 10, 19);
+            Vortex vs8 = new Vortex(board, 11, 19);
+            Vortex vs9 = new Vortex(board, 12, 19);
+            Vortex vs10 = new Vortex(board, 13, 19);
+            Vortex vs11 = new Vortex(board, 14, 19);
+            Vortex vs12 = new Vortex(board, 15, 19);
+            Vortex vs13 = new Vortex(board, 16, 19);
+            Vortex vs14 = new Vortex(board, 17, 19);
+            Vortex vs15 = new Vortex(board, 18, 19);
+            Vortex vs16 = new Vortex(board, 19, 19);
+            Vortex vs17 = new Vortex(board, 20, 19);
+            Vortex vs18 = new Vortex(board, 21, 19);
+            Vortex vs19 = new Vortex(board, 22, 19);
+            Vortex vs20 = new Vortex(board, 23, 19);
+            Vortex vs21 = new Vortex(board, 24, 19);
+            Vortex vs22 = new Vortex(board, 25, 19);
+            Vortex vs23 = new Vortex(board, 26, 19);
+            Vortex vs24 = new Vortex(board, 27, 19);
+            Vortex vs25 = new Vortex(board, 28, 19);
+
+            Vortex ve1 = new Vortex(board, 28, 5);
+            Vortex ve2 = new Vortex(board, 28, 6);
+            Vortex ve3 = new Vortex(board, 28, 7);
+            Vortex ve4 = new Vortex(board, 28, 8);
+            Vortex ve5 = new Vortex(board, 28, 9);
+            Vortex ve6 = new Vortex(board, 28, 10);
+            Vortex ve7 = new Vortex(board, 28, 11);
+            Vortex ve8 = new Vortex(board, 28, 12);
+            Vortex ve9 = new Vortex(board, 28, 13);
+            Vortex ve10 = new Vortex(board, 28, 14);
+            Vortex ve11 = new Vortex(board, 28, 15);
+            Vortex ve12 = new Vortex(board, 28, 16);
+            Vortex ve13 = new Vortex(board, 28, 17);
+            Vortex ve14 = new Vortex(board, 28, 18);
+
+            Vortex vw1 = new Vortex(board, 4, 5);
+            Vortex vw2 = new Vortex(board, 4, 6);
+            Vortex vw3 = new Vortex(board, 4, 7);
+            Vortex vw4 = new Vortex(board, 4, 8);
+            Vortex vw5 = new Vortex(board, 4, 9);
+            Vortex vw6 = new Vortex(board, 4, 10);
+            Vortex vw7 = new Vortex(board, 4, 11);
+            Vortex vw8 = new Vortex(board, 4, 12);
+            Vortex vw9 = new Vortex(board, 4, 13);
+            Vortex vw10 = new Vortex(board, 4, 14);
+            Vortex vw11 = new Vortex(board, 4, 15);
+            Vortex vw12 = new Vortex(board, 4, 16);
+            Vortex vw13 = new Vortex(board, 4, 17);
+            Vortex vw14 = new Vortex(board, 4, 18);
+
+            vortexes = new Vortex[78] { vn1, vn2, vn3, vn4, vn5, vn6, vn7, vn8, vn9, vn10, vn11, vn12, vn13, vn14, vn15, vn16, vn17, vn18, vn19, vn20, vn21, vn22, vn23, vn24, vn25,
+                                        vs1, vs2, vs3, vs4, vs5, vs6, vs7, vs8, vs9, vs10, vs11, vs12, vs13, vs14, vs15, vs16, vs17, vs18, vs19, vs20, vs21, vs22, vs23, vs24, vs25,
+                                        ve1, ve2, ve3, ve4, ve5, ve6, ve7, ve8, ve9, ve10, ve11, ve12, ve13, ve14,
+                                        vw1, vw2, vw3, vw4, vw5, vw6, vw7, vw8, vw9, vw10, vw11, vw12, vw13, vw14 };
+        }
+
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
@@ -220,6 +288,9 @@ namespace LegendOfDarwin.Level
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
 
+            //load a sparkly overlay for the stairs
+            sparkleTex = mainGame.Content.Load<Texture2D>("sparkle");
+
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
@@ -227,9 +298,6 @@ namespace LegendOfDarwin.Level
 
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
-
-            firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
-                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/metal_tile_light"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow"));
@@ -240,7 +308,6 @@ namespace LegendOfDarwin.Level
 
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
-            switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
@@ -249,6 +316,11 @@ namespace LegendOfDarwin.Level
             foreach (Box b in boxes)
             {
                 b.LoadContent(mainGame.Content.Load<Texture2D>("box"));
+            }
+
+            foreach (Vortex v in vortexes)
+            {
+                v.LoadContent(mainGame.Content.Load<Texture2D>("hole"));
             }
 
             pattern.LoadContent(mainGame.Content.Load<Texture2D>("boxPattern"));
@@ -292,7 +364,6 @@ namespace LegendOfDarwin.Level
             messageModeCounter++;
 
             darwinMessage.pointToSquare(darwin.X, darwin.Y, board);
-            switchMessage.pointToSquare(firstSwitch.X, firstSwitch.Y, board);
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -333,13 +404,21 @@ namespace LegendOfDarwin.Level
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             stairs.Update(gameTime, darwin);
 
-            firstSwitch.Update(gameTime, ks, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
 
             foreach (Box b in boxes)
             {
-                //Console.Out.WriteLine("b's x is {0}, b's y is {1}", b.X, b.Y);
                 b.Update(gameTime, ks, darwin);
+            }
+
+            foreach (Vortex v in vortexes)
+            {
+                v.Update(gameTime, ks);
+                // maybe update this so that boxes can't go in holes
+                foreach (Box b in boxes)
+                {
+                    v.CollisionWithBO(b, board);
+                }
             }
 
             snake.Update(gameTime, darwin);
@@ -355,10 +434,12 @@ namespace LegendOfDarwin.Level
 
             updateSnakeCollision(snake, darwin);
 
-            // if the pattern is complete, for now, do a game over
-            if (pattern.isComplete(board, boxes))
+            foreach (Vortex v in vortexes)
             {
-                gameOver = true;
+                if (darwin.isOnTop(v))
+                {
+                    gameOver = true;
+                }
             }
 
             checkForGameWin();
@@ -409,14 +490,14 @@ namespace LegendOfDarwin.Level
                 }
 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 20);
+                darwin.setGridPosition(6, 18);
 
                 gameOver = false;
                 gameWin = false;
 
                 board.setGridPositionOpen(potion);
 
-                potion.setGridPosition(25, 4);
+                potion.setGridPosition(18, 10);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
                 potion.reset();
@@ -473,9 +554,13 @@ namespace LegendOfDarwin.Level
 
         private void checkForGameWin()
         {
-            if (darwin.isOnTop(stairs))
+            // if the pattern is complete, show the stairs and win
+            if (pattern.isComplete(board, boxes))
             {
-                gameWin = true;
+                if (darwin.isOnTop(stairs))
+                {
+                    gameWin = true;
+                }
             }
         }
 
@@ -546,11 +631,23 @@ namespace LegendOfDarwin.Level
 
             spriteBatch.Begin();
             board.Draw(spriteBatch);
-            stairs.Draw(spriteBatch);
+
+            // only show the stairs after the pattern is complete
+            if (pattern.isComplete(board, boxes))
+            {
+                //if (pattern.shouldSparkle())
+                //{  
+                //    stairs.Draw(spriteBatch);
+                //    spriteBatch.Draw(sparkleTex, stairs.destination, Color.White);
+                //}
+                //else
+                //{
+                    stairs.Draw(spriteBatch);
+                //}
+            }
 
             darwin.Draw(spriteBatch);
 
-            firstSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             potion.Draw(spriteBatch);
 
@@ -577,6 +674,11 @@ namespace LegendOfDarwin.Level
             foreach (Box b in boxes)
             {
                 b.Draw(spriteBatch);
+            }
+
+            foreach (Vortex v in vortexes)
+            {
+                v.Draw(spriteBatch);
             }
 
             spriteBatch.End();

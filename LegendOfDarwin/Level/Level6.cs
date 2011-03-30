@@ -100,7 +100,6 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(darwin);
 
             zTime.reset();
-            zTime.setTime(zTimeReset.getTime());
 
             gameOver = false;
             gameWin = false;

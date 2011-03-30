@@ -471,7 +471,14 @@ namespace LegendOfDarwin.Level
                 {
                     checkForDarwinBelowSnake(snake, darwin);
                 }
-
+                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Right))
+                {
+                    checkForDarwinRightOfSnake(snake, darwin);
+                }
+                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Left))
+                {
+                    checkForDarwinLeftOfSnake(snake, darwin);
+                }
                 
             }
         }
@@ -518,6 +525,52 @@ namespace LegendOfDarwin.Level
                 else
                 {
                     snake.backOffUp();
+                }
+            }
+        }
+
+        private void checkForDarwinRightOfSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyRightOfSnake(darwin) && board.isGridPositionOpen(darwin.X + 1, darwin.Y))
+            {
+                snake.pushDarwinRight(darwin);
+            }
+            else if (snake.isDarwinDirectlyRightOfSnake(darwin) && !board.isGridPositionOpen(darwin.X + 1, darwin.Y))
+            {
+                snake.backOffLeft();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X + 1, snake.Y))
+                {
+                    snake.MoveRight();
+                }
+                else
+                {
+                    snake.backOffLeft();
+                }
+            }
+        }
+
+        private void checkForDarwinLeftOfSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyLeftOfSnake(darwin) && board.isGridPositionOpen(darwin.X - 1, darwin.Y))
+            {
+                snake.pushDarwinLeft(darwin);
+            }
+            else if(snake.isDarwinDirectlyLeftOfSnake(darwin) && !board.isGridPositionOpen(darwin.X - 1, darwin.Y))
+            {
+                snake.backOffRight();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X - 1, snake.Y))
+                {
+                    snake.MoveLeft();
+                }
+                else
+                {
+                    snake.backOffRight();
                 }
             }
         }

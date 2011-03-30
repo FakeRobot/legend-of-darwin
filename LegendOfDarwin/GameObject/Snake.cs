@@ -42,20 +42,28 @@ namespace LegendOfDarwin.GameObject
                     delaySnakeCounter = false;
                 }
 
-                if (isDarwinAboveSnakeSomewhere(darwin) || isDarwinBelowSnakeSomewhere(darwin))
+                if (!delaySnakeCounter && (isDarwinAboveSnakeSomewhere(darwin) || isDarwinBelowSnakeSomewhere(darwin) || isDarwinRightOfSnakeSomewhere(darwin) || isDarwinLeftOfSnakeSomewhere(darwin)))
                 {
-                    if (!delaySnakeCounter)
+                    lineOfSight = true;
+
+                    if (isDarwinAboveSnakeSomewhere(darwin) ){
+
+                        lineOfSightDirection = Direction.Up;
+                    }
+
+                    if (isDarwinBelowSnakeSomewhere(darwin)){
+
+                        lineOfSightDirection = Direction.Down;
+                    }
+
+                    if (isDarwinRightOfSnakeSomewhere(darwin))
                     {
-                        lineOfSight = true;
+                        lineOfSightDirection = Direction.Right;
+                    }
 
-                        if (isDarwinAboveSnakeSomewhere(darwin) ){
-
-                            lineOfSightDirection = Direction.Up;
-                        }
-                        if (isDarwinBelowSnakeSomewhere(darwin)){
-
-                            lineOfSightDirection = Direction.Down;
-                        }
+                    if (isDarwinLeftOfSnakeSomewhere(darwin))
+                    {
+                        lineOfSightDirection = Direction.Left;
                     }
                 }
                 else
@@ -94,13 +102,32 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        public void pushDarwinRight(Darwin darwin)
+        {
+            darwin.MoveRight();
+
+            if (board.isGridPositionOpen(this.X + 1, this.Y))
+            {
+                this.MoveRight();
+            }
+        }
+
+        public void pushDarwinLeft(Darwin darwin)
+        {
+            darwin.MoveLeft();
+
+            if (board.isGridPositionOpen(this.X - 1, this.Y))
+            {
+                this.MoveLeft();
+            }
+        }
+
         public void backOffDown()
         {
-                this.lineOfSight = false;
-                this.delaySnakeCounter = true;
-                this.MoveDown();
-                this.MoveDown();
-                this.MoveDown();
+            this.lineOfSight = false;
+            this.delaySnakeCounter = true;
+            this.MoveDown();
+            this.MoveDown();
         }
 
         public void backOffUp()
@@ -109,7 +136,22 @@ namespace LegendOfDarwin.GameObject
             this.delaySnakeCounter = true;
             this.MoveUp();
             this.MoveUp();
-            this.MoveUp();
+        }
+
+        public void backOffRight()
+        {
+            this.lineOfSight = false;
+            this.delaySnakeCounter = true;
+            this.MoveRight();
+            this.MoveRight();
+        }
+
+        public void backOffLeft()
+        {
+            this.lineOfSight = false;
+            this.delaySnakeCounter = true;
+            this.MoveLeft();
+            this.MoveLeft();
         }
 
         public bool isDarwinAboveSnakeSomewhere(Darwin darwin)
@@ -129,6 +171,24 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        public bool isDarwinRightOfSnakeSomewhere(Darwin darwin)
+        {
+            if (darwin.Y == this.Y && darwin.X > this.X)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isDarwinLeftOfSnakeSomewhere(Darwin darwin)
+        {
+            if (darwin.Y == this.Y && darwin.X < this.X)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool isDarwinDirectlyAboveSnake(Darwin darwin)
         {
             if ((this.Y - 1 == darwin.Y) && darwin.X == this.X)
@@ -141,6 +201,24 @@ namespace LegendOfDarwin.GameObject
         public bool isDarwinDirectlyBelowSnake(Darwin darwin)
         {
             if ((this.Y + 1 == darwin.Y) && darwin.X == this.X)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isDarwinDirectlyRightOfSnake(Darwin darwin)
+        {
+            if ((this.X + 1 == darwin.X) && darwin.Y == this.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isDarwinDirectlyLeftOfSnake(Darwin darwin)
+        {
+            if ((this.X - 1 == darwin.X) && darwin.Y == this.Y)
             {
                 return true;
             }

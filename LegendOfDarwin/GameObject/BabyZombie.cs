@@ -18,7 +18,7 @@ namespace LegendOfDarwin.GameObject
 
         public void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            this.RandomWalk();
         }
     }
 }

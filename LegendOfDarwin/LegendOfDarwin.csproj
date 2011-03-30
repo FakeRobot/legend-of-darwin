@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObject\BabyZombie.cs" />
     <Compile Include="GameObject\CannibalZombie.cs" />
     <Compile Include="GameObject\Box.cs" />
     <Compile Include="GameObject\BoxPattern.cs" />

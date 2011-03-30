@@ -96,5 +96,10 @@ namespace LegendOfDarwin.GameObject
             return showSparkles;
         }
 
+        public int getSparkleCount()
+        {
+            return sparkleCount;
+        }
+
     }
 }

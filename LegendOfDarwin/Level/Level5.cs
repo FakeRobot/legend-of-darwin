@@ -742,20 +742,6 @@ namespace LegendOfDarwin.Level
             spriteBatch.Begin();
             board.Draw(spriteBatch);
 
-            // only show the stairs after the pattern is complete
-            if (pattern.isComplete(board, boxes))
-            {
-                if (pattern.shouldSparkle())
-                {
-                    stairs.Draw(spriteBatch);
-                    spriteBatch.Draw(sparkleTex, stairs.destination, Color.White);
-                }
-                else
-                {
-                    stairs.Draw(spriteBatch);
-                }
-            }
-
             darwin.Draw(spriteBatch);
 
             zTime.Draw(spriteBatch);
@@ -789,6 +775,52 @@ namespace LegendOfDarwin.Level
             foreach (Vortex v in vortexes)
             {
                 v.Draw(spriteBatch);
+            }
+
+            // only show the stairs after the pattern is complete
+            if (pattern.isComplete(board, boxes))
+            {
+                if (pattern.shouldSparkle())
+                {
+                    stairs.Draw(spriteBatch);
+                    Rectangle rect = stairs.destination;
+                    Rectangle source = new Rectangle(0, 0, 100, 100);
+                    if (pattern.getSparkleCount() >= 0 && pattern.getSparkleCount() < 25)
+                    {
+                        rect.Height = 100;
+                        rect.Width = 100;
+                        rect.X -= 30;
+                        rect.Y -= 50;
+
+                        spriteBatch.Draw(sparkleTex, rect, source, Color.White);
+                    }
+                    else if (pattern.getSparkleCount() >= 25 && pattern.getSparkleCount() < 50)
+                    {
+                        rect.Height = 100;
+                        rect.Width = 100;
+                        rect.X -= 30;
+                        rect.Y -= 50;
+
+                        source.X = 100;
+
+                        spriteBatch.Draw(sparkleTex, rect, source, Color.White);
+                    }
+                    else if (pattern.getSparkleCount() >= 50)
+                    {
+                        rect.Height = 100;
+                        rect.Width = 100;
+                        rect.X -= 30;
+                        rect.Y -= 50;
+
+                        source.X = 200;
+
+                        spriteBatch.Draw(sparkleTex, rect, source, Color.White);
+                    }
+                }
+                else
+                {
+                    stairs.Draw(spriteBatch);
+                }
             }
 
             spriteBatch.End();

@@ -3,6 +3,7 @@ Content\DarwinPic\ZombieDarwin.xnb
 Content\StaticPic\grid_outline.xnb
 Content\StaticPic\grid_menu_outline.xnb
 Content\ZombiePic\Zombie.xnb
+Content\StaticPic\Wall.xnb
 Content\StaticPic\stairsUp.xnb
 Content\DarwinPic\DarwinLeft.xnb
 Content\DarwinPic\DarwinRight.xnb
@@ -23,12 +24,11 @@ Content\StaticPic\Level2\side_wall_green.xnb
 Content\StaticPic\potion.xnb
 Content\StaticPic\Level3\side_wall_yellow.xnb
 Content\StaticPic\Level3\metal_tile_light.xnb
-Content\leaf.xnb
 Content\brokenleaf.xnb
 Content\ZombiePic\CannibalZombie.xnb
 Content\ZombiePic\FastZombie.xnb
 Content\ZombiePic\FastZombieSleeping.xnb
-Content\StaticPic\Wall.xnb
+Content\leaf.xnb
 Content\StaticPic\Level4\side_wall_purple.xnb
 Content\StaticPic\Level4\metal_tile_medium.xnb
 Content\snake.xnb

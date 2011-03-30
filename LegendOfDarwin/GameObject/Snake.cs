@@ -12,6 +12,7 @@ namespace LegendOfDarwin.GameObject
         protected Texture2D snakeTexture;
         private bool lineOfSight = false;
         private int snakeDelayCounter = 0;
+        private bool delaySnakeCounter = false;
 
         public Snake(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard)
             : base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
@@ -26,37 +27,53 @@ namespace LegendOfDarwin.GameObject
 
         public new void Update(GameTime gameTime, Darwin darwin)
         {
-
             if (snakeDelayCounter > (ZOMBIE_MOVE_RATE * 2))
             {
-                lineOfSight = true;
                 snakeDelayCounter = 0;
+                delaySnakeCounter = false;
+                
             }
 
-            //base.Update(gameTime);
+            if (isDarwinAboveSnakeSomewhere(darwin))
+            {
+                if (!delaySnakeCounter)
+                {
+                    lineOfSight = true;
+                }
+            }
+            else
+            {
+                lineOfSight = false;
+            }
+
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                if(isDarwinAboveSnake(darwin) && lineOfSight){
-                    this.MoveUp();
 
-                    if (isDirectlyOnTopOfDarwin(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                if(isDarwinAboveSnakeSomewhere(darwin) && lineOfSight){
+                             
+                    if (isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
                     {
                         darwin.MoveUp();
-
+                        this.MoveUp();
                     }
-                    else if (isDirectlyOnTopOfDarwin(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                    else if (isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
                     {
-                        this.MoveDown();
-                        this.MoveDown();
                         lineOfSight = false;
+                        delaySnakeCounter = true;
+                        this.MoveDown();
+                        this.MoveDown();
+                        this.MoveDown();
                     }
+                    else
+                    {
+                        this.MoveUp();
+                    }
+                    
                 }
                 else
                 {
                     this.RandomWalk();
                 }
-
-
                 movecounter = 0;
             }
 
@@ -64,7 +81,7 @@ namespace LegendOfDarwin.GameObject
             snakeDelayCounter++;
         }
 
-        private bool isDarwinAboveSnake(Darwin darwin)
+        private bool isDarwinAboveSnakeSomewhere(Darwin darwin)
         {
             if(darwin.X == this.X && darwin.Y < this.Y){
                 return true;
@@ -72,7 +89,7 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
-        public bool isDirectlyOnTopOfDarwin(Darwin darwin)
+        public bool isDarwinDirectlyAboveSnake(Darwin darwin)
         {
             if ((this.Y - 1 == darwin.Y) && darwin.X == this.X)
             {
@@ -85,6 +102,8 @@ namespace LegendOfDarwin.GameObject
         {
             spriteBatch.Draw(snakeTexture, this.destination, Color.White);
         }
+
+
 
     }
 }

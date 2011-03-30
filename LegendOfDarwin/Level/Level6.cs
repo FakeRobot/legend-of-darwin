@@ -86,6 +86,12 @@ namespace LegendOfDarwin.Level
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
         }
 
+        public void setLevelState()
+        {
+            
+        }
+
+
         public void Update(GameTime gameTime)
         {
             switch (gameState.getState())
@@ -204,6 +210,15 @@ namespace LegendOfDarwin.Level
             {
                 gameOver = true;
             }
+        }
+
+        public void setZTime(ZombieTime mytime)
+        {
+            zTime = mytime;
+
+            zTimeReset = new ZombieTime(board);
+            zTimeReset.reset();
+            zTimeReset.setTime(mytime.getTime());
         }
 
         public void Draw(GameTime gameTime)

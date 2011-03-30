@@ -30,6 +30,7 @@ namespace LegendOfDarwin.Level
         private Zombie firstZombie, secondZombie, thirdZombie;
         private CongaLeaderZombie leaderZombie;
         private Switch firstSwitch;
+        private Switch secondSwitch;
         private GameBoard board;
 
         private ZombieTime zTime;
@@ -87,12 +88,12 @@ namespace LegendOfDarwin.Level
             //thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
 
             Vector2[] myPath = new Vector2[4]; 
-            myPath[0] = new Vector2(7,7);
-            myPath[1] = new Vector2(7,19);
-            myPath[2] = new Vector2(20,19);
-            myPath[3] = new Vector2(20,7);
+            myPath[0] = new Vector2(8,4);
+            myPath[1] = new Vector2(8,19);
+            myPath[2] = new Vector2(25,19);
+            myPath[3] = new Vector2(25,4);
 
-            leaderZombie = new CongaLeaderZombie(7,7,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
+            leaderZombie = new CongaLeaderZombie(8,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -105,13 +106,21 @@ namespace LegendOfDarwin.Level
 
             stairs = new Stairs(board);
 
-            BasicObject[] removableWalls = setRemovableWallsInLevelOne();
+            BasicObject[] removableWalls = setRemovableWallsSwitchOne();
 
             BasicObject switchSquare = new BasicObject(board);
-            switchSquare.X = 5;
-            switchSquare.Y = 10;
+            switchSquare.X = 31;
+            switchSquare.Y = 8;
 
             firstSwitch = new Switch(switchSquare, board, removableWalls);
+
+            BasicObject[] removableWalls2 = setRemovableWallsSwitchTwo();
+
+            BasicObject switchSquare2 = new BasicObject(board);
+            switchSquare2.X = 1;
+            switchSquare2.Y = 15;
+
+            secondSwitch = new Switch(switchSquare2, board, removableWalls2);
 
             // Initial starting position
             darwin.setGridPosition(16, 22);
@@ -134,19 +143,78 @@ namespace LegendOfDarwin.Level
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
 
-            setPotionPosition(25, 4);
+            setPotionPosition(28, 7);
 
             setWallsInLevelFour();
         }
 
-        private BasicObject[] setRemovableWallsInLevelOne()
+        private BasicObject[] setRemovableWallsSwitchOne()
         {
 
             BasicObject s1 = new BasicObject(board);
-            s1.X = 28;
-            s1.Y = 19;
+            s1.X = 15;
+            s1.Y = 2;
 
-            BasicObject[] removableWalls = new BasicObject[1] {s1};
+            BasicObject s2 = new BasicObject(board);
+            s2.X = 16;
+            s2.Y = 2;
+            BasicObject s3 = new BasicObject(board);
+            s3.X = 17;
+            s3.Y = 2;
+
+            BasicObject s4 = new BasicObject(board);
+            s4.X = 7;
+            s4.Y = 6;
+
+            BasicObject s5 = new BasicObject(board);
+            s5.X = 7;
+            s5.Y = 7;
+            BasicObject s6 = new BasicObject(board);
+            s6.X = 7;
+            s6.Y = 8;
+            BasicObject s7 = new BasicObject(board);
+            s7.X = 7;
+            s7.Y = 9;
+            BasicObject s8 = new BasicObject(board);
+            s8.X = 7;
+            s8.Y = 10;
+
+            BasicObject[] removableWalls = new BasicObject[8] {s1,s2,s3,s4,s5,s6,s7,s8};
+            return removableWalls;
+        }
+
+        private BasicObject[] setRemovableWallsSwitchTwo()
+        {
+
+            BasicObject s1 = new BasicObject(board);
+            s1.X = 15;
+            s1.Y = 3;
+
+            BasicObject s2 = new BasicObject(board);
+            s2.X = 16;
+            s2.Y = 3;
+            BasicObject s3 = new BasicObject(board);
+            s3.X = 17;
+            s3.Y = 3;
+
+            BasicObject s4 = new BasicObject(board);
+            s4.X = 26;
+            s4.Y = 17;
+
+            BasicObject s5 = new BasicObject(board);
+            s5.X = 26;
+            s5.Y = 13;
+            BasicObject s6 = new BasicObject(board);
+            s6.X = 26;
+            s6.Y = 14;
+            BasicObject s7 = new BasicObject(board);
+            s7.X = 26;
+            s7.Y = 15;
+            BasicObject s8 = new BasicObject(board);
+            s8.X = 26;
+            s8.Y = 16;
+
+            BasicObject[] removableWalls = new BasicObject[8] { s1, s2, s3, s4, s5, s6, s7, s8 };
             return removableWalls;
         }
 
@@ -187,6 +255,9 @@ namespace LegendOfDarwin.Level
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
                 mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
 
+            secondSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
+                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
+
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/metal_tile_medium"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple"));
 
@@ -207,7 +278,6 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
-
 
         }
 
@@ -991,6 +1061,7 @@ namespace LegendOfDarwin.Level
             leaderZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
+            secondSwitch.Update(gameTime, ks, darwin);
 
             potion.Update(gameTime, ks, darwin, zTime);
 
@@ -1200,6 +1271,7 @@ namespace LegendOfDarwin.Level
             leaderZombie.Draw(spriteBatch);
 
             firstSwitch.Draw(spriteBatch);
+            secondSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             potion.Draw(spriteBatch);
 

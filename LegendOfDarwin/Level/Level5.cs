@@ -115,7 +115,7 @@ namespace LegendOfDarwin.Level
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
 
-            setPotionPosition(18, 10);
+            setPotionPosition(27, 5);
 
             setBoxes();
             setBoxPattern();
@@ -150,7 +150,6 @@ namespace LegendOfDarwin.Level
             potion = new Potion(board);
             potion.setDestination(board.getPosition(x, y));
             potion.setGridPosition(x, y);
-            board.setGridPositionOccupied(x, y);
         }
 
         private void setWalls()
@@ -607,7 +606,7 @@ namespace LegendOfDarwin.Level
 
                 board.setGridPositionOpen(potion);
 
-                potion.setGridPosition(18, 10);
+                potion.setGridPosition(27, 5);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
                 potion.reset();

@@ -222,7 +222,6 @@ namespace LegendOfDarwin.Level
             potion = new Potion(board);
             potion.setDestination(board.getPosition(x, y));
             potion.setGridPosition(x, y);
-            board.setGridPositionOccupied(x, y);
         }
 
         private void setWalls()

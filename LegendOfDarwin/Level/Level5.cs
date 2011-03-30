@@ -463,24 +463,61 @@ namespace LegendOfDarwin.Level
 
             if (snake.lineOfSight & snake.allowedToWalk)
             {
-                if (snake.isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Up))
                 {
-                    snake.pushDarwinUp(darwin);
+                    checkForDarwinAboveSnake(snake, darwin);
                 }
-                else if (snake.isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Down))
                 {
-                    snake.backOff();
+                    checkForDarwinBelowSnake(snake, darwin);
+                }
+
+                
+            }
+        }
+
+        private void checkForDarwinAboveSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+            {
+                snake.pushDarwinUp(darwin);
+            }
+            else if (snake.isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+            {
+                snake.backOffDown();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X, snake.Y - 1))
+                {
+                    snake.MoveUp();
                 }
                 else
                 {
-                    if (board.isGridPositionOpen(snake.X, snake.Y - 1))
-                    {
-                        snake.moveSnakeUp();
-                    }
-                    else
-                    {
-                        snake.backOff();
-                    }
+                    snake.backOffDown();
+                }
+            }
+        }
+
+        private void checkForDarwinBelowSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyBelowSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y + 1))
+            {
+                snake.pushDarwinDown(darwin);
+            }
+            else if (snake.isDarwinDirectlyBelowSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y + 1))
+            {
+                snake.backOffUp();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X, snake.Y + 1))
+                {
+                    snake.MoveDown();
+                }
+                else
+                {
+                    snake.backOffUp();
                 }
             }
         }

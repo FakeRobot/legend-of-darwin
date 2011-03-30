@@ -37,6 +37,8 @@ namespace LegendOfDarwin.Level
         private Potion potion;
         private Stairs stairs;
 
+        private PyroZombie northZombie, southZombie, eastZombie, westZombie;
+
         private Box[] boxes;
 
         private Snake snake;
@@ -130,6 +132,10 @@ namespace LegendOfDarwin.Level
             setWalls();
 
             snake = new Snake(10, 10, 15, 5, 15, 5, board);
+
+            northZombie = new PyroZombie(15, 3, 25, 5, 3, 3, board);
+            northZombie.setGridPosition(15, 3);
+
         }
 
         private BasicObject[] setRemovableWallsInLevelOne()
@@ -215,6 +221,9 @@ namespace LegendOfDarwin.Level
 
             Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
             snake.LoadContent(snakeTexture);
+
+            Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
+            northZombie.LoadContent(pyroZombieTex);
         }
 
 
@@ -296,6 +305,7 @@ namespace LegendOfDarwin.Level
             }
 
             snake.Update(gameTime, darwin);
+            northZombie.Update(darwin);
 
             if (!darwin.isZombie())
             {
@@ -498,6 +508,7 @@ namespace LegendOfDarwin.Level
             potion.Draw(spriteBatch);
 
             snake.Draw(spriteBatch);
+            northZombie.Draw(spriteBatch);
 
             if (messageMode)
             {

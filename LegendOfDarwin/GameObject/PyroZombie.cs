@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
@@ -44,6 +45,7 @@ namespace LegendOfDarwin.GameObject
                 case (true):
                     break;
                 case (false):
+                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 default:
                     throw new Exception("failed to draw pyro zombie");

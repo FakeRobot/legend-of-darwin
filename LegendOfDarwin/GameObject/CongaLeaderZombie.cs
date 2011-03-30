@@ -17,6 +17,9 @@ namespace LegendOfDarwin.GameObject
         protected Vector2[] pathList;
         protected int pathCount = 0;
 
+        //amt that sprite should be shifted up in order to look natural
+        protected int amtShiftUp = 0;
+
         // set ranges to whole board
         public CongaLeaderZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList, Darwin mydarwin, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard) 
@@ -27,6 +30,33 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 6;
             darwin = mydarwin;
             pathList = myPathList;
+        }
+
+        // loads in sprite as well as shifts sprite to look natural 
+        public new void LoadContent(Texture2D myZombieTexture) 
+        {
+            base.LoadContent(myZombieTexture);
+
+            // 100 is height of sprite on sheet, the destination is shifted proportionally to the gameboard
+            source.Height=100;
+            destination.Height = (100 / 64) * board.getSquareWidth() + 10;
+            amtShiftUp = (1 / 2) * board.getSquareWidth() + 10;
+            destination.Y -= amtShiftUp;
+        }
+
+        /*
+         * resets conga leaders position
+         * myx, myy are restart posit for conga zombie on gameboard
+         */
+        public void Reset(int myx, int myy) 
+        {
+            this.setGridPosition(myx, myy);
+            board.setGridPositionOccupied(this.X, this.Y);
+            this.setZombieAlive(true);
+
+            //fix sprite
+            destination.Height = (100 / 64) * board.getSquareWidth() + 10;
+            destination.Y -= amtShiftUp;
         }
 
         /*
@@ -130,8 +160,42 @@ namespace LegendOfDarwin.GameObject
 
         }
 
+        /*
+         * These overides of the move functions are meant to refix the 
+         * sprite when a movement is made
+         * This keeps the sprite looking natural, since it is too tall for the square
+         * */
+        public new void MoveRight()
+        {
+            base.MoveRight();
+            destination.Height = (100/64)*board.getSquareWidth()+10;
+            destination.Y -= amtShiftUp;
+        }
+
+        public new void MoveLeft()
+        {
+            base.MoveLeft();
+            destination.Height = (100 / 64) * board.getSquareWidth()+10;
+            destination.Y -= amtShiftUp;
+        }
+
+        public new void MoveDown()
+        {
+            base.MoveDown();
+            destination.Height = (100 / 64) * board.getSquareWidth()+10;
+            destination.Y -= amtShiftUp;
+        }
+
+        public new void MoveUp()
+        {
+            base.MoveUp();
+            destination.Height = (100 / 64) * board.getSquareWidth()+10;
+            destination.Y -= amtShiftUp;
+        }
+
         public new void Update(GameTime gameTime, Darwin darwin)
         {
+            
             eventLagMin++;
             if (eventLagMin > eventLagMax)
             {
@@ -140,13 +204,13 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-
+                
                 followPath();
-
+                
                 movecounter = 0;
             }
             movecounter++;
-
+            
         }
 
 

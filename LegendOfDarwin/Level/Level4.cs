@@ -198,7 +198,7 @@ namespace LegendOfDarwin.Level
             //secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             //thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
 
-            leaderZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            leaderZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/CongaLeaderZombie"));
         
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -380,9 +380,7 @@ namespace LegendOfDarwin.Level
                 //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 //thirdZombie.setZombieAlive(true);
 
-                leaderZombie.setGridPosition(7, 7);
-                board.setGridPositionOccupied(leaderZombie.X, leaderZombie.Y);
-                leaderZombie.setZombieAlive(true);
+                leaderZombie.Reset(7, 7);
 
                 potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);

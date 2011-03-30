@@ -32,6 +32,47 @@ namespace LegendOfDarwin.GameObject
             pathList = myPathList;
         }
 
+        public new void Update(GameTime gameTime, Darwin darwin)
+        {
+
+            eventLagMin++;
+            if (eventLagMin > eventLagMax)
+            {
+                this.eventFlag = true;
+            }
+
+            if (movecounter > ZOMBIE_MOVE_RATE)
+            {
+
+                if (this.isPointInVision(darwin.X,darwin.Y) && !darwin.isZombie())
+                {
+                    this.enemyAlert = true;
+                    source.X = 64;
+                    //moveTowardsPoint(darwin.X, darwin.Y);
+                }
+                else
+                {
+                    if (enemyAlert)
+                    {
+                        source.X = 128;
+                        enemyAlertCount++;
+                        if (enemyAlertCount > 2)
+                        {
+                            enemyAlert = false;
+                            enemyAlertCount = 0;
+                        }
+                    }
+                    else
+                        this.source.X = 0;
+
+                    //followPath();
+                }
+
+                movecounter = 0;
+            }
+            movecounter++;
+
+        }
 
     }
 }

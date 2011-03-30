@@ -49,15 +49,7 @@ namespace LegendOfDarwin.GameObject
                 ZOMBIE_MOVE_RATE=40;
             }
 
-        // checks if a given game board point is in the zombie's vision
-        public bool isPointInVision(int myX, int myY) 
-        {
-            if (myX <= this.X+visionMaxX && myX>=this.X-visionMaxX && myY <= this.Y+visionMaxY && myY>= this.Y-visionMaxY)
-                return true;
-            else
-                return false;
-        }
-
+        
         /**
          * moves cannibal towards a specified point within the cannibals range
          * will go around stuff to get there

@@ -375,6 +375,15 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // checks if a given game board point is in the zombie's vision
+        public bool isPointInVision(int myX, int myY)
+        {
+            if (myX <= this.X + visionMaxX && myX >= this.X - visionMaxX && myY <= this.Y + visionMaxY && myY >= this.Y - visionMaxY)
+                return true;
+            else
+                return false;
+        }
+
         /**
          *  checks whether zombie is in range or not
          *  return True if it is, false if not

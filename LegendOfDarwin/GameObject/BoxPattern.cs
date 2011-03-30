@@ -72,12 +72,12 @@ namespace LegendOfDarwin.GameObject
 
             if (matchCount == numberOfSpotsToCheck)
             {
-                if (sparkleCount < 50)
+                if (sparkleCount < 75)
                 {
                     showSparkles = true;
                     sparkleCount++;
                 }
-                else if (sparkleCount > 50)
+                else if (sparkleCount >= 75)
                 {
                     showSparkles = false;
                 }

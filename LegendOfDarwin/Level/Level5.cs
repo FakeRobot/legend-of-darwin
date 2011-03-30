@@ -655,15 +655,15 @@ namespace LegendOfDarwin.Level
             // only show the stairs after the pattern is complete
             if (pattern.isComplete(board, boxes))
             {
-                //if (pattern.shouldSparkle())
-                //{  
-                //    stairs.Draw(spriteBatch);
-                //    spriteBatch.Draw(sparkleTex, stairs.destination, Color.White);
-                //}
-                //else
-                //{
+                if (pattern.shouldSparkle())
+                {
                     stairs.Draw(spriteBatch);
-                //}
+                    spriteBatch.Draw(sparkleTex, stairs.destination, Color.White);
+                }
+                else
+                {
+                    stairs.Draw(spriteBatch);
+                }
             }
 
             darwin.Draw(spriteBatch);

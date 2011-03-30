@@ -10,9 +10,11 @@ namespace LegendOfDarwin.GameObject
     public class Snake: Zombie
     {
         protected Texture2D snakeTexture;
-        private bool lineOfSight = false;
         private int snakeDelayCounter = 0;
-        private bool delaySnakeCounter = false;
+        public bool delaySnakeCounter = false;
+        public bool allowedToWalk= false;
+        public bool lineOfSight { get; set; }
+
 
         public Snake(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard)
             : base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
@@ -27,61 +29,71 @@ namespace LegendOfDarwin.GameObject
 
         public new void Update(GameTime gameTime, Darwin darwin)
         {
-            if (snakeDelayCounter > (ZOMBIE_MOVE_RATE * 2))
-            {
-                snakeDelayCounter = 0;
-                delaySnakeCounter = false;
-                
-            }
-
-            if (isDarwinAboveSnakeSomewhere(darwin))
-            {
-                if (!delaySnakeCounter)
-                {
-                    lineOfSight = true;
-                }
-            }
-            else
-            {
-                lineOfSight = false;
-            }
-
+            //base.Update(gameTime);
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
 
-                if(isDarwinAboveSnakeSomewhere(darwin) && lineOfSight){
-                             
-                    if (isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                allowedToWalk = true;
+
+                if (snakeDelayCounter > (ZOMBIE_MOVE_RATE * 5))
+                {
+                    Console.Out.WriteLine("-----------" + snakeDelayCounter + " > " + (ZOMBIE_MOVE_RATE * 5));
+                    snakeDelayCounter = 0;
+                    delaySnakeCounter = false;
+                }
+
+                if (isDarwinAboveSnakeSomewhere(darwin))
+                {
+                    if (!delaySnakeCounter)
                     {
-                        darwin.MoveUp();
-                        this.MoveUp();
+                        lineOfSight = true;
                     }
-                    else if (isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
-                    {
-                        lineOfSight = false;
-                        delaySnakeCounter = true;
-                        this.MoveDown();
-                        this.MoveDown();
-                        this.MoveDown();
-                    }
-                    else
-                    {
-                        this.MoveUp();
-                    }
-                    
                 }
                 else
                 {
+                    lineOfSight = false;
                     this.RandomWalk();
                 }
                 movecounter = 0;
+            }
+            else
+            {
+                allowedToWalk = false;
             }
 
             movecounter++;
             snakeDelayCounter++;
         }
 
-        private bool isDarwinAboveSnakeSomewhere(Darwin darwin)
+        public void moveSnakeUp()
+        {
+
+                this.MoveUp();
+
+
+        }
+
+        public void pushDarwinUp(Darwin darwin)
+        {
+                darwin.MoveUp();
+
+                if (board.isGridPositionOpen(this.X, this.Y - 1))
+                {
+                    this.MoveUp();
+                }
+        }
+
+        public void backOff()
+        {
+                this.lineOfSight = false;
+                this.delaySnakeCounter = true;
+                this.MoveDown();
+                this.MoveDown();
+                this.MoveDown();
+
+        }
+
+        public bool isDarwinAboveSnakeSomewhere(Darwin darwin)
         {
             if(darwin.X == this.X && darwin.Y < this.Y){
                 return true;

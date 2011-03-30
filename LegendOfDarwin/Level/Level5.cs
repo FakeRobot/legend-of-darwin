@@ -125,7 +125,7 @@ namespace LegendOfDarwin.Level
 
             setWalls();
 
-            snake = new Snake(10, 10, 15, 5, 15, 5, board);
+            snake = new Snake(10, 10, 27, 5, 18, 5, board);
 
             northZombie = new PyroZombie(15, 3, 25, 4, 3, 3, board);
             northZombie.setGridPosition(15, 3);
@@ -421,7 +421,6 @@ namespace LegendOfDarwin.Level
                 }
             }
 
-            snake.Update(gameTime, darwin);
             northZombie.Update(darwin);
             southZombie.Update(darwin);
             eastZombie.Update(darwin);
@@ -432,7 +431,7 @@ namespace LegendOfDarwin.Level
                 //checkForGameOver(zombie...);
             }
 
-            updateSnakeCollision(snake, darwin);
+            updateSnakeCollision(snake, darwin, gameTime);
 
             foreach (Vortex v in vortexes)
             {
@@ -458,11 +457,32 @@ namespace LegendOfDarwin.Level
             messageModeCounter++;
         }
 
-        private void updateSnakeCollision(Snake snake, Darwin darwin)
+        private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)
         {
-            
+            snake.Update(gameTime, darwin);
 
-            
+            if (snake.lineOfSight & snake.allowedToWalk)
+            {
+                if (snake.isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                {
+                    snake.pushDarwinUp(darwin);
+                }
+                else if (snake.isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+                {
+                    snake.backOff();
+                }
+                else
+                {
+                    if (board.isGridPositionOpen(snake.X, snake.Y - 1))
+                    {
+                        snake.moveSnakeUp();
+                    }
+                    else
+                    {
+                        snake.backOff();
+                    }
+                }
+            }
         }
 
         private void UpdateEndState()

@@ -40,7 +40,7 @@ namespace LegendOfDarwin.GameObject
         public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin)
         {
             base.Update(gameTime);
-            // if we be a zombie, he cant push boxes
+            // if darwin is a zombie, he cant push boxes
             if (!darwin.isZombie() && this.canEventHappen() && ks.IsKeyDown(Keys.A))
             {
                 this.setEventFalse();

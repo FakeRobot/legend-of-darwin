@@ -345,6 +345,15 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+<<<<<<< .mine
+  <ItemGroup>
+    <Compile Include="boxPattern.png">
+      <Name>boxPattern</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+=======
   <ItemGroup>
     <Compile Include="ZombiePic\FlamethrowerZombie.png">
       <Name>FlamethrowerZombie</Name>
@@ -352,6 +361,7 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+>>>>>>> .r292
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

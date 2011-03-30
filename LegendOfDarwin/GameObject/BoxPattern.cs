@@ -16,13 +16,23 @@ namespace LegendOfDarwin.GameObject
         // Optional: a texture can be printed on the board to help with debugging
         protected Texture2D SpotTexture;
 
-        public BoxPattern(BasicObject[] mySpots)
+        private int numberOfSpotsToCheck;
+
+        public BoxPattern(GameBoard board, BasicObject[] mySpots)
         {
             int i = 0;
             foreach (BasicObject s in mySpots)
             {
-                spots[i] = s;
                 i++;
+            }
+
+            numberOfSpotsToCheck = i;
+            spots = new BasicObject[numberOfSpotsToCheck];
+
+            for (i = 0; i < numberOfSpotsToCheck; i++)
+            {
+                this.spots[i] = new BasicObject(board);
+                this.spots[i].setGridPosition(mySpots[i].X, mySpots[i].Y);
             }
         }
 
@@ -42,15 +52,24 @@ namespace LegendOfDarwin.GameObject
         // check the list of boxes to see if they are on every spot in the pattern
         public bool isComplete(GameBoard board, Box[] boxes)
         {
-            // copy the box positions (basic objects) into an array
-            BasicObject[] boxSpots;
-            int i = 0;
+            // store the number of boxes we match
+            int matchCount = 0;
 
-            foreach (Box b in boxes)
+            //foreach (Box b in boxes)
+            for (int j = 0; j < numberOfSpotsToCheck; j++)
             {
-                //boxSpots[i] = b;
-                //boxSpots[i].setPosition(b.X, b.Y);
-                i++;
+                for (int i = 0; i < numberOfSpotsToCheck; i++)
+                {
+                    if (boxes[j].X == spots[i].X && boxes[j].Y == spots[i].Y)
+                    {
+                        matchCount++;
+                    }
+                }
+            }
+
+            if (matchCount == numberOfSpotsToCheck)
+            {
+                return true;
             }
 
             return false;

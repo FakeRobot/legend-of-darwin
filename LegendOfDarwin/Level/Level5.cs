@@ -40,6 +40,8 @@ namespace LegendOfDarwin.Level
         private PyroZombie northZombie, southZombie, eastZombie, westZombie;
 
         private Box[] boxes;
+        private BasicObject[] spotsForPattern;
+        private BoxPattern pattern;
 
         private Snake snake;
 
@@ -129,6 +131,9 @@ namespace LegendOfDarwin.Level
             setPotionPosition(25, 4);
 
             setBoxes();
+            setBoxPattern();
+            pattern = new BoxPattern(board, spotsForPattern);
+
             setWalls();
 
             snake = new Snake(10, 10, 15, 5, 15, 5, board);
@@ -190,6 +195,20 @@ namespace LegendOfDarwin.Level
             boxes = new Box[4] { b1, b2, b3, b4 };
         }
 
+        private void setBoxPattern()
+        {
+            BasicObject bo1 = new BasicObject(board);
+                bo1.setGridPosition(20, 6);
+            BasicObject bo2 = new BasicObject(board);
+                bo2.setGridPosition(20, 8);
+            BasicObject bo3 = new BasicObject(board);
+                bo3.setGridPosition(20, 10);
+            BasicObject bo4 = new BasicObject(board);
+                bo4.setGridPosition(20, 12);
+
+            spotsForPattern = new BasicObject[4] { bo1, bo2, bo3, bo4 };
+        }
+
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
@@ -200,7 +219,7 @@ namespace LegendOfDarwin.Level
             Texture2D darwinRightTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinRight");
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
-            
+
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
@@ -231,6 +250,8 @@ namespace LegendOfDarwin.Level
             {
                 b.LoadContent(mainGame.Content.Load<Texture2D>("box"));
             }
+
+            pattern.LoadContent(mainGame.Content.Load<Texture2D>("boxPattern"));
 
             Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
             snake.LoadContent(snakeTexture);
@@ -317,6 +338,7 @@ namespace LegendOfDarwin.Level
 
             foreach (Box b in boxes)
             {
+                //Console.Out.WriteLine("b's x is {0}, b's y is {1}", b.X, b.Y);
                 b.Update(gameTime, ks, darwin);
             }
 
@@ -332,6 +354,12 @@ namespace LegendOfDarwin.Level
             }
 
             updateSnakeCollision(snake, darwin);
+
+            // if the pattern is complete, for now, do a game over
+            if (pattern.isComplete(board, boxes))
+            {
+                gameOver = true;
+            }
 
             checkForGameWin();
             //checkForSwitchToLevelSix();
@@ -542,6 +570,9 @@ namespace LegendOfDarwin.Level
             {
                 spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
             }
+
+            // Only draw this for debugging
+            pattern.Draw(spriteBatch);
 
             foreach (Box b in boxes)
             {

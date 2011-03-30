@@ -129,6 +129,7 @@
     <Compile Include="Level\Level2.cs" />
     <Compile Include="Level\Level3.cs" />
     <Compile Include="Level\Level5.cs" />
+    <Compile Include="Level\Level6.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="MenuObject\ZombieTime.cs" />
     <Compile Include="GameObject\BasicObject.cs" />

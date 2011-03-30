@@ -24,6 +24,7 @@ namespace LegendOfDarwin.Level
 
         private Darwin darwin;
         private ZombieTime zTime;
+        private ZombieTime zTimeReset;
 
         public SpriteFont messageFont;
 
@@ -61,6 +62,8 @@ namespace LegendOfDarwin.Level
             darwin = new Darwin(board);
 
             zTime = new ZombieTime(board);
+
+            setLevelState();
         }
 
 
@@ -86,8 +89,23 @@ namespace LegendOfDarwin.Level
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
         }
 
+        /*
+         * Start of the level's state.
+         */
         public void setLevelState()
         {
+            darwin.setHuman();
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(15, 22);
+            board.setGridPositionOccupied(darwin);
+
+            zTime.reset();
+            zTime.setTime(zTimeReset.getTime());
+
+            gameOver = false;
+            gameWin = false;
+
+            gameState.setState(GameState.state.Level);
             
         }
 
@@ -166,16 +184,7 @@ namespace LegendOfDarwin.Level
             if (ks.IsKeyDown(Keys.R))
             {
 
-                gameOver = false;
-                gameWin = false;
-
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 20);
-
-                zTime.reset();
-
-                darwin.setHuman();
-                gameState.setState(GameState.state.Level);
+                setLevelState();
                 //MediaPlayer.Stop();
                 //MediaPlayer.Play(song);
             }

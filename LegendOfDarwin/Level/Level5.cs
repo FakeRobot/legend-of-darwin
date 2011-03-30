@@ -133,8 +133,21 @@ namespace LegendOfDarwin.Level
 
             snake = new Snake(10, 10, 15, 5, 15, 5, board);
 
-            northZombie = new PyroZombie(15, 3, 25, 5, 3, 3, board);
+            northZombie = new PyroZombie(15, 3, 25, 4, 3, 3, board);
             northZombie.setGridPosition(15, 3);
+            northZombie.setDirection(2);
+
+            southZombie = new PyroZombie(15, 20, 25, 4, 20, 20, board);
+            southZombie.setGridPosition(15, 20);
+            southZombie.setDirection(4);
+
+            eastZombie = new PyroZombie(29, 11, 29, 29, 19, 4, board);
+            eastZombie.setGridPosition(29, 11);
+            eastZombie.setDirection(1);
+
+            westZombie = new PyroZombie(3, 11, 3, 3, 19, 4, board);
+            westZombie.setGridPosition(3, 11);
+            westZombie.setDirection(3);
 
         }
 
@@ -222,8 +235,11 @@ namespace LegendOfDarwin.Level
             Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
             snake.LoadContent(snakeTexture);
 
-            Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/Zombie");
-            northZombie.LoadContent(pyroZombieTex);
+            Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
+            northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            southZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            eastZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            westZombie.LoadContent(pyroZombieTex, pyroZombieTex);
         }
 
 
@@ -306,6 +322,9 @@ namespace LegendOfDarwin.Level
 
             snake.Update(gameTime, darwin);
             northZombie.Update(darwin);
+            southZombie.Update(darwin);
+            eastZombie.Update(darwin);
+            westZombie.Update(darwin);
 
             if (!darwin.isZombie())
             {
@@ -509,6 +528,9 @@ namespace LegendOfDarwin.Level
 
             snake.Draw(spriteBatch);
             northZombie.Draw(spriteBatch);
+            southZombie.Draw(spriteBatch);
+            eastZombie.Draw(spriteBatch);
+            westZombie.Draw(spriteBatch);
 
             if (messageMode)
             {

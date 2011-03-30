@@ -679,8 +679,8 @@ namespace LegendOfDarwin.Level
             if (darwin.isOnTop(stairs))
             {
                 //need to changwe this to level 6 once it's created!!
-                mainGame.setCurLevel(Game1.LevelState.Level3);
-                mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
+                mainGame.setCurLevel(Game1.LevelState.Level6);
+                mainGame.setZTimeLevel(zTime, Game1.LevelState.Level6);
 
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);

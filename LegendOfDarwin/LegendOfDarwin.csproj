@@ -121,6 +121,7 @@
     <Compile Include="GameObject\CongaFollowerZombie.cs" />
     <Compile Include="GameObject\CongaLeaderZombie.cs" />
     <Compile Include="GameObject\Leaf.cs" />
+    <Compile Include="GameObject\Nursery.cs" />
     <Compile Include="GameObject\Potion.cs" />
     <Compile Include="GameObject\FastZombie.cs" />
     <Compile Include="GameObject\PyroZombie.cs" />

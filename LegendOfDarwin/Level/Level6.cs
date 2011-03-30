@@ -39,6 +39,8 @@ namespace LegendOfDarwin.Level
         bool messageMode = false;
         int messageModeCounter = 0;
 
+        private Nursery nurseryOne, nurseryTwo;
+
         public Song song;
         public Game1 mainGame;
 
@@ -62,6 +64,9 @@ namespace LegendOfDarwin.Level
             darwin = new Darwin(board);
 
             zTime = new ZombieTime(board);
+
+            nurseryOne = new Nursery(board, darwin);
+            nurseryTwo = new Nursery(board, darwin);
 
             setLevelState();
         }
@@ -87,6 +92,12 @@ namespace LegendOfDarwin.Level
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
+
+            nurseryOne.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery"),
+                mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"));
+            
+            nurseryTwo.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery"),
+                mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"));
         }
 
         /*
@@ -98,6 +109,22 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOpen(darwin);
             darwin.setGridPosition(15, 22);
             board.setGridPositionOccupied(darwin);
+
+            nurseryOne.setGridPosition(1, 1);
+            board.setGridPositionOccupied(1, 1);
+            board.setGridPositionOccupied(1, 2);
+            board.setGridPositionOccupied(1, 3);
+            board.setGridPositionOccupied(2, 1);
+            board.setGridPositionOccupied(2, 2);
+            board.setGridPositionOccupied(2, 3);
+            
+            nurseryTwo.setGridPosition(30, 20);
+            board.setGridPositionOccupied(30, 20);
+            board.setGridPositionOccupied(30, 21);
+            board.setGridPositionOccupied(30, 22);
+            board.setGridPositionOccupied(31, 20);
+            board.setGridPositionOccupied(31, 21);
+            board.setGridPositionOccupied(31, 22);
 
             zTime.reset();
 
@@ -170,6 +197,9 @@ namespace LegendOfDarwin.Level
                 messageModeCounter = 0;
             }
             messageModeCounter++;
+
+            nurseryOne.Update(gameTime);
+            nurseryTwo.Update(gameTime);
         }
 
         private void UpdateEndState()
@@ -263,6 +293,9 @@ namespace LegendOfDarwin.Level
             board.Draw(spriteBatch);
             darwin.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
+
+            nurseryOne.Draw(spriteBatch);
+            nurseryTwo.Draw(spriteBatch);
 
             if (messageMode)
             {

@@ -180,6 +180,26 @@ namespace LegendOfDarwin.GameObject
         }
 
         /*
+         * checks if darwin is on the conga line path or not
+         * that is, is darwin on the patrol path
+         * Point must be set up so top left pt is first,
+         * bottom right pt is 3rd
+         * */
+        public bool isDarwinOnPath(Darwin myDarwin)
+        {
+            // 
+            Vector2 minPt = pathList[0];
+            Vector2 maxPt = pathList[2];
+
+            if ((myDarwin.X >= minPt.X && myDarwin.X <= maxPt.X && (myDarwin.Y == minPt.Y || myDarwin.Y == maxPt.Y))
+                || ((myDarwin.X == minPt.X || myDarwin.X == maxPt.X) && myDarwin.Y >= minPt.Y && myDarwin.Y <= maxPt.Y))
+                return true;
+            else
+                return false;
+        }
+
+
+        /*
          * These overides of the move functions are meant to refix the 
          * sprite when a movement is made
          * This keeps the sprite looking natural, since it is too tall for the square

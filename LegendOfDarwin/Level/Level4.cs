@@ -200,7 +200,6 @@ namespace LegendOfDarwin.Level
             BasicObject s4 = new BasicObject(board);
             s4.X = 26;
             s4.Y = 17;
-
             BasicObject s5 = new BasicObject(board);
             s5.X = 26;
             s5.Y = 13;

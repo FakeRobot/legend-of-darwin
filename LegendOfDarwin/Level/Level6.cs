@@ -41,6 +41,8 @@ namespace LegendOfDarwin.Level
 
         private Nursery nurseryOne, nurseryTwo;
 
+        private FatBossZombie fatBossZombie;
+
         public Song song;
         public Game1 mainGame;
 
@@ -67,6 +69,8 @@ namespace LegendOfDarwin.Level
 
             nurseryOne = new Nursery(board, darwin);
             nurseryTwo = new Nursery(board, darwin);
+
+            fatBossZombie = new FatBossZombie(15, 5, 32, 0, 24, 0, darwin, board);
 
             setLevelState();
         }
@@ -100,6 +104,8 @@ namespace LegendOfDarwin.Level
             nurseryTwo.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery"),
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"));
+
+            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/FatBossZombie"));
         }
 
         /*
@@ -129,6 +135,12 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(31, 20);
             board.setGridPositionOccupied(31, 21);
             board.setGridPositionOccupied(31, 22);
+
+            fatBossZombie.setGridPosition(15, 5);
+            board.setGridPositionOccupied(15, 5);
+            board.setGridPositionOccupied(16, 5);
+            board.setGridPositionOccupied(15, 6);
+            board.setGridPositionOccupied(16, 6);
 
             zTime.reset();
 
@@ -206,6 +218,8 @@ namespace LegendOfDarwin.Level
 
             nurseryOne.Update(gameTime);
             nurseryTwo.Update(gameTime);
+
+            fatBossZombie.Update(gameTime);
         }
 
         private void UpdateEndState()
@@ -302,6 +316,8 @@ namespace LegendOfDarwin.Level
 
             nurseryOne.Draw(spriteBatch);
             nurseryTwo.Draw(spriteBatch);
+
+            fatBossZombie.Draw(spriteBatch);
 
             if (messageMode)
             {

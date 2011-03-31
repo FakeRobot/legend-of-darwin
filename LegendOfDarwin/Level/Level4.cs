@@ -29,6 +29,7 @@ namespace LegendOfDarwin.Level
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie;
         private CongaLeaderZombie leaderZombie;
+        private List<CongaFollowerZombie> followerZombies;
         private Switch firstSwitch;
         private Switch secondSwitch;
         private GameBoard board;
@@ -53,7 +54,6 @@ namespace LegendOfDarwin.Level
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-
 
         // things for managing message boxes
         bool messageMode = false;
@@ -87,6 +87,8 @@ namespace LegendOfDarwin.Level
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
 
+            followerZombies = new List<CongaFollowerZombie>();
+
             Vector2[] myPath = new Vector2[4]; 
             myPath[0] = new Vector2(8,4);
             myPath[1] = new Vector2(8,19);
@@ -94,6 +96,19 @@ namespace LegendOfDarwin.Level
             myPath[3] = new Vector2(25,4);
 
             leaderZombie = new CongaLeaderZombie(8,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
+            followerZombies.Add(new CongaFollowerZombie(10,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board));
+            followerZombies.Add(new CongaFollowerZombie(12, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(14, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+
+            myPath = new Vector2[4];
+            myPath[1] = new Vector2(8, 4);
+            myPath[2] = new Vector2(8, 19);
+            myPath[3] = new Vector2(25, 19);
+            myPath[0] = new Vector2(25, 4);
+
+            followerZombies.Add(new CongaFollowerZombie(25, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(25, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -268,6 +283,9 @@ namespace LegendOfDarwin.Level
             //thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
 
             leaderZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/CongaLeaderZombie"));
+
+            foreach (CongaFollowerZombie follower in followerZombies)
+                follower.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
 
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -1053,9 +1071,9 @@ namespace LegendOfDarwin.Level
 
             stairs.Update(gameTime, darwin);
 
-            //firstZombie.Update(gameTime, darwin);
-            //secondZombie.Update(gameTime, darwin);
-            //thirdZombie.Update(gameTime, darwin);
+            foreach (CongaFollowerZombie follower in followerZombies)
+                follower.Update(gameTime,darwin);
+
             leaderZombie.Update(gameTime, darwin);
 
             firstSwitch.Update(gameTime, ks, darwin);
@@ -1263,10 +1281,10 @@ namespace LegendOfDarwin.Level
             stairs.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
-            //firstZombie.Draw(spriteBatch);
-            //secondZombie.Draw(spriteBatch);
-            //thirdZombie.Draw(spriteBatch);
+            
             leaderZombie.Draw(spriteBatch);
+            foreach (CongaFollowerZombie follower in followerZombies)
+                follower.Draw(spriteBatch);
 
             firstSwitch.Draw(spriteBatch);
             secondSwitch.Draw(spriteBatch);

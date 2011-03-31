@@ -30,6 +30,7 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 6;
             darwin = mydarwin;
             pathList = myPathList;
+            ZOMBIE_MOVE_RATE = 30;
         }
 
         // loads in sprite as well as shifts sprite to look natural 

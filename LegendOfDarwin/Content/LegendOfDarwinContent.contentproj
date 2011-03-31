@@ -381,13 +381,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZombiePic\BabyZombie.png">
-      <Name>BabyZombie</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="ZombiePic\snake_strip.png">
       <Name>snake_strip</Name>
       <Importer>TextureImporter</Importer>
@@ -397,6 +390,13 @@
   <ItemGroup>
     <Compile Include="explosion_sequence.png">
       <Name>explosion_sequence</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ZombiePic\BabyZombie.png">
+      <Name>BabyZombie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

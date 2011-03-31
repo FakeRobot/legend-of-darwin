@@ -59,10 +59,7 @@ namespace LegendOfDarwin.GameObject
                     {
                         explodeCount = 0;
                         exploding = false;
-                    }
-                    else
-                    {
-                        this.setZombieAlive(false);
+                        setZombieAlive(false);
                     }
                 }
                 else if (goingToExplode)

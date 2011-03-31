@@ -26,6 +26,7 @@ namespace LegendOfDarwin
 
         //flag to show whether darwin is a zombie or not
         private bool zombieFlag;
+        private bool isZombieButtonBeingPressed = false;
 
         //start darwin's humanity at 100
         public int humanityLevel = 100;
@@ -240,11 +241,17 @@ namespace LegendOfDarwin
                 moveDarwin(ks, board, currentDarwinX, currentDarwinY);
             }
 
-            if (canEventHappen())
-            {
+            //if (canEventHappen())
+            //{
+            //    updateDarwinTransformState(ks);
+            //    this.setEventFalse();
+            //}
+
+            if (!isZombieButtonBeingPressed)
                 updateDarwinTransformState(ks);
-                this.setEventFalse();
-            }
+
+            if (ks.IsKeyUp(Keys.Z))
+                isZombieButtonBeingPressed = false;
         }
 
         private void moveDarwin(KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
@@ -327,6 +334,7 @@ namespace LegendOfDarwin
             
             if (ks.IsKeyDown(Keys.Z))
             {
+                isZombieButtonBeingPressed = true;
                 if (zombieFlag == true)
                 {
                     zombieFlag = false;

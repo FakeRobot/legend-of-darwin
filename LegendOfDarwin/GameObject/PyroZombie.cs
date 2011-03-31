@@ -17,7 +17,7 @@ namespace LegendOfDarwin.GameObject
         protected Texture2D flamingZombieTexture;
 
         // boolean to know whether or not we're patrolling or shooting flames
-        protected Boolean patrolling;
+        public Boolean patrolling;
 
         // patrol path nodes
         protected Vector2 currentPoint;

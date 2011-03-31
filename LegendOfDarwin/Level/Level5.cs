@@ -714,18 +714,24 @@ namespace LegendOfDarwin.Level
                 northZombie.setGridPosition(15, 3);
                 northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
                 northZombie.setNextPatrolPoint(new Vector2(5, 3));
+                northZombie.patrolling = true;
 
                 southZombie.setGridPosition(15, 20);
                 southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
                 southZombie.setNextPatrolPoint(new Vector2(27, 20));
+                southZombie.patrolling = true;
                 
                 eastZombie.setGridPosition(29, 11);
                 eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
                 eastZombie.setNextPatrolPoint(new Vector2(29, 6));
+                eastZombie.patrolling = true;
 
                 westZombie.setGridPosition(3, 11);
                 westZombie.setCurrentPatrolPoint(new Vector2(3, 6));
                 westZombie.setNextPatrolPoint(new Vector2(3, 17));
+                westZombie.patrolling = true;
+
+                flames = new LinkedList<Flame>();
 
             }
         }

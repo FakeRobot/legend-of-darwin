@@ -13,6 +13,7 @@ namespace LegendOfDarwin.GameObject
 
         private Random ran;
 
+        private int count;
         
         //private int health;
 
@@ -30,7 +31,9 @@ namespace LegendOfDarwin.GameObject
 
             source = new Rectangle(7, 0, 47, 64);
 
-            setEventLag(55);
+            setEventLag(75);
+
+            count = 0;
             ran = new Random();
         }
 
@@ -63,14 +66,36 @@ namespace LegendOfDarwin.GameObject
                         break;
                 }
 
+                destination.Height = board.getSquareLength() * 2;
+                destination.Width = board.getSquareWidth() * 2;
+
                 setEventFalse();
+                count = 0;
+            }
+            else
+            {
+                count++;
+
+                if (count > 50)
+                {
+                    destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
+                    destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
+                }
+                else if (count > 24)
+                {
+                    destination.Height = board.getSquareLength() * 2;
+                    destination.Width = board.getSquareWidth() * 2;
+                }
+                else
+                {
+                    destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
+                    destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
+                }
             }
         }
 
         public new void Draw(SpriteBatch sb)
         {
-            destination.Height = board.getSquareLength() * 2;
-            destination.Width = board.getSquareWidth() * 2;
             sb.Draw(zombieTexture, destination, source, Color.White);
         }
 

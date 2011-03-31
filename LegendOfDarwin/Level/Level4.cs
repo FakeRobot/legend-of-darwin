@@ -1153,7 +1153,8 @@ namespace LegendOfDarwin.Level
             checkForGameOver(leaderZombie);
             
             // only test for game over if darwin is human or not in conga line
-            if (darwin.isZombie() || (leaderZombie.isDarwinOnFloor(darwin) && !leaderZombie.isDarwinOnPath(darwin))) 
+            if (!darwin.isZombie() || (leaderZombie.isDarwinOnFloor(darwin) && !leaderZombie.isDarwinOnPath(darwin)) 
+                || leaderZombie.isKillMode()) 
             {
                 foreach (CongaFollowerZombie follower in followerZombies)
                     checkForGameOver(follower);

@@ -77,6 +77,12 @@ namespace LegendOfDarwin.GameObject
             killMode = true;
         }
 
+        // checks if zombies are in kill mode or not
+        public bool isKillMode() 
+        {
+            return killMode;
+        }
+
         // set what follower zombies there are on the level
         public void setFollowers(List<CongaFollowerZombie> myFollowers) 
         {

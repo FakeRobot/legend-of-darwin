@@ -9,24 +9,28 @@ namespace LegendOfDarwin.GameObject
 {
     class Nursery : BasicObject
     {
-        private struct vect { public int x; public int y;}
-
         private int maxBabies = 7;
-        private int babyTimeSpawn = 300;
+        private int babyTimeSpawn = 1000;
         private Texture2D nurseTex;
         private BabyZombie[] babies;
 
-        private vect[] spawnPoints;
+        private int spawnX, spawnY;
+
+        //private Vector2[] spawnPoints;
 
         public Nursery(GameBoard gb, Darwin darwin)
             : base(gb)
         {
             babies = new BabyZombie[maxBabies];
-            spawnPoints = new vect[10];
-
+            /*spawnPoints = new Vector2[10];
+            for (int i = 0; i < 10; i++)
+            {
+                spawnPoints[i] = new Vector2();
+            }
+            */
             for (int i = 0; i < maxBabies; i++)
             {
-                babies[i] = new BabyZombie(0, 0, 15, 5, 15, 5, darwin, gb);
+                babies[i] = new BabyZombie(0, 0, 32, 0, 24, 0, darwin, gb);
 
                 babies[i].setZombieAlive(false);
             }
@@ -40,10 +44,10 @@ namespace LegendOfDarwin.GameObject
 
         public new void setGridPosition(int x, int y)
         {
+            //setSpawnPoints(x, y);
+
             this.destination.X = board.getPosition(x, y).X;
             this.destination.Y = board.getPosition(x, y).Y;
-
-            setSpawnPoints(x, y);
         }
 
         public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn)
@@ -62,7 +66,10 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                b.Draw(sb);
+                if (b.isZombieAlive())
+                {
+                    b.Draw(sb);
+                }
             }
         }
 
@@ -72,17 +79,22 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                b.Update(gameTime);
+                if (b.isZombieAlive())
+                {
+                    b.Update(gameTime);
+                }
             }
 
             if (canEventHappen())
             {
-                foreach (BabyZombie b in babies)
+                for( int i = 0; i < maxBabies; i ++)
                 {
-                    if (!b.isZombieAlive())
+                    if (!babies[i].isZombieAlive())
                     {
-                        b.setZombieAlive(true);
-                        b.setDestination(findSpawnPoint());
+                        babies[i].setZombieAlive(true);
+                        babies[i].setGridPosition(spawnX, spawnY);
+                        //Vector2 temp = findSpawnPoint();
+                        //babies[i].setGridPosition((int)temp.X, (int)temp.Y);
                         break;
                     }
                 }
@@ -91,50 +103,60 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
-        private Rectangle findSpawnPoint()
+        public void setSpawnPoint(int x, int y)
         {
-            foreach (vect v in spawnPoints)
+            spawnX = x;
+            spawnY = y;
+        }
+        
+        /*
+        private Vector2 findSpawnPoint()
+        {
+            int mark = 100;
+
+            for(int i = 0; i < 10; i++)
             {
-                if (board.isGridPositionOpen(v.x, v.y))
+                if (board.isGridPositionOpen((int)spawnPoints[i].X, (int)spawnPoints[i].Y))
                 {
-                    return board.getPosition(v.x, v.y);
+                    mark = i;
+                    break;
                 }
             }
 
-            return new Rectangle();
+            return new Vector2(spawnPoints[mark].X, spawnPoints[mark].Y);
         }
 
         private void setSpawnPoints(int x, int y)
         {
-            spawnPoints[0].x = x;
-            spawnPoints[0].y = y - 1;
+            spawnPoints[0].X = x;
+            spawnPoints[0].Y = y - 1;
 
-            spawnPoints[1].x = x - 1;
-            spawnPoints[1].y = y;
+            spawnPoints[1].X = x - 1;
+            spawnPoints[1].Y = y;
 
-            spawnPoints[2].x = x - 1;
-            spawnPoints[2].y = y + 1;
+            spawnPoints[2].X = x - 1;
+            spawnPoints[2].Y = y + 1;
 
-            spawnPoints[3].x = x - 1;
-            spawnPoints[3].y = y + 2;
+            spawnPoints[3].X = x - 1;
+            spawnPoints[3].Y = y + 2;
 
-            spawnPoints[4].x = x;
-            spawnPoints[4].y = y + 3;
+            spawnPoints[4].X = x;
+            spawnPoints[4].Y = y + 3;
 
-            spawnPoints[5].x = x + 1;
-            spawnPoints[5].y = y + 3;
+            spawnPoints[5].X = x + 1;
+            spawnPoints[5].Y = y + 3;
 
-            spawnPoints[6].x = x + 2;
-            spawnPoints[6].y = y + 2;
+            spawnPoints[6].X = x + 2;
+            spawnPoints[6].Y = y + 2;
 
-            spawnPoints[7].x = x + 2;
-            spawnPoints[7].y = y + 1;
+            spawnPoints[7].X = x + 2;
+            spawnPoints[7].Y = y + 1;
 
-            spawnPoints[8].x = x + 2;
-            spawnPoints[8].y = y;
+            spawnPoints[8].X = x + 2;
+            spawnPoints[8].Y = y;
 
-            spawnPoints[9].x = x + 1;
-            spawnPoints[9].y = y - 1;
-        }
+            spawnPoints[9].X = x + 1;
+            spawnPoints[9].Y = y - 1;
+        }*/
     }
 }

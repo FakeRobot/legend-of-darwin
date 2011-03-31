@@ -111,6 +111,7 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(darwin);
 
             nurseryOne.setGridPosition(1, 1);
+            nurseryOne.setSpawnPoint(2, 4);
             board.setGridPositionOccupied(1, 1);
             board.setGridPositionOccupied(1, 2);
             board.setGridPositionOccupied(1, 3);
@@ -119,6 +120,7 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(2, 3);
             
             nurseryTwo.setGridPosition(30, 20);
+            nurseryTwo.setSpawnPoint(30, 19);
             board.setGridPositionOccupied(30, 20);
             board.setGridPositionOccupied(30, 21);
             board.setGridPositionOccupied(30, 22);
@@ -131,8 +133,10 @@ namespace LegendOfDarwin.Level
             gameOver = false;
             gameWin = false;
 
-            gameState.setState(GameState.state.Level);
-            
+            if (gameState.getState().Equals(GameState.state.End))
+            {
+                gameState.setState(GameState.state.Level);
+            }
         }
 
 

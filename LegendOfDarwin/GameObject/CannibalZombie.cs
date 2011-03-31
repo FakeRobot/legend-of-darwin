@@ -130,14 +130,14 @@ namespace LegendOfDarwin.GameObject
                 else
                 {
                     //attempt to find way around obstacle
-                    FindWhichWay(intendedPathX, intendedPathY);
+                    //FindWhichWay(intendedPathX, intendedPathY);
 
-                    if (!goAroundMode)
-                    {
+                    //if (!goAroundMode)
+                    //{
                         RandomWalk();
-                    }
-                    else
-                        goAroundObstacle();
+                    //}
+                    //else
+                    //   goAroundObstacle();
                     
                 
                 }

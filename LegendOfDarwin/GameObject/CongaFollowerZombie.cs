@@ -24,6 +24,9 @@ namespace LegendOfDarwin.GameObject
         //amt that sprite should be shifted up in order to look natural
         protected int amtShiftUp = 0;
 
+        //init posit of zombie, used for resetting
+        protected Vector2 startPosit;
+
         // set ranges to whole board
         public CongaFollowerZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList, Darwin mydarwin, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard) 
@@ -35,6 +38,7 @@ namespace LegendOfDarwin.GameObject
             darwin = mydarwin;
             pathList = myPathList;
             ZOMBIE_MOVE_RATE = 30;
+            startPosit = new Vector2(startX,startY);
         }
 
         /*
@@ -208,6 +212,19 @@ namespace LegendOfDarwin.GameObject
             }
 
             return maxPt;
+        }
+
+        /**
+         * resets follower zombie to initial position on game board
+         * */
+        public void reset() 
+        {
+            board.setGridPositionOpen(this.X, this.Y);
+            this.setGridPosition((int)startPosit.X,(int) startPosit.Y);
+            board.setGridPositionOccupied(this.X, this.Y);
+            this.setZombieAlive(true);
+
+            this.pathCount = 0;
         }
 
         public new void Update(GameTime gameTime, Darwin darwin)

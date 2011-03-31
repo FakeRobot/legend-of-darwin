@@ -51,10 +51,12 @@ namespace LegendOfDarwin.GameObject
          */
         public void Reset(int myx, int myy) 
         {
+            board.setGridPositionOpen(this.X, this.Y);
             this.setGridPosition(myx, myy);
             board.setGridPositionOccupied(this.X, this.Y);
             this.setZombieAlive(true);
 
+            this.pathCount = 0;
             //fix sprite
             destination.Height = (100 / 64) * board.getSquareWidth() + 10;
             destination.Y -= amtShiftUp;

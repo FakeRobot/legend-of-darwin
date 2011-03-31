@@ -182,8 +182,9 @@ namespace LegendOfDarwin.GameObject
             Random rand = new Random();
             int direction = 0;
             bool hasPicked = false; // has a direction been chosen
+            int infiniteLoopStopper = 0;
 
-            while (!(hasPicked))
+            while (!(hasPicked) && infiniteLoopStopper<10)
             {
                 direction = rand.Next(4);
                 if (direction == 0)
@@ -230,6 +231,8 @@ namespace LegendOfDarwin.GameObject
                         }
                     }
                 }
+
+                infiniteLoopStopper++;
             }
 
         }

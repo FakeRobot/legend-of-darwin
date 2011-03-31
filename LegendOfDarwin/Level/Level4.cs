@@ -108,7 +108,48 @@ namespace LegendOfDarwin.Level
 
             followerZombies.Add(new CongaFollowerZombie(25, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(25, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(25, 14, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
+            myPath = new Vector2[4];
+            myPath[2] = new Vector2(8, 4);
+            myPath[3] = new Vector2(8, 19);
+            myPath[0] = new Vector2(25, 19);
+            myPath[1] = new Vector2(25, 4);
+
+            followerZombies.Add(new CongaFollowerZombie(22, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(16, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(14, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+
+            myPath = new Vector2[4];
+            myPath[3] = new Vector2(8, 4);
+            myPath[0] = new Vector2(8, 19);
+            myPath[1] = new Vector2(25, 19);
+            myPath[2] = new Vector2(25, 4);
+
+            followerZombies.Add(new CongaFollowerZombie(8, 12, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(8, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+
+            myPath = new Vector2[5];
+            myPath[0] = new Vector2(25,16);
+            myPath[2] = new Vector2(8, 4);
+            myPath[3] = new Vector2(8, 19);
+            myPath[4] = new Vector2(25, 19);
+            myPath[1] = new Vector2(25, 4);
+
+            followerZombies.Add(new CongaFollowerZombie(29, 17, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 16, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 13, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+
+            myPath = new Vector2[5];
+            myPath[0] = new Vector2(8, 7);
+            myPath[4] = new Vector2(8, 4);
+            myPath[1] = new Vector2(8, 19);
+            myPath[2] = new Vector2(25, 19);
+            myPath[3] = new Vector2(25, 4);
+
+            //followerZombies.Add(new CongaFollowerZombie(4, 7, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            //followerZombies.Add(new CongaFollowerZombie(4, 9, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -1065,7 +1106,11 @@ namespace LegendOfDarwin.Level
             if (!darwin.isZombie())
             {
                 checkForGameOver(leaderZombie);
+                foreach (CongaFollowerZombie follower in followerZombies)
+                    checkForGameOver(follower);
             }
+
+            
 
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
 
@@ -1080,8 +1125,6 @@ namespace LegendOfDarwin.Level
             secondSwitch.Update(gameTime, ks, darwin);
 
             potion.Update(gameTime, ks, darwin, zTime);
-
-            
 
             //checkForGameWin();
             checkForSwitchToLevelFive();
@@ -1125,7 +1168,7 @@ namespace LegendOfDarwin.Level
                 }
 
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(16, 20);
+                darwin.setGridPosition(16, 21);
 
                 gameOver = false;
                 gameWin = false;
@@ -1147,16 +1190,19 @@ namespace LegendOfDarwin.Level
                 //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 //thirdZombie.setZombieAlive(true);
 
-                leaderZombie.Reset(7, 7);
+                leaderZombie.Reset(8, 4);
 
-                potion.setGridPosition(25, 4);
+                foreach (CongaFollowerZombie follower in followerZombies)
+                    follower.reset();
+
+                potion.setGridPosition(28, 7);
                 board.setGridPositionOccupied(potion.X, potion.Y);
 
                 potion.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 
             }
         }

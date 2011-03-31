@@ -43,7 +43,7 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 4;
             darwin = mydarwin;
             pathList = myPathList;
-            ZOMBIE_MOVE_RATE = 30;
+            ZOMBIE_MOVE_RATE = 20;
             startPosit = new Vector2(startX,startY);
             leaderZombie = myLeader;
         }
@@ -258,6 +258,7 @@ namespace LegendOfDarwin.GameObject
 
                 if (preKillMode)
                 {
+                    
                     source.X = 128;
                     killMode = true;
                     preKillMode = false;
@@ -265,12 +266,14 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if(killMode)
                 {
+                    ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;
                     moveTowardsPoint(darwin.X, darwin.Y);
                 }
                 else if (this.isPointInVision(darwin.X, darwin.Y) && !darwin.isZombie() && isDarwinOnFloor(darwin))
                 {
+                        ZOMBIE_MOVE_RATE = 10;
                         this.enemyAlert = true;
                         source.X = 64;
                         moveTowardsPoint(darwin.X, darwin.Y);
@@ -280,6 +283,7 @@ namespace LegendOfDarwin.GameObject
                 {
                         if (!hasBeenSeen)
                         {
+                            ZOMBIE_MOVE_RATE = 20;
                             hasBeenSeenCounter++;
                             if (hasBeenSeenCounter > 3)
                                 hasBeenSeen = true;
@@ -287,6 +291,7 @@ namespace LegendOfDarwin.GameObject
                         }
                         else
                         {
+                            ZOMBIE_MOVE_RATE = 10;
                             this.enemyAlert = true;
                             source.X = 64;
                             moveTowardsPoint(darwin.X, darwin.Y);
@@ -295,6 +300,7 @@ namespace LegendOfDarwin.GameObject
                  }
                 else
                 {
+                        ZOMBIE_MOVE_RATE = 20;
                         hasBeenSeen = false;
                         hasBeenSeenCounter = 0;
 

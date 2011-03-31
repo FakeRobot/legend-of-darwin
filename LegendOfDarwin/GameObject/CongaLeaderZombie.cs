@@ -37,7 +37,7 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 6;
             darwin = mydarwin;
             pathList = myPathList;
-            ZOMBIE_MOVE_RATE = 30;
+            ZOMBIE_MOVE_RATE = 20;
             followerZombies = new List<CongaFollowerZombie>();
         }
 
@@ -269,6 +269,7 @@ namespace LegendOfDarwin.GameObject
             {
                 if (killMode) 
                 {
+                    ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;
                     moveTowardsPoint(darwin.X, darwin.Y);
@@ -278,12 +279,14 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if (isDarwinOnFloor(darwin) && !darwin.isZombie())
                 {
+                    ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;
                     moveTowardsPoint(darwin.X,darwin.Y);
                 }
                 else if (isDarwinOnFloor(darwin) && !isDarwinOnPath(darwin)) 
                 {
+                    ZOMBIE_MOVE_RATE = 10;
                     // case where darwin is a zombie not in the conga line
                     this.enemyAlert = true;
                     source.X = 64;
@@ -291,6 +294,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else
                 {
+                    ZOMBIE_MOVE_RATE = 20;
                     if (enemyAlert)
                     {
                         source.X = 128;

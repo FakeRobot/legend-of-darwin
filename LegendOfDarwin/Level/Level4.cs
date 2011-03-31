@@ -38,6 +38,7 @@ namespace LegendOfDarwin.Level
         private ZombieTime zTimeReset; //what zTime should reset to
 
         private Potion potion;
+        private Potion potion2;
         private Stairs stairs;
 
         private BasicObject[] walls;
@@ -235,6 +236,7 @@ namespace LegendOfDarwin.Level
             zTimeReset = new ZombieTime(board);
 
             setPotionPosition(28, 7);
+            setPotion2Position(1, 7);
 
             setWallsInLevelFour();
         }
@@ -315,6 +317,13 @@ namespace LegendOfDarwin.Level
             potion.setGridPosition(x, y);
         }
 
+        private void setPotion2Position(int x, int y)
+        {
+            potion2 = new Potion(board);
+            potion2.setDestination(board.getPosition(x, y));
+            potion2.setGridPosition(x, y);
+        }
+
         private void setWalls()
         {
             BasicObject w1 = new BasicObject(board);
@@ -370,6 +379,8 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
+            potion2.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
+
 
         }
 
@@ -1161,6 +1172,7 @@ namespace LegendOfDarwin.Level
             secondSwitch.Update(gameTime, ks, darwin);
 
             potion.Update(gameTime, ks, darwin, zTime);
+            potion2.Update(gameTime, ks, darwin, zTime);
 
             //checkForGameWin();
             checkForSwitchToLevelFive();
@@ -1213,6 +1225,7 @@ namespace LegendOfDarwin.Level
                 //board.setGridPositionOpen(secondZombie);
                 //board.setGridPositionOpen(thirdZombie);
                 board.setGridPositionOpen(potion);
+                board.setGridPositionOpen(potion2);
 
                 //firstZombie.setGridPosition(10, 10);
                 //board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
@@ -1231,10 +1244,14 @@ namespace LegendOfDarwin.Level
                 foreach (CongaFollowerZombie follower in followerZombies)
                     follower.reset();
 
+                firstSwitch.turnOn();
+                secondSwitch.turnOn();
+
                 potion.setGridPosition(28, 7);
-                board.setGridPositionOccupied(potion.X, potion.Y);
+                potion2.setGridPosition(1, 7);
 
                 potion.reset();
+                potion2.reset();
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
@@ -1372,6 +1389,7 @@ namespace LegendOfDarwin.Level
             secondSwitch.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
             potion.Draw(spriteBatch);
+            potion2.Draw(spriteBatch);
 
             if (messageMode)
             {

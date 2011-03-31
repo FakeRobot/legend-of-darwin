@@ -25,7 +25,7 @@ namespace LegendOfDarwin
         private GameStart gameStart;
 
         private Darwin darwin;
-        private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie;
+        private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie, fifthZombie, sixthZombie;
         private Switch firstSwitch;
         private Brain brain;
         private GameBoard board;
@@ -81,7 +81,9 @@ namespace LegendOfDarwin
             firstZombie = new Zombie(10, 10, 15, 5, 15, 5, board);
             secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
-            //fourthZombie = new Zombie(20, 7, 5, 2, 5, 5, board);
+            fourthZombie = new Zombie(20, 7, 27, 15, 22, 2, board);
+            fifthZombie = new Zombie(22, 10, 25, 15, 22, 2, board);
+            sixthZombie = new Zombie(21, 4, 25, 15, 15, 2, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -136,22 +138,6 @@ namespace LegendOfDarwin
 
         private BasicObject[] setRemovableWallsInLevelOne()
         {
-            //later add an x and y to the constructor
-            //BasicObject s1 = new BasicObject(board);
-            //s1.X = 20;
-            //s1.Y = 19;
-
-            //BasicObject s2 = new BasicObject(board);
-            //s2.X = 20;
-            //s2.Y = 20;
-
-            //BasicObject s3 = new BasicObject(board);
-            //s3.X = 20;
-            //s3.Y = 21;
-
-            //BasicObject s4 = new BasicObject(board);
-            //s4.X = 20;
-            //s4.Y = 22;
 
             BasicObject s5 = new BasicObject(board);
             s5.X = 25;
@@ -376,7 +362,10 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
             thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            //fourthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            fourthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            fifthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            sixthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
@@ -480,7 +469,9 @@ namespace LegendOfDarwin
                 checkForGameOver(firstZombie);
                 checkForGameOver(secondZombie);
                 checkForGameOver(thirdZombie);
-                //checkForGameOver(fourthZombie);
+                checkForGameOver(fourthZombie);
+                checkForGameOver(fifthZombie);
+                checkForGameOver(sixthZombie);
             }
             checkForGameOver(vortex);
 
@@ -488,13 +479,12 @@ namespace LegendOfDarwin
 
             stairs.Update(gameTime, darwin);
 
-            //firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
-            //secondZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             secondZombie.Update(gameTime, darwin, brain);
-            //thirdZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             thirdZombie.Update(gameTime, darwin, brain);
-            //fourthZombie.Update(gameTime, darwin, brain);
+            fourthZombie.Update(gameTime, darwin, brain);
+            fifthZombie.Update(gameTime, darwin, brain);
+            sixthZombie.Update(gameTime, darwin, brain);
 
             firstSwitch.Update(gameTime, ks, darwin);
 
@@ -504,11 +494,12 @@ namespace LegendOfDarwin
             vortex.CollisionWithZombie(firstZombie);
             vortex.CollisionWithZombie(secondZombie);
             vortex.CollisionWithZombie(thirdZombie);
-            //vortex.CollisionWithZombie(fourthZombie);
+            vortex.CollisionWithZombie(fourthZombie);
+            vortex.CollisionWithZombie(fifthZombie);
+            vortex.CollisionWithZombie(sixthZombie);
             vortex.CollisionWithBO(brain, board);
 
             potion.Update(gameTime, ks, darwin, zTime);
-
             
             //checkForGameWin();
             checkForSwitchToLevelTwo();
@@ -548,7 +539,9 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(firstZombie);
                 board.setGridPositionOpen(secondZombie);
                 board.setGridPositionOpen(thirdZombie);
-                //board.setGridPositionOpen(fourthZombie);
+                board.setGridPositionOpen(fourthZombie);
+                board.setGridPositionOpen(fifthZombie);
+                board.setGridPositionOpen(sixthZombie);
                 board.setGridPositionOpen(brain);
                 board.setGridPositionOpen(potion);
 
@@ -564,9 +557,17 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
                 thirdZombie.setZombieAlive(true);
 
-                //fourthZombie.setGridPosition(20, 7);
-                //board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
-                //fourthZombie.setZombieAlive(true);
+                fourthZombie.setGridPosition(20, 7);
+                board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+                fourthZombie.setZombieAlive(true);
+
+                fifthZombie.setGridPosition(22, 10);
+                board.setGridPositionOccupied(fifthZombie.X, fifthZombie.Y);
+                fifthZombie.setZombieAlive(true);
+
+                sixthZombie.setGridPosition(22, 10);
+                board.setGridPositionOccupied(sixthZombie.X, sixthZombie.Y);
+                sixthZombie.setZombieAlive(true);
 
                 potion.setGridPosition(25, 4);
                 board.setGridPositionOccupied(potion.X, potion.Y);
@@ -740,7 +741,9 @@ namespace LegendOfDarwin
             firstZombie.Draw(spriteBatch);
             secondZombie.Draw(spriteBatch);
             thirdZombie.Draw(spriteBatch);
-            //fourthZombie.Draw(spriteBatch);
+            fourthZombie.Draw(spriteBatch);
+            fifthZombie.Draw(spriteBatch);
+            sixthZombie.Draw(spriteBatch);
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);

@@ -25,8 +25,8 @@ namespace LegendOfDarwin.GameObject
             explodeCount = 0;
             explodeSource = new Rectangle[3];
             explodeSource[0] = new Rectangle(0, 0, 75, 90);
-            explodeSource[1] = new Rectangle(75, 0, 75, 90);
-            explodeSource[2] = new Rectangle(150, 0, 75, 90);
+            explodeSource[1] = new Rectangle(76, 0, 87, 90);
+            explodeSource[2] = new Rectangle(169, 0, 101, 90);
 
             this.setEventLag(40);
         }
@@ -106,7 +106,7 @@ namespace LegendOfDarwin.GameObject
                 yDist = this.Y - darwin.Y;
             }
 
-            if (xDist + yDist == 1)
+            if (xDist + yDist < 2)
             {
                 return true;
             }

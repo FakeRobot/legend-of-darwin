@@ -20,8 +20,15 @@ namespace LegendOfDarwin.GameObject
         //amt that sprite should be shifted up in order to look natural
         protected int amtShiftUp = 0;
 
-        // set ranges to whole board
-        public CongaLeaderZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList, Darwin mydarwin, GameBoard myboard) :
+        // used to see when an all out atk should be done
+        protected bool killMode = false;
+
+        // list of all follower zombies on level
+        protected List<CongaFollowerZombie> followerZombies;
+
+        // you should set ranges to whole board
+        public CongaLeaderZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList, 
+            Darwin mydarwin, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard) 
         {
             allowRangeDetection = false;
@@ -31,6 +38,7 @@ namespace LegendOfDarwin.GameObject
             darwin = mydarwin;
             pathList = myPathList;
             ZOMBIE_MOVE_RATE = 30;
+            followerZombies = new List<CongaFollowerZombie>();
         }
 
         // loads in sprite as well as shifts sprite to look natural 
@@ -55,11 +63,24 @@ namespace LegendOfDarwin.GameObject
             this.setGridPosition(myx, myy);
             board.setGridPositionOccupied(this.X, this.Y);
             this.setZombieAlive(true);
+            killMode = false;
 
             this.pathCount = 0;
             //fix sprite
             destination.Height = (100 / 64) * board.getSquareWidth() + 10;
             destination.Y -= amtShiftUp;
+        }
+
+        // ATTACK!!!
+        public void activateKillMode()
+        {
+            killMode = true;
+        }
+
+        // set what follower zombies there are on the level
+        public void setFollowers(List<CongaFollowerZombie> myFollowers) 
+        {
+            followerZombies = myFollowers;
         }
 
         /*
@@ -136,7 +157,7 @@ namespace LegendOfDarwin.GameObject
                 bool canMoveThere = false;
                 
 
-                if (darwin.X == intendedPathX && darwin.Y == intendedPathY && !darwin.isZombie())
+                if (darwin.X == intendedPathX && darwin.Y == intendedPathY)
                     canMoveThere = true;
 
                 // checks for board position to be open
@@ -246,12 +267,27 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
+                if (killMode) 
+                {
+                    this.enemyAlert = true;
+                    source.X = 64;
+                    moveTowardsPoint(darwin.X, darwin.Y);
 
-                if (isDarwinOnFloor(darwin) && !darwin.isZombie())
+                    foreach (CongaFollowerZombie follower in followerZombies)
+                        follower.activateKillMode();
+                }
+                else if (isDarwinOnFloor(darwin) && !darwin.isZombie())
                 {
                     this.enemyAlert = true;
                     source.X = 64;
                     moveTowardsPoint(darwin.X,darwin.Y);
+                }
+                else if (isDarwinOnFloor(darwin) && !isDarwinOnPath(darwin)) 
+                {
+                    // case where darwin is a zombie not in the conga line
+                    this.enemyAlert = true;
+                    source.X = 64;
+                    moveTowardsPoint(darwin.X, darwin.Y);
                 }
                 else
                 {
@@ -267,7 +303,7 @@ namespace LegendOfDarwin.GameObject
                     }
                     else
                         this.source.X = 0;
-                    
+
                     followPath();
                 }
 

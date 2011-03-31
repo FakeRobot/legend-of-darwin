@@ -108,9 +108,9 @@ namespace LegendOfDarwin.Level
             myPath[7] = new Vector2(17, 4);
 
             
-            followerZombies.Add(new CongaFollowerZombie(10,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board));
-            followerZombies.Add(new CongaFollowerZombie(12, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(14, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(10,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,leaderZombie,darwin,board));
+            followerZombies.Add(new CongaFollowerZombie(12, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, leaderZombie,darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(14, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, leaderZombie,darwin, board));
 
             myPath = new Vector2[8];
             myPath[2] = new Vector2(8, 4);
@@ -122,9 +122,9 @@ namespace LegendOfDarwin.Level
             myPath[0] = new Vector2(25, 4);
             myPath[1] = new Vector2(17, 4);
 
-            followerZombies.Add(new CongaFollowerZombie(25, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(25, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(25, 14, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(25, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(25, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(25, 14, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
 
             myPath = new Vector2[8];
             myPath[4] = new Vector2(8, 4);
@@ -136,9 +136,9 @@ namespace LegendOfDarwin.Level
             myPath[2] = new Vector2(25, 4);
             myPath[3] = new Vector2(17, 4);
 
-            followerZombies.Add(new CongaFollowerZombie(22, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(16, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(14, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(22, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(16, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(14, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
 
             myPath = new Vector2[8];
             myPath[6] = new Vector2(8, 4);
@@ -150,8 +150,8 @@ namespace LegendOfDarwin.Level
             myPath[4] = new Vector2(25, 4);
             myPath[5] = new Vector2(17, 4);
 
-            followerZombies.Add(new CongaFollowerZombie(8, 12, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(8, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(8, 12, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(8, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
 
             myPath = new Vector2[8];
 
@@ -164,10 +164,10 @@ namespace LegendOfDarwin.Level
             myPath[1] = new Vector2(25, 4);
             myPath[2] = new Vector2(17, 4);
 
-            followerZombies.Add(new CongaFollowerZombie(29, 17, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(29, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(29, 16, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(29, 13, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 17, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 16, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(29, 13, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
 
             myPath = new Vector2[8];
             myPath[7] = new Vector2(8, 4);
@@ -179,10 +179,12 @@ namespace LegendOfDarwin.Level
             myPath[5] = new Vector2(25, 4);
             myPath[6] = new Vector2(17, 4);
 
-            followerZombies.Add(new CongaFollowerZombie(4, 7, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(4, 9, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(4, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            followerZombies.Add(new CongaFollowerZombie(4, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 7, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 9, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath,leaderZombie, darwin, board));
+
+            leaderZombie.setFollowers(followerZombies);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -1136,14 +1138,15 @@ namespace LegendOfDarwin.Level
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
-            if (!darwin.isZombie())
+            
+            checkForGameOver(leaderZombie);
+            
+            // only test for game over if darwin is human or not in conga line
+            if (darwin.isZombie() || (leaderZombie.isDarwinOnFloor(darwin) && !leaderZombie.isDarwinOnPath(darwin))) 
             {
-                checkForGameOver(leaderZombie);
                 foreach (CongaFollowerZombie follower in followerZombies)
                     checkForGameOver(follower);
             }
-
-            
 
             darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
 

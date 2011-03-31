@@ -27,8 +27,14 @@ namespace LegendOfDarwin.GameObject
         //init posit of zombie, used for resetting
         protected Vector2 startPosit;
 
+        // for deciding when zombie darwin should be attacked or not
+        protected bool killMode = false;
+        protected bool preKillMode = false;
+
+        protected CongaLeaderZombie leaderZombie;
+
         // set ranges to whole board
-        public CongaFollowerZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList, Darwin mydarwin, GameBoard myboard) :
+        public CongaFollowerZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, Vector2[] myPathList,CongaLeaderZombie myLeader, Darwin mydarwin, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard) 
         {
             allowRangeDetection = false;
@@ -39,6 +45,7 @@ namespace LegendOfDarwin.GameObject
             pathList = myPathList;
             ZOMBIE_MOVE_RATE = 30;
             startPosit = new Vector2(startX,startY);
+            leaderZombie = myLeader;
         }
 
         /*
@@ -115,8 +122,10 @@ namespace LegendOfDarwin.GameObject
                 bool canMoveThere = false;
 
 
-                if (darwin.X == intendedPathX && darwin.Y == intendedPathY && !darwin.isZombie())
+                if (darwin.X == intendedPathX && darwin.Y == intendedPathY && (!darwin.isZombie() || killMode))
                     canMoveThere = true;
+                else if (darwin.X == intendedPathX && darwin.Y == intendedPathY && darwin.isZombie() && !killMode)
+                    preKillMode = true;
 
                 // checks for board position to be open
                 if (board.isGridPositionOpen(intendedPathX, intendedPathY) || canMoveThere)
@@ -133,8 +142,8 @@ namespace LegendOfDarwin.GameObject
                 }
                 else
                 {
-
-                    RandomWalk();
+                    if (!preKillMode)
+                        RandomWalk();
 
                 }
             }
@@ -223,8 +232,16 @@ namespace LegendOfDarwin.GameObject
             this.setGridPosition((int)startPosit.X,(int) startPosit.Y);
             board.setGridPositionOccupied(this.X, this.Y);
             this.setZombieAlive(true);
+            killMode = false;
+            preKillMode = false;
 
             this.pathCount = 0;
+        }
+
+        // ATTACK!!!
+        public void activateKillMode() 
+        {
+            killMode = true;
         }
 
         public new void Update(GameTime gameTime, Darwin darwin)
@@ -239,48 +256,62 @@ namespace LegendOfDarwin.GameObject
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
 
-                if (this.isPointInVision(darwin.X, darwin.Y) && !darwin.isZombie() && isDarwinOnFloor(darwin))
+                if (preKillMode)
+                {
+                    source.X = 128;
+                    killMode = true;
+                    preKillMode = false;
+                    leaderZombie.activateKillMode();
+                }
+                else if(killMode)
                 {
                     this.enemyAlert = true;
                     source.X = 64;
                     moveTowardsPoint(darwin.X, darwin.Y);
                 }
-                else if (isDarwinOnFloor(darwin) && !darwin.isZombie())
+                else if (this.isPointInVision(darwin.X, darwin.Y) && !darwin.isZombie() && isDarwinOnFloor(darwin))
                 {
-                    if (!hasBeenSeen)
-                    {
-                        hasBeenSeenCounter++;
-                        if (hasBeenSeenCounter > 3)
-                            hasBeenSeen = true;
-                        followPath();
-                    }
-                    else
-                    {
                         this.enemyAlert = true;
                         source.X = 64;
                         moveTowardsPoint(darwin.X, darwin.Y);
-                    }
-
                 }
+                else if ((isDarwinOnFloor(darwin) && !darwin.isZombie())
+                    || (darwin.isZombie() && isDarwinOnFloor(darwin) && !isDarwinOnPath(darwin)))
+                {
+                        if (!hasBeenSeen)
+                        {
+                            hasBeenSeenCounter++;
+                            if (hasBeenSeenCounter > 3)
+                                hasBeenSeen = true;
+                            followPath();
+                        }
+                        else
+                        {
+                            this.enemyAlert = true;
+                            source.X = 64;
+                            moveTowardsPoint(darwin.X, darwin.Y);
+                        }
+
+                 }
                 else
                 {
-                    hasBeenSeen = false;
-                    hasBeenSeenCounter = 0;
+                        hasBeenSeen = false;
+                        hasBeenSeenCounter = 0;
 
-                    if (enemyAlert)
-                    {
-                        source.X = 128;
-                        enemyAlertCount++;
-                        if (enemyAlertCount > 2)
+                        if (enemyAlert)
                         {
-                            enemyAlert = false;
-                            enemyAlertCount = 0;
+                            source.X = 128;
+                            enemyAlertCount++;
+                            if (enemyAlertCount > 2)
+                            {
+                                enemyAlert = false;
+                                enemyAlertCount = 0;
+                            }
                         }
-                    }
-                    else
-                        this.source.X = 0;
+                        else
+                            this.source.X = 0;
 
-                    followPath();
+                        followPath();
                 }
 
                 movecounter = 0;

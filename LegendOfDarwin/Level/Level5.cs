@@ -164,26 +164,60 @@ namespace LegendOfDarwin.Level
 
         private void setBoxes()
         {
-            Box b1 = new Box(board, 25, 6);
-            Box b2 = new Box(board, 25, 8);
-            Box b3 = new Box(board, 25, 10);
-            Box b4 = new Box(board, 25, 12);
+            Box b1 = new Box(board, 7, 8);
+            Box b2 = new Box(board, 13, 8);
+            Box b3 = new Box(board, 19, 8);
+            Box b4 = new Box(board, 25, 8);
+            Box b5 = new Box(board, 10, 10);
+            Box b6 = new Box(board, 16, 10);
+            Box b7 = new Box(board, 22, 10);
 
-            boxes = new Box[4] { b1, b2, b3, b4 };
+            Box b8 = new Box(board, 7, 13);
+            Box b9 = new Box(board, 8, 13);
+            Box b10 = new Box(board, 9, 13);
+            Box b11 = new Box(board, 10, 13);
+            Box b12 = new Box(board, 11, 13);
+            Box b13 = new Box(board, 12, 13);
+            Box b14 = new Box(board, 13, 13);
+
+            boxes = new Box[14] { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14 };
         }
 
         private void setBoxPattern()
         {
             BasicObject bo1 = new BasicObject(board);
-                bo1.setGridPosition(20, 6);
+                bo1.setGridPosition(7, 8);
             BasicObject bo2 = new BasicObject(board);
-                bo2.setGridPosition(20, 8);
+                bo2.setGridPosition(13, 8);
             BasicObject bo3 = new BasicObject(board);
-                bo3.setGridPosition(20, 10);
+                bo3.setGridPosition(19, 8);
             BasicObject bo4 = new BasicObject(board);
-                bo4.setGridPosition(20, 12);
+                bo4.setGridPosition(25, 8);
 
-            spotsForPattern = new BasicObject[4] { bo1, bo2, bo3, bo4 };
+            BasicObject bo5 = new BasicObject(board);
+                bo5.setGridPosition(7, 15);
+            BasicObject bo6 = new BasicObject(board);
+                bo6.setGridPosition(13, 15);
+            BasicObject bo7 = new BasicObject(board);
+                bo7.setGridPosition(19, 15);
+            BasicObject bo8 = new BasicObject(board);
+                bo8.setGridPosition(25, 15);
+
+            BasicObject bo9 = new BasicObject(board);
+                bo9.setGridPosition(10, 10);
+            BasicObject bo10 = new BasicObject(board);
+                bo10.setGridPosition(16, 10);
+            BasicObject bo11 = new BasicObject(board);
+                bo11.setGridPosition(22, 10);
+
+            BasicObject bo12 = new BasicObject(board);
+                bo12.setGridPosition(10, 13);
+            BasicObject bo13 = new BasicObject(board);
+                bo13.setGridPosition(16, 13);
+            BasicObject bo14 = new BasicObject(board);
+                bo14.setGridPosition(22, 13);
+
+            spotsForPattern = new BasicObject[14] { bo1, bo2, bo3, bo4, bo5, bo6, bo7, bo8, bo9, bo10, bo11, bo12, bo13, bo14 };
         }
 
         private void setVortexes()

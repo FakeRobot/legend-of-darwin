@@ -58,12 +58,13 @@ namespace LegendOfDarwin.GameObject
             // store the number of boxes we match
             int matchCount = 0;
 
-            //foreach (Box b in boxes)
-            for (int j = 0; j < numberOfSpotsToCheck; j++)
+            foreach (Box b in boxes)
+            //for (int j = 0; j < numberOfSpotsToCheck; j++)
             {
                 for (int i = 0; i < numberOfSpotsToCheck; i++)
                 {
-                    if (boxes[j].X == spots[i].X && boxes[j].Y == spots[i].Y)
+                    //if (boxes[j].X == spots[i].X && boxes[j].Y == spots[i].Y)
+                    if (b.X == spots[i].X && b.Y == spots[i].Y)
                     {
                         matchCount++;
                     }

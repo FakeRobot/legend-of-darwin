@@ -132,19 +132,26 @@ namespace LegendOfDarwin.Level
 
             northZombie = new PyroZombie(15, 3, 25, 4, 3, 3, board);
             northZombie.setGridPosition(15, 3);
-            northZombie.setDirection(2);
+            northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
+            northZombie.setNextPatrolPoint(new Vector2(5, 3));
+            
 
             southZombie = new PyroZombie(15, 20, 25, 4, 20, 20, board);
             southZombie.setGridPosition(15, 20);
-            southZombie.setDirection(4);
+            southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
+            southZombie.setNextPatrolPoint(new Vector2(27, 20));
+           
 
             eastZombie = new PyroZombie(29, 11, 29, 29, 19, 4, board);
             eastZombie.setGridPosition(29, 11);
-            eastZombie.setDirection(1);
+            eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
+            eastZombie.setNextPatrolPoint(new Vector2(29, 6));
 
             westZombie = new PyroZombie(3, 11, 3, 3, 19, 4, board);
             westZombie.setGridPosition(3, 11);
-            westZombie.setDirection(3);
+            westZombie.setCurrentPatrolPoint(new Vector2(3, 5));
+            westZombie.setNextPatrolPoint(new Vector2(3, 18));
+           
 
         }
 
@@ -367,11 +374,12 @@ namespace LegendOfDarwin.Level
             snake3.LoadContent(snakeTexture);
             snake4.LoadContent(snakeTexture);
 
+            // zombie darwin texture == placeholder flamethrowering erryting sprite
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
-            northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            southZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            eastZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            westZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            northZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
+            southZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
+            eastZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
+            westZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
         }
 
 
@@ -658,6 +666,22 @@ namespace LegendOfDarwin.Level
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
 
+                northZombie.setGridPosition(15, 3);
+                northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
+                northZombie.setNextPatrolPoint(new Vector2(5, 3));
+
+                southZombie.setGridPosition(15, 20);
+                southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
+                southZombie.setNextPatrolPoint(new Vector2(27, 20));
+                
+                eastZombie.setGridPosition(29, 11);
+                eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
+                eastZombie.setNextPatrolPoint(new Vector2(29, 6));
+
+                westZombie.setGridPosition(3, 11);
+                westZombie.setCurrentPatrolPoint(new Vector2(3, 6));
+                westZombie.setNextPatrolPoint(new Vector2(3, 17));
+
             }
         }
 
@@ -793,6 +817,7 @@ namespace LegendOfDarwin.Level
             snake2.Draw(spriteBatch);
             snake3.Draw(spriteBatch);
             snake4.Draw(spriteBatch);
+
             northZombie.Draw(spriteBatch);
             southZombie.Draw(spriteBatch);
             eastZombie.Draw(spriteBatch);

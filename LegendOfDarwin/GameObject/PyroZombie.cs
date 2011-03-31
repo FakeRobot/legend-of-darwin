@@ -15,21 +15,25 @@ namespace LegendOfDarwin.GameObject
 
         // need directions to shoot flames and directions to walk
         protected Dir flameDir;
-        protected Dir walkDir;
 
-        protected Boolean isShootingFlames;
+        // boolean to know whether or not we're patrolling or shooting flames
         protected Boolean patrolling;
 
+        // texture for the flame
         protected Texture2D flame;
+
+        // patrol path nodes
+        protected Vector2 currentPoint;
+        protected Vector2 nextPoint;
 
         public PyroZombie(int startX, int startY, int maxX, int minX, int maxY, int minY, GameBoard myboard)
             : base(startX, startY, maxX, minX, maxY, minY, myboard)
         {
             allowVision = true;
-            visionMaxX = 7;
-            visionMaxY = 7;
-            this.isShootingFlames = false;
+            visionMaxX = 4;
+            visionMaxY = 4;
             this.patrolling = true;
+            ZOMBIE_MOVE_RATE = 35;
         }
 
         public void LoadContent(Texture2D pyroZombieTexture, Texture2D flameTexture)
@@ -38,59 +42,91 @@ namespace LegendOfDarwin.GameObject
             this.flame = flameTexture;
         }
 
-        public void setDirection(int dir)
+        public Boolean isPatrolling()
         {
-            switch (dir)
-            {
-                case(3):
-                    this.walkDir = Dir.Down;
-                    break;
-                case(1):
-                    this.walkDir = Dir.Up;
-                    break;
-                case(4):
-                    this.walkDir = Dir.Left;
-                    break;
-                case(2):
-                    this.walkDir = Dir.Right;
-                    break;
-                default:
-                    throw new Exception("Cant set walk direction for shit");
-            }
+            return this.patrolling;
+        }
+
+        public void setCurrentPatrolPoint(Vector2 curr)
+        {
+            this.currentPoint = curr;
+        }
+
+        public void setNextPatrolPoint(Vector2 next)
+        {
+            this.nextPoint = next;
+        }
+
+        public Vector2 getCurrentPatrolPoint()
+        {
+            return this.currentPoint;
+        }
+
+        public Vector2 getNextPatrolPoint()
+        {
+            return this.nextPoint;
+        }
+
+        public void moveToPoint(Vector2 point)
+        {
+            if (this.X < point.X)
+                this.MoveRight();
+            else if (this.X > point.X)
+                this.MoveLeft();
+            else if (this.Y < point.Y)
+                this.MoveDown();
+            else if (this.Y > point.Y)
+                this.MoveUp();
         }
 
         public void Update(Darwin darwin)
         {
-            if (!this.patrolling)
+            if (movecounter > ZOMBIE_MOVE_RATE)
             {
-                switch (this.walkDir)
+                if (this.isPointInVision(darwin.X, darwin.Y))
                 {
-                    case (Dir.Down):
-                        this.MoveDown();
-                        break;
-                    case (Dir.Up):
-                        this.MoveUp();
-                        break;
-                    case (Dir.Left):
-                        this.MoveLeft();
-                        break;
-                    case (Dir.Right):
-                        this.MoveRight();
-                        break;
-                    default:
-                        throw new Exception("Cant walk for shit");
+                    patrolling = false;
+                    // flame darwin up the ass
                 }
+                else
+                {
+                    patrolling = true;
+                }
+
+                // if he is patrolling
+                if (this.patrolling)
+                {
+                    // could probably do this better
+                    if ((this.X == nextPoint.X) && (this.Y == nextPoint.Y))
+                    {
+                        // switch patrol points
+                        Vector2 temp = currentPoint;
+                        setCurrentPatrolPoint(this.getNextPatrolPoint());
+                        setNextPatrolPoint(temp);
+                    }
+                    else
+                    {
+                        this.moveToPoint(nextPoint);
+                    }
+                }
+
+                movecounter = 0;
             }
+
+            movecounter++;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (this.isShootingFlames)
+            switch (this.patrolling)
             {
                 case (true):
+                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 case (false):
-                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
+                    // need both flame and 
+                    //spriteBatch.Draw(zombieTexture, destination, source, Color.White);
+                    spriteBatch.Draw(flame, destination, source, Color.White);
                     break;
                 default:
                     throw new Exception("failed to draw pyro zombie");

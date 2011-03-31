@@ -87,69 +87,102 @@ namespace LegendOfDarwin.Level
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(12, 10, 15, 5, 15, 5, board);
 
+            Vector2[] myPath = new Vector2[4];
+            myPath[0] = new Vector2(8, 4);
+            myPath[1] = new Vector2(8, 19);
+            myPath[2] = new Vector2(25, 19);
+            myPath[3] = new Vector2(25, 4);
+
+            leaderZombie = new CongaLeaderZombie(8, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board);
+
             followerZombies = new List<CongaFollowerZombie>();
 
-            Vector2[] myPath = new Vector2[4]; 
+            myPath = new Vector2[8]; 
             myPath[0] = new Vector2(8,4);
-            myPath[1] = new Vector2(8,19);
-            myPath[2] = new Vector2(25,19);
-            myPath[3] = new Vector2(25,4);
+            myPath[1] = new Vector2(8, 12);
+            myPath[2] = new Vector2(8,19);
+            myPath[3] = new Vector2(17, 19);
+            myPath[4] = new Vector2(25,19);
+            myPath[5] = new Vector2(25, 12);
+            myPath[6] = new Vector2(25,4);
+            myPath[7] = new Vector2(17, 4);
 
-            leaderZombie = new CongaLeaderZombie(8,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board);
+            
             followerZombies.Add(new CongaFollowerZombie(10,4,board.getNumSquaresX(),0,board.getNumSquaresY(),0,myPath,darwin,board));
             followerZombies.Add(new CongaFollowerZombie(12, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(14, 4, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
-            myPath = new Vector2[4];
-            myPath[1] = new Vector2(8, 4);
-            myPath[2] = new Vector2(8, 19);
-            myPath[3] = new Vector2(25, 19);
+            myPath = new Vector2[8];
+            myPath[2] = new Vector2(8, 4);
+            myPath[3] = new Vector2(8, 12);
+            myPath[4] = new Vector2(8, 19);
+            myPath[5] = new Vector2(17, 19);
+            myPath[6] = new Vector2(25, 19);
+            myPath[7] = new Vector2(25, 12);
             myPath[0] = new Vector2(25, 4);
+            myPath[1] = new Vector2(17, 4);
 
             followerZombies.Add(new CongaFollowerZombie(25, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(25, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(25, 14, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
-            myPath = new Vector2[4];
-            myPath[2] = new Vector2(8, 4);
-            myPath[3] = new Vector2(8, 19);
+            myPath = new Vector2[8];
+            myPath[4] = new Vector2(8, 4);
+            myPath[5] = new Vector2(8, 12);
+            myPath[6] = new Vector2(8, 19);
+            myPath[7] = new Vector2(17, 19);
             myPath[0] = new Vector2(25, 19);
-            myPath[1] = new Vector2(25, 4);
+            myPath[1] = new Vector2(25, 12);
+            myPath[2] = new Vector2(25, 4);
+            myPath[3] = new Vector2(17, 4);
 
             followerZombies.Add(new CongaFollowerZombie(22, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(16, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(14, 19, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
-            myPath = new Vector2[4];
-            myPath[3] = new Vector2(8, 4);
+            myPath = new Vector2[8];
+            myPath[6] = new Vector2(8, 4);
+            myPath[7] = new Vector2(8, 12);
             myPath[0] = new Vector2(8, 19);
-            myPath[1] = new Vector2(25, 19);
-            myPath[2] = new Vector2(25, 4);
+            myPath[1] = new Vector2(17, 19);
+            myPath[2] = new Vector2(25, 19);
+            myPath[3] = new Vector2(25, 12);
+            myPath[4] = new Vector2(25, 4);
+            myPath[5] = new Vector2(17, 4);
 
             followerZombies.Add(new CongaFollowerZombie(8, 12, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(8, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
-            myPath = new Vector2[5];
-            myPath[0] = new Vector2(25,16);
-            myPath[2] = new Vector2(8, 4);
-            myPath[3] = new Vector2(8, 19);
-            myPath[4] = new Vector2(25, 19);
+            myPath = new Vector2[8];
+
+            myPath[3] = new Vector2(8, 4);
+            myPath[4] = new Vector2(8, 12);
+            myPath[5] = new Vector2(8, 19);
+            myPath[6] = new Vector2(17, 19);
+            myPath[7] = new Vector2(25, 19);
+            myPath[0] = new Vector2(25, 16);
             myPath[1] = new Vector2(25, 4);
+            myPath[2] = new Vector2(17, 4);
 
             followerZombies.Add(new CongaFollowerZombie(29, 17, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(29, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(29, 16, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
             followerZombies.Add(new CongaFollowerZombie(29, 13, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
-            myPath = new Vector2[5];
+            myPath = new Vector2[8];
+            myPath[7] = new Vector2(8, 4);
             myPath[0] = new Vector2(8, 7);
-            myPath[4] = new Vector2(8, 4);
             myPath[1] = new Vector2(8, 19);
-            myPath[2] = new Vector2(25, 19);
-            myPath[3] = new Vector2(25, 4);
+            myPath[2] = new Vector2(17, 19);
+            myPath[3] = new Vector2(25, 19);
+            myPath[4] = new Vector2(25, 12);
+            myPath[5] = new Vector2(25, 4);
+            myPath[6] = new Vector2(17, 4);
 
-            //followerZombies.Add(new CongaFollowerZombie(4, 7, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
-            //followerZombies.Add(new CongaFollowerZombie(4, 9, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 7, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 9, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 8, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
+            followerZombies.Add(new CongaFollowerZombie(4, 10, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, myPath, darwin, board));
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);

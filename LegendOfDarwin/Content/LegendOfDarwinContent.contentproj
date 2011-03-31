@@ -402,6 +402,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="flame.png">
+      <Name>flame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ZombiePic\FatBossZombie.png">
       <Name>FatBossZombie</Name>
       <Importer>TextureImporter</Importer>

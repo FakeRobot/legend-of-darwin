@@ -13,14 +13,11 @@ namespace LegendOfDarwin.GameObject
         // directional stuffs
         protected enum Dir { Up, Down, Left, Right };
 
-        // need directions to shoot flames and directions to walk
-        protected Dir flameDir;
+        // texture to use when zombie is flaming darwin
+        protected Texture2D flamingZombieTexture;
 
         // boolean to know whether or not we're patrolling or shooting flames
         protected Boolean patrolling;
-
-        // texture for the flame
-        protected Texture2D flame;
 
         // patrol path nodes
         protected Vector2 currentPoint;
@@ -36,10 +33,10 @@ namespace LegendOfDarwin.GameObject
             ZOMBIE_MOVE_RATE = 35;
         }
 
-        public void LoadContent(Texture2D pyroZombieTexture, Texture2D flameTexture)
+        public void LoadContent(Texture2D pyroZombieTexture, Texture2D zombieFlamingTex)
         {
             zombieTexture = pyroZombieTexture;
-            this.flame = flameTexture;
+            this.flamingZombieTexture = zombieFlamingTex;
         }
 
         public Boolean isPatrolling()
@@ -86,7 +83,9 @@ namespace LegendOfDarwin.GameObject
                 if (this.isPointInVision(darwin.X, darwin.Y))
                 {
                     patrolling = false;
-                    // flame darwin up the ass
+                    // check cardinal directions for darwin
+                        // if in range of flamethrower (vision - 1)
+                            // flame darwin up the ass
                 }
                 else
                 {
@@ -124,9 +123,8 @@ namespace LegendOfDarwin.GameObject
                     spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 case (false):
-                    // need both flame and 
-                    //spriteBatch.Draw(zombieTexture, destination, source, Color.White);
-                    spriteBatch.Draw(flame, destination, source, Color.White);
+                    // flamin' tiem
+                    spriteBatch.Draw(this.flamingZombieTexture, destination, source, Color.White);
                     break;
                 default:
                     throw new Exception("failed to draw pyro zombie");

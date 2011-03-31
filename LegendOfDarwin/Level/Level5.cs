@@ -37,6 +37,8 @@ namespace LegendOfDarwin.Level
 
         private PyroZombie northZombie, southZombie, eastZombie, westZombie;
 
+        private LinkedList<Flame> flames;
+
         private Box[] boxes;
         private BasicObject[] spotsForPattern;
         private BoxPattern pattern;
@@ -151,7 +153,8 @@ namespace LegendOfDarwin.Level
             westZombie.setGridPosition(3, 11);
             westZombie.setCurrentPatrolPoint(new Vector2(3, 5));
             westZombie.setNextPatrolPoint(new Vector2(3, 18));
-           
+
+            flames = new LinkedList<Flame>();
 
         }
 
@@ -376,10 +379,11 @@ namespace LegendOfDarwin.Level
 
             // zombie darwin texture == placeholder flamethrowering erryting sprite
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
-            northZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
-            southZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
-            eastZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
-            westZombie.LoadContent(pyroZombieTex, zombieDarwinTex);
+            Texture2D flameTex = mainGame.Content.Load<Texture2D>("flame");
+            northZombie.LoadContent(pyroZombieTex, flameTex);
+            southZombie.LoadContent(pyroZombieTex, flameTex);
+            eastZombie.LoadContent(pyroZombieTex, flameTex);
+            westZombie.LoadContent(pyroZombieTex, flameTex);
         }
 
 
@@ -469,9 +473,50 @@ namespace LegendOfDarwin.Level
             }
 
             northZombie.Update(darwin);
+            if(!northZombie.isPatrolling())
+            {
+                if(darwin.X == northZombie.X)
+                {
+                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 1));
+                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
+                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
+                }
+
+            }
+
+            foreach (Flame flame in flames)
+            {
+                if (flame.flameCounter == 0)
+                {
+                    flames.Remove(flame);
+                }
+            }
+
             southZombie.Update(darwin);
+            if (!southZombie.isPatrolling())
+            {
+                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
+                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
+                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+            }
+
             eastZombie.Update(darwin);
+            if (!eastZombie.isPatrolling())
+            {
+                flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
+                flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
+                flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
+            }
+
             westZombie.Update(darwin);
+            if (!westZombie.isPatrolling())
+            {
+                flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
+                flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
+                flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+            }
+
+
 
             if (!darwin.isZombie())
             {
@@ -822,6 +867,12 @@ namespace LegendOfDarwin.Level
             southZombie.Draw(spriteBatch);
             eastZombie.Draw(spriteBatch);
             westZombie.Draw(spriteBatch);
+
+            foreach (Flame flame in flames)
+            {
+                spriteBatch.Draw(mainGame.Content.Load<Texture2D>("flame"), board.getPosition(flame.X, flame.Y), Color.White);
+            }
+
 
             if (messageMode)
             {

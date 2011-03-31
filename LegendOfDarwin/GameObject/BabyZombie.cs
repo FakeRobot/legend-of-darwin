@@ -11,7 +11,10 @@ namespace LegendOfDarwin.GameObject
     {
         private Darwin darwin;
 
-        private bool explode;
+        private int babyCount;
+        private Rectangle[] babySource;
+
+        private bool goingToExplode, exploding;
         private Texture2D explodeTex;
         private int explodeCount;
         private Rectangle[] explodeSource;
@@ -21,7 +24,14 @@ namespace LegendOfDarwin.GameObject
         {
             darwin = dar;
 
-            explode = false;
+            babyCount = 0;
+            babySource = new Rectangle[3];
+            babySource[0] = new Rectangle(0, 0, 64, 64);
+            babySource[1] = new Rectangle(65, 0, 64, 64);
+            babySource[2] = new Rectangle(130, 0, 64, 64);
+
+            goingToExplode = false;
+            exploding = false;
             explodeCount = 0;
             explodeSource = new Rectangle[3];
             explodeSource[0] = new Rectangle(0, 0, 75, 90);
@@ -42,19 +52,27 @@ namespace LegendOfDarwin.GameObject
             base.Update(gameTime);
             if (canEventHappen())
             {
-                if (explode)
+                if (exploding)
                 {
                     explodeCount++;
-
-
                     if (explodeCount == 3)
                     {
                         explodeCount = 0;
-                        explode = false;
+                        exploding = false;
                     }
                     else
                     {
                         this.setZombieAlive(false);
+                    }
+                }
+                else if (goingToExplode)
+                {
+                    babyCount++;
+                    if (babyCount == 3)
+                    {
+                        babyCount = 0;
+                        exploding = true;
+                        goingToExplode = false;
                     }
                 }
                 else if (isZombieAlive())
@@ -62,7 +80,7 @@ namespace LegendOfDarwin.GameObject
                     this.moveTowardsDarwin(darwin);
                     if (nearDarwin())
                     {
-                        explode = true;
+                        goingToExplode = true;
                     }
                 }
                 this.setEventFalse();
@@ -71,7 +89,7 @@ namespace LegendOfDarwin.GameObject
 
         public new void Draw(SpriteBatch sp)
         {
-            if (explode)
+            if (exploding)
             {
                 sp.Draw(explodeTex, board.getPosition(this), explodeSource[explodeCount], Color.White);
                 sp.Draw(explodeTex, board.getPosition(this.X, this.Y + 1), explodeSource[explodeCount], Color.White);
@@ -79,9 +97,13 @@ namespace LegendOfDarwin.GameObject
                 sp.Draw(explodeTex, board.getPosition(this.X + 1, this.Y), explodeSource[explodeCount], Color.White);
                 sp.Draw(explodeTex, board.getPosition(this.X - 1, this.Y), explodeSource[explodeCount], Color.White);
             }
-            if (this.isZombieAlive())
+            else if (goingToExplode)
             {
-                sp.Draw(this.zombieTexture, this.destination, Color.White);
+                sp.Draw(zombieTexture, destination, babySource[babyCount], Color.White);
+            }
+            else if (this.isZombieAlive())
+            {
+                sp.Draw(zombieTexture, destination, babySource[0], Color.White);
             }
         }
 

@@ -42,7 +42,7 @@ namespace LegendOfDarwin.Level
         private BoxPattern pattern;
         private Texture2D sparkleTex;
 
-        private Snake snake;
+        private Snake snake, snake2, snake3, snake4;
 
         private BasicObject[] walls;
         private Texture2D wallTex;
@@ -125,7 +125,10 @@ namespace LegendOfDarwin.Level
 
             setWalls();
 
-            snake = new Snake(10, 10, 27, 5, 18, 5, board);
+            snake = new Snake(10, 9, 27, 5, 18, 5, board);
+            snake2 = new Snake(8, 15, 27, 5, 18, 5, board);
+            snake3 = new Snake(21, 9, 27, 5, 18, 5, board);
+            snake4 = new Snake(21, 15, 27, 5, 18, 5, board);
 
             northZombie = new PyroZombie(15, 3, 25, 4, 3, 3, board);
             northZombie.setGridPosition(15, 3);
@@ -360,7 +363,9 @@ namespace LegendOfDarwin.Level
 
             Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("ZombiePic/snake_strip");
             snake.LoadContent(snakeTexture);
-            
+            snake2.LoadContent(snakeTexture);
+            snake3.LoadContent(snakeTexture);
+            snake4.LoadContent(snakeTexture);
 
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
             northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
@@ -466,6 +471,9 @@ namespace LegendOfDarwin.Level
             }
 
             updateSnakeCollision(snake, darwin, gameTime);
+            updateSnakeCollision(snake2, darwin, gameTime);
+            updateSnakeCollision(snake3, darwin, gameTime);
+            updateSnakeCollision(snake4, darwin, gameTime);
 
             foreach (Vortex v in vortexes)
             {
@@ -782,6 +790,9 @@ namespace LegendOfDarwin.Level
             potion.Draw(spriteBatch);
 
             snake.Draw(spriteBatch);
+            snake2.Draw(spriteBatch);
+            snake3.Draw(spriteBatch);
+            snake4.Draw(spriteBatch);
             northZombie.Draw(spriteBatch);
             southZombie.Draw(spriteBatch);
             eastZombie.Draw(spriteBatch);

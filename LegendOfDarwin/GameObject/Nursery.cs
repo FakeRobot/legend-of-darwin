@@ -10,7 +10,7 @@ namespace LegendOfDarwin.GameObject
     class Nursery : BasicObject
     {
         private int maxBabies = 7;
-        private int babyTimeSpawn = 1000;
+        private int babyTimeSpawn = 300;
         private Texture2D nurseTex;
         private BabyZombie[] babies;
 
@@ -50,13 +50,13 @@ namespace LegendOfDarwin.GameObject
             this.destination.Y = board.getPosition(x, y).Y;
         }
 
-        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn)
+        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn, Texture2D explodeTexIn)
         {
             nurseTex = nurseTexIn;
 
             foreach (BabyZombie b in babies)
             {
-                b.LoadContent(babyTexIn);
+                b.LoadContent(babyTexIn, explodeTexIn);
             }
         }
 
@@ -66,10 +66,7 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                if (b.isZombieAlive())
-                {
-                    b.Draw(sb);
-                }
+                b.Draw(sb);
             }
         }
 
@@ -79,10 +76,7 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                if (b.isZombieAlive())
-                {
-                    b.Update(gameTime);
-                }
+                b.Update(gameTime);
             }
 
             if (canEventHappen())

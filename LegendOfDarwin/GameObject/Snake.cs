@@ -14,6 +14,7 @@ namespace LegendOfDarwin.GameObject
         public bool delaySnakeCounter = false;
         public bool allowedToWalk= false;
         public bool lineOfSight { get; set; }
+        public int spriteStripCounter = 0;
 
         public enum Direction {Up, Down, Left, Right};
         public Direction lineOfSightDirection;
@@ -22,6 +23,7 @@ namespace LegendOfDarwin.GameObject
             : base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {
             ZOMBIE_MOVE_RATE = 20;
+            source.X = 0;
         }
 
         public new void LoadContent(Texture2D snakeTex)
@@ -64,6 +66,7 @@ namespace LegendOfDarwin.GameObject
                     if (isDarwinLeftOfSnakeSomewhere(darwin))
                     {
                         lineOfSightDirection = Direction.Left;
+                        
                     }
                 }
                 else
@@ -227,8 +230,41 @@ namespace LegendOfDarwin.GameObject
 
         public new void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(snakeTexture, this.destination, Color.White);
+            if(allowedToWalk){
+
+                if (spriteStripCounter == 1)
+                {
+                    spriteStripCounter = 0;
+                    //either 0 or 128
+                    if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
+                    {
+                        this.source.X = 0;
+                    }
+                    else
+                    {
+                        this.source.X = 128;
+                    }
+                }
+                else
+                {
+                    spriteStripCounter++;
+                    //either 64 or 192
+                    if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
+                    {
+                        this.source.X = 64;
+                    }
+                    else
+                    {
+                        this.source.X = 192;
+                    }
+                }
+
+            }
+            
+
+            spriteBatch.Draw(snakeTexture, this.destination, this.source, Color.White);
         }
+
 
 
 

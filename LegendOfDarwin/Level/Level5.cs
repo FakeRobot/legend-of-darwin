@@ -324,8 +324,9 @@ namespace LegendOfDarwin.Level
 
             pattern.LoadContent(mainGame.Content.Load<Texture2D>("boxPattern"));
 
-            Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("snake");
+            Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("ZombiePic/snake_strip");
             snake.LoadContent(snakeTexture);
+            
 
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
             northZombie.LoadContent(pyroZombieTex, pyroZombieTex);

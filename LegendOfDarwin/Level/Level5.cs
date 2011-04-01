@@ -628,7 +628,7 @@ namespace LegendOfDarwin.Level
             }
             else
             {
-                snake.Update(gameTime, darwin);
+                snake.Update(gameTime, darwin, flames);
 
                 if (snake.lineOfSight & snake.allowedToWalk)
                 {

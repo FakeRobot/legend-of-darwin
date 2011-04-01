@@ -32,12 +32,13 @@ namespace LegendOfDarwin.GameObject
             snakeTexture = snakeTex;
         }
 
-        public new void Update(GameTime gameTime, Darwin darwin)
+        public new void Update(GameTime gameTime, Darwin darwin, LinkedList<Flame> flames)
         {
             //base.Update(gameTime);
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 allowedToWalk = true;
+                this.checkForFieryDeath(flames);
 
                 if (snakeDelayCounter > (ZOMBIE_MOVE_RATE * 5))
                 {
@@ -84,6 +85,17 @@ namespace LegendOfDarwin.GameObject
 
             movecounter++;
             snakeDelayCounter++;
+        }
+
+        public void checkForFieryDeath(LinkedList<Flame> flames)
+        {
+            foreach (Flame flame in flames)
+            {
+                if (this.isOnTop(flame))
+                {
+                    this.isAlive = false;
+                }
+            }
         }
 
         public void pushDarwinUp(Darwin darwin)
@@ -307,9 +319,5 @@ namespace LegendOfDarwin.GameObject
 
             spriteBatch.Draw(snakeTexture, this.destination, this.source, Color.White);
         }
-
-
-
-
     }
 }

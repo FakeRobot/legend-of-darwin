@@ -102,11 +102,11 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
 
-            nurseryOne.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery"),
+            nurseryOne.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery-cribs"),
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"));
             
-            nurseryTwo.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery"),
+            nurseryTwo.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery-cribs"),
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"));
 

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
-    class Flame : BasicObject
+    public class Flame : BasicObject
     {
         // static int for how long this flame should live
         private static int FLAME_LIFE = 150;

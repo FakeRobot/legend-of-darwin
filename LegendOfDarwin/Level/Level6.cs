@@ -110,7 +110,7 @@ namespace LegendOfDarwin.Level
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"));
 
-            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/FatBossZombie"));
+            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"));
         }
 
         /*

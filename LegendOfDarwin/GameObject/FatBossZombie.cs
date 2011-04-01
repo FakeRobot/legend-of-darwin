@@ -19,6 +19,9 @@ namespace LegendOfDarwin.GameObject
 
         private int count;
 
+        private bool allowedToWalk;
+        private int spriteStripCounter = 0;
+
         //private int health;
 
         //private LinkedList<BabyZombie> babies;
@@ -33,7 +36,7 @@ namespace LegendOfDarwin.GameObject
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
-            source = new Rectangle(7, 0, 47, 64);
+            source = new Rectangle(0, 0, 128, 128);
 
             setEventLag(75);
 
@@ -100,9 +103,14 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
+                allowedToWalk = true;
                 setEventFalse();
                 randomWalk();
                 movecounter = 0;
+            }
+            else
+            {
+                allowedToWalk = false;
             }
             movecounter++;
 
@@ -110,6 +118,20 @@ namespace LegendOfDarwin.GameObject
 
         public new void Draw(SpriteBatch sb)
         {
+            if (allowedToWalk)
+            {
+                if (spriteStripCounter == 1)
+                {
+                    spriteStripCounter = 0;
+                    this.source.X = 0;
+                }
+                else
+                {
+                    spriteStripCounter++;
+                    this.source.X = 128;
+                }
+            }
+
             sb.Draw(zombieTexture, destination, source, Color.White);
         }
 

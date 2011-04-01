@@ -563,11 +563,6 @@ namespace LegendOfDarwin.Level
                 }
             }
 
-            if (!darwin.isZombie())
-            {
-                //checkForGameOver(zombie...);
-            }
-
             if (snake.isZombieAlive())
             {
                 updateSnakeCollision(snake, darwin, gameTime);
@@ -585,8 +580,6 @@ namespace LegendOfDarwin.Level
                 updateSnakeCollision(snake4, darwin, gameTime);
             }
             
-            
-
             foreach (Vortex v in vortexes)
             {
                 if (darwin.isOnTop(v))
@@ -621,7 +614,6 @@ namespace LegendOfDarwin.Level
 
         private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)
         {
-
             if (!snake.isSnakeInPit())
             {
                 snake.setZombieAlive(false);
@@ -648,11 +640,8 @@ namespace LegendOfDarwin.Level
                     {
                         checkForDarwinLeftOfSnake(snake, darwin);
                     }
-
                 }
             }
-
-            
         }
 
         private void checkForDarwinAboveSnake(Snake snake, Darwin darwin)

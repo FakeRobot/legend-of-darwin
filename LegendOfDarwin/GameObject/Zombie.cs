@@ -538,10 +538,6 @@ namespace LegendOfDarwin.GameObject
             if (this.isZombieAlive())
             {
                 base.Update(gameTime);
-                if (this.isOnTop(darwin) && !darwin.isZombie())
-                {
-                    darwin.setGridPosition(2, 2);
-                }
 
                 if (movecounter > ZOMBIE_MOVE_RATE)
                 {
@@ -587,12 +583,6 @@ namespace LegendOfDarwin.GameObject
 
             if (this.isZombieAlive())
             {
-                base.Update(gameTime);
-                if (this.isOnTop(darwin) && !darwin.isZombie())
-                {
-                    darwin.setGridPosition(2, 2);
-                }
-
                 if (movecounter > ZOMBIE_MOVE_RATE)
                 {
                     if (isRangeDetectionAllowed() && isDarwinInRange(darwin) && !darwin.isZombie())

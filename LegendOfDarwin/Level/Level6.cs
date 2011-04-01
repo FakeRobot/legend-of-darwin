@@ -39,9 +39,9 @@ namespace LegendOfDarwin.Level
         bool messageMode = false;
         int messageModeCounter = 0;
 
-        private Nursery nurseryOne, nurseryTwo;
+        public Nursery nurseryOne, nurseryTwo;
 
-        private FatBossZombie fatBossZombie;
+        public FatBossZombie fatBossZombie;
 
         public Song song;
         public Game1 mainGame;
@@ -118,6 +118,7 @@ namespace LegendOfDarwin.Level
             darwin.setGridPosition(15, 22);
             board.setGridPositionOccupied(darwin);
 
+            nurseryOne.reset();
             nurseryOne.setGridPosition(1, 1);
             nurseryOne.setSpawnPoint(2, 4);
             board.setGridPositionOccupied(1, 1);
@@ -126,7 +127,8 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(2, 1);
             board.setGridPositionOccupied(2, 2);
             board.setGridPositionOccupied(2, 3);
-            
+
+            nurseryTwo.reset();
             nurseryTwo.setGridPosition(30, 20);
             nurseryTwo.setSpawnPoint(30, 19);
             board.setGridPositionOccupied(30, 20);
@@ -198,6 +200,8 @@ namespace LegendOfDarwin.Level
                 }
             }
 
+            checkForGameOver();
+
             KeyboardState ks = Keyboard.GetState();
 
             checkForExitGame(ks);
@@ -232,7 +236,6 @@ namespace LegendOfDarwin.Level
             }
             if (ks.IsKeyDown(Keys.R))
             {
-
                 setLevelState();
                 //MediaPlayer.Stop();
                 //MediaPlayer.Play(song);
@@ -262,12 +265,38 @@ namespace LegendOfDarwin.Level
             }
         }
 
-        private void checkForGameOver(Zombie myZombie)
+        private void checkForGameOver()
         {
-            if (darwin.isOnTop(myZombie))
+            foreach (BabyZombie b in nurseryOne.babies)
             {
-                gameOver = true;
+                if (b.exploding)
+                {
+                    if (darwin.isOnTop(b)
+                        || darwin.isOnTop(b.X, b.Y - 1)
+                        || darwin.isOnTop(b.X - 1, b.Y)
+                        || darwin.isOnTop(b.X, b.Y + 1)
+                        || darwin.isOnTop(b.X + 1, b.Y))
+                    {
+                        gameOver = true;
+                    }
+                }
             }
+
+            foreach (BabyZombie b in nurseryTwo.babies)
+            {
+                if (b.exploding)
+                {
+                    if (darwin.isOnTop(b)
+                        || darwin.isOnTop(b.X, b.Y - 1)
+                        || darwin.isOnTop(b.X - 1, b.Y)
+                        || darwin.isOnTop(b.X, b.Y + 1)
+                        || darwin.isOnTop(b.X + 1, b.Y))
+                    {
+                        gameOver = true;
+                    }
+                }
+            }
+            
         }
 
         public void setZTime(ZombieTime mytime)
@@ -277,6 +306,11 @@ namespace LegendOfDarwin.Level
             zTimeReset = new ZombieTime(board);
             zTimeReset.reset();
             zTimeReset.setTime(mytime.getTime());
+        }
+
+        public void setGameOver(bool game)
+        {
+            gameOver = game;
         }
 
         public void Draw(GameTime gameTime)

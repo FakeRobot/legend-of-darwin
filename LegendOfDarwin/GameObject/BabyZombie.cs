@@ -11,10 +11,10 @@ namespace LegendOfDarwin.GameObject
     {
         private Darwin darwin;
 
-        private int babyCount;
+        private int babyCount, babyCountTwo;
         private Rectangle[] babySource;
 
-        private bool goingToExplode, exploding;
+        public bool goingToExplode, exploding;
         private Texture2D explodeTex;
         private int explodeCount;
         private Rectangle[] explodeSource;
@@ -25,6 +25,7 @@ namespace LegendOfDarwin.GameObject
             darwin = dar;
 
             babyCount = 0;
+            babyCountTwo = 0;
             babySource = new Rectangle[3];
             babySource[0] = new Rectangle(0, 0, 64, 64);
             babySource[1] = new Rectangle(65, 0, 64, 64);
@@ -39,6 +40,16 @@ namespace LegendOfDarwin.GameObject
             explodeSource[2] = new Rectangle(169, 0, 101, 90);
 
             this.setEventLag(40);
+        }
+
+        public void reset()
+        {
+            babyCount = 0;
+            babyCountTwo = 0;
+            goingToExplode = false;
+            exploding = false;
+            explodeCount = 0;
+            this.setZombieAlive(false);
         }
 
         public void LoadContent(Texture2D babyIn, Texture2D splodeIn)
@@ -60,6 +71,7 @@ namespace LegendOfDarwin.GameObject
                         explodeCount = 0;
                         exploding = false;
                         setZombieAlive(false);
+                        setEventLag(40);
                     }
                 }
                 else if (goingToExplode)
@@ -67,9 +79,15 @@ namespace LegendOfDarwin.GameObject
                     babyCount++;
                     if (babyCount == 3)
                     {
+                        babyCountTwo++;
                         babyCount = 0;
-                        exploding = true;
-                        goingToExplode = false;
+                        if (babyCountTwo == 5)
+                        {
+                            babyCount = 0;
+                            babyCountTwo = 0;
+                            exploding = true;
+                            goingToExplode = false;
+                        }
                     }
                 }
                 else if (isZombieAlive())
@@ -78,6 +96,7 @@ namespace LegendOfDarwin.GameObject
                     if (nearDarwin())
                     {
                         goingToExplode = true;
+                        setEventLag(5);
                     }
                 }
                 this.setEventFalse();

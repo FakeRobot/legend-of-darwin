@@ -12,7 +12,7 @@ namespace LegendOfDarwin.GameObject
         private int maxBabies = 7;
         private int babyTimeSpawn = 300;
         private Texture2D nurseTex;
-        private BabyZombie[] babies;
+        public BabyZombie[] babies;
 
         private int spawnX, spawnY;
 
@@ -40,6 +40,14 @@ namespace LegendOfDarwin.GameObject
             this.destination.Height = board.getSquareLength() * 3;
             this.destination.Width = board.getSquareWidth() * 2;
 
+        }
+
+        public void reset()
+        {
+            foreach (BabyZombie b in babies)
+            {
+                b.reset();
+            }
         }
 
         public new void setGridPosition(int x, int y)

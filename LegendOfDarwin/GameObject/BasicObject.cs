@@ -93,6 +93,15 @@ namespace LegendOfDarwin
             return false;
         }
 
+        public bool isOnTop(int x, int y)
+        {
+            if (x == this.X && y == this.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool canEventHappen()
         {
             return this.eventFlag;

@@ -395,13 +395,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZombiePic\BabyZombie.png">
-      <Name>BabyZombie</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="flame.png">
       <Name>flame</Name>
       <Importer>TextureImporter</Importer>
@@ -413,6 +406,14 @@
       <Name>FatBossZombie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ZombiePic\BabyZombie.png">
+      <Name>BabyZombie</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>255, 255, 255, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

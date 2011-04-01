@@ -63,6 +63,7 @@ namespace LegendOfDarwin.Level
             device = graphics.GraphicsDevice;
 
             gameState = new GameState();
+            gameState.setState(GameState.state.Start);
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
@@ -96,11 +97,11 @@ namespace LegendOfDarwin.Level
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
 
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelSix"));
+
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/side_wall");
-
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
 
             nurseryOne.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery-cribs"),
@@ -161,7 +162,10 @@ namespace LegendOfDarwin.Level
 
             gameOver = false;
             gameWin = false;
-            gameState.setState(GameState.state.Level);
+            if(gameState.Equals(GameState.state.End))
+            {
+                gameState.setState(GameState.state.Level);
+            }
             
         }
 

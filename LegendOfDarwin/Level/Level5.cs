@@ -383,7 +383,7 @@ namespace LegendOfDarwin.Level
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelFive"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
 

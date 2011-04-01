@@ -63,7 +63,7 @@ namespace LegendOfDarwin.Level
             device = graphics.GraphicsDevice;
 
             gameState = new GameState();
-            gameState.setState(GameState.state.Start);
+
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
@@ -79,6 +79,7 @@ namespace LegendOfDarwin.Level
 
             setLevelState();
             walls = setWallsInLevelSix();
+            gameState.setState(GameState.state.Start);
         }
 
 
@@ -162,10 +163,8 @@ namespace LegendOfDarwin.Level
 
             gameOver = false;
             gameWin = false;
-            if(gameState.Equals(GameState.state.End))
-            {
-                gameState.setState(GameState.state.Level);
-            }
+            gameState.setState(GameState.state.Level);
+            
             
         }
 

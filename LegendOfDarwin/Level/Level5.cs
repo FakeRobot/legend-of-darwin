@@ -569,10 +569,24 @@ namespace LegendOfDarwin.Level
                 //checkForGameOver(zombie...);
             }
 
-            updateSnakeCollision(snake, darwin, gameTime);
-            updateSnakeCollision(snake2, darwin, gameTime);
-            updateSnakeCollision(snake3, darwin, gameTime);
-            updateSnakeCollision(snake4, darwin, gameTime);
+            if (snake.isZombieAlive())
+            {
+                updateSnakeCollision(snake, darwin, gameTime);
+            }
+            if (snake2.isZombieAlive())
+            {
+                updateSnakeCollision(snake2, darwin, gameTime);
+            }
+            if (snake3.isZombieAlive())
+            {
+                updateSnakeCollision(snake3, darwin, gameTime);
+            }
+            if (snake4.isZombieAlive())
+            {
+                updateSnakeCollision(snake4, darwin, gameTime);
+            }
+            
+            
 
             foreach (Vortex v in vortexes)
             {
@@ -608,28 +622,38 @@ namespace LegendOfDarwin.Level
 
         private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)
         {
-            snake.Update(gameTime, darwin);
 
-            if (snake.lineOfSight & snake.allowedToWalk)
+            if (!snake.isSnakeInPit())
             {
-                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Up))
-                {
-                    checkForDarwinAboveSnake(snake, darwin);
-                }
-                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Down))
-                {
-                    checkForDarwinBelowSnake(snake, darwin);
-                }
-                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Right))
-                {
-                    checkForDarwinRightOfSnake(snake, darwin);
-                }
-                if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Left))
-                {
-                    checkForDarwinLeftOfSnake(snake, darwin);
-                }
-                
+                snake.setZombieAlive(false);
             }
+            else
+            {
+                snake.Update(gameTime, darwin);
+
+                if (snake.lineOfSight & snake.allowedToWalk)
+                {
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Up))
+                    {
+                        checkForDarwinAboveSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Down))
+                    {
+                        checkForDarwinBelowSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Right))
+                    {
+                        checkForDarwinRightOfSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Left))
+                    {
+                        checkForDarwinLeftOfSnake(snake, darwin);
+                    }
+
+                }
+            }
+
+            
         }
 
         private void checkForDarwinAboveSnake(Snake snake, Darwin darwin)

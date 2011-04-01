@@ -24,6 +24,7 @@ namespace LegendOfDarwin.GameObject
         {
             ZOMBIE_MOVE_RATE = 20;
             source.X = 0;
+            isAlive = true;
         }
 
         public new void LoadContent(Texture2D snakeTex)
@@ -129,32 +130,63 @@ namespace LegendOfDarwin.GameObject
         {
             this.lineOfSight = false;
             this.delaySnakeCounter = true;
-            this.MoveDown();
-            this.MoveDown();
+
+            if(board.isGridPositionOpen(this.X, this.Y + 1))
+            {
+                this.MoveDown();
+            }
+
+            if (board.isGridPositionOpen(this.X, this.Y + 1))
+            {
+                this.MoveDown();
+            }
         }
 
         public void backOffUp()
         {
             this.lineOfSight = false;
             this.delaySnakeCounter = true;
-            this.MoveUp();
-            this.MoveUp();
+
+            if(board.isGridPositionOpen(this.X, this.Y - 1)){
+                this.MoveUp();
+            }
+
+            if (board.isGridPositionOpen(this.X, this.Y - 1))
+            {
+                this.MoveUp();
+            }
         }
 
         public void backOffRight()
         {
             this.lineOfSight = false;
             this.delaySnakeCounter = true;
-            this.MoveRight();
-            this.MoveRight();
+
+            if (board.isGridPositionOpen(this.X + 1, this.Y))
+            {
+                this.MoveRight();
+            }
+
+            if (board.isGridPositionOpen(this.X + 1, this.Y))
+            {
+                this.MoveRight();
+            }
         }
 
         public void backOffLeft()
         {
             this.lineOfSight = false;
             this.delaySnakeCounter = true;
-            this.MoveLeft();
-            this.MoveLeft();
+
+            if (board.isGridPositionOpen(this.X - 1, this.Y))
+            {
+                this.MoveLeft();
+            }
+
+            if (board.isGridPositionOpen(this.X - 1, this.Y))
+            {
+                this.MoveLeft();
+            }
         }
 
         public bool isDarwinAboveSnakeSomewhere(Darwin darwin)
@@ -228,14 +260,26 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        public bool isSnakeInPit()
+        {
+            if (this.X <= 4 || this.X >= 28 || this.Y <= 4 || this.Y >= 19)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
         public new void Draw(SpriteBatch spriteBatch)
         {
-            if(allowedToWalk){
+            if(allowedToWalk && isAlive){
 
                 if (spriteStripCounter == 1)
                 {
                     spriteStripCounter = 0;
-                    //either 0 or 128
                     if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
                     {
                         this.source.X = 0;
@@ -248,7 +292,6 @@ namespace LegendOfDarwin.GameObject
                 else
                 {
                     spriteStripCounter++;
-                    //either 64 or 192
                     if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
                     {
                         this.source.X = 64;

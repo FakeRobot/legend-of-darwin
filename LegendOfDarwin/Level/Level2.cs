@@ -429,7 +429,7 @@ namespace LegendOfDarwin
                 cannibalZombie.updateListOfZombies(myZombieList);
 
                 board.setGridPositionOpen(cannibalZombie.X,cannibalZombie.Y);
-                cannibalZombie.setGridPosition(26,3);
+                cannibalZombie.setGridPosition(29,3);
                 board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
                 cannibalZombie.setZombieAlive(true);
 
@@ -476,7 +476,7 @@ namespace LegendOfDarwin
             cannibalZombie.updateListOfZombies(myZombieList);
 
             board.setGridPositionOpen(cannibalZombie.X, cannibalZombie.Y);
-            cannibalZombie.setGridPosition(21, 3);
+            cannibalZombie.setGridPosition(29, 3);
             board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
             cannibalZombie.setZombieAlive(true);
 

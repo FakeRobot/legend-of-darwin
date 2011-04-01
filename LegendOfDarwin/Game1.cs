@@ -20,10 +20,10 @@ namespace LegendOfDarwin
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D main;
-        KeyboardState ks;
+        Texture2D main, end;
+        KeyboardState ks, ksEnd;
         // for keeping track of what level player is on
-        public enum LevelState { Start, Level1, Level2, Level3, Level4, Level5, Level6 };
+        public enum LevelState { Start, Level1, Level2, Level3, Level4, Level5, Level6, End };
         LevelState curLevel;
 
         Level1 level1;
@@ -38,7 +38,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level6;
+            curLevel = LevelState.End;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -99,6 +99,7 @@ namespace LegendOfDarwin
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             main = Content.Load<Texture2D>("startScreen");
+            end = Content.Load<Texture2D>("DemoFinish");
 
             level1.spriteBatch = spriteBatch;
             level1.song = Content.Load<Song>("Thriller8bit");
@@ -146,7 +147,6 @@ namespace LegendOfDarwin
                 {
                     ks = Keyboard.GetState();
                 }
-                
             }
             else if (curLevel == LevelState.Level1)
                 level1.Update(gameTime);
@@ -160,6 +160,17 @@ namespace LegendOfDarwin
                 level5.Update(gameTime);
             else if (curLevel == LevelState.Level6)
                 level6.Update(gameTime);
+            else if (curLevel == LevelState.End)
+            {
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ksEnd.IsKeyDown(Keys.Enter))
+                {
+                    setCurLevel(LevelState.Start);
+                }
+                else
+                {
+                    ksEnd = Keyboard.GetState();
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -183,6 +194,12 @@ namespace LegendOfDarwin
                 level5.Draw(gameTime);
             else if (curLevel == LevelState.Level6)
                 level6.Draw(gameTime);
+            else if (curLevel == LevelState.End)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(end, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferWidth), Color.White);
+                spriteBatch.End();
+            }
             base.Draw(gameTime);
         }
 

@@ -28,8 +28,8 @@ namespace LegendOfDarwin.GameObject
 
             darwin = dar;
 
-            destination.Height = board.getSquareLength() * 2;
-            destination.Width = board.getSquareWidth() * 2;
+            destination.Height = board.getSquareLength() * 3;
+            destination.Width = board.getSquareWidth() * 3;
 
             source = new Rectangle(7, 0, 47, 64);
 
@@ -37,6 +37,19 @@ namespace LegendOfDarwin.GameObject
 
             count = 0;
             ran = new Random();
+        }
+
+        public void reset()
+        {
+            board.setGridPositionOpen(this.X, this.Y);
+            board.setGridPositionOpen(this.X + 1, this.Y);
+            board.setGridPositionOpen(this.X + 2, this.Y);
+            board.setGridPositionOpen(this.X, this.Y + 1);
+            board.setGridPositionOpen(this.X + 1, this.Y + 1);
+            board.setGridPositionOpen(this.X + 2, this.Y + 1);
+            board.setGridPositionOpen(this.X, this.Y + 2);
+            board.setGridPositionOpen(this.X + 1, this.Y + 2);
+            board.setGridPositionOpen(this.X + 2, this.Y + 2);
         }
 
         public new void LoadContent(Texture2D texIn)
@@ -80,8 +93,8 @@ namespace LegendOfDarwin.GameObject
                     break;
             }
 
-            destination.Height = board.getSquareLength() * 2;
-            destination.Width = board.getSquareWidth() * 2;
+            destination.Height = board.getSquareLength() * 3;
+            destination.Width = board.getSquareWidth() * 3;
 
             setEventFalse();
             if(count == 80)
@@ -93,13 +106,13 @@ namespace LegendOfDarwin.GameObject
 
             if (count > 40)
             {
-                destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
-                destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
+                destination.Height = board.getSquareLength() * 3 + (int)(board.getSquareLength() * .1);
+                destination.Width = board.getSquareWidth() * 3 + (int)(board.getSquareWidth() * .1);
             }
             else
             {
-                destination.Height = board.getSquareLength() * 2;
-                destination.Width = board.getSquareWidth() * 2;
+                destination.Height = board.getSquareLength() * 3;
+                destination.Width = board.getSquareWidth() * 3;
             }
             
         }
@@ -107,12 +120,15 @@ namespace LegendOfDarwin.GameObject
         private new void MoveUp()
         {
             if (board.isGridPositionOpen(this.X, this.Y - 1) &&
-                board.isGridPositionOpen(this.X + 1, this.Y - 1))
+                board.isGridPositionOpen(this.X + 1, this.Y - 1) &&
+                board.isGridPositionOpen(this.X + 2, this.Y - 1))
             {
                 board.setGridPositionOccupied(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X + 1, this.Y - 1);
-                board.setGridPositionOpen(this.X, this.Y + 1);
-                board.setGridPositionOpen(this.X + 1, this.Y + 1);
+                board.setGridPositionOccupied(this.X + 2, this.Y - 1);
+                board.setGridPositionOpen(this.X, this.Y + 2);
+                board.setGridPositionOpen(this.X + 1, this.Y + 2);
+                board.setGridPositionOpen(this.X + 2, this.Y + 2);
                 this.setGridPosition(this.X, this.Y - 1);
             }
         }
@@ -120,12 +136,15 @@ namespace LegendOfDarwin.GameObject
         private new void MoveDown()
         {
             if (board.isGridPositionOpen(this.X, this.Y + 2) &&
-                board.isGridPositionOpen(this.X + 1, this.Y + 2))
+                board.isGridPositionOpen(this.X + 1, this.Y + 2) &&
+                board.isGridPositionOpen(this.X + 2, this.Y + 2))
             {
                 board.setGridPositionOccupied(this.X, this.Y + 2);
                 board.setGridPositionOccupied(this.X + 1, this.Y + 2);
+                board.setGridPositionOccupied(this.X + 2, this.Y + 2);
                 board.setGridPositionOpen(this.X, this.Y);
                 board.setGridPositionOpen(this.X + 1, this.Y);
+                board.setGridPositionOpen(this.X + 2, this.Y);
                 this.setGridPosition(this.X, this.Y + 1);
             }
         }
@@ -133,25 +152,31 @@ namespace LegendOfDarwin.GameObject
         private new void MoveLeft()
         {
             if (board.isGridPositionOpen(this.X - 1, this.Y) &&
-                board.isGridPositionOpen(this.X - 1, this.Y + 1))
+                board.isGridPositionOpen(this.X - 1, this.Y + 1) &&
+                board.isGridPositionOpen(this.X - 1, this.Y + 2))
             {
                 board.setGridPositionOccupied(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X - 1, this.Y + 1);
-                board.setGridPositionOpen(this.X + 1, this.Y);
-                board.setGridPositionOpen(this.X + 1, this.Y + 1);
+                board.setGridPositionOccupied(this.X - 1, this.Y + 2);
+                board.setGridPositionOpen(this.X + 2, this.Y);
+                board.setGridPositionOpen(this.X + 2, this.Y + 1);
+                board.setGridPositionOpen(this.X + 2, this.Y + 2);
                 this.setGridPosition(this.X - 1, this.Y);
             }
         }
 
         private new void MoveRight()
         {
-            if (board.isGridPositionOpen(this.X + 2, this.Y) &&
-                board.isGridPositionOpen(this.X + 2, this.Y + 1))
+            if (board.isGridPositionOpen(this.X + 3, this.Y) &&
+                board.isGridPositionOpen(this.X + 3, this.Y + 1) &&
+                board.isGridPositionOpen(this.X + 3, this.Y + 2))
             {
-                board.setGridPositionOccupied(this.X + 2, this.Y);
-                board.setGridPositionOccupied(this.X + 2, this.Y + 1);
+                board.setGridPositionOccupied(this.X + 3, this.Y);
+                board.setGridPositionOccupied(this.X + 3, this.Y + 1);
+                board.setGridPositionOccupied(this.X + 3, this.Y + 2);
                 board.setGridPositionOpen(this.X , this.Y);
                 board.setGridPositionOpen(this.X , this.Y + 1);
+                board.setGridPositionOpen(this.X , this.Y + 2);
                 this.setGridPosition(this.X + 1, this.Y);
             }
         }

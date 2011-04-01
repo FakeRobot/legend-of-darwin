@@ -251,7 +251,9 @@ namespace LegendOfDarwin.Level
             }
 
             checkForGameOver();
-            checkForGameOverWithBoss();
+            
+            if (fatBossZombie.isZombieAlive())
+                checkForGameOverWithBoss();
 
             KeyboardState ks = Keyboard.GetState();
 
@@ -274,7 +276,8 @@ namespace LegendOfDarwin.Level
             nurseryOne.Update(gameTime);
             nurseryTwo.Update(gameTime);
 
-            fatBossZombie.Update(gameTime);
+            if (fatBossZombie.isZombieAlive())
+                fatBossZombie.Update(gameTime);
         }
 
         private void UpdateEndState()
@@ -436,7 +439,8 @@ namespace LegendOfDarwin.Level
             nurseryOne.Draw(spriteBatch);
             nurseryTwo.Draw(spriteBatch);
 
-            fatBossZombie.Draw(spriteBatch);
+            if (fatBossZombie.isZombieAlive())
+                fatBossZombie.Draw(spriteBatch);
 
             foreach (BasicObject a in walls)
             {

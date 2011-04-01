@@ -27,14 +27,15 @@ namespace LegendOfDarwin.GameObject
         private bool gapeMode = false;
         private int gapeCount = 0;
 
-        //private int health;
+        // number of babies boss must eat to die
+        private int health;
 
         //private LinkedList<BabyZombie> babies;
 
         public FatBossZombie(int x, int y, int maxX, int minX, int maxY, int minY, Darwin dar, GameBoard gb) :
             base(x, y, maxX, minX, maxY, minY, gb)
         {
-            //health = 4;
+            health = 4;
 
             darwin = dar;
 
@@ -134,10 +135,46 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        // checks if a baby is in front of boss and boss has mouth open
+        public bool canBabyBeEaten(BabyZombie baby)
+        {
+            if ((baby.X == this.X || baby.X == this.X + 1 || baby.X == this.X + 2))
+            {
+                if (baby.Y == this.Y + 3 && gapeMode)
+                    return true;
+            }
+
+            return false;
+        }
+
         public void resetGapeMode() 
         { 
             gapeMode = false;
             gapeCount = 0;
+        }
+
+        /**
+         * checks if babies are in eating range, kills them, modifies health if necessary
+         */
+        public void checkForBabyDeaths(Nursery nurseryOne, Nursery nurseryTwo) 
+        {
+            foreach (BabyZombie baby in nurseryOne.babies) 
+            {
+                if (canBabyBeEaten(baby)) 
+                {
+                    baby.setZombieAlive(false);
+                    health--;
+                }
+            }
+
+            foreach (BabyZombie baby in nurseryTwo.babies)
+            {
+                if (canBabyBeEaten(baby))
+                {
+                    baby.setZombieAlive(false);
+                    health--;
+                }
+            }
         }
 
         public new void Update(GameTime gameTime)
@@ -147,6 +184,8 @@ namespace LegendOfDarwin.GameObject
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
+            if (health <= 0)
+                this.setZombieAlive(false);
 
             if (isDarwinToTheLeft() || isDarwinToTheRight())
                 ZOMBIE_MOVE_RATE = 5;

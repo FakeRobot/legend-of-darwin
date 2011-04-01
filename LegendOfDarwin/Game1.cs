@@ -168,7 +168,7 @@ namespace LegendOfDarwin
             if (curLevel == LevelState.Start)
             {
                 spriteBatch.Begin();
-                spriteBatch.Draw(main, new Vector2(0,0), Color.White);
+                spriteBatch.Draw(main, new Rectangle(0,0,graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferWidth), Color.White);
                 spriteBatch.End();
             }
             else if (curLevel == LevelState.Level1)

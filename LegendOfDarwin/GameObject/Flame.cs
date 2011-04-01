@@ -50,7 +50,7 @@ namespace LegendOfDarwin.GameObject
             if (this.flameCounter > FLAME_LIFE)
             {
                 // flame can die
-                this.alive = false;
+                //this.alive = false;
             }
 
             this.flameCounter++;

@@ -447,6 +447,11 @@ namespace LegendOfDarwin.Level
                 }
             }
 
+            foreach (Flame flame in flames)
+            {
+                this.checkForFlameDeath(flame, darwin);
+            }
+
             KeyboardState ks = Keyboard.GetState();
 
             checkForExitGame(ks);
@@ -473,6 +478,10 @@ namespace LegendOfDarwin.Level
             }
 
             northZombie.Update(darwin);
+            southZombie.Update(darwin);
+            eastZombie.Update(darwin);
+            westZombie.Update(darwin);
+
             if(!northZombie.isPatrolling())
             {
                 if(darwin.X == northZombie.X)
@@ -481,43 +490,43 @@ namespace LegendOfDarwin.Level
                     flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
                     flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
                 }
-            }
-
-            southZombie.Update(darwin);
-            if (!southZombie.isPatrolling())
+            }           
+            else if (!southZombie.isPatrolling())
             {
-                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
-                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
-                flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+                if (darwin.X == southZombie.X)
+                {
+                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
+                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
+                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+                }
             }
-
-            eastZombie.Update(darwin);
-            if (!eastZombie.isPatrolling())
+            else if (!eastZombie.isPatrolling())
             {
-                flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
-                flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
-                flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
-            }
-
-            westZombie.Update(darwin);
-            if (!westZombie.isPatrolling())
+                if (darwin.Y == eastZombie.Y)
+                {
+                    flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
+                    flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
+                    flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
+                }
+            } 
+            else if (!westZombie.isPatrolling())
             {
-                flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
-                flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
-                flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+                if (darwin.Y == westZombie.Y)
+                {
+                    flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
+                    flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
+                    flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+                }
             }            
 
             foreach (Flame flame in flames)
             {
-                if (flame.flameCounter == 0)
-                {
-                    flames.Remove(flame);
-                }
-            }
+                flame.Update();
 
-            foreach (Flame flame in flames)
-            {
-                this.checkForFlameDeath(flame, darwin);
+                if (!flame.isAlive())
+                {
+                    //flames.Remove(flame);
+                }
             }
 
             if (!darwin.isZombie())
@@ -888,7 +897,6 @@ namespace LegendOfDarwin.Level
             {
                 spriteBatch.Draw(mainGame.Content.Load<Texture2D>("flame"), board.getPosition(flame.X, flame.Y), Color.White);
             }
-
 
             if (messageMode)
             {

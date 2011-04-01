@@ -16,11 +16,16 @@ namespace LegendOfDarwin.GameObject
         private Darwin darwin;
 
         private Random ran;
+        private Random ran1;
 
         private int count;
 
         private bool allowedToWalk;
         private int spriteStripCounter = 0;
+
+        // is this in mode where his mouth is open
+        private bool gapeMode = false;
+        private int gapeCount = 0;
 
         //private int health;
 
@@ -42,6 +47,7 @@ namespace LegendOfDarwin.GameObject
 
             count = 0;
             ran = new Random();
+            ran1 = new Random();
             ZOMBIE_MOVE_RATE = 50;
         }
 
@@ -122,8 +128,14 @@ namespace LegendOfDarwin.GameObject
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
+
             if (isDarwinToTheLeft() || isDarwinToTheRight())
                 ZOMBIE_MOVE_RATE = 5;
+
+            int checkForGape = 0;
+            checkForGape = ran1.Next(500);
+            if (checkForGape == 345)
+                gapeMode = true;
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
@@ -134,6 +146,16 @@ namespace LegendOfDarwin.GameObject
                     MoveLeft();
                 else if (isDarwinToTheRight())
                     MoveRight();
+                else if (gapeMode) 
+                {
+                    gapeCount++;
+
+                    if (gapeCount > 10) 
+                    {
+                        gapeCount = 0;
+                        gapeMode = false;
+                    }
+                }
                 else
                 {
                     ZOMBIE_MOVE_RATE = 50;
@@ -169,6 +191,9 @@ namespace LegendOfDarwin.GameObject
                     this.source.X = 128;
                 }
             }
+
+            if (gapeMode)
+                this.source.X = 256;
 
             sb.Draw(zombieTexture, destination, source, Color.White);
         }

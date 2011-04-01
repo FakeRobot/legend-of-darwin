@@ -286,37 +286,38 @@ namespace LegendOfDarwin.GameObject
 
         public new void Draw(SpriteBatch spriteBatch)
         {
-            if(allowedToWalk && isAlive){
-
-                if (spriteStripCounter == 1)
+            if (this.isAlive)
+            {
+                if (allowedToWalk)
                 {
-                    spriteStripCounter = 0;
-                    if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
+                    if (spriteStripCounter == 1)
                     {
-                        this.source.X = 0;
+                        spriteStripCounter = 0;
+                        if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
+                        {
+                            this.source.X = 0;
+                        }
+                        else
+                        {
+                            this.source.X = 128;
+                        }
                     }
                     else
                     {
-                        this.source.X = 128;
-                    }
-                }
-                else
-                {
-                    spriteStripCounter++;
-                    if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
-                    {
-                        this.source.X = 64;
-                    }
-                    else
-                    {
-                        this.source.X = 192;
+                        spriteStripCounter++;
+                        if (this.lineOfSightDirection.Equals(Direction.Right) || this.lineOfSightDirection.Equals(Direction.Down))
+                        {
+                            this.source.X = 64;
+                        }
+                        else
+                        {
+                            this.source.X = 192;
+                        }
                     }
                 }
 
+                spriteBatch.Draw(snakeTexture, this.destination, this.source, Color.White);
             }
-            
-
-            spriteBatch.Draw(snakeTexture, this.destination, this.source, Color.White);
         }
     }
 }

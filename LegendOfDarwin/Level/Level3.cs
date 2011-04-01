@@ -604,8 +604,6 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(firstZombie);
 
                 firstZombie.setGridPosition(10, 10);
-                //secondZombie.setAbsoluteDestination(10, 16);
-                //thirdZombie.setAbsoluteDestination(16, 10); 
 
                 leaf.resetLeaf();
                 leaf2.resetLeaf();
@@ -652,6 +650,9 @@ namespace LegendOfDarwin
                 fastZombie1.chasingDarwin = false;
                 fastZombie1.goBackToSleep();
                 fastZombie1.setGridPosition(15, 15);
+
+                board.setGridPositionOpen(brain);
+                brain.setGridPosition(5, 18);
 
                 darwin.setHuman();
                 firstSwitch.turnOn();

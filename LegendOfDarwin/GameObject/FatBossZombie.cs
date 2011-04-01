@@ -160,7 +160,7 @@ namespace LegendOfDarwin.GameObject
         {
             foreach (BabyZombie baby in nurseryOne.babies) 
             {
-                if (canBabyBeEaten(baby)) 
+                if (canBabyBeEaten(baby) && baby.isZombieAlive()) 
                 {
                     baby.setZombieAlive(false);
                     health--;
@@ -169,7 +169,7 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie baby in nurseryTwo.babies)
             {
-                if (canBabyBeEaten(baby))
+                if (canBabyBeEaten(baby) && baby.isZombieAlive())
                 {
                     baby.setZombieAlive(false);
                     health--;
@@ -191,8 +191,8 @@ namespace LegendOfDarwin.GameObject
                 ZOMBIE_MOVE_RATE = 5;
 
             int checkForGape = 0;
-            checkForGape = ran1.Next(500);
-            if (checkForGape == 345)
+            checkForGape = ran1.Next(200);
+            if (checkForGape == 150)
                 gapeMode = true;
 
             if (movecounter > ZOMBIE_MOVE_RATE)

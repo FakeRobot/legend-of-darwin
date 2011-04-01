@@ -276,6 +276,9 @@ namespace LegendOfDarwin.Level
             }
             messageModeCounter++;
 
+            if (fatBossZombie.isZombieAlive())
+                fatBossZombie.checkForBabyDeaths(nurseryOne, nurseryTwo);
+
             nurseryOne.Update(gameTime);
             nurseryTwo.Update(gameTime);
 

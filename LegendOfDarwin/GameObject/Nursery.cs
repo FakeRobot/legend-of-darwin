@@ -74,7 +74,8 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                b.Draw(sb);
+                if (b.isZombieAlive())
+                    b.Draw(sb);
             }
         }
 
@@ -84,7 +85,8 @@ namespace LegendOfDarwin.GameObject
 
             foreach (BabyZombie b in babies)
             {
-                b.Update(gameTime);
+                if (b.isZombieAlive())
+                    b.Update(gameTime);
             }
 
             if (canEventHappen())

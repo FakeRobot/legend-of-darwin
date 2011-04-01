@@ -517,42 +517,46 @@ namespace LegendOfDarwin.Level
             eastZombie.Update(darwin);
             westZombie.Update(darwin);
 
-            if(!northZombie.isPatrolling())
+            if (!darwin.isZombie())
             {
-                if(darwin.X == northZombie.X)
+                if (!northZombie.isPatrolling())
                 {
-                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 1));
-                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
-                    flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
+                    if (darwin.X == northZombie.X)
+                    {
+                        flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 1));
+                        flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
+                        flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
+                    }
                 }
-            }           
-            else if (!southZombie.isPatrolling())
-            {
-                if (darwin.X == southZombie.X)
+                else if (!southZombie.isPatrolling())
                 {
-                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
-                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
-                    flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+                    if (darwin.X == southZombie.X)
+                    {
+                        flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
+                        flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
+                        flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+                    }
+                }
+                else if (!eastZombie.isPatrolling())
+                {
+                    if (darwin.Y == eastZombie.Y)
+                    {
+                        flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
+                        flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
+                        flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
+                    }
+                }
+                else if (!westZombie.isPatrolling())
+                {
+                    if (darwin.Y == westZombie.Y)
+                    {
+                        flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
+                        flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
+                        flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+                    }
                 }
             }
-            else if (!eastZombie.isPatrolling())
-            {
-                if (darwin.Y == eastZombie.Y)
-                {
-                    flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
-                    flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
-                    flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
-                }
-            } 
-            else if (!westZombie.isPatrolling())
-            {
-                if (darwin.Y == westZombie.Y)
-                {
-                    flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
-                    flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
-                    flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
-                }
-            }            
+                        
 
             foreach (Flame flame in flames)
             {
@@ -597,7 +601,7 @@ namespace LegendOfDarwin.Level
             }
 
             checkForGameWin();
-            //checkForSwitchToLevelSix();
+            checkForSwitchToLevelSix();
 
             if (gameOver || gameWin)
             {
@@ -886,7 +890,6 @@ namespace LegendOfDarwin.Level
         {
             if (darwin.isOnTop(stairs))
             {
-                //need to changwe this to level 6 once it's created!!
                 mainGame.setCurLevel(Game1.LevelState.Level6);
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level6);
 

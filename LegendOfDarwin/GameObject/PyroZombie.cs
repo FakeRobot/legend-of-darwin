@@ -85,7 +85,8 @@ namespace LegendOfDarwin.GameObject
             {
                 if (this.isPointInVision(darwin.X, darwin.Y))
                 {
-                    patrolling = false;                    
+                    if(!darwin.isZombie())
+                        patrolling = false;                    
                     // check cardinal directions for darwin
                         // if in range of flamethrower (vision - 1)
                             // flame darwin up the ass

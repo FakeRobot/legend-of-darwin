@@ -20,8 +20,10 @@ namespace LegendOfDarwin
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Texture2D main;
+        KeyboardState ks;
         // for keeping track of what level player is on
-        public enum LevelState { Level1, Level2, Level3, Level4, Level5, Level6 };
+        public enum LevelState { Start, Level1, Level2, Level3, Level4, Level5, Level6 };
         LevelState curLevel;
 
         Level1 level1;
@@ -36,7 +38,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level6;
+            curLevel = LevelState.Start;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -95,7 +97,9 @@ namespace LegendOfDarwin
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
+            main = Content.Load<Texture2D>("startScreen");
+
             level1.spriteBatch = spriteBatch;
             level1.song = Content.Load<Song>("thriller");
             level1.LoadContent();
@@ -132,7 +136,19 @@ namespace LegendOfDarwin
 
         protected override void Update(GameTime gameTime)
         {
-            if (curLevel == LevelState.Level1)
+            if (curLevel == LevelState.Start)
+            {
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
+                {
+                    setCurLevel(LevelState.Level1);
+                }
+                else
+                {
+                    ks = Keyboard.GetState();
+                }
+                
+            }
+            else if (curLevel == LevelState.Level1)
                 level1.Update(gameTime);
             else if (curLevel == LevelState.Level2)
                 level2.Update(gameTime);
@@ -149,7 +165,13 @@ namespace LegendOfDarwin
 
         protected override void Draw(GameTime gameTime)
         {
-            if (curLevel == LevelState.Level1)
+            if (curLevel == LevelState.Start)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(main, new Vector2(0,0), Color.White);
+                spriteBatch.End();
+            }
+            else if (curLevel == LevelState.Level1)
                 level1.Draw(gameTime);
             else if (curLevel == LevelState.Level2)
                 level2.Draw(gameTime);

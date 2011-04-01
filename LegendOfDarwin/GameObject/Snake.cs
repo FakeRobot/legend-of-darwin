@@ -67,8 +67,7 @@ namespace LegendOfDarwin.GameObject
 
                     if (isDarwinLeftOfSnakeSomewhere(darwin))
                     {
-                        lineOfSightDirection = Direction.Left;
-                        
+                        lineOfSightDirection = Direction.Left;   
                     }
                 }
                 else

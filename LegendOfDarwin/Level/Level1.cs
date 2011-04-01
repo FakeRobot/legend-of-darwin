@@ -371,7 +371,7 @@ namespace LegendOfDarwin
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             brainMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelOne"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));

@@ -1105,7 +1105,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                //MediaPlayer.Play(song);
+                MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -1255,7 +1255,7 @@ namespace LegendOfDarwin.Level
                 darwin.setHuman();
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
+                MediaPlayer.Play(song);
                 
             }
         }

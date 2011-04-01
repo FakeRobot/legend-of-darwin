@@ -243,7 +243,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                //MediaPlayer.Play(song);
+                MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -307,8 +307,8 @@ namespace LegendOfDarwin.Level
             if (ks.IsKeyDown(Keys.R))
             {
                 setLevelState();
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
             }
 
         }

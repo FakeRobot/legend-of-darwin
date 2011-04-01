@@ -18,6 +18,8 @@ namespace LegendOfDarwin.GameObject
         private Texture2D explodeTex;
         private int explodeCount;
         private Rectangle[] explodeSource;
+        public enum Direction { Up, Down, Left, Right };
+        private Direction darwinDirection;
 
         public BabyZombie(int x, int y, int maxX, int minX, int maxY, int minY, Darwin dar, GameBoard gb) : 
             base(x, y, maxX, minX, maxY, minY, gb)
@@ -26,10 +28,13 @@ namespace LegendOfDarwin.GameObject
 
             babyCount = 0;
             babyCountTwo = 0;
-            babySource = new Rectangle[3];
+            babySource = new Rectangle[6];
             babySource[0] = new Rectangle(0, 0, 64, 64);
             babySource[1] = new Rectangle(65, 0, 64, 64);
-            babySource[2] = new Rectangle(130, 0, 64, 64);
+            babySource[2] = new Rectangle(128, 0, 64, 64);
+            babySource[3] = new Rectangle(192, 0, 64, 64);
+            babySource[4] = new Rectangle(256, 0, 64, 64);
+            babySource[5] = new Rectangle(320, 0, 64, 64);
 
             goingToExplode = false;
             exploding = false;
@@ -94,6 +99,7 @@ namespace LegendOfDarwin.GameObject
                 else if (isZombieAlive())
                 {
                     this.moveTowardsDarwin(darwin);
+                    updateFacingDarwin(darwin);
                     if (nearDarwin())
                     {
                         goingToExplode = true;
@@ -102,6 +108,19 @@ namespace LegendOfDarwin.GameObject
                 }
                 this.setEventFalse();
             }
+        }
+
+        private void updateFacingDarwin(Darwin darwin)
+        {
+            if (darwin.X <= this.X)
+            {
+                darwinDirection = Direction.Left;
+            }
+            else
+            {
+                darwinDirection = Direction.Right;
+            }
+
         }
 
         public new void Draw(SpriteBatch sp)
@@ -116,11 +135,40 @@ namespace LegendOfDarwin.GameObject
             }
             else if (goingToExplode)
             {
-                sp.Draw(zombieTexture, destination, babySource[babyCount], Color.White);
+                if (babyCount == 0)
+                {
+                    if (darwinDirection.Equals(Direction.Left))
+                    {
+                        sp.Draw(zombieTexture, destination, babySource[1], Color.White);
+                    }
+                    else
+                    {
+                        sp.Draw(zombieTexture, destination, babySource[4], Color.White);
+                    }
+                }
+                else
+                {
+                    if (darwinDirection.Equals(Direction.Left))
+                    {
+                        sp.Draw(zombieTexture, destination, babySource[2], Color.White);
+                    }
+                    else
+                    {
+                        sp.Draw(zombieTexture, destination, babySource[5], Color.White);
+                    }
+                }
+                
             }
             else if (this.isZombieAlive())
             {
-                sp.Draw(zombieTexture, destination, babySource[0], Color.White);
+                if (darwinDirection.Equals(Direction.Right))
+                {
+                    sp.Draw(zombieTexture, destination, babySource[3], Color.White);
+                }
+                else
+                {
+                    sp.Draw(zombieTexture, destination, babySource[0], Color.White);
+                }
             }
         }
 

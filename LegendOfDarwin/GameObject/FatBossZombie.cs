@@ -84,6 +84,27 @@ namespace LegendOfDarwin.GameObject
             return result; 
         }
 
+        // checks if darwin is immediately to the right of the zombie, that is in range and not up or down
+        public bool isDarwinToTheRight()
+        {
+
+            bool result = false;
+
+            if (darwin.Y == this.Y || darwin.Y == this.Y + 1 || darwin.Y == this.Y + 2)
+            {
+
+                for (int i = 1; i < 6; i++)
+                {
+                    if (this.isZombieInRange(this.X + i, this.Y) && darwin.X == this.X + i)
+                        result = true;
+
+                }
+
+            }
+
+            return result;
+        }
+
         public bool isInCollision(Darwin myDarwin) 
         {
             if ((this.X == darwin.X && this.Y == darwin.Y) || (this.X+1 == darwin.X && this.Y == darwin.Y) || (this.X+2 == darwin.X && this.Y == darwin.Y)
@@ -101,11 +122,24 @@ namespace LegendOfDarwin.GameObject
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
+            if (isDarwinToTheLeft() || isDarwinToTheRight())
+                ZOMBIE_MOVE_RATE = 5;
+
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 allowedToWalk = true;
                 setEventFalse();
-                randomWalk();
+
+                if (isDarwinToTheLeft())
+                    MoveLeft();
+                else if (isDarwinToTheRight())
+                    MoveRight();
+                else
+                {
+                    ZOMBIE_MOVE_RATE = 50;
+                    randomWalk();
+                }
+
                 movecounter = 0;
             }
             else
@@ -118,6 +152,10 @@ namespace LegendOfDarwin.GameObject
 
         public new void Draw(SpriteBatch sb)
         {
+
+            destination.Height = board.getSquareLength() * 3;
+            destination.Width = board.getSquareWidth() * 3;
+
             if (allowedToWalk)
             {
                 if (spriteStripCounter == 1)

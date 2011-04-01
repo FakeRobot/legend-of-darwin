@@ -138,11 +138,17 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(31, 21);
             board.setGridPositionOccupied(31, 22);
 
+            fatBossZombie.reset();
             fatBossZombie.setGridPosition(15, 5);
             board.setGridPositionOccupied(15, 5);
             board.setGridPositionOccupied(16, 5);
+            board.setGridPositionOccupied(17, 5);
             board.setGridPositionOccupied(15, 6);
             board.setGridPositionOccupied(16, 6);
+            board.setGridPositionOccupied(17, 6);
+            board.setGridPositionOccupied(15, 7);
+            board.setGridPositionOccupied(16, 7);
+            board.setGridPositionOccupied(17, 7);
 
             zTime.reset();
 

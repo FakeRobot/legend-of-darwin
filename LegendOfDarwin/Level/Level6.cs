@@ -49,6 +49,8 @@ namespace LegendOfDarwin.Level
         private BasicObject[] walls;
         private Texture2D wallTex;
 
+        private Stairs stairs;
+
         public Level6(Game1 myMainGame)
         {
             mainGame = myMainGame;
@@ -76,9 +78,11 @@ namespace LegendOfDarwin.Level
 
             fatBossZombie = new FatBossZombie(15, 4, 19, 14, 4, 3, darwin, board);
             fatBossZombie.resetGapeMode();
+            stairs = new Stairs(board);
+
+            walls = setWallsInLevelSix();
 
             setLevelState();
-            walls = setWallsInLevelSix();
             gameState.setState(GameState.state.Start);
         }
 
@@ -114,6 +118,9 @@ namespace LegendOfDarwin.Level
                 mainGame.Content.Load<Texture2D>("explosion_sequence"));
 
             fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"));
+
+            stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
+                mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
         }
 
         /*
@@ -160,6 +167,8 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(17, 6);
 
             zTime.reset();
+
+            stairs.setGridPosition(14, 1);
 
             gameOver = false;
             gameWin = false;
@@ -241,6 +250,7 @@ namespace LegendOfDarwin.Level
 
         private void UpdateLevelState(GameTime gameTime)
         {
+            checkLevelOver();
             if (darwin.isZombie())
             {
                 if (zTime.isTimedOut())
@@ -439,6 +449,9 @@ namespace LegendOfDarwin.Level
             spriteBatch.Begin();
 
             board.Draw(spriteBatch);
+
+            stairs.Draw(spriteBatch);
+
             darwin.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
 
@@ -475,6 +488,14 @@ namespace LegendOfDarwin.Level
                 spriteBatch.Draw(gameWinTexture, gameOverPosition, Color.White);
             }
             spriteBatch.End();
+        }
+
+        private void checkLevelOver()
+        {
+            if (stairs.isOnTop(darwin))
+            {
+                mainGame.setCurLevel(Game1.LevelState.End);
+            }
         }
     }
 }

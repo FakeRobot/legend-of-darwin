@@ -380,8 +380,6 @@ namespace LegendOfDarwin.Level
 
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow");
 
-            //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
-
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
@@ -407,11 +405,9 @@ namespace LegendOfDarwin.Level
             snake3.LoadContent(snakeTexture);
             snake4.LoadContent(snakeTexture);
 
-            // zombie darwin texture == placeholder flamethrowering erryting sprite
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
-            Texture2D flameTex = mainGame.Content.Load<Texture2D>("flame");
 
-            //TODO: fix this
+            //second sprite is for when the flame is flaming
             northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
             southZombie.LoadContent(pyroZombieTex, pyroZombieTex);
             eastZombie.LoadContent(pyroZombieTex, pyroZombieTex);
@@ -771,7 +767,6 @@ namespace LegendOfDarwin.Level
                 board.setGridPositionOpen(potion);
 
                 potion.setGridPosition(27, 5);
-                //board.setGridPositionOccupied(potion.X, potion.Y);
 
                 potion.reset();
                 darwin.setHuman();
@@ -865,6 +860,7 @@ namespace LegendOfDarwin.Level
             // if the pattern is complete, show the stairs and win
             if (pattern.isComplete(board, boxes))
             {
+                Console.Out.WriteLine("thinks the pattern is complete");
                 if (darwin.isOnTop(stairs))
                 {
                     gameWin = true;
@@ -874,7 +870,7 @@ namespace LegendOfDarwin.Level
 
         private void checkForSwitchToLevelSix()
         {
-            if (darwin.isOnTop(stairs))
+            if (gameWin)
             {
                 mainGame.setCurLevel(Game1.LevelState.Level6);
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level6);
@@ -956,8 +952,6 @@ namespace LegendOfDarwin.Level
 
             foreach (Flame flame in flames)
             {
-                //spriteBatch.Draw(mainGame.Content.Load<Texture2D>("flame"), board.getPosition(flame.X, flame.Y), Color.White);
-                //flameTex = mainGame.Content.Load<Texture2D>("flame");
                 flame.Draw(spriteBatch, mainGame.Content.Load<Texture2D>("flame"));
             }
 

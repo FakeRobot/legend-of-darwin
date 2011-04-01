@@ -250,6 +250,7 @@ namespace LegendOfDarwin.Level
             }
 
             checkForGameOver();
+            checkForGameOverWithBoss();
 
             KeyboardState ks = Keyboard.GetState();
 
@@ -346,6 +347,39 @@ namespace LegendOfDarwin.Level
                 }
             }
             
+        }
+
+        private void checkForGameOverWithBoss()
+        {
+            
+            if (fatBossZombie.isInCollision(darwin))
+            {
+                gameOver = true;
+            }
+
+            if (darwin.collision)
+            {
+                Rectangle rightSideOfDarwin = darwin.destination;
+                rightSideOfDarwin.X = rightSideOfDarwin.X + board.getSquareWidth();
+
+                Rectangle leftSideOfDarwin = darwin.destination;
+                leftSideOfDarwin.X = leftSideOfDarwin.X - board.getSquareWidth();
+
+                Rectangle onTopOfDarwin = darwin.destination;
+                onTopOfDarwin.Y = onTopOfDarwin.Y - board.getSquareLength();
+
+                Rectangle onBottomOfDarwin = darwin.destination;
+                onBottomOfDarwin.Y = onBottomOfDarwin.Y + board.getSquareLength();
+
+
+                if (rightSideOfDarwin == fatBossZombie.destination ||
+                    leftSideOfDarwin == fatBossZombie.destination ||
+                    onTopOfDarwin == fatBossZombie.destination ||
+                    onBottomOfDarwin == fatBossZombie.destination)
+                {
+                    gameOver = true;
+                }
+            }
         }
 
         public void setZTime(ZombieTime mytime)

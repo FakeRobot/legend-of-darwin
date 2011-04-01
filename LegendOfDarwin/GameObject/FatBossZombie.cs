@@ -60,6 +60,37 @@ namespace LegendOfDarwin.GameObject
             zombieTexture = texIn;
         }
 
+        // checks if darwin is immediately to the left of the zombie, that is in range and not up or down
+        public bool isDarwinToTheLeft() 
+        {
+
+            bool result = false;
+
+            if (darwin.Y == this.Y || darwin.Y == this.Y + 1 || darwin.Y == this.Y + 2)
+            {
+
+                for (int i = 1; i < 6; i++)
+                {
+                    if (this.isZombieInRange(this.X-i,this.Y) && darwin.X==this.X-i)
+                        result = true;
+
+                }
+
+            }
+
+            return result; 
+        }
+
+        public bool isInCollision(Darwin myDarwin) 
+        {
+            if ((this.X == darwin.X && this.Y == darwin.Y) || (this.X+1 == darwin.X && this.Y == darwin.Y) || (this.X+2 == darwin.X && this.Y == darwin.Y)
+                || (this.X == darwin.X && this.Y+1 == darwin.Y) || (this.X+1 == darwin.X && this.Y+1 == darwin.Y) || (this.X+2 == darwin.X && this.Y+1 == darwin.Y)
+                || (this.X == darwin.X && this.Y+2 == darwin.Y) || (this.X+1 == darwin.X && this.Y+2 == darwin.Y) || (this.X+2 == darwin.X && this.Y+2 == darwin.Y))
+                return true;
+            else
+                return false;
+        }
+
         public new void Update(GameTime gameTime)
         {
 
@@ -128,10 +159,11 @@ namespace LegendOfDarwin.GameObject
 
         private new void MoveUp()
         {
-            if (board.isGridPositionOpen(this.X, this.Y - 1) &&
+            if (((board.isGridPositionOpen(this.X, this.Y - 1) &&
                 board.isGridPositionOpen(this.X + 1, this.Y - 1) &&
-                board.isGridPositionOpen(this.X + 2, this.Y - 1) 
-                && this.isZombieInRange(this.X,this.Y-1))
+                board.isGridPositionOpen(this.X + 2, this.Y - 1)) || 
+                ((darwin.X == this.X && darwin.Y == this.Y -1) || (darwin.X == this.X+1 && darwin.Y == this.Y - 1) ||
+                (darwin.X == this.X+2 && darwin.Y == this.Y - 1))) && this.isZombieInRange(this.X, this.Y - 1))
             {
                 board.setGridPositionOccupied(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X + 1, this.Y - 1);
@@ -145,10 +177,11 @@ namespace LegendOfDarwin.GameObject
 
         private new void MoveDown()
         {
-            if (board.isGridPositionOpen(this.X, this.Y + 3) &&
+            if (((board.isGridPositionOpen(this.X, this.Y + 3) &&
                 board.isGridPositionOpen(this.X + 1, this.Y + 3) &&
-                board.isGridPositionOpen(this.X + 2, this.Y + 3)
-                 && this.isZombieInRange(this.X, this.Y +1))
+                board.isGridPositionOpen(this.X + 2, this.Y + 3)) || 
+                ((darwin.X == this.X && darwin.Y == this.Y + 3) || (darwin.X == this.X+1 && darwin.Y == this.Y + 3) ||
+                (darwin.X == this.X+2 && darwin.Y == this.Y + 3))) && this.isZombieInRange(this.X, this.Y + 1))
             {
                 board.setGridPositionOccupied(this.X, this.Y + 3);
                 board.setGridPositionOccupied(this.X + 1, this.Y + 3);
@@ -162,10 +195,11 @@ namespace LegendOfDarwin.GameObject
 
         private new void MoveLeft()
         {
-            if (board.isGridPositionOpen(this.X - 1, this.Y) &&
+            if (((board.isGridPositionOpen(this.X - 1, this.Y) &&
                 board.isGridPositionOpen(this.X - 1, this.Y + 1) &&
-                board.isGridPositionOpen(this.X - 1, this.Y + 2)
-                && this.isZombieInRange(this.X-1, this.Y))
+                board.isGridPositionOpen(this.X - 1, this.Y + 2)) ||
+                ((darwin.X == this.X-1 && darwin.Y == this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y + 1) ||
+                (darwin.X == this.X -1 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X-1, this.Y))
             {
                 board.setGridPositionOccupied(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X - 1, this.Y + 1);
@@ -179,10 +213,11 @@ namespace LegendOfDarwin.GameObject
 
         private new void MoveRight()
         {
-            if (board.isGridPositionOpen(this.X + 3, this.Y) &&
+            if (((board.isGridPositionOpen(this.X + 3, this.Y) &&
                 board.isGridPositionOpen(this.X + 3, this.Y + 1) &&
-                board.isGridPositionOpen(this.X + 3, this.Y + 2)
-                && this.isZombieInRange(this.X+1, this.Y))
+                board.isGridPositionOpen(this.X + 3, this.Y + 2)) ||
+                ((darwin.X == this.X+3 && darwin.Y == this.Y) || (darwin.X == this.X+3 && darwin.Y == this.Y + 1) ||
+                (darwin.X == this.X+3 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X+1, this.Y))
             {
                 board.setGridPositionOccupied(this.X + 3, this.Y);
                 board.setGridPositionOccupied(this.X + 3, this.Y + 1);

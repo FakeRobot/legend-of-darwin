@@ -44,6 +44,7 @@ namespace LegendOfDarwin.GameObject
 
         public void reset()
         {
+            this.setEventLag(40);
             babyCount = 0;
             babyCountTwo = 0;
             goingToExplode = false;

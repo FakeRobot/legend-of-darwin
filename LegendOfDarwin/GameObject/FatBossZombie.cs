@@ -9,12 +9,14 @@ namespace LegendOfDarwin.GameObject
 {
     class FatBossZombie : Zombie
     {
+        enum Stage { Nothing, Gape, Walk, Chuck }
+
         private Darwin darwin;
 
         private Random ran;
 
         private int count;
-        
+
         //private int health;
 
         //private LinkedList<BabyZombie> babies;

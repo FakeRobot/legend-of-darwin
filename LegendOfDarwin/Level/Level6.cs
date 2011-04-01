@@ -148,11 +148,8 @@ namespace LegendOfDarwin.Level
 
             gameOver = false;
             gameWin = false;
-
-            if (gameState.getState().Equals(GameState.state.End))
-            {
-                gameState.setState(GameState.state.Level);
-            }
+            gameState.setState(GameState.state.Level);
+            
         }
 
 

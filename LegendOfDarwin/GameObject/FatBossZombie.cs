@@ -50,55 +50,58 @@ namespace LegendOfDarwin.GameObject
 
             if (canEventHappen())
             {
-                int i = ran.Next(1, 4);
-
-                switch (i)
-                {
-                    case 1:
-                        MoveUp();
-                        break;
-                    case 2:
-                        MoveDown();
-                        break;
-                    case 3:
-                        MoveLeft();
-                        break;
-                    case 4:
-                        MoveRight();
-                        break;
-                }
-
-                destination.Height = board.getSquareLength() * 2;
-                destination.Width = board.getSquareWidth() * 2;
-
                 setEventFalse();
-                count = 0;
-            }
-            else
-            {
-                count++;
-
-                if (count > 50)
-                {
-                    destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
-                    destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
-                }
-                else if (count > 24)
-                {
-                    destination.Height = board.getSquareLength() * 2;
-                    destination.Width = board.getSquareWidth() * 2;
-                }
-                else
-                {
-                    destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
-                    destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
-                }
+                randomWalk();
             }
         }
 
         public new void Draw(SpriteBatch sb)
         {
             sb.Draw(zombieTexture, destination, source, Color.White);
+        }
+
+        private void randomWalk()
+        { 
+            int i = ran.Next(1, 4);
+
+            switch (i)
+            {
+                case 1:
+                    MoveUp();
+                    break;
+                case 2:
+                    MoveDown();
+                    break;
+                case 3:
+                    MoveLeft();
+                    break;
+                case 4:
+                    MoveRight();
+                    break;
+            }
+
+            destination.Height = board.getSquareLength() * 2;
+            destination.Width = board.getSquareWidth() * 2;
+
+            setEventFalse();
+            if(count == 80)
+            {
+                count = 0;
+            }
+            
+            count++;
+
+            if (count > 40)
+            {
+                destination.Height = board.getSquareLength() * 2 + (int)(board.getSquareLength() * .1);
+                destination.Width = board.getSquareWidth() * 2 + (int)(board.getSquareWidth() * .1);
+            }
+            else
+            {
+                destination.Height = board.getSquareLength() * 2;
+                destination.Width = board.getSquareWidth() * 2;
+            }
+            
         }
 
         private new void MoveUp()

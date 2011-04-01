@@ -101,27 +101,27 @@ namespace LegendOfDarwin
             main = Content.Load<Texture2D>("startScreen");
 
             level1.spriteBatch = spriteBatch;
-            level1.song = Content.Load<Song>("thriller");
+            level1.song = Content.Load<Song>("Thriller8bit");
             level1.LoadContent();
 
             level2.spriteBatch = spriteBatch;
-            level2.song = Content.Load<Song>("thriller");
+            level2.song = Content.Load<Song>("Thriller8bit");
             level2.LoadContent();
 
             level3.spriteBatch = spriteBatch;
-            level3.song = Content.Load<Song>("thriller");
+            level3.song = Content.Load<Song>("Thriller8bit");
             level3.LoadContent();
 
             level4.spriteBatch = spriteBatch;
-            level4.song = Content.Load<Song>("thriller");
+            level4.song = Content.Load<Song>("Thriller8bit");
             level4.LoadContent();
 
             level5.spriteBatch = spriteBatch;
-            level5.song = Content.Load<Song>("thriller");
+            level5.song = Content.Load<Song>("Thriller8bit");
             level5.LoadContent();
 
             level6.spriteBatch = spriteBatch;
-            level6.song = Content.Load<Song>("thriller");
+            level6.song = Content.Load<Song>("Thriller8bit");
             level6.LoadContent();
         }
 

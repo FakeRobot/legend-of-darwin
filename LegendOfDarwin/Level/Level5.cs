@@ -757,7 +757,7 @@ namespace LegendOfDarwin.Level
                 board.setGridPositionOpen(potion);
 
                 potion.setGridPosition(27, 5);
-                board.setGridPositionOccupied(potion.X, potion.Y);
+                //board.setGridPositionOccupied(potion.X, potion.Y);
 
                 potion.reset();
                 darwin.setHuman();

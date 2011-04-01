@@ -370,7 +370,7 @@ namespace LegendOfDarwin.Level
             leaderZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/CongaLeaderZombie"));
 
             foreach (CongaFollowerZombie follower in followerZombies)
-                follower.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+                follower.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/CongaFollowerZombie"));
 
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));

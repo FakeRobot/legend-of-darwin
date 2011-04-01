@@ -70,6 +70,9 @@ namespace LegendOfDarwin.Level
         private MessageBox darwinMessage;
 
         public Song song;
+        public SoundEffect revealStairsSound;
+        public bool playSound = true;
+
         public Game1 mainGame;
 
         public Level5(Game1 myMainGame)
@@ -356,6 +359,9 @@ namespace LegendOfDarwin.Level
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
+
+            // load the sound
+            revealStairsSound = mainGame.Content.Load<SoundEffect>("SumoHit");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -984,6 +990,14 @@ namespace LegendOfDarwin.Level
             {
                 if (pattern.shouldSparkle())
                 {
+                    //PUT THE SOUND HERE
+                    if (playSound)
+                    {
+                        revealStairsSound.Play();
+                        playSound = false;
+                    }
+                    Console.Out.WriteLine("here");
+
                     stairs.Draw(spriteBatch);
                     Rectangle rect = stairs.destination;
                     Rectangle source = new Rectangle(0, 0, 100, 100);

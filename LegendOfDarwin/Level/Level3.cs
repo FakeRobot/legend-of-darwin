@@ -715,6 +715,7 @@ namespace LegendOfDarwin
             if (darwin.isOnTop(secondStair))
             {
                 mainGame.setCurLevel(Game1.LevelState.Level4);
+                zTime.reset();
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level4);
 
                 darwin.setHuman();

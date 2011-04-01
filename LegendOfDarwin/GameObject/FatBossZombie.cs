@@ -15,6 +15,7 @@ namespace LegendOfDarwin.GameObject
 
         private Darwin darwin;
 
+        // for random walk and randomly opening his mouth
         private Random ran;
         private Random ran1;
 

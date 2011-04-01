@@ -12,11 +12,11 @@ namespace LegendOfDarwin.GameObject
         // static int for how long this flame should live
         private static int FLAME_LIFE = 150;
 
-        // texture for the flame
-        public Texture2D flameTex;
-
         // counter for how long this flame will burn a tile
         private int flameCounter;
+
+        // true if hte left sprite will show
+        private bool leftSprite;
 
         // is this flame alive
         private Boolean alive;
@@ -40,11 +40,6 @@ namespace LegendOfDarwin.GameObject
             return this.alive;
         }
 
-        public void LoadContent(Texture2D flameTexture)
-        {
-            this.flameTex = flameTexture;
-        }
-
         public void Update()
         {
             if (this.flameCounter > FLAME_LIFE)
@@ -53,7 +48,28 @@ namespace LegendOfDarwin.GameObject
                 //this.alive = false;
             }
 
+            if (flameCounter > 0 && flameCounter <= 20)
+                leftSprite = true;
+            else if (flameCounter > 20 && flameCounter <= 40)
+                leftSprite = false;
+            else
+                this.flameCounter = 0;
+
             this.flameCounter++;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D texture)
+        {
+            if (leftSprite)
+            {
+                Rectangle source = new Rectangle(0, 0, 256, 256);
+                spriteBatch.Draw(texture, board.getPosition(this.X, this.Y), source, Color.White);
+            }
+            else
+            {
+                Rectangle source = new Rectangle(256, 0, 256, 256);
+                spriteBatch.Draw(texture, board.getPosition(this.X, this.Y), source, Color.White);
+            }
         }
     }
 }

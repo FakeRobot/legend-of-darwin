@@ -124,11 +124,13 @@ namespace LegendOfDarwin.GameObject
             switch (this.patrolling)
             {
                 case (true):
-                    spriteBatch.Draw(zombieTexture, destination, source, Color.White);
+                    // Don't use a source so that it shows the whole sprite
+                    spriteBatch.Draw(zombieTexture, destination, Color.White);
                     break;
                 case (false):
                     // flamin' tiem
-                    spriteBatch.Draw(this.flamingZombieTexture, destination, source, Color.White);
+                    // leave this in because i might make a sprite eventually
+                    spriteBatch.Draw(this.flamingZombieTexture, destination, Color.White);
                     break;
                 default:
                     throw new Exception("failed to draw pyro zombie");

@@ -410,10 +410,12 @@ namespace LegendOfDarwin.Level
             // zombie darwin texture == placeholder flamethrowering erryting sprite
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
             Texture2D flameTex = mainGame.Content.Load<Texture2D>("flame");
-            northZombie.LoadContent(pyroZombieTex, flameTex);
-            southZombie.LoadContent(pyroZombieTex, flameTex);
-            eastZombie.LoadContent(pyroZombieTex, flameTex);
-            westZombie.LoadContent(pyroZombieTex, flameTex);
+
+            //TODO: fix this
+            northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            southZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            eastZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            westZombie.LoadContent(pyroZombieTex, pyroZombieTex);
         }
 
 
@@ -954,7 +956,9 @@ namespace LegendOfDarwin.Level
 
             foreach (Flame flame in flames)
             {
-                spriteBatch.Draw(mainGame.Content.Load<Texture2D>("flame"), board.getPosition(flame.X, flame.Y), Color.White);
+                //spriteBatch.Draw(mainGame.Content.Load<Texture2D>("flame"), board.getPosition(flame.X, flame.Y), Color.White);
+                //flameTex = mainGame.Content.Load<Texture2D>("flame");
+                flame.Draw(spriteBatch, mainGame.Content.Load<Texture2D>("flame"));
             }
 
             if (messageMode)

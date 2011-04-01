@@ -18,6 +18,7 @@ namespace LegendOfDarwin.GameObject
         private Random ran;
         private Random ran1;
 
+        // for breathing thingy
         private int count;
 
         private bool allowedToWalk;
@@ -64,6 +65,8 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this.X + 1, this.Y + 2);
             board.setGridPositionOpen(this.X + 2, this.Y + 2);
             gapeMode = false;
+            this.setZombieAlive(true);
+            health = 4;
         }
 
         public new void LoadContent(Texture2D texIn)
@@ -151,6 +154,29 @@ namespace LegendOfDarwin.GameObject
         { 
             gapeMode = false;
             gapeCount = 0;
+        }
+
+        /**
+         * sets the zombie to alive (true) or dead (false)
+         * if it is dead it won't be drawn
+         * opens up all zombie boss tiles
+         */
+        public new void setZombieAlive(bool living)
+        {
+            isAlive = living;
+            if (isAlive == false)
+            {
+                // if you are killing the zombie, free up his space
+                board.setGridPositionOpen(this.X, this.Y);
+                board.setGridPositionOpen(this.X + 1,this.Y);
+                board.setGridPositionOpen(this.X + 2, this.Y);
+                board.setGridPositionOpen(this.X , this.Y+1);
+                board.setGridPositionOpen(this.X + 1, this.Y+1);
+                board.setGridPositionOpen(this.X + 2, this.Y+1);
+                board.setGridPositionOpen(this.X, this.Y+2);
+                board.setGridPositionOpen(this.X + 1, this.Y+2);
+                board.setGridPositionOpen(this.X + 2, this.Y+2);
+            }
         }
 
         /**

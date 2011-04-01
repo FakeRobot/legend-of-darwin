@@ -205,13 +205,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="thriller.mp3">
-      <Name>thriller</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="StaticPic\metal_tile.jpg">
       <Name>metal_tile</Name>
       <Importer>TextureImporter</Importer>
@@ -470,6 +463,13 @@
       <Name>LevelSix</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Thriller8bit.mp3">
+      <Name>Thriller8bit</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

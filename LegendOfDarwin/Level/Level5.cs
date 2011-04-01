@@ -361,7 +361,7 @@ namespace LegendOfDarwin.Level
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
 
             // load the sound
-            revealStairsSound = mainGame.Content.Load<SoundEffect>("SumoHit");
+            revealStairsSound = mainGame.Content.Load<SoundEffect>("reveal");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -941,6 +941,8 @@ namespace LegendOfDarwin.Level
             spriteBatch.Begin();
             board.Draw(spriteBatch);
 
+            pattern.Draw(spriteBatch);
+
             darwin.Draw(spriteBatch);
 
             zTime.Draw(spriteBatch);
@@ -971,9 +973,6 @@ namespace LegendOfDarwin.Level
             {
                 spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
             }
-
-            // Only draw this for debugging
-            pattern.Draw(spriteBatch);
 
             foreach (Box b in boxes)
             {

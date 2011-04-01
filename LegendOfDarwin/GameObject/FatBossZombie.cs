@@ -62,6 +62,7 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this.X, this.Y + 2);
             board.setGridPositionOpen(this.X + 1, this.Y + 2);
             board.setGridPositionOpen(this.X + 2, this.Y + 2);
+            gapeMode = false;
         }
 
         public new void LoadContent(Texture2D texIn)
@@ -119,6 +120,24 @@ namespace LegendOfDarwin.GameObject
                 return true;
             else
                 return false;
+        }
+
+        // checks if darwin is in front of boss and boss has his mouth open and darwin is a human
+        public bool canDarwinBeEaten() 
+        {
+            if ((darwin.X == this.X || darwin.X == this.X + 1 || darwin.X == this.X + 2)) 
+            {
+                if (darwin.Y == this.Y + 3 && !darwin.isZombie() && gapeMode)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void resetGapeMode() 
+        { 
+            gapeMode = false;
+            gapeCount = 0;
         }
 
         public new void Update(GameTime gameTime)

@@ -74,6 +74,7 @@ namespace LegendOfDarwin.Level
             nurseryTwo = new Nursery(board, darwin);
 
             fatBossZombie = new FatBossZombie(15, 4, 19, 14, 4, 3, darwin, board);
+            fatBossZombie.resetGapeMode();
 
             setLevelState();
             walls = setWallsInLevelSix();
@@ -351,7 +352,8 @@ namespace LegendOfDarwin.Level
 
         private void checkForGameOverWithBoss()
         {
-            
+            if (fatBossZombie.canDarwinBeEaten())
+                gameOver = true;
             if (fatBossZombie.isInCollision(darwin))
             {
                 gameOver = true;

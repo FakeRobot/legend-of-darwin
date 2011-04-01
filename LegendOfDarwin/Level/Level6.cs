@@ -46,6 +46,9 @@ namespace LegendOfDarwin.Level
         public Song song;
         public Game1 mainGame;
 
+        private BasicObject[] walls;
+        private Texture2D wallTex;
+
         public Level6(Game1 myMainGame)
         {
             mainGame = myMainGame;
@@ -70,9 +73,10 @@ namespace LegendOfDarwin.Level
             nurseryOne = new Nursery(board, darwin);
             nurseryTwo = new Nursery(board, darwin);
 
-            fatBossZombie = new FatBossZombie(15, 5, 32, 0, 24, 0, darwin, board);
+            fatBossZombie = new FatBossZombie(15, 10, 32, 0, 24, 0, darwin, board);
 
             setLevelState();
+            walls = setWallsInLevelSix();
         }
 
 
@@ -93,6 +97,7 @@ namespace LegendOfDarwin.Level
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));
+            wallTex = mainGame.Content.Load<Texture2D>("StaticPic/side_wall");
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
@@ -138,17 +143,18 @@ namespace LegendOfDarwin.Level
             board.setGridPositionOccupied(31, 21);
             board.setGridPositionOccupied(31, 22);
 
+
             fatBossZombie.reset();
-            fatBossZombie.setGridPosition(15, 5);
-            board.setGridPositionOccupied(15, 5);
-            board.setGridPositionOccupied(16, 5);
-            board.setGridPositionOccupied(17, 5);
-            board.setGridPositionOccupied(15, 6);
-            board.setGridPositionOccupied(16, 6);
-            board.setGridPositionOccupied(17, 6);
-            board.setGridPositionOccupied(15, 7);
-            board.setGridPositionOccupied(16, 7);
-            board.setGridPositionOccupied(17, 7);
+            fatBossZombie.setGridPosition(15, 10);
+            board.setGridPositionOccupied(15, 10);
+            board.setGridPositionOccupied(16, 10);
+            board.setGridPositionOccupied(17, 10);
+            board.setGridPositionOccupied(15, 11);
+            board.setGridPositionOccupied(16, 11);
+            board.setGridPositionOccupied(17, 11);
+            board.setGridPositionOccupied(15, 12);
+            board.setGridPositionOccupied(16, 12);
+            board.setGridPositionOccupied(17, 12);
 
             zTime.reset();
 
@@ -158,6 +164,46 @@ namespace LegendOfDarwin.Level
             
         }
 
+        private BasicObject[] setWallsInLevelSix()
+        {
+            BasicObject w0 = new BasicObject(board);
+            BasicObject w1 = new BasicObject(board);
+            BasicObject w2 = new BasicObject(board);
+            BasicObject w3 = new BasicObject(board);
+            BasicObject w4 = new BasicObject(board);
+            BasicObject w5 = new BasicObject(board);
+            BasicObject w6 = new BasicObject(board);
+            BasicObject w7 = new BasicObject(board);
+            BasicObject w8 = new BasicObject(board);
+            BasicObject w9 = new BasicObject(board);
+            BasicObject w10 = new BasicObject(board);
+            BasicObject w11 = new BasicObject(board);
+
+            w0.setGridPosition(10, 1);
+            w1.setGridPosition(10, 2);
+            w2.setGridPosition(10, 3);
+            w3.setGridPosition(10, 4);
+            w4.setGridPosition(10, 5);
+            w5.setGridPosition(10, 6);
+            w6.setGridPosition(16, 1);
+            w7.setGridPosition(16, 2);
+            w8.setGridPosition(16, 3);
+            w9.setGridPosition(16, 4);
+            w10.setGridPosition(16, 5);
+            w11.setGridPosition(16, 6);
+
+            for (int m = 1; m < 7; m++)
+            {
+                board.setGridPositionOccupied(10, m);
+            }
+            for (int m = 1; m < 7; m++)
+            {
+                board.setGridPositionOccupied(16, m);
+            }
+
+            walls = new BasicObject[12] { w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11 };
+            return walls;
+        }
 
         public void Update(GameTime gameTime)
         {
@@ -355,6 +401,11 @@ namespace LegendOfDarwin.Level
             nurseryTwo.Draw(spriteBatch);
 
             fatBossZombie.Draw(spriteBatch);
+
+            foreach (BasicObject a in walls)
+            {
+                spriteBatch.Draw(wallTex, board.getPosition(a.X, a.Y), Color.White);
+            }
 
             if (messageMode)
             {

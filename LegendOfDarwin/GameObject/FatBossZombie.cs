@@ -9,7 +9,9 @@ namespace LegendOfDarwin.GameObject
 {
     class FatBossZombie : Zombie
     {
+        // mode for zombie
         enum Stage { Nothing, Gape, Walk, Chuck }
+        private Stage curMode;
 
         private Darwin darwin;
 

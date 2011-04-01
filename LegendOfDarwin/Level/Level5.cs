@@ -481,15 +481,6 @@ namespace LegendOfDarwin.Level
                     flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
                     flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
                 }
-
-            }
-
-            foreach (Flame flame in flames)
-            {
-                if (flame.flameCounter == 0)
-                {
-                    flames.Remove(flame);
-                }
             }
 
             southZombie.Update(darwin);
@@ -514,9 +505,20 @@ namespace LegendOfDarwin.Level
                 flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
                 flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
                 flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+            }            
+
+            foreach (Flame flame in flames)
+            {
+                if (flame.flameCounter == 0)
+                {
+                    flames.Remove(flame);
+                }
             }
 
-
+            foreach (Flame flame in flames)
+            {
+                this.checkForFlameDeath(flame, darwin);
+            }
 
             if (!darwin.isZombie())
             {
@@ -550,6 +552,14 @@ namespace LegendOfDarwin.Level
                 messageModeCounter = 0;
             }
             messageModeCounter++;
+        }
+
+        private void checkForFlameDeath(Flame flame, Darwin darwin)
+        {
+            if(darwin.isOnTop(flame))
+            {
+                this.gameOver = true;
+            }
         }
 
         private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)

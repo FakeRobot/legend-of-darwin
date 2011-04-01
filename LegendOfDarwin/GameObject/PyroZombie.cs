@@ -23,6 +23,8 @@ namespace LegendOfDarwin.GameObject
         protected Vector2 currentPoint;
         protected Vector2 nextPoint;
 
+        public Boolean killedDarwin;
+
         public PyroZombie(int startX, int startY, int maxX, int minX, int maxY, int minY, GameBoard myboard)
             : base(startX, startY, maxX, minX, maxY, minY, myboard)
         {
@@ -31,6 +33,7 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 4;
             this.patrolling = true;
             ZOMBIE_MOVE_RATE = 35;
+            this.killedDarwin = false;
         }
 
         public void LoadContent(Texture2D pyroZombieTexture, Texture2D zombieFlamingTex)
@@ -82,7 +85,7 @@ namespace LegendOfDarwin.GameObject
             {
                 if (this.isPointInVision(darwin.X, darwin.Y))
                 {
-                    patrolling = false;
+                    patrolling = false;                    
                     // check cardinal directions for darwin
                         // if in range of flamethrower (vision - 1)
                             // flame darwin up the ass

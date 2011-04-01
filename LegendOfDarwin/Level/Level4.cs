@@ -381,7 +381,6 @@ namespace LegendOfDarwin.Level
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
             potion2.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
 
-
         }
 
         

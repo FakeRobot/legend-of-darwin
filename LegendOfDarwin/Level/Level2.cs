@@ -79,7 +79,7 @@ namespace LegendOfDarwin
             device = graphics.GraphicsDevice;
 
             gameState = new GameState();
-            gameState.setState(GameState.state.Level);
+            gameState.setState(GameState.state.Start);
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
@@ -222,7 +222,7 @@ namespace LegendOfDarwin
             darwinMessage.LoadContent(messagePic);
             cannibalMessage.LoadContent(messagePic);
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelTwo"));
             
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));

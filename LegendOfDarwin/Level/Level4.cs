@@ -80,7 +80,7 @@ namespace LegendOfDarwin.Level
 
             gameState = new GameState();
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
-            gameState.setState(GameState.state.Level);
+            gameState.setState(GameState.state.Start);
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
@@ -376,7 +376,7 @@ namespace LegendOfDarwin.Level
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("startScreen"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelFour"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
             potion2.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));

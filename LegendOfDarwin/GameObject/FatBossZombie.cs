@@ -39,6 +39,7 @@ namespace LegendOfDarwin.GameObject
 
             count = 0;
             ran = new Random();
+            ZOMBIE_MOVE_RATE = 50;
         }
 
         public void reset()
@@ -61,13 +62,19 @@ namespace LegendOfDarwin.GameObject
 
         public new void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
 
-            if (canEventHappen())
+            base.Update(gameTime);
+            destination.Height = board.getSquareLength() * 3;
+            destination.Width = board.getSquareWidth() * 3;
+
+            if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 setEventFalse();
                 randomWalk();
+                movecounter = 0;
             }
+            movecounter++;
+
         }
 
         public new void Draw(SpriteBatch sb)
@@ -77,7 +84,7 @@ namespace LegendOfDarwin.GameObject
 
         private void randomWalk()
         { 
-            int i = ran.Next(1, 4);
+            int i = ran.Next(1, 5);
 
             switch (i)
             {
@@ -123,7 +130,8 @@ namespace LegendOfDarwin.GameObject
         {
             if (board.isGridPositionOpen(this.X, this.Y - 1) &&
                 board.isGridPositionOpen(this.X + 1, this.Y - 1) &&
-                board.isGridPositionOpen(this.X + 2, this.Y - 1))
+                board.isGridPositionOpen(this.X + 2, this.Y - 1) 
+                && this.isZombieInRange(this.X,this.Y-1))
             {
                 board.setGridPositionOccupied(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X + 1, this.Y - 1);
@@ -137,13 +145,14 @@ namespace LegendOfDarwin.GameObject
 
         private new void MoveDown()
         {
-            if (board.isGridPositionOpen(this.X, this.Y + 2) &&
-                board.isGridPositionOpen(this.X + 1, this.Y + 2) &&
-                board.isGridPositionOpen(this.X + 2, this.Y + 2))
+            if (board.isGridPositionOpen(this.X, this.Y + 3) &&
+                board.isGridPositionOpen(this.X + 1, this.Y + 3) &&
+                board.isGridPositionOpen(this.X + 2, this.Y + 3)
+                 && this.isZombieInRange(this.X, this.Y +1))
             {
-                board.setGridPositionOccupied(this.X, this.Y + 2);
-                board.setGridPositionOccupied(this.X + 1, this.Y + 2);
-                board.setGridPositionOccupied(this.X + 2, this.Y + 2);
+                board.setGridPositionOccupied(this.X, this.Y + 3);
+                board.setGridPositionOccupied(this.X + 1, this.Y + 3);
+                board.setGridPositionOccupied(this.X + 2, this.Y + 3);
                 board.setGridPositionOpen(this.X, this.Y);
                 board.setGridPositionOpen(this.X + 1, this.Y);
                 board.setGridPositionOpen(this.X + 2, this.Y);
@@ -155,7 +164,8 @@ namespace LegendOfDarwin.GameObject
         {
             if (board.isGridPositionOpen(this.X - 1, this.Y) &&
                 board.isGridPositionOpen(this.X - 1, this.Y + 1) &&
-                board.isGridPositionOpen(this.X - 1, this.Y + 2))
+                board.isGridPositionOpen(this.X - 1, this.Y + 2)
+                && this.isZombieInRange(this.X-1, this.Y))
             {
                 board.setGridPositionOccupied(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X - 1, this.Y + 1);
@@ -171,7 +181,8 @@ namespace LegendOfDarwin.GameObject
         {
             if (board.isGridPositionOpen(this.X + 3, this.Y) &&
                 board.isGridPositionOpen(this.X + 3, this.Y + 1) &&
-                board.isGridPositionOpen(this.X + 3, this.Y + 2))
+                board.isGridPositionOpen(this.X + 3, this.Y + 2)
+                && this.isZombieInRange(this.X+1, this.Y))
             {
                 board.setGridPositionOccupied(this.X + 3, this.Y);
                 board.setGridPositionOccupied(this.X + 3, this.Y + 1);

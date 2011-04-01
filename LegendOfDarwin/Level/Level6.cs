@@ -73,7 +73,7 @@ namespace LegendOfDarwin.Level
             nurseryOne = new Nursery(board, darwin);
             nurseryTwo = new Nursery(board, darwin);
 
-            fatBossZombie = new FatBossZombie(15, 10, 32, 0, 24, 0, darwin, board);
+            fatBossZombie = new FatBossZombie(15, 4, 19, 14, 4, 3, darwin, board);
 
             setLevelState();
             walls = setWallsInLevelSix();
@@ -145,16 +145,16 @@ namespace LegendOfDarwin.Level
 
 
             fatBossZombie.reset();
-            fatBossZombie.setGridPosition(15, 10);
-            board.setGridPositionOccupied(15, 10);
-            board.setGridPositionOccupied(16, 10);
-            board.setGridPositionOccupied(17, 10);
-            board.setGridPositionOccupied(15, 11);
-            board.setGridPositionOccupied(16, 11);
-            board.setGridPositionOccupied(17, 11);
-            board.setGridPositionOccupied(15, 12);
-            board.setGridPositionOccupied(16, 12);
-            board.setGridPositionOccupied(17, 12);
+            fatBossZombie.setGridPosition(15, 4);
+            board.setGridPositionOccupied(15, 4);
+            board.setGridPositionOccupied(16, 4);
+            board.setGridPositionOccupied(17, 4);
+            board.setGridPositionOccupied(15, 5);
+            board.setGridPositionOccupied(16, 5);
+            board.setGridPositionOccupied(17, 5);
+            board.setGridPositionOccupied(15, 6);
+            board.setGridPositionOccupied(16, 6);
+            board.setGridPositionOccupied(17, 6);
 
             zTime.reset();
 
@@ -179,26 +179,26 @@ namespace LegendOfDarwin.Level
             BasicObject w10 = new BasicObject(board);
             BasicObject w11 = new BasicObject(board);
 
-            w0.setGridPosition(10, 1);
-            w1.setGridPosition(10, 2);
-            w2.setGridPosition(10, 3);
-            w3.setGridPosition(10, 4);
-            w4.setGridPosition(10, 5);
-            w5.setGridPosition(10, 6);
-            w6.setGridPosition(16, 1);
-            w7.setGridPosition(16, 2);
-            w8.setGridPosition(16, 3);
-            w9.setGridPosition(16, 4);
-            w10.setGridPosition(16, 5);
-            w11.setGridPosition(16, 6);
+            w0.setGridPosition(13, 1);
+            w1.setGridPosition(13, 2);
+            w2.setGridPosition(13, 3);
+            w3.setGridPosition(13, 4);
+            w4.setGridPosition(13, 5);
+            w5.setGridPosition(13, 6);
+            w6.setGridPosition(20, 1);
+            w7.setGridPosition(20, 2);
+            w8.setGridPosition(20, 3);
+            w9.setGridPosition(20, 4);
+            w10.setGridPosition(20, 5);
+            w11.setGridPosition(20, 6);
 
             for (int m = 1; m < 7; m++)
             {
-                board.setGridPositionOccupied(10, m);
+                board.setGridPositionOccupied(13, m);
             }
             for (int m = 1; m < 7; m++)
             {
-                board.setGridPositionOccupied(16, m);
+                board.setGridPositionOccupied(20, m);
             }
 
             walls = new BasicObject[12] { w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11 };

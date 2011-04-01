@@ -198,21 +198,10 @@ namespace LegendOfDarwin.Level
 
         private void resetBoxes()
         {
-            board.setGridPositionOpen(boxes[0]);
-            board.setGridPositionOpen(boxes[1]);
-            board.setGridPositionOpen(boxes[2]);
-            board.setGridPositionOpen(boxes[3]);
-            board.setGridPositionOpen(boxes[4]);
-            board.setGridPositionOpen(boxes[5]);
-            board.setGridPositionOpen(boxes[6]);
-
-            board.setGridPositionOpen(boxes[7]);
-            board.setGridPositionOpen(boxes[8]);
-            board.setGridPositionOpen(boxes[9]);
-            board.setGridPositionOpen(boxes[10]);
-            board.setGridPositionOpen(boxes[11]);
-            board.setGridPositionOpen(boxes[12]);
-            board.setGridPositionOpen(boxes[13]);
+            foreach (Box b in boxes)
+            {
+                board.setGridPositionOpen(b);
+            }
 
             boxes[0].setGridPosition(7, 8);
             boxes[1].setGridPosition(13, 8);
@@ -229,6 +218,12 @@ namespace LegendOfDarwin.Level
             boxes[11].setGridPosition(11, 13);
             boxes[12].setGridPosition(12, 13);
             boxes[13].setGridPosition(13, 13);
+
+            foreach (Box b in boxes)
+            {
+                board.setGridPositionOccupied(b);
+                b.setVisible(true);
+            }
         }
 
         private void setBoxPattern()

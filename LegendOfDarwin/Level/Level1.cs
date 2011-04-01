@@ -570,9 +570,9 @@ namespace LegendOfDarwin
                 sixthZombie.setZombieAlive(true);
 
                 potion.setGridPosition(25, 4);
-                board.setGridPositionOccupied(potion.X, potion.Y);
 
                 brain.setGridPosition(3, 3);
+                brain.setVisible(true);
                 board.setGridPositionOccupied(brain.X, brain.Y);
 
                 potion.reset();

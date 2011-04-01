@@ -17,6 +17,9 @@ namespace LegendOfDarwin
 
         protected bool eventFlag;
 
+        // mostly used for only basic objects that can get sucked into the vortex
+        protected bool visible = true;
+
         // The location to draw the sprite on the screen.
         public Rectangle destination;
 
@@ -45,6 +48,11 @@ namespace LegendOfDarwin
         public void setDestination(Rectangle rectangle)
         {
             destination = rectangle;
+        }
+
+        public void setVisible(bool isVisible)
+        {
+            visible = isVisible;
         }
 
         public void MoveRight()

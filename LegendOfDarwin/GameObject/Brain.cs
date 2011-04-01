@@ -87,7 +87,10 @@ namespace LegendOfDarwin.GameObject
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(brainTexture, this.destination, Color.White);
+            if (this.visible)
+            {
+                spriteBatch.Draw(brainTexture, this.destination, Color.White);
+            }
         }
 
     }

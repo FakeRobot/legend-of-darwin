@@ -37,7 +37,10 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.isOnTop(bo))
             {
+                Console.Out.WriteLine("collision with box");
                 board.setGridPositionOpen(this.X, this.Y);
+                bo.setGridPosition(0, 0);
+                bo.setVisible(false);
             }
         }
 

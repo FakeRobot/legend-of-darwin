@@ -198,6 +198,22 @@ namespace LegendOfDarwin.Level
 
         private void resetBoxes()
         {
+            board.setGridPositionOpen(boxes[0]);
+            board.setGridPositionOpen(boxes[1]);
+            board.setGridPositionOpen(boxes[2]);
+            board.setGridPositionOpen(boxes[3]);
+            board.setGridPositionOpen(boxes[4]);
+            board.setGridPositionOpen(boxes[5]);
+            board.setGridPositionOpen(boxes[6]);
+
+            board.setGridPositionOpen(boxes[7]);
+            board.setGridPositionOpen(boxes[8]);
+            board.setGridPositionOpen(boxes[9]);
+            board.setGridPositionOpen(boxes[10]);
+            board.setGridPositionOpen(boxes[11]);
+            board.setGridPositionOpen(boxes[12]);
+            board.setGridPositionOpen(boxes[13]);
+
             boxes[0].setGridPosition(7, 8);
             boxes[1].setGridPosition(13, 8);
             boxes[2].setGridPosition(19, 8);
@@ -770,6 +786,11 @@ namespace LegendOfDarwin.Level
                 westZombie.patrolling = true;
 
                 flames = new LinkedList<Flame>();
+
+                board.setGridPositionOpen(snake);
+                board.setGridPositionOpen(snake2);
+                board.setGridPositionOpen(snake3);
+                board.setGridPositionOpen(snake4);
 
                 snake.setGridPosition(10, 9);
                 snake2.setGridPosition(8, 15);

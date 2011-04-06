@@ -75,6 +75,7 @@ namespace LegendOfDarwin.Level
 
         //public Song song;
         public SoundEffect revealStairsSound;
+        public SoundEffect deathScreamSound;
         public bool playSound = true;
 
         public Game1 mainGame;
@@ -364,7 +365,7 @@ namespace LegendOfDarwin.Level
 
             // load the sound
             revealStairsSound = mainGame.Content.Load<SoundEffect>("reveal");
-
+            deathScreamSound = mainGame.Content.Load<SoundEffect>("deathScream1");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -449,7 +450,7 @@ namespace LegendOfDarwin.Level
                         // deals with logic for showing the player that they died
                         if (playDeathSound)
                         {
-                            revealStairsSound.Play();
+                            deathScreamSound.Play();
                             playDeathSound = false;
                         }
 

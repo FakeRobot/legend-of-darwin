@@ -44,6 +44,9 @@ namespace LegendOfDarwin
         public bool gameWin = false;
         private int gameOverCounter = 0;
 
+        private SoundEffect deathScreamSound;
+        private bool playDeathSound = true;
+
         private int counter;
         private int counterReady;
         public Texture2D gameOverTexture;
@@ -372,6 +375,8 @@ namespace LegendOfDarwin
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
 
+            deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
+
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
 
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -459,6 +464,12 @@ namespace LegendOfDarwin
                         UpdateMessageMode();
                     else
                     {
+                        if (playDeathSound)
+                        {
+                            deathScreamSound.Play();
+                            playDeathSound = false;
+                        }
+
                         // for freezing screen when darwin dies
                         darwin.setDarwinDead();
                         darwin.setZombie();
@@ -633,6 +644,7 @@ namespace LegendOfDarwin
 
                 darwin.setHuman();
                 darwin.setDarwinAlive();
+                playDeathSound = true;
                 gameOverCounter = 0;
                 firstSwitch.turnOn();
                 secondSwitch.turnOn();

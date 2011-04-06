@@ -23,7 +23,13 @@ namespace LegendOfDarwin.GameObject
         // for breathing thingy
         private int count;
         private int explodeCount;
+        private int secondExplodeCount = 0;
+        private int thirdExplodeCount = 0;
+        private int fourthExplodeCount = 0;
         private bool exploding = false;
+        private bool secondExplosion = false;
+        private bool thirdExplosion = false;
+        private bool fourthExplosion = false;
 
         private bool allowedToWalk;
         private int spriteStripCounter = 0;
@@ -56,10 +62,11 @@ namespace LegendOfDarwin.GameObject
             count = 0;
             explodeCount = 0;
 
-            explodeSource = new Rectangle[3];
+            explodeSource = new Rectangle[4];
             explodeSource[0] = new Rectangle(0, 0, 75, 90);
-            explodeSource[1] = new Rectangle(76, 0, 87, 90);
-            explodeSource[2] = new Rectangle(169, 0, 101, 90);
+            explodeSource[1] = new Rectangle(0, 0, 75, 90);
+            explodeSource[2] = new Rectangle(76, 0, 87, 90);
+            explodeSource[3] = new Rectangle(169, 0, 101, 90);
 
             ran = new Random();
             ran1 = new Random();
@@ -235,10 +242,7 @@ namespace LegendOfDarwin.GameObject
             if (isDarwinToTheLeft() || isDarwinToTheRight())
                 ZOMBIE_MOVE_RATE = 5;
 
-            int checkForGape = 0;
-            checkForGape = ran1.Next(200);
-            if (checkForGape == 150)
-                gapeMode = true;
+            checkForRandomBossGape();
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
@@ -249,6 +253,8 @@ namespace LegendOfDarwin.GameObject
                     eatingBaby = false;
                     gapeMode = false;
                 }
+
+
 
                 allowedToWalk = true;
                 setEventFalse();
@@ -273,15 +279,7 @@ namespace LegendOfDarwin.GameObject
                     randomWalk();
                 }
 
-                if(exploding)
-                {
-                    explodeCount++;
-                    if (explodeCount == 3)
-                    {
-                        exploding = false;
-                        explodeCount = 0;
-                    }  
-                }
+                updateBossExplosions();
 
                 movecounter = 0;
             }
@@ -294,9 +292,77 @@ namespace LegendOfDarwin.GameObject
 
         }
 
+        private void checkForRandomBossGape()
+        {
+            if (!exploding && !secondExplosion && !thirdExplosion && !fourthExplosion)
+            {
+                int checkForGape = 0;
+                checkForGape = ran1.Next(200);
+                if (checkForGape == 150)
+                {
+                    gapeMode = true;
+                }
+            }
+        }
+
+        private void updateBossExplosions()
+        {
+            if (exploding)
+            {
+                explodeCount++;
+                if (explodeCount == 4)
+                {
+                    exploding = false;
+                    explodeCount = 0;
+                }
+                if (explodeCount == 2)
+                {
+                    secondExplosion = true;
+                }
+            }
+
+            if (secondExplosion)
+            {
+                secondExplodeCount++;
+                if (secondExplodeCount == 4)
+                {
+                    secondExplosion = false;
+                    secondExplodeCount = 0;
+                }
+                if(secondExplodeCount == 3)
+                {
+                    thirdExplosion = true;
+                }
+            }
+
+            if (thirdExplosion)
+            {
+                thirdExplodeCount++;
+                if (thirdExplodeCount == 4)
+                {
+                    thirdExplosion = false;
+                    thirdExplodeCount = 0;
+                }
+                if (thirdExplodeCount == 2)
+                {
+                    fourthExplosion = true;
+                }
+            }
+
+            if (fourthExplosion)
+            {
+                fourthExplodeCount++;
+                if (fourthExplodeCount == 4)
+                {
+                    fourthExplosion = false;
+                    fourthExplodeCount = 0;
+                }
+            }
+        }
+
         public new void Draw(SpriteBatch sb)
         {
-
+            
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
@@ -323,11 +389,24 @@ namespace LegendOfDarwin.GameObject
                 this.source.X = 256;
             }
 
-            if(exploding){
+            sb.Draw(zombieTexture, destination, source, Color.White);
+
+            if (exploding)
+            {
                 sb.Draw(explosionTexture, board.getPosition(this), explodeSource[explodeCount], Color.White);
             }
-
-            sb.Draw(zombieTexture, destination, source, Color.White);
+            if (secondExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X + 1, this.Y), explodeSource[secondExplodeCount], Color.White);
+            }
+            if (thirdExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X, this.Y + 1), explodeSource[thirdExplodeCount], Color.White);
+            }
+            if (fourthExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X + 1, this.Y + 1), explodeSource[fourthExplodeCount], Color.White);
+            }
         }
 
         private void randomWalk()

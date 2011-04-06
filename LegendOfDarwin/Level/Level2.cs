@@ -445,6 +445,7 @@ namespace LegendOfDarwin
                 cannibalZombie.setZombieAlive(true);
 
                 potion.setGridPosition(3, 3);
+                potion.reset();
 
                 darwin.setHuman();
                 darwin.setDarwinAlive();

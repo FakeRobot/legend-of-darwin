@@ -33,8 +33,11 @@ namespace LegendOfDarwin
         Level.Level5 level5;
         Level.Level6 level6;
 
+        public int DEATH_COUNTER;
+
         public Game1()
         {
+            DEATH_COUNTER = 0;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 

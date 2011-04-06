@@ -31,6 +31,8 @@ namespace LegendOfDarwin.MenuObject
 
         private const int downTime = 60;
 
+        private SpriteFont messageFont;
+
         public ZombieTime(GameBoard board) : base(board)
         {
             destination = new Rectangle(board.getPosition(x, y).X, board.getPosition(x, y).Y, board.getPosition(x,y).Width*barLength, board.getPosition(x, y).Height);

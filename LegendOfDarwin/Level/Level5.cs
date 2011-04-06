@@ -70,7 +70,7 @@ namespace LegendOfDarwin.Level
         private MessageBox zombieMessage;
         private MessageBox darwinMessage;
 
-        public Song song;
+        //public Song song;
         public SoundEffect revealStairsSound;
         public bool playSound = true;
 
@@ -477,7 +477,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -795,8 +795,8 @@ namespace LegendOfDarwin.Level
                 darwin.setDarwinAlive();
                 gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
 
                 northZombie.setGridPosition(15, 3);
                 northZombie.setCurrentPatrolPoint(new Vector2(27, 3));

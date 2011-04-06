@@ -447,9 +447,9 @@ namespace LegendOfDarwin.Level
 
         private void checkForGameOverWithBoss()
         {
-            if (fatBossZombie.canDarwinBeEaten())
+            if (fatBossZombie.canDarwinBeEaten() && !fatBossZombie.isZombieAlive())
                 gameOver = true;
-            if (fatBossZombie.isInCollision(darwin))
+            if (fatBossZombie.isInCollision(darwin) && !fatBossZombie.isZombieAlive())
             {
                 gameOver = true;
             }

@@ -48,6 +48,7 @@ namespace LegendOfDarwin.Level
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         private int counter;
         private int counterReady;
@@ -1074,10 +1075,22 @@ namespace LegendOfDarwin.Level
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else 
+                    {
+                        darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
+                        gameOverCounter++;
+                        if (gameOverCounter > 200) 
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -1114,7 +1127,7 @@ namespace LegendOfDarwin.Level
 
         private void UpdateLevelState(GameTime gameTime)
         {
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -1150,18 +1163,16 @@ namespace LegendOfDarwin.Level
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
-            
-            checkForGameOver(leaderZombie);
-            
-            // only test for game over if darwin is human or not in conga line
-            //if (!darwin.isZombie() || (leaderZombie.isDarwinOnFloor(darwin) && !leaderZombie.isDarwinOnPath(darwin)) 
-            //    || leaderZombie.isKillMode()) 
-            //{
-            foreach (CongaFollowerZombie follower in followerZombies)
-                checkForGameOver(follower);
-            //}
+            if (darwin.isDarwinAlive())
+            {
+                checkForGameOver(leaderZombie);
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+                foreach (CongaFollowerZombie follower in followerZombies)
+                    checkForGameOver(follower);
+
+
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+            }
 
             stairs.Update(gameTime, darwin);
 
@@ -1178,11 +1189,6 @@ namespace LegendOfDarwin.Level
 
             //checkForGameWin();
             checkForSwitchToLevelFive();
-
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
-            }
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -1255,6 +1261,8 @@ namespace LegendOfDarwin.Level
                 potion.reset();
                 potion2.reset();
                 darwin.setHuman();
+                darwin.setDarwinAlive();
+                gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);

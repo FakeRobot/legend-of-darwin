@@ -144,13 +144,11 @@ namespace LegendOfDarwin.Level
             northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
             northZombie.setNextPatrolPoint(new Vector2(5, 3));
             
-
             southZombie = new PyroZombie(15, 20, 25, 4, 20, 20, board);
             southZombie.setGridPosition(15, 20);
             southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
             southZombie.setNextPatrolPoint(new Vector2(27, 20));
            
-
             eastZombie = new PyroZombie(29, 11, 29, 29, 19, 4, board);
             eastZombie.setGridPosition(29, 11);
             eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
@@ -366,6 +364,7 @@ namespace LegendOfDarwin.Level
 
             // load the sound
             revealStairsSound = mainGame.Content.Load<SoundEffect>("reveal");
+
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");

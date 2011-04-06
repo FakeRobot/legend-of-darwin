@@ -42,7 +42,9 @@ namespace LegendOfDarwin
         public bool gameOver = false;
         public bool gameWin = false;
         private int gameOverCounter = 0;
+
         private bool playDeathSound = true;
+        private SoundEffect deathScreamSound;
 
         private int counter;
         private int counterReady;
@@ -334,6 +336,7 @@ namespace LegendOfDarwin
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
+            deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -401,7 +404,7 @@ namespace LegendOfDarwin
                     {
                         if (playDeathSound)
                         {
-                            //revealStairsSound.Play();
+                            deathScreamSound.Play();
                             playDeathSound = false;
                         }
 

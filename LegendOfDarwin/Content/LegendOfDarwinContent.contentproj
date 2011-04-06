@@ -417,13 +417,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZombiePic\King.png">
-      <Name>King</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="LevelOne.png">
       <Name>LevelOne</Name>
       <Importer>TextureImporter</Importer>
@@ -482,6 +475,13 @@
   <ItemGroup>
     <Compile Include="DemoFinish.png">
       <Name>DemoFinish</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ZombiePic\King.png">
+      <Name>King</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

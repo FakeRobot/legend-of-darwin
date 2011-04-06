@@ -14,6 +14,7 @@ namespace LegendOfDarwin.GameObject
         private Stage curMode;
 
         private Darwin darwin;
+        private Texture2D explosionTexture;
 
         // for random walk and randomly opening his mouth
         private Random ran;
@@ -21,9 +22,14 @@ namespace LegendOfDarwin.GameObject
 
         // for breathing thingy
         private int count;
+        private int explodeCount;
+        private bool exploding = false;
 
         private bool allowedToWalk;
         private int spriteStripCounter = 0;
+        private bool eatingBaby = false;
+        private int eatingCounter = 0;
+        private Rectangle[] explodeSource;
 
         // is this in mode where his mouth is open
         private bool gapeMode = false;
@@ -38,7 +44,6 @@ namespace LegendOfDarwin.GameObject
             base(x, y, maxX, minX, maxY, minY, gb)
         {
             health = 4;
-
             darwin = dar;
 
             destination.Height = board.getSquareLength() * 3;
@@ -49,6 +54,13 @@ namespace LegendOfDarwin.GameObject
             setEventLag(75);
 
             count = 0;
+            explodeCount = 0;
+
+            explodeSource = new Rectangle[3];
+            explodeSource[0] = new Rectangle(0, 0, 75, 90);
+            explodeSource[1] = new Rectangle(76, 0, 87, 90);
+            explodeSource[2] = new Rectangle(169, 0, 101, 90);
+
             ran = new Random();
             ran1 = new Random();
             ZOMBIE_MOVE_RATE = 50;
@@ -68,11 +80,13 @@ namespace LegendOfDarwin.GameObject
             gapeMode = false;
             this.setZombieAlive(true);
             health = 4;
+            explodeCount = 0;
         }
 
-        public new void LoadContent(Texture2D texIn)
+        public new void LoadContent(Texture2D texIn, Texture2D explosion)
         {
             zombieTexture = texIn;
+            explosionTexture = explosion;
         }
 
         // checks if darwin is immediately to the left of the zombie, that is in range and not up or down
@@ -144,7 +158,7 @@ namespace LegendOfDarwin.GameObject
         {
             if ((baby.X == this.X || baby.X == this.X + 1 || baby.X == this.X + 2))
             {
-                if (baby.Y == this.Y + 3 && gapeMode)
+                if (baby.Y == this.Y + 3 && gapeMode && !eatingBaby)
                     return true;
             }
 
@@ -191,6 +205,8 @@ namespace LegendOfDarwin.GameObject
                 {
                     baby.setZombieAlive(false);
                     health--;
+                    eatingBaby = true;
+                    exploding = true;
                 }
             }
 
@@ -200,6 +216,8 @@ namespace LegendOfDarwin.GameObject
                 {
                     baby.setZombieAlive(false);
                     health--;
+                    eatingBaby = true;
+                    exploding = true;
                 }
             }
         }
@@ -224,6 +242,14 @@ namespace LegendOfDarwin.GameObject
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
+
+                if (eatingCounter > (ZOMBIE_MOVE_RATE * 7))
+                {
+                    eatingCounter = 0;
+                    eatingBaby = false;
+                    gapeMode = false;
+                }
+
                 allowedToWalk = true;
                 setEventFalse();
 
@@ -247,6 +273,16 @@ namespace LegendOfDarwin.GameObject
                     randomWalk();
                 }
 
+                if(exploding)
+                {
+                    explodeCount++;
+                    if (explodeCount == 3)
+                    {
+                        exploding = false;
+                        explodeCount = 0;
+                    }  
+                }
+
                 movecounter = 0;
             }
             else
@@ -254,6 +290,7 @@ namespace LegendOfDarwin.GameObject
                 allowedToWalk = false;
             }
             movecounter++;
+            eatingCounter++;
 
         }
 
@@ -277,8 +314,18 @@ namespace LegendOfDarwin.GameObject
                 }
             }
 
-            if (gapeMode)
+            if (eatingBaby)
+            {
+                this.source.X = 384;
+            }
+            else if (gapeMode)
+            {
                 this.source.X = 256;
+            }
+
+            if(exploding){
+                sb.Draw(explosionTexture, board.getPosition(this), explodeSource[explodeCount], Color.White);
+            }
 
             sb.Draw(zombieTexture, destination, source, Color.White);
         }

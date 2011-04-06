@@ -462,23 +462,6 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
-            /*
-            if (keyIsHeldDown)
-            {
-                if (counter > counterReady)
-                {
-                    darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-                    counter = 0;
-                }
-                else
-                {
-                    counter++;
-                }
-            }
-            else
-            {
-                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-            }*/
 
             if (darwin.isDarwinAlive())
             {
@@ -522,11 +505,6 @@ namespace LegendOfDarwin
             
             //checkForGameWin();
             checkForSwitchToLevelTwo();
-
-            //if (gameOver || gameWin)
-            //{
-            //    gameState.setState(GameState.state.End);
-            //}
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {

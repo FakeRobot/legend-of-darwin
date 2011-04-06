@@ -64,7 +64,7 @@ namespace LegendOfDarwin.Level
         private MessageBox darwinMessage;
         private MessageBox switchMessage;
 
-        public Song song;
+        //public Song song;
         public Game1 mainGame;
 
         public Level4(Game1 myMainGame)
@@ -1120,7 +1120,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -1264,8 +1264,8 @@ namespace LegendOfDarwin.Level
                 darwin.setDarwinAlive();
                 gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
 
                 mainGame.DEATH_COUNTER++;
                 

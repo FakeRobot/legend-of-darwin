@@ -33,6 +33,8 @@ namespace LegendOfDarwin
         Level.Level5 level5;
         Level.Level6 level6;
 
+        Song song;
+
         public int DEATH_COUNTER;
 
         public Game1()
@@ -93,6 +95,8 @@ namespace LegendOfDarwin
             level5.Initialize();
             level6.Initialize();
 
+            MediaPlayer.IsRepeating = true;
+
             base.Initialize();
         }
 
@@ -103,13 +107,14 @@ namespace LegendOfDarwin
 
             main = Content.Load<Texture2D>("startScreen");
             end = Content.Load<Texture2D>("DemoFinish");
+            song = Content.Load<Song>("Thriller8bit");
 
             level1.spriteBatch = spriteBatch;
-            level1.song = Content.Load<Song>("Thriller8bit");
+            //level1.song = Content.Load<Song>("Thriller8bit");
             level1.LoadContent();
 
             level2.spriteBatch = spriteBatch;
-            level2.song = Content.Load<Song>("Thriller8bit");
+            //level2.song = Content.Load<Song>("Thriller8bit");
             level2.LoadContent();
 
             level3.spriteBatch = spriteBatch;
@@ -117,15 +122,15 @@ namespace LegendOfDarwin
             level3.LoadContent();
 
             level4.spriteBatch = spriteBatch;
-            level4.song = Content.Load<Song>("Thriller8bit");
+            //level4.song = Content.Load<Song>("Thriller8bit");
             level4.LoadContent();
 
             level5.spriteBatch = spriteBatch;
-            level5.song = Content.Load<Song>("Thriller8bit");
+            //level5.song = Content.Load<Song>("Thriller8bit");
             level5.LoadContent();
 
             level6.spriteBatch = spriteBatch;
-            level6.song = Content.Load<Song>("Thriller8bit");
+            //level6.song = Content.Load<Song>("Thriller8bit");
             level6.LoadContent();
         }
 
@@ -140,6 +145,7 @@ namespace LegendOfDarwin
 
         protected override void Update(GameTime gameTime)
         {
+            MediaPlayer.Play(song);
             if (curLevel == LevelState.Start)
             {
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))

@@ -44,7 +44,7 @@ namespace LegendOfDarwin.Level
 
         public FatBossZombie fatBossZombie;
 
-        public Song song;
+        //public Song song;
         public Game1 mainGame;
 
         private BasicObject[] walls;
@@ -261,7 +261,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -382,8 +382,8 @@ namespace LegendOfDarwin.Level
             if (ks.IsKeyDown(Keys.R))
             {
                 setLevelState();
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
                 mainGame.DEATH_COUNTER++;
             }
 

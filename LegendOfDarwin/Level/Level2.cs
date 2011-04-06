@@ -64,7 +64,7 @@ namespace LegendOfDarwin
         private Texture2D wallTex;
         List<Zombie> myZombieList;
 
-        public Song song;
+        //public Song song;
         public Game1 mainGame;
 
         public Level2(Game1 myMainGame)
@@ -287,7 +287,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -453,8 +453,8 @@ namespace LegendOfDarwin
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
                 gameWin = false;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
 
                 mainGame.DEATH_COUNTER++;
             }

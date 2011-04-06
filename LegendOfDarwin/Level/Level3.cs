@@ -63,7 +63,7 @@ namespace LegendOfDarwin
         private ZombieTime zTime;
         private ZombieTime zTimeReset; //what zTime should reset to
 
-        public Song song;
+        //public Song song;
         public Game1 mainGame;
 
         public Level3(Game1 myMainGame)

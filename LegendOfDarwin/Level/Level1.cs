@@ -59,7 +59,7 @@ namespace LegendOfDarwin
         private MessageBox switchMessage;
         private MessageBox brainMessage;
 
-        public Song song;
+        //public Song song;
         public Game1 mainGame;
 
         public Level1(Game1 myMainGame)
@@ -437,7 +437,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -576,8 +576,8 @@ namespace LegendOfDarwin
                 darwin.setHuman();
                 darwin.setDarwinAlive();
                 gameState.setState(GameState.state.Level);
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
 
                 mainGame.DEATH_COUNTER++;
                 

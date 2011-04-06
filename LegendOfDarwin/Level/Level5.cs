@@ -376,6 +376,7 @@ namespace LegendOfDarwin.Level
 
             //load a sparkly overlay for the stairs
             sparkleTex = mainGame.Content.Load<Texture2D>("sparkle");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex);
@@ -388,6 +389,7 @@ namespace LegendOfDarwin.Level
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/metal_tile_light"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow"));
+            board.loadMenuBar(menuBarTexture);
 
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level3/side_wall_yellow");
 
@@ -397,6 +399,8 @@ namespace LegendOfDarwin.Level
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelFive"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"));
+
+
 
             foreach (Box b in boxes)
             {

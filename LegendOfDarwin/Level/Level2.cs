@@ -198,6 +198,7 @@ namespace LegendOfDarwin
 
             Texture2D basicStairUpTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsUp");
             Texture2D basicStairDownTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsDown");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
 
             removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
 
@@ -208,11 +209,10 @@ namespace LegendOfDarwin
 
             stairs.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
-            // Test
             board.LoadContent(basicGridTex);
             board.LoadBackgroundContent(basicMenuTex);
+            board.loadMenuBar(menuBarTexture);
 
-            //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex);
             firstZombie.LoadContent(zombieTex);

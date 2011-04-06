@@ -358,11 +358,14 @@ namespace LegendOfDarwin.Level
 
             secondSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
                 mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/metal_tile_medium"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple"));
+            board.loadMenuBar(menuBarTexture);
 
             wallTex = mainGame.Content.Load<Texture2D>("StaticPic/Level4/side_wall_purple");
+
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
 

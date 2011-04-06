@@ -204,12 +204,10 @@ namespace LegendOfDarwin
         {
             for (int i = 0; i < this.gridWidth; i++)
             {
-                this.background[i, 0] = content;
-                this.background[i, this.gridLength - 1] = content;
+                this.background[i, 0] = content; 
                 this.background[i, this.gridLength - 2] = content;
 
                 this.hasObject[i, 0] = true;
-                this.hasObject[i, this.gridLength - 1] = true;
                 this.hasObject[i, this.gridLength - 2] = true;
             }
             for (int i = 0; i < this.gridLength; i++)
@@ -222,6 +220,20 @@ namespace LegendOfDarwin
             }
         }
 
+        public void loadMenuBar(Texture2D menuBar)
+        {
+            for (int i = 0; i < this.gridWidth; i++)
+            {
+                this.background[i, this.gridLength - 1] = menuBar;
+                this.hasObject[i, this.gridLength - 1] = true;
+            }
+        }
+
+        public void drawMenuBar(Texture2D menuBarTex)
+        {
+
+
+        }
         /*
          * Draws the background
          */ 

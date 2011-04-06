@@ -496,6 +496,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="rainbow.jpg">
+      <Name>rainbow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="deathScream1.wav">
       <Name>deathScream1</Name>
       <Importer>WavImporter</Importer>

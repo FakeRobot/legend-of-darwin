@@ -310,7 +310,41 @@ namespace LegendOfDarwin.Level
             if (fatBossZombie.isZombieAlive())
                 fatBossZombie.Update(gameTime);
 
-            if(fatBossZombie.explodeFirstWaveOfBabies)
+            updateFirstBabyWaveExplosion();
+            updateSecondBabyWaveExplosion();
+        }
+
+        private void updateSecondBabyWaveExplosion()
+        {
+            if (fatBossZombie.explodeSecondWaveOfBabies)
+            {
+                foreach (BabyZombie baby in nurseryOne.babies)
+                {
+                    if (baby.Y == fatBossZombie.Y + 4)
+                    {
+                        if (baby.X == fatBossZombie.X || baby.X == fatBossZombie.X + 1 || baby.X == fatBossZombie.X + 2 || baby.X == fatBossZombie.X + 3 || baby.X == fatBossZombie.X - 1)
+                        {
+                            baby.exploding = true;
+                        }
+                    }
+                }
+                foreach (BabyZombie baby in nurseryTwo.babies)
+                {
+                    if (baby.Y == fatBossZombie.Y + 4)
+                    {
+                        if (baby.X == fatBossZombie.X || baby.X == fatBossZombie.X + 1 || baby.X == fatBossZombie.X + 2 || baby.X == fatBossZombie.X + 3 || baby.X == fatBossZombie.X - 1)
+                        {
+                            baby.exploding = true;
+                        }
+                    }
+                }
+                fatBossZombie.explodeSecondWaveOfBabies = false;
+            }
+        }
+
+        private void updateFirstBabyWaveExplosion()
+        {
+            if (fatBossZombie.explodeFirstWaveOfBabies)
             {
                 foreach (BabyZombie baby in nurseryOne.babies)
                 {
@@ -318,6 +352,7 @@ namespace LegendOfDarwin.Level
                     {
                         if (baby.X == fatBossZombie.X || baby.X == fatBossZombie.X + 1 || baby.X == fatBossZombie.X + 2)
                         {
+                            //add babies beside and behind him
                             baby.exploding = true;
                         }
                     }
@@ -334,7 +369,6 @@ namespace LegendOfDarwin.Level
                 }
                 fatBossZombie.explodeFirstWaveOfBabies = false;
             }
-
         }
 
         private void UpdateEndState()

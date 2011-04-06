@@ -320,7 +320,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 if (explodeCount == 2)
                 {
-                    secondExplosion = true;
+                    secondExplosion = true;  
                 }
             }
 
@@ -332,21 +332,23 @@ namespace LegendOfDarwin.GameObject
                 {
                     secondExplosion = false;
                     secondExplodeCount = 0;
+                    explodeFirstWaveOfBabies = false;
                 }
                 if(secondExplodeCount == 3)
                 {
                     thirdExplosion = true;
+                    explodeSecondWaveOfBabies = true;
                 }
             }
 
             if (thirdExplosion)
-            {
-                explodeSecondWaveOfBabies = true;
+            {       
                 thirdExplodeCount++;
                 if (thirdExplodeCount == 4)
                 {
                     thirdExplosion = false;
                     thirdExplodeCount = 0;
+                    explodeSecondWaveOfBabies = false;
                 }
                 if (thirdExplodeCount == 2)
                 {
@@ -356,7 +358,6 @@ namespace LegendOfDarwin.GameObject
 
             if (fourthExplosion)
             {
-                explodeThirdWaveOfBabies = true;
                 fourthExplodeCount++;
                 if (fourthExplodeCount == 4)
                 {

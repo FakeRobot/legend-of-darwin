@@ -41,6 +41,7 @@ namespace LegendOfDarwin
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         private int counter;
         private int counterReady;
@@ -232,7 +233,6 @@ namespace LegendOfDarwin
             leaf42.setGridPosition(2, 20);
             leaf43.setGridPosition(3, 21);
             leaf44.setGridPosition(1, 21);
-
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
@@ -442,10 +442,23 @@ namespace LegendOfDarwin
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else
+                    {
+                        // for freezing screen when darwin dies
+                        darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
+                        gameOverCounter++;
+                        if (gameOverCounter > 200)
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -483,7 +496,7 @@ namespace LegendOfDarwin
 
         private void UpdateLevelState(GameTime gameTime)
         {
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -518,13 +531,17 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
-            if (!darwin.isZombie())
+            if (darwin.isDarwinAlive())
             {
-                checkForGameOver(firstZombie);
-                checkForGameOver(fastZombie1);
+                if (!darwin.isZombie())
+                {
+                    checkForGameOver(firstZombie);
+                    checkForGameOver(fastZombie1);
+                }
+
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             secondStair.Update(gameTime, darwin);
 
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
@@ -599,11 +616,6 @@ namespace LegendOfDarwin
 
             checkForSwitchToLevelFour();
             //checkForGameWin();
-
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
-            }
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -827,6 +839,8 @@ namespace LegendOfDarwin
                 brain.setGridPosition(5, 18);
 
                 darwin.setHuman();
+                darwin.setDarwinAlive();
+                gameOverCounter = 0;
                 firstSwitch.turnOn();
                 secondSwitch.turnOn();
 

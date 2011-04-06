@@ -311,6 +311,7 @@ namespace LegendOfDarwin.Level
                 setLevelState();
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                mainGame.DEATH_COUNTER++;
             }
 
         }
@@ -471,6 +472,14 @@ namespace LegendOfDarwin.Level
             if (messageMode)
             {
             }
+
+            spriteBatch.DrawString(messageFont, "HUMANITY: ",
+                new Vector2(board.getPosition(zTime.X, zTime.Y).X + board.getSquareWidth() * 2, board.getPosition(zTime.X, 24).Y),
+                Color.Black);
+
+            spriteBatch.DrawString(messageFont, "DEATH COUNT: " + mainGame.DEATH_COUNTER.ToString(),
+                new Vector2(board.getPosition(15, 24).X, board.getPosition(15, 24).Y),
+                Color.Black);
 
             spriteBatch.End();
         }

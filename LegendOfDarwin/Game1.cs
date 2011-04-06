@@ -41,7 +41,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Start;
+            curLevel = LevelState.Level2;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -173,6 +173,8 @@ namespace LegendOfDarwin
                 {
                     ksEnd = Keyboard.GetState();
                 }
+
+                this.DEATH_COUNTER = 0;
             }
             base.Update(gameTime);
         }

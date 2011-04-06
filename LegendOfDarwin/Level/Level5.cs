@@ -57,6 +57,9 @@ namespace LegendOfDarwin.Level
         public bool gameOver = false;
         public bool gameWin = false;
         private int gameOverCounter = 0;
+        private bool fellDownPit = false;
+        private int fellDownCounter = 0;
+        private bool playDeathSound = true;
 
         private int counter;
         private int counterReady;
@@ -440,6 +443,21 @@ namespace LegendOfDarwin.Level
                         UpdateMessageMode();
                     else
                     {
+                        // deals with logic for showing the player that they died
+                        if (playDeathSound)
+                        {
+                            revealStairsSound.Play();
+                            playDeathSound = false;
+                        }
+
+                        fellDownCounter++;
+                        if (fellDownPit && darwin.destination.Width>0 && darwin.destination.Height>0 && fellDownCounter>5)
+                        {
+                            darwin.destination.Width -= (int)((float)board.getSquareWidth() * 0.1);
+                            darwin.destination.Height -= (int)((float)board.getSquareLength() * 0.1);
+                            fellDownCounter = 0;
+                        }
+
                         darwin.setDarwinDead();
                         darwin.setZombie();
                         UpdateLevelState(gameTime);
@@ -609,6 +627,7 @@ namespace LegendOfDarwin.Level
             {
                 if (darwin.isOnTop(v))
                 {
+                    fellDownPit = true;
                     gameOver = true;
                 }
             }
@@ -795,6 +814,8 @@ namespace LegendOfDarwin.Level
                 darwin.setDarwinAlive();
                 gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
+                playSound = true;
+                playDeathSound = true;
                 //MediaPlayer.Stop();
                 //MediaPlayer.Play(song);
 
@@ -962,6 +983,11 @@ namespace LegendOfDarwin.Level
 
             pattern.Draw(spriteBatch);
 
+            foreach (Vortex v in vortexes)
+            {
+                v.Draw(spriteBatch);
+            }
+
             darwin.Draw(spriteBatch);
 
             zTime.Draw(spriteBatch);
@@ -996,11 +1022,6 @@ namespace LegendOfDarwin.Level
             foreach (Box b in boxes)
             {
                 b.Draw(spriteBatch);
-            }
-
-            foreach (Vortex v in vortexes)
-            {
-                v.Draw(spriteBatch);
             }
 
             // only show the stairs after the pattern is complete

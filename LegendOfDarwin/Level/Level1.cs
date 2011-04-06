@@ -42,6 +42,7 @@ namespace LegendOfDarwin
         public bool gameOver = false;
         public bool gameWin = false;
         private int gameOverCounter = 0;
+        private bool playDeathSound = true;
 
         private int counter;
         private int counterReady;
@@ -398,6 +399,12 @@ namespace LegendOfDarwin
                         UpdateMessageMode();
                     else 
                     {
+                        if (playDeathSound)
+                        {
+                            //revealStairsSound.Play();
+                            playDeathSound = false;
+                        }
+
                         darwin.setDarwinDead();
                         darwin.setZombie();
                         UpdateLevelState(gameTime);
@@ -575,6 +582,7 @@ namespace LegendOfDarwin
                 potion.reset();
                 darwin.setHuman();
                 darwin.setDarwinAlive();
+                playDeathSound = true;
                 gameState.setState(GameState.state.Level);
                 //MediaPlayer.Stop();
                 //MediaPlayer.Play(song);

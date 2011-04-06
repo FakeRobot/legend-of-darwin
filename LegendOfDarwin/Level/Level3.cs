@@ -27,9 +27,10 @@ namespace LegendOfDarwin
         private GameStart gameStart;
 
         private FastZombie fastZombie1;
-        private Leaf leaf, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, leaf8, leaf9, leaf10, leaf11, leaf12, leaf13, leaf14, leaf15, leaf16, leaf17, leaf18, leaf19, leaf20, leaf21, leaf22, leaf23, leaf24, leaf25, leaf26, leaf27, leaf28, leaf29, leaf30, leaf31, leaf32, leaf33, leaf34, leaf35, leaf36, leaf37, leaf38, leaf39, leaf40, leaf41, leaf42, leaf43, leaf44;
 
-        private Snake snake, snake2;
+        private LinkedList<Leaf> leaves;
+
+        private int leafCount = 137;
 
         private Darwin darwin;
         private Zombie firstZombie;
@@ -89,54 +90,13 @@ namespace LegendOfDarwin
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
             fastZombie1 = new FastZombie(15, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, board);
-            leaf = new Leaf(board, fastZombie1);
-            leaf2 = new Leaf(board, fastZombie1);
-            leaf3 = new Leaf(board, fastZombie1);
-            leaf4 = new Leaf(board, fastZombie1);
-            leaf5 = new Leaf(board, fastZombie1);
-            leaf6 = new Leaf(board, fastZombie1);
-            leaf7 = new Leaf(board, fastZombie1);
-            leaf8 = new Leaf(board, fastZombie1);
-            leaf9 = new Leaf(board, fastZombie1);
-            leaf10 = new Leaf(board, fastZombie1);
-            leaf11 = new Leaf(board, fastZombie1);
-            leaf12 = new Leaf(board, fastZombie1);
-            leaf13 = new Leaf(board, fastZombie1);
-            leaf14 = new Leaf(board, fastZombie1);
-            leaf15 = new Leaf(board, fastZombie1);
-            leaf16 = new Leaf(board, fastZombie1);
-            leaf17 = new Leaf(board, fastZombie1);
-            leaf18 = new Leaf(board, fastZombie1);
-            leaf19 = new Leaf(board, fastZombie1);
-            leaf20 = new Leaf(board, fastZombie1);
-            leaf21 = new Leaf(board, fastZombie1);
-            leaf22 = new Leaf(board, fastZombie1);
-            leaf23 = new Leaf(board, fastZombie1);
-            leaf24 = new Leaf(board, fastZombie1);
-            leaf25 = new Leaf(board, fastZombie1);
-            leaf26 = new Leaf(board, fastZombie1);
-            leaf27 = new Leaf(board, fastZombie1);
-            leaf28 = new Leaf(board, fastZombie1);
-            leaf29 = new Leaf(board, fastZombie1);
-            leaf30 = new Leaf(board, fastZombie1);
-            leaf31 = new Leaf(board, fastZombie1);
-            leaf32 = new Leaf(board, fastZombie1);
-            leaf33 = new Leaf(board, fastZombie1);
-            leaf34 = new Leaf(board, fastZombie1);
-            leaf35 = new Leaf(board, fastZombie1);
-            leaf36 = new Leaf(board, fastZombie1);
-            leaf37 = new Leaf(board, fastZombie1);
-            leaf38 = new Leaf(board, fastZombie1);
-            leaf39 = new Leaf(board, fastZombie1);
-            leaf40 = new Leaf(board, fastZombie1);
-            leaf41 = new Leaf(board, fastZombie1);
-            leaf42 = new Leaf(board, fastZombie1);
-            leaf43 = new Leaf(board, fastZombie1);
-            leaf44 = new Leaf(board, fastZombie1);
 
-            //snake = new Snake(10, 9, 27, 5, 18, 5, board);
-            snake = new Snake(9, 7, board.getNumSquaresX(), 5, board.getNumSquaresY(), 5, board);
-            snake2 = new Snake(15, 19, board.getNumSquaresX(), 5, board.getNumSquaresY(), 5, board);
+            this.leaves = new LinkedList<Leaf>();
+
+            for (int i = 0; i < leafCount; i++)
+            {
+                this.leaves.AddLast(new Leaf(board, fastZombie1));
+            }
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
@@ -187,52 +147,145 @@ namespace LegendOfDarwin
                 secondStair.setGridPosition(30, 21);
                 secondStair.setDestination(board.getPosition(30, 21));
             }
+            
+            leaves.ElementAt(0).setGridPosition(7, 7);
+            leaves.ElementAt(1).setGridPosition(5, 15);
+            leaves.ElementAt(2).setGridPosition(4, 2);
+            leaves.ElementAt(3).setGridPosition(19, 7);
+            leaves.ElementAt(4).setGridPosition(11, 21);
+            leaves.ElementAt(5).setGridPosition(7, 8);
+            leaves.ElementAt(6).setGridPosition(8, 17);
+            leaves.ElementAt(7).setGridPosition(19, 2);
+            leaves.ElementAt(8).setGridPosition(19, 1);
+            leaves.ElementAt(9).setGridPosition(10, 14);
+            leaves.ElementAt(10).setGridPosition(13, 4);
+            leaves.ElementAt(11).setGridPosition(13, 3);
+            leaves.ElementAt(12).setGridPosition(19, 16);
+            leaves.ElementAt(13).setGridPosition(21, 7);
+            leaves.ElementAt(14).setGridPosition(2, 16);
+            leaves.ElementAt(15).setGridPosition(10, 18);
+            leaves.ElementAt(16).setGridPosition(3, 16);
+            leaves.ElementAt(17).setGridPosition(16, 15);
+            leaves.ElementAt(18).setGridPosition(18, 8);
+            leaves.ElementAt(19).setGridPosition(8, 5);
+            leaves.ElementAt(20).setGridPosition(5, 7);
+            leaves.ElementAt(21).setGridPosition(9, 5);
+            leaves.ElementAt(22).setGridPosition(2, 6);
+            leaves.ElementAt(23).setGridPosition(8, 8);
+            leaves.ElementAt(24).setGridPosition(14, 6);
+            leaves.ElementAt(25).setGridPosition(15, 7);
+            leaves.ElementAt(26).setGridPosition(15, 8);
+            leaves.ElementAt(27).setGridPosition(14, 10);
+            leaves.ElementAt(28).setGridPosition(16, 18);
+            leaves.ElementAt(29).setGridPosition(14, 22);
+            leaves.ElementAt(30).setGridPosition(24, 2);
+            leaves.ElementAt(31).setGridPosition(24, 3);
+            leaves.ElementAt(32).setGridPosition(25, 6);
+            leaves.ElementAt(33).setGridPosition(22, 8);
+            leaves.ElementAt(34).setGridPosition(26, 6);
+            leaves.ElementAt(35).setGridPosition(25, 10);
+            leaves.ElementAt(36).setGridPosition(24, 11);
+            leaves.ElementAt(37).setGridPosition(23, 14);
+            leaves.ElementAt(38).setGridPosition(22, 17);
+            leaves.ElementAt(39).setGridPosition(26, 20);
+            leaves.ElementAt(41).setGridPosition(2, 22);
+            leaves.ElementAt(42).setGridPosition(2, 20);
+            leaves.ElementAt(43).setGridPosition(3, 21);
+            leaves.ElementAt(44).setGridPosition(1, 21);
+            leaves.ElementAt(45).setGridPosition(2, 18);
+            leaves.ElementAt(46).setGridPosition(1, 18);
+            leaves.ElementAt(47).setGridPosition(3, 18);
+            leaves.ElementAt(48).setGridPosition(4, 18);
+            leaves.ElementAt(49).setGridPosition(5, 19);
+            leaves.ElementAt(50).setGridPosition(5, 20);
+            leaves.ElementAt(51).setGridPosition(5, 21);
+            leaves.ElementAt(52).setGridPosition(5, 22);
+            leaves.ElementAt(53).setGridPosition(4, 1);
+            leaves.ElementAt(54).setGridPosition(4, 2);
+            leaves.ElementAt(55).setGridPosition(4, 3);
+            leaves.ElementAt(56).setGridPosition(4, 4);
+            leaves.ElementAt(57).setGridPosition(4, 5);
+            leaves.ElementAt(58).setGridPosition(4, 6);
+            leaves.ElementAt(59).setGridPosition(4, 7);
+            leaves.ElementAt(60).setGridPosition(4, 8);
+            leaves.ElementAt(61).setGridPosition(4, 9);
+            leaves.ElementAt(62).setGridPosition(4, 10);
+            leaves.ElementAt(63).setGridPosition(4, 11);
+            leaves.ElementAt(64).setGridPosition(4, 12);
+            leaves.ElementAt(65).setGridPosition(4, 13);
+            leaves.ElementAt(66).setGridPosition(10, 4);
+            leaves.ElementAt(67).setGridPosition(10, 5);
+            leaves.ElementAt(68).setGridPosition(10, 6);
+            leaves.ElementAt(69).setGridPosition(10, 7);
+            leaves.ElementAt(70).setGridPosition(10, 8);
+            leaves.ElementAt(71).setGridPosition(10, 9);
+            leaves.ElementAt(72).setGridPosition(10, 10);
+            leaves.ElementAt(73).setGridPosition(10, 11);
+            leaves.ElementAt(74).setGridPosition(10, 12);
+            leaves.ElementAt(75).setGridPosition(10, 13);
+            leaves.ElementAt(76).setGridPosition(10, 14);
+            leaves.ElementAt(77).setGridPosition(10, 15);
+            leaves.ElementAt(78).setGridPosition(10, 16);
+            leaves.ElementAt(79).setGridPosition(10, 17);
+            leaves.ElementAt(80).setGridPosition(10, 18);
+            leaves.ElementAt(81).setGridPosition(10, 19);
+            leaves.ElementAt(82).setGridPosition(11, 19);
+            leaves.ElementAt(83).setGridPosition(12, 19);
+            leaves.ElementAt(84).setGridPosition(13, 19);
+            leaves.ElementAt(85).setGridPosition(14, 19);
+            leaves.ElementAt(86).setGridPosition(15, 19);
+            leaves.ElementAt(87).setGridPosition(16, 19);
+            leaves.ElementAt(88).setGridPosition(17, 19);
+            leaves.ElementAt(89).setGridPosition(18, 19);
+            leaves.ElementAt(90).setGridPosition(19, 19);
+            leaves.ElementAt(91).setGridPosition(20, 19);
+            leaves.ElementAt(92).setGridPosition(21, 19);
+            leaves.ElementAt(93).setGridPosition(22, 19);
+            leaves.ElementAt(94).setGridPosition(23, 19);
+            leaves.ElementAt(95).setGridPosition(23, 18);
+            leaves.ElementAt(96).setGridPosition(23, 17);
+            leaves.ElementAt(97).setGridPosition(23, 16);
+            leaves.ElementAt(98).setGridPosition(23, 15);
+            leaves.ElementAt(99).setGridPosition(23, 14);
+            leaves.ElementAt(100).setGridPosition(23, 13);
+            leaves.ElementAt(101).setGridPosition(23, 12);
+            leaves.ElementAt(102).setGridPosition(23, 11);
+            leaves.ElementAt(103).setGridPosition(23, 10);
+            leaves.ElementAt(104).setGridPosition(23, 9);
+            leaves.ElementAt(105).setGridPosition(23, 8);
+            leaves.ElementAt(106).setGridPosition(23, 7);
+            leaves.ElementAt(107).setGridPosition(23, 6);
+            leaves.ElementAt(108).setGridPosition(23, 5);
+            leaves.ElementAt(109).setGridPosition(23, 4);
+            leaves.ElementAt(110).setGridPosition(22, 4);
+            leaves.ElementAt(111).setGridPosition(21, 4);
+            leaves.ElementAt(112).setGridPosition(20, 4);
+            leaves.ElementAt(113).setGridPosition(19, 4);
+            leaves.ElementAt(114).setGridPosition(18, 4);
+            leaves.ElementAt(115).setGridPosition(17, 4);
+            leaves.ElementAt(116).setGridPosition(16, 4);
+            leaves.ElementAt(117).setGridPosition(15, 4);
+            leaves.ElementAt(118).setGridPosition(14, 4);
+            leaves.ElementAt(119).setGridPosition(13, 4);
+            leaves.ElementAt(120).setGridPosition(12, 4);
+            leaves.ElementAt(121).setGridPosition(11, 4);
 
-            leaf.setGridPosition(7, 7);
-            leaf2.setGridPosition(5, 15);
-            leaf3.setGridPosition(4, 2);
-            leaf4.setGridPosition(19, 7);
-            leaf5.setGridPosition(11, 21);
-            leaf6.setGridPosition(7, 8);
-            leaf7.setGridPosition(8, 17);
-            leaf8.setGridPosition(19, 2);
-            leaf9.setGridPosition(19, 1);
-            leaf10.setGridPosition(10, 14);
-            leaf11.setGridPosition(13, 4);
-            leaf12.setGridPosition(13, 3);
-            leaf13.setGridPosition(19, 16);
-            leaf14.setGridPosition(21, 7);
-            leaf15.setGridPosition(2, 16);
-            leaf16.setGridPosition(10, 18);
-            leaf17.setGridPosition(3, 16);
-            leaf18.setGridPosition(16, 15);
-            leaf19.setGridPosition(18, 8);
-            leaf20.setGridPosition(8, 5);
-            leaf21.setGridPosition(5, 7);
-            leaf22.setGridPosition(9, 5);
-            leaf23.setGridPosition(2, 6);
-            leaf24.setGridPosition(8, 8);
-            leaf25.setGridPosition(14, 6);
-            leaf26.setGridPosition(15, 7);
-            leaf27.setGridPosition(15, 8);
-            leaf28.setGridPosition(14, 10);
-            leaf29.setGridPosition(16, 18);
-            leaf30.setGridPosition(14, 22);
-            leaf31.setGridPosition(24, 2);
-            leaf32.setGridPosition(24, 3);
-            leaf33.setGridPosition(25, 6);
-            leaf34.setGridPosition(22, 8);
-            leaf35.setGridPosition(26, 6);
-            leaf36.setGridPosition(25, 10);
-            leaf37.setGridPosition(24, 11);
-            leaf38.setGridPosition(23, 14);
-            leaf39.setGridPosition(22, 17);
-            leaf40.setGridPosition(26, 20);
+            leaves.ElementAt(134).setGridPosition(27, 1);
+            leaves.ElementAt(135).setGridPosition(27, 2);
+            leaves.ElementAt(136).setGridPosition(27, 3);
 
-            leaf41.setGridPosition(2, 22);
-            leaf42.setGridPosition(2, 20);
-            leaf43.setGridPosition(3, 21);
-            leaf44.setGridPosition(1, 21);
+            leaves.ElementAt(122).setGridPosition(27, 4);
+            leaves.ElementAt(123).setGridPosition(27, 5);
+            leaves.ElementAt(124).setGridPosition(27, 6);
+            leaves.ElementAt(125).setGridPosition(27, 7);
+            leaves.ElementAt(126).setGridPosition(27, 8);
+            leaves.ElementAt(127).setGridPosition(27, 9);
+            leaves.ElementAt(128).setGridPosition(27, 10);
+            leaves.ElementAt(129).setGridPosition(27, 11);
+            leaves.ElementAt(130).setGridPosition(27, 12);
+            leaves.ElementAt(131).setGridPosition(27, 13);
+            leaves.ElementAt(132).setGridPosition(27, 14);
+            leaves.ElementAt(133).setGridPosition(27, 15);
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
@@ -368,54 +421,11 @@ namespace LegendOfDarwin
             firstZombie.LoadContent(zombieTex);
 
             fastZombie1.LoadContent(zombieFastTex);
-            leaf.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf2.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf3.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf4.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf5.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf6.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf7.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf8.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf9.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf10.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf11.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf12.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf13.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf14.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf15.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf16.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf17.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf18.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf19.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf20.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf21.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf22.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf23.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf24.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf25.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf26.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf27.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf28.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf29.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf30.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf31.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf32.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf33.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf34.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf35.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf36.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf37.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf38.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf39.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf40.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf41.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf42.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf43.LoadContent(brokeLeafTex, wholeLeafTex);
-            leaf44.LoadContent(brokeLeafTex, wholeLeafTex);
 
-            Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("ZombiePic/snake_strip");
-            snake.LoadContent(snakeTexture);
-            snake2.LoadContent(snakeTexture);
+            foreach(Leaf leaf in this.leaves)
+            {
+                leaf.LoadContent(brokeLeafTex, wholeLeafTex);
+            }
 
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
@@ -547,59 +557,10 @@ namespace LegendOfDarwin
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
 
-            if (snake.isZombieAlive())
+            foreach (Leaf leaf in this.leaves)
             {
-                updateSnakeCollision(snake, darwin, gameTime);
+                leaf.Update(darwin);
             }
-            if (snake2.isZombieAlive())
-            {
-                updateSnakeCollision(snake, darwin, gameTime);
-            }
-
-            leaf.Update(darwin);
-            leaf2.Update(darwin);
-            leaf3.Update(darwin);
-            leaf4.Update(darwin);
-            leaf5.Update(darwin);
-            leaf6.Update(darwin);
-            leaf7.Update(darwin);
-            leaf8.Update(darwin);
-            leaf9.Update(darwin);
-            leaf10.Update(darwin);
-            leaf11.Update(darwin);
-            leaf12.Update(darwin);
-            leaf13.Update(darwin);
-            leaf14.Update(darwin);
-            leaf15.Update(darwin);
-            leaf16.Update(darwin);
-            leaf17.Update(darwin);
-            leaf18.Update(darwin);
-            leaf19.Update(darwin);
-            leaf20.Update(darwin);
-            leaf21.Update(darwin);
-            leaf22.Update(darwin);
-            leaf23.Update(darwin);
-            leaf24.Update(darwin);
-            leaf25.Update(darwin);
-            leaf26.Update(darwin);
-            leaf27.Update(darwin);
-            leaf28.Update(darwin);
-            leaf29.Update(darwin);
-            leaf30.Update(darwin);
-            leaf31.Update(darwin);
-            leaf32.Update(darwin);
-            leaf33.Update(darwin);
-            leaf34.Update(darwin);
-            leaf35.Update(darwin);
-            leaf36.Update(darwin);
-            leaf37.Update(darwin);
-            leaf38.Update(darwin);
-            leaf39.Update(darwin);
-            leaf40.Update(darwin);
-            leaf41.Update(darwin);
-            leaf42.Update(darwin);
-            leaf43.Update(darwin);
-            leaf44.Update(darwin);
 
             fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             fastZombie1.Update(gameTime, darwin, brain);
@@ -625,132 +586,6 @@ namespace LegendOfDarwin
             messageModeCounter++;
 
         }
-
-        private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)
-        {
-            if (!snake.isSnakeInPit())
-            {
-                snake.setZombieAlive(false);
-            }
-            else
-            {
-                snake.Update(gameTime, darwin, null);
-                snake2.Update(gameTime, darwin, null);
-
-                if (snake.lineOfSight & snake.allowedToWalk)
-                {
-                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Up))
-                    {
-                        checkForDarwinAboveSnake(snake, darwin);
-                    }
-                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Down))
-                    {
-                        checkForDarwinBelowSnake(snake, darwin);
-                    }
-                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Right))
-                    {
-                        checkForDarwinRightOfSnake(snake, darwin);
-                    }
-                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Left))
-                    {
-                        checkForDarwinLeftOfSnake(snake, darwin);
-                    }
-                }
-            }
-        }
-
-        private void checkForDarwinAboveSnake(Snake snake, Darwin darwin)
-        {
-            if (snake.isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
-            {
-                snake.pushDarwinUp(darwin);
-            }
-            else if (snake.isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
-            {
-                snake.backOffDown();
-            }
-            else
-            {
-                if (board.isGridPositionOpen(snake.X, snake.Y - 1))
-                {
-                    snake.MoveUp();
-                }
-                else
-                {
-                    snake.backOffDown();
-                }
-            }
-        }
-
-        private void checkForDarwinBelowSnake(Snake snake, Darwin darwin)
-        {
-            if (snake.isDarwinDirectlyBelowSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y + 1))
-            {
-                snake.pushDarwinDown(darwin);
-            }
-            else if (snake.isDarwinDirectlyBelowSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y + 1))
-            {
-                snake.backOffUp();
-            }
-            else
-            {
-                if (board.isGridPositionOpen(snake.X, snake.Y + 1))
-                {
-                    snake.MoveDown();
-                }
-                else
-                {
-                    snake.backOffUp();
-                }
-            }
-        }
-
-        private void checkForDarwinRightOfSnake(Snake snake, Darwin darwin)
-        {
-            if (snake.isDarwinDirectlyRightOfSnake(darwin) && board.isGridPositionOpen(darwin.X + 1, darwin.Y))
-            {
-                snake.pushDarwinRight(darwin);
-            }
-            else if (snake.isDarwinDirectlyRightOfSnake(darwin) && !board.isGridPositionOpen(darwin.X + 1, darwin.Y))
-            {
-                snake.backOffLeft();
-            }
-            else
-            {
-                if (board.isGridPositionOpen(snake.X + 1, snake.Y))
-                {
-                    snake.MoveRight();
-                }
-                else
-                {
-                    snake.backOffLeft();
-                }
-            }
-        }
-
-        private void checkForDarwinLeftOfSnake(Snake snake, Darwin darwin)
-        {
-            if (snake.isDarwinDirectlyLeftOfSnake(darwin) && board.isGridPositionOpen(darwin.X - 1, darwin.Y))
-            {
-                snake.pushDarwinLeft(darwin);
-            }
-            else if (snake.isDarwinDirectlyLeftOfSnake(darwin) && !board.isGridPositionOpen(darwin.X - 1, darwin.Y))
-            {
-                snake.backOffRight();
-            }
-            else
-            {
-                if (board.isGridPositionOpen(snake.X - 1, snake.Y))
-                {
-                    snake.MoveLeft();
-                }
-                else
-                {
-                    snake.backOffRight();
-                }
-            }
-        }
-
 
         private void UpdateEndState()
         {
@@ -781,54 +616,11 @@ namespace LegendOfDarwin
                 board.setGridPositionOpen(firstZombie);
 
                 firstZombie.setGridPosition(10, 10);
-
-                leaf.resetLeaf();
-                leaf2.resetLeaf();
-                leaf3.resetLeaf();
-                leaf4.resetLeaf();
-                leaf5.resetLeaf();
-                leaf6.resetLeaf();
-                leaf7.resetLeaf();
-                leaf8.resetLeaf();
-                leaf9.resetLeaf();
-                leaf10.resetLeaf();
-                leaf11.resetLeaf();
-                leaf12.resetLeaf();
-                leaf13.resetLeaf();
-                leaf14.resetLeaf();
-                leaf15.resetLeaf();
-                leaf16.resetLeaf();
-                leaf17.resetLeaf();
-                leaf18.resetLeaf();
-                leaf19.resetLeaf();
-                leaf20.resetLeaf();
-                leaf21.resetLeaf();
-                leaf22.resetLeaf();
-                leaf23.resetLeaf();
-                leaf24.resetLeaf();
-                leaf25.resetLeaf();
-                leaf26.resetLeaf();
-                leaf27.resetLeaf();
-                leaf28.resetLeaf();
-                leaf29.resetLeaf();
-                leaf30.resetLeaf();
-                leaf31.resetLeaf();
-                leaf32.resetLeaf();
-                leaf33.resetLeaf();
-                leaf34.resetLeaf();
-                leaf35.resetLeaf();
-                leaf36.resetLeaf();
-                leaf37.resetLeaf();
-                leaf38.resetLeaf();
-                leaf39.resetLeaf();
-                leaf40.resetLeaf();
-                leaf41.resetLeaf();
-                leaf42.resetLeaf();
-                leaf43.resetLeaf();
-                leaf44.resetLeaf();
-
-                snake.setGridPosition(9, 7);
-                snake2.setGridPosition(15, 19);
+                
+                foreach (Leaf leaf in this.leaves)
+                {
+                    leaf.resetLeaf();
+                }
 
                 board.setGridPositionOpen(fastZombie1);
                 fastZombie1.chasingDarwin = false;
@@ -976,53 +768,10 @@ namespace LegendOfDarwin
 
             secondStair.Draw(spriteBatch);
 
-            leaf.Draw(spriteBatch);
-            leaf2.Draw(spriteBatch);
-            leaf3.Draw(spriteBatch);
-            leaf4.Draw(spriteBatch);
-            leaf5.Draw(spriteBatch);
-            leaf6.Draw(spriteBatch);
-            leaf7.Draw(spriteBatch);
-            leaf8.Draw(spriteBatch);
-            leaf9.Draw(spriteBatch);
-            leaf10.Draw(spriteBatch);
-            leaf11.Draw(spriteBatch);
-            leaf12.Draw(spriteBatch);
-            leaf13.Draw(spriteBatch);
-            leaf14.Draw(spriteBatch);
-            leaf15.Draw(spriteBatch);
-            leaf16.Draw(spriteBatch);
-            leaf17.Draw(spriteBatch);
-            leaf18.Draw(spriteBatch);
-            leaf19.Draw(spriteBatch);
-            leaf20.Draw(spriteBatch);
-            leaf21.Draw(spriteBatch);
-            leaf22.Draw(spriteBatch);
-            leaf23.Draw(spriteBatch);
-            leaf24.Draw(spriteBatch);
-            leaf25.Draw(spriteBatch);
-            leaf26.Draw(spriteBatch);
-            leaf27.Draw(spriteBatch);
-            leaf28.Draw(spriteBatch);
-            leaf29.Draw(spriteBatch);
-            leaf30.Draw(spriteBatch);
-            leaf31.Draw(spriteBatch);
-            leaf32.Draw(spriteBatch);
-            leaf33.Draw(spriteBatch);
-            leaf34.Draw(spriteBatch);
-            leaf35.Draw(spriteBatch);
-            leaf36.Draw(spriteBatch);
-            leaf37.Draw(spriteBatch);
-            leaf38.Draw(spriteBatch);
-            leaf39.Draw(spriteBatch);
-            leaf40.Draw(spriteBatch);
-            leaf41.Draw(spriteBatch);
-            leaf42.Draw(spriteBatch);
-            leaf43.Draw(spriteBatch);
-            leaf44.Draw(spriteBatch);
-
-            snake.Draw(spriteBatch);
-            snake2.Draw(spriteBatch);
+            foreach (Leaf leaf in this.leaves)
+            {
+                leaf.Draw(spriteBatch);
+            }
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);

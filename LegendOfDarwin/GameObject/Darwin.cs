@@ -54,6 +54,9 @@ namespace LegendOfDarwin
         Texture2D darwinLeftTex;
         Texture2D zombieDarwinTex;
 
+        Texture2D deadDarwinTex;
+        bool isDead = false;
+
         private int widthLength, heightLength, darwinLag, zombieLag, darwinCount, zombieCount;
         private int darwinWidthLength, darwinHeightLength, zombieWidthLength, zombieHeightLength;
         private bool inMotion;
@@ -135,6 +138,11 @@ namespace LegendOfDarwin
             darwinRightTex = humanRight;
             darwinLeftTex = humanLeft;
             zombieDarwinTex = zombieTex;
+        }
+
+        public void loadDeadDarwin(Texture2D deadDarwin) 
+        {
+            deadDarwinTex = deadDarwin;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
@@ -394,9 +402,26 @@ namespace LegendOfDarwin
             this.zombieFlag = true;
         }
 
+        public void setDarwinDead() 
+        {
+            isDead = true;
+        }
+
+        public void setDarwinAlive() 
+        {
+            isDead = false;
+        }
+
+        public bool isDarwinAlive() 
+        {
+            return !isDead;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (zombieFlag == false)
+            if (isDead)
+                spriteBatch.Draw(deadDarwinTex, destination, source, Color.White);
+            else if (zombieFlag == false)
             {
                 if (facing == Dir.Up)
                 {

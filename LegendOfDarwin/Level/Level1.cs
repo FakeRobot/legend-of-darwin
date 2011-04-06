@@ -341,6 +341,7 @@ namespace LegendOfDarwin
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
+            darwin.loadDeadDarwin(mainGame.Content.Load<Texture2D>("DarwinPic/DeadDarwin"));
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
@@ -395,6 +396,7 @@ namespace LegendOfDarwin
                         UpdateMessageMode();
                     else 
                     {
+                        darwin.setDarwinDead();
                         gameOverCounter++;
                         if (gameOverCounter > 200) 
                         {
@@ -587,6 +589,7 @@ namespace LegendOfDarwin
 
                 potion.reset();
                 darwin.setHuman();
+                darwin.setDarwinAlive();
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);

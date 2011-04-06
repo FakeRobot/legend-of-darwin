@@ -41,6 +41,7 @@ namespace LegendOfDarwin
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         private int counter;
         private int counterReady;
@@ -388,10 +389,19 @@ namespace LegendOfDarwin
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else 
+                    {
+                        gameOverCounter++;
+                        if (gameOverCounter > 200) 
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -504,10 +514,10 @@ namespace LegendOfDarwin
             //checkForGameWin();
             checkForSwitchToLevelTwo();
 
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
-            }
+            //if (gameOver || gameWin)
+            //{
+            //    gameState.setState(GameState.state.End);
+            //}
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {

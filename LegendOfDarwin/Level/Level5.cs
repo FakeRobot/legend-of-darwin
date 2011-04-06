@@ -369,11 +369,13 @@ namespace LegendOfDarwin.Level
             Texture2D darwinRightTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinRight");
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
+            Texture2D deadDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/DeadDarwin");
 
             //load a sparkly overlay for the stairs
             sparkleTex = mainGame.Content.Load<Texture2D>("sparkle");
 
-            darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, darwinRightTex, darwinLeftTex, zombieDarwinTex);
+            darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
+                darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex);
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");

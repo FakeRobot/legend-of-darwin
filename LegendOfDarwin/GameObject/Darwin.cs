@@ -130,7 +130,8 @@ namespace LegendOfDarwin
         }
         */
 
-        public void LoadContent(GraphicsDevice newGraphics, Texture2D humanUp, Texture2D humanDown, Texture2D humanRight, Texture2D humanLeft, Texture2D zombieTex)
+        public void LoadContent(GraphicsDevice newGraphics, Texture2D humanUp, Texture2D humanDown, 
+            Texture2D humanRight, Texture2D humanLeft, Texture2D zombieTex,Texture2D deadTex)
         {
             graphics = newGraphics;
             darwinUpTex = humanUp;
@@ -138,11 +139,7 @@ namespace LegendOfDarwin
             darwinRightTex = humanRight;
             darwinLeftTex = humanLeft;
             zombieDarwinTex = zombieTex;
-        }
-
-        public void loadDeadDarwin(Texture2D deadDarwin) 
-        {
-            deadDarwinTex = deadDarwin;
+            deadDarwinTex = deadTex;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)

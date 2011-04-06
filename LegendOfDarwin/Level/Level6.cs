@@ -30,6 +30,7 @@ namespace LegendOfDarwin.Level
 
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
@@ -170,6 +171,9 @@ namespace LegendOfDarwin.Level
 
             zTime.reset();
 
+            darwin.setDarwinAlive();
+            darwin.setHuman();
+            gameOverCounter = 0;
             stairs.setGridPosition(14, 1);
 
             gameOver = false;
@@ -228,10 +232,22 @@ namespace LegendOfDarwin.Level
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else
+                    {
+                        darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
+                        gameOverCounter++;
+                        if (gameOverCounter > 200)
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -253,7 +269,7 @@ namespace LegendOfDarwin.Level
         private void UpdateLevelState(GameTime gameTime)
         {
             checkLevelOver();
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -265,20 +281,17 @@ namespace LegendOfDarwin.Level
                 }
             }
 
-            checkForGameOver();
-            
-            if (fatBossZombie.isZombieAlive())
-                checkForGameOverWithBoss();
-
             KeyboardState ks = Keyboard.GetState();
 
-            checkForExitGame(ks);
+            if (darwin.isDarwinAlive()){
+                checkForExitGame(ks);
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+                checkForGameOver();
+            
+                if (fatBossZombie.isZombieAlive())
+                    checkForGameOverWithBoss();
 
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)

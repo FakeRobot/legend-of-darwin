@@ -35,6 +35,7 @@ namespace LegendOfDarwin
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         private int counter;
 
@@ -241,10 +242,22 @@ namespace LegendOfDarwin
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else
+                    {
+                        darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
+                        gameOverCounter++;
+                        if (gameOverCounter > 200)
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -281,7 +294,7 @@ namespace LegendOfDarwin
 
         private void UpdateLevelState(GameTime gameTime)
         {
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -299,23 +312,26 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
-            if (!darwin.isZombie())
+            if (darwin.isDarwinAlive())
             {
-                if (firstZombie.isZombieAlive())
-                    checkForGameOver(firstZombie);
-                if (secondZombie.isZombieAlive())
-                    checkForGameOver(secondZombie);
-                if (thirdZombie.isZombieAlive())
-                    checkForGameOver(thirdZombie);
-                if (fourthZombie.isZombieAlive())
-                    checkForGameOver(fourthZombie);
-            }
-            if (darwin.isZombie())
-            {
-                checkForGameOver(cannibalZombie);
-            }
+                if (!darwin.isZombie())
+                {
+                    if (firstZombie.isZombieAlive())
+                        checkForGameOver(firstZombie);
+                    if (secondZombie.isZombieAlive())
+                        checkForGameOver(secondZombie);
+                    if (thirdZombie.isZombieAlive())
+                        checkForGameOver(thirdZombie);
+                    if (fourthZombie.isZombieAlive())
+                        checkForGameOver(fourthZombie);
+                }
+                if (darwin.isZombie())
+                {
+                    checkForGameOver(cannibalZombie);
+                }
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+            }
 
             stairs.Update(gameTime, darwin);
 
@@ -336,8 +352,6 @@ namespace LegendOfDarwin
 
             potion.Update(gameTime, ks, darwin, zTime);
 
-            
-
             //checkForGameWin();
             if (isAllZombiesDead())
             {
@@ -351,11 +365,6 @@ namespace LegendOfDarwin
             }
 
             checkUpdateToLevelThree();
-
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
-            }
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -438,6 +447,8 @@ namespace LegendOfDarwin
                 potion.setGridPosition(3, 3);
 
                 darwin.setHuman();
+                darwin.setDarwinAlive();
+                gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
                 gameWin = false;

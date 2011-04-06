@@ -56,6 +56,7 @@ namespace LegendOfDarwin.Level
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
+        private int gameOverCounter = 0;
 
         private int counter;
         private int counterReady;
@@ -433,10 +434,22 @@ namespace LegendOfDarwin.Level
                     UpdateStartState();
                     break;
                 case GameState.state.Level:
-                    if (!messageMode)
+                    if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
-                    else
+                    else if (messageMode)
                         UpdateMessageMode();
+                    else
+                    {
+                        darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
+                        gameOverCounter++;
+                        if (gameOverCounter > 200)
+                        {
+                            gameState.setState(GameState.state.End);
+                            gameOverCounter = 0;
+                        }
+                    }
                     break;
                 case GameState.state.End:
                     UpdateEndState();
@@ -471,7 +484,7 @@ namespace LegendOfDarwin.Level
 
         private void UpdateLevelState(GameTime gameTime)
         {
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -483,19 +496,22 @@ namespace LegendOfDarwin.Level
                 }
             }
 
-            foreach (Flame flame in flames)
-            {
-                this.checkForFlameDeath(flame, darwin);
-            }
-
             KeyboardState ks = Keyboard.GetState();
 
             checkForExitGame(ks);
             updateKeyHeldDown(ks);
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-            stairs.Update(gameTime, darwin);
+            if (darwin.isDarwinAlive())
+            {
+                foreach (Flame flame in flames)
+                {
+                    this.checkForFlameDeath(flame, darwin);
+                }
 
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+            }
+            
+            stairs.Update(gameTime, darwin);
             potion.Update(gameTime, ks, darwin, zTime);
 
             foreach (Box b in boxes)
@@ -569,23 +585,26 @@ namespace LegendOfDarwin.Level
                 }
             }
 
-            if (snake.isZombieAlive())
+            if (darwin.isDarwinAlive())
             {
-                updateSnakeCollision(snake, darwin, gameTime);
+                if (snake.isZombieAlive())
+                {
+                    updateSnakeCollision(snake, darwin, gameTime);
+                }
+                if (snake2.isZombieAlive())
+                {
+                    updateSnakeCollision(snake2, darwin, gameTime);
+                }
+                if (snake3.isZombieAlive())
+                {
+                    updateSnakeCollision(snake3, darwin, gameTime);
+                }
+                if (snake4.isZombieAlive())
+                {
+                    updateSnakeCollision(snake4, darwin, gameTime);
+                }
             }
-            if (snake2.isZombieAlive())
-            {
-                updateSnakeCollision(snake2, darwin, gameTime);
-            }
-            if (snake3.isZombieAlive())
-            {
-                updateSnakeCollision(snake3, darwin, gameTime);
-            }
-            if (snake4.isZombieAlive())
-            {
-                updateSnakeCollision(snake4, darwin, gameTime);
-            }
-            
+
             foreach (Vortex v in vortexes)
             {
                 if (darwin.isOnTop(v))
@@ -596,11 +615,6 @@ namespace LegendOfDarwin.Level
 
             checkForGameWin();
             checkForSwitchToLevelSix();
-
-            if (gameOver || gameWin)
-            {
-                gameState.setState(GameState.state.End);
-            }
 
             if (ks.IsKeyDown(Keys.H) && messageModeCounter > 10)
             {
@@ -778,6 +792,8 @@ namespace LegendOfDarwin.Level
 
                 potion.reset();
                 darwin.setHuman();
+                darwin.setDarwinAlive();
+                gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);

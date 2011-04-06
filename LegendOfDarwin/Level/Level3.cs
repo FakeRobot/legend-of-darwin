@@ -88,7 +88,7 @@ namespace LegendOfDarwin
             //secondZombie = new Zombie(10, 16, 15, 5, 15, 5, board);
             //thirdZombie = new Zombie(16, 10, 15, 5, 15, 5, board);
 
-            fastZombie1 = new FastZombie(15, 15, 15, 0, 15, 0, board);
+            fastZombie1 = new FastZombie(15, 15, board.getNumSquaresX(), 0, board.getNumSquaresY(), 0, board);
             leaf = new Leaf(board, fastZombie1);
             leaf2 = new Leaf(board, fastZombie1);
             leaf3 = new Leaf(board, fastZombie1);
@@ -135,8 +135,8 @@ namespace LegendOfDarwin
             leaf44 = new Leaf(board, fastZombie1);
 
             //snake = new Snake(10, 9, 27, 5, 18, 5, board);
-            snake = new Snake(9, 7, 30, 5, 22, 5, board);
-            snake2 = new Snake(15, 19, 30, 5, 22, 5, board);
+            snake = new Snake(9, 7, board.getNumSquaresX(), 5, board.getNumSquaresY(), 5, board);
+            snake2 = new Snake(15, 19, board.getNumSquaresX(), 5, board.getNumSquaresY(), 5, board);
 
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);

@@ -117,7 +117,7 @@ namespace LegendOfDarwin.GameObject
         /// </summary>
         public void lookForDarwin(Darwin darwin)
         {
-            if (isDarwinInRange(darwin))
+            if (this.isPointInVision(darwin.X,darwin.Y))
                 chaseDarwin(darwin);
             else
                 this.goBackToSleep();

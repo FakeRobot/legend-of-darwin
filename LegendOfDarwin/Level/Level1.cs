@@ -397,6 +397,8 @@ namespace LegendOfDarwin
                     else 
                     {
                         darwin.setDarwinDead();
+                        darwin.setZombie();
+                        UpdateLevelState(gameTime);
                         gameOverCounter++;
                         if (gameOverCounter > 200) 
                         {
@@ -440,7 +442,7 @@ namespace LegendOfDarwin
 
         private void UpdateLevelState(GameTime gameTime)
         {
-            if (darwin.isZombie())
+            if (darwin.isZombie() && darwin.isDarwinAlive())
             {
                 if (zTime.isTimedOut())
                 {
@@ -476,18 +478,21 @@ namespace LegendOfDarwin
                 darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
             }*/
 
-            if (!darwin.isZombie())
+            if (darwin.isDarwinAlive())
             {
-                checkForGameOver(firstZombie);
-                checkForGameOver(secondZombie);
-                checkForGameOver(thirdZombie);
-                checkForGameOver(fourthZombie);
-                checkForGameOver(fifthZombie);
-                checkForGameOver(sixthZombie);
-            }
-            checkForGameOver(vortex);
+                if (!darwin.isZombie())
+                {
+                    checkForGameOver(firstZombie);
+                    checkForGameOver(secondZombie);
+                    checkForGameOver(thirdZombie);
+                    checkForGameOver(fourthZombie);
+                    checkForGameOver(fifthZombie);
+                    checkForGameOver(sixthZombie);
+                }
+                checkForGameOver(vortex);
 
-            darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
+            }
 
             stairs.Update(gameTime, darwin);
 

@@ -309,6 +309,32 @@ namespace LegendOfDarwin.Level
 
             if (fatBossZombie.isZombieAlive())
                 fatBossZombie.Update(gameTime);
+
+            if(fatBossZombie.explodeFirstWaveOfBabies)
+            {
+                foreach (BabyZombie baby in nurseryOne.babies)
+                {
+                    if (baby.Y == fatBossZombie.Y + 3)
+                    {
+                        if (baby.X == fatBossZombie.X || baby.X == fatBossZombie.X + 1 || baby.X == fatBossZombie.X + 2)
+                        {
+                            baby.exploding = true;
+                        }
+                    }
+                }
+                foreach (BabyZombie baby in nurseryTwo.babies)
+                {
+                    if (baby.Y == fatBossZombie.Y + 3)
+                    {
+                        if (baby.X == fatBossZombie.X || baby.X == fatBossZombie.X + 1 || baby.X == fatBossZombie.X + 2)
+                        {
+                            baby.exploding = true;
+                        }
+                    }
+                }
+                fatBossZombie.explodeFirstWaveOfBabies = false;
+            }
+
         }
 
         private void UpdateEndState()

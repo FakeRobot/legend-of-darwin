@@ -30,6 +30,9 @@ namespace LegendOfDarwin.GameObject
         private bool secondExplosion = false;
         private bool thirdExplosion = false;
         private bool fourthExplosion = false;
+        public bool explodeFirstWaveOfBabies = true;
+        public bool explodeSecondWaveOfBabies = true;
+        public bool explodeThirdWaveOfBabies = true;
 
         private bool allowedToWalk;
         private int spriteStripCounter = 0;
@@ -323,6 +326,7 @@ namespace LegendOfDarwin.GameObject
 
             if (secondExplosion)
             {
+                explodeFirstWaveOfBabies = true;
                 secondExplodeCount++;
                 if (secondExplodeCount == 4)
                 {
@@ -337,6 +341,7 @@ namespace LegendOfDarwin.GameObject
 
             if (thirdExplosion)
             {
+                explodeSecondWaveOfBabies = true;
                 thirdExplodeCount++;
                 if (thirdExplodeCount == 4)
                 {
@@ -351,6 +356,7 @@ namespace LegendOfDarwin.GameObject
 
             if (fourthExplosion)
             {
+                explodeThirdWaveOfBabies = true;
                 fourthExplodeCount++;
                 if (fourthExplodeCount == 4)
                 {

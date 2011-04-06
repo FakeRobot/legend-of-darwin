@@ -228,13 +228,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StaticPic\potion.png">
-      <Name>potion</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="StaticPic\Level3\side_wall_yellow.jpg">
       <Name>side_wall_yellow</Name>
       <Importer>TextureImporter</Importer>
@@ -491,6 +484,13 @@
   <ItemGroup>
     <Compile Include="DarwinPic\DarwinUp.png">
       <Name>DarwinUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StaticPic\potion.png">
+      <Name>potion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

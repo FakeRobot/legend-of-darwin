@@ -43,7 +43,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level5;
+            curLevel = LevelState.Start;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -145,11 +145,11 @@ namespace LegendOfDarwin
 
         protected override void Update(GameTime gameTime)
         {
-            MediaPlayer.Play(song);
             if (curLevel == LevelState.Start)
             {
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
                 {
+                    MediaPlayer.Play(song);
                     setCurLevel(LevelState.Level1);
                 }
                 else

@@ -27,7 +27,9 @@ namespace LegendOfDarwin
         private GameStart gameStart;
 
         private FastZombie fastZombie1;
-        private Leaf leaf, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, leaf8, leaf9, leaf10, leaf11, leaf12, leaf13, leaf14, leaf15, leaf16, leaf17, leaf18, leaf19, leaf20, leaf21, leaf22, leaf23, leaf24, leaf25, leaf26, leaf27, leaf28, leaf29, leaf30, leaf31, leaf32, leaf33, leaf34, leaf35, leaf36, leaf37, leaf38, leaf39, leaf40;
+        private Leaf leaf, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, leaf8, leaf9, leaf10, leaf11, leaf12, leaf13, leaf14, leaf15, leaf16, leaf17, leaf18, leaf19, leaf20, leaf21, leaf22, leaf23, leaf24, leaf25, leaf26, leaf27, leaf28, leaf29, leaf30, leaf31, leaf32, leaf33, leaf34, leaf35, leaf36, leaf37, leaf38, leaf39, leaf40, leaf41, leaf42, leaf43, leaf44;
+
+        private Snake snake, snake2;
 
         private Darwin darwin;
         private Zombie firstZombie;
@@ -126,7 +128,15 @@ namespace LegendOfDarwin
             leaf38 = new Leaf(board, fastZombie1);
             leaf39 = new Leaf(board, fastZombie1);
             leaf40 = new Leaf(board, fastZombie1);
-            
+            leaf41 = new Leaf(board, fastZombie1);
+            leaf42 = new Leaf(board, fastZombie1);
+            leaf43 = new Leaf(board, fastZombie1);
+            leaf44 = new Leaf(board, fastZombie1);
+
+            //snake = new Snake(10, 9, 27, 5, 18, 5, board);
+            snake = new Snake(9, 7, 30, 5, 22, 5, board);
+            snake2 = new Snake(15, 19, 30, 5, 22, 5, board);
+
             String zombieString = "This a zombie,\n don't near him \nas a human!!";
             zombieMessage = new MessageBox(board.getPosition(12, 8).X, board.getPosition(10, 10).Y, zombieString);
 
@@ -217,6 +227,12 @@ namespace LegendOfDarwin
             leaf38.setGridPosition(23, 14);
             leaf39.setGridPosition(22, 17);
             leaf40.setGridPosition(26, 20);
+
+            leaf41.setGridPosition(2, 22);
+            leaf42.setGridPosition(2, 20);
+            leaf43.setGridPosition(3, 21);
+            leaf44.setGridPosition(1, 21);
+
 
             zTime = new ZombieTime(board);
             zTimeReset = new ZombieTime(board);
@@ -390,6 +406,14 @@ namespace LegendOfDarwin
             leaf38.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf39.LoadContent(brokeLeafTex, wholeLeafTex);
             leaf40.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf41.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf42.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf43.LoadContent(brokeLeafTex, wholeLeafTex);
+            leaf44.LoadContent(brokeLeafTex, wholeLeafTex);
+
+            Texture2D snakeTexture = mainGame.Content.Load<Texture2D>("ZombiePic/snake_strip");
+            snake.LoadContent(snakeTexture);
+            snake2.LoadContent(snakeTexture);
 
             //secondZombie.LoadContent(zombieTex);
             //thirdZombie.LoadContent(zombieTex);
@@ -450,7 +474,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                MediaPlayer.Play(song);
+                //MediaPlayer.Play(song);
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -504,6 +528,15 @@ namespace LegendOfDarwin
             firstZombie.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             firstZombie.Update(gameTime, darwin, brain);
 
+            if (snake.isZombieAlive())
+            {
+                updateSnakeCollision(snake, darwin, gameTime);
+            }
+            if (snake2.isZombieAlive())
+            {
+                updateSnakeCollision(snake, darwin, gameTime);
+            }
+
             leaf.Update(darwin);
             leaf2.Update(darwin);
             leaf3.Update(darwin);
@@ -544,6 +577,10 @@ namespace LegendOfDarwin
             leaf38.Update(darwin);
             leaf39.Update(darwin);
             leaf40.Update(darwin);
+            leaf41.Update(darwin);
+            leaf42.Update(darwin);
+            leaf43.Update(darwin);
+            leaf44.Update(darwin);
 
             fastZombie1.setPictureSize(board.getSquareWidth(), board.getSquareLength());
             fastZombie1.Update(gameTime, darwin, brain);
@@ -574,6 +611,132 @@ namespace LegendOfDarwin
             messageModeCounter++;
 
         }
+
+        private void updateSnakeCollision(Snake snake, Darwin darwin, GameTime gameTime)
+        {
+            if (!snake.isSnakeInPit())
+            {
+                snake.setZombieAlive(false);
+            }
+            else
+            {
+                snake.Update(gameTime, darwin, null);
+                snake2.Update(gameTime, darwin, null);
+
+                if (snake.lineOfSight & snake.allowedToWalk)
+                {
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Up))
+                    {
+                        checkForDarwinAboveSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Down))
+                    {
+                        checkForDarwinBelowSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Right))
+                    {
+                        checkForDarwinRightOfSnake(snake, darwin);
+                    }
+                    if (snake.lineOfSightDirection.Equals(LegendOfDarwin.GameObject.Snake.Direction.Left))
+                    {
+                        checkForDarwinLeftOfSnake(snake, darwin);
+                    }
+                }
+            }
+        }
+
+        private void checkForDarwinAboveSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyAboveSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+            {
+                snake.pushDarwinUp(darwin);
+            }
+            else if (snake.isDarwinDirectlyAboveSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+            {
+                snake.backOffDown();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X, snake.Y - 1))
+                {
+                    snake.MoveUp();
+                }
+                else
+                {
+                    snake.backOffDown();
+                }
+            }
+        }
+
+        private void checkForDarwinBelowSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyBelowSnake(darwin) && board.isGridPositionOpen(darwin.X, darwin.Y + 1))
+            {
+                snake.pushDarwinDown(darwin);
+            }
+            else if (snake.isDarwinDirectlyBelowSnake(darwin) && !board.isGridPositionOpen(darwin.X, darwin.Y + 1))
+            {
+                snake.backOffUp();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X, snake.Y + 1))
+                {
+                    snake.MoveDown();
+                }
+                else
+                {
+                    snake.backOffUp();
+                }
+            }
+        }
+
+        private void checkForDarwinRightOfSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyRightOfSnake(darwin) && board.isGridPositionOpen(darwin.X + 1, darwin.Y))
+            {
+                snake.pushDarwinRight(darwin);
+            }
+            else if (snake.isDarwinDirectlyRightOfSnake(darwin) && !board.isGridPositionOpen(darwin.X + 1, darwin.Y))
+            {
+                snake.backOffLeft();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X + 1, snake.Y))
+                {
+                    snake.MoveRight();
+                }
+                else
+                {
+                    snake.backOffLeft();
+                }
+            }
+        }
+
+        private void checkForDarwinLeftOfSnake(Snake snake, Darwin darwin)
+        {
+            if (snake.isDarwinDirectlyLeftOfSnake(darwin) && board.isGridPositionOpen(darwin.X - 1, darwin.Y))
+            {
+                snake.pushDarwinLeft(darwin);
+            }
+            else if (snake.isDarwinDirectlyLeftOfSnake(darwin) && !board.isGridPositionOpen(darwin.X - 1, darwin.Y))
+            {
+                snake.backOffRight();
+            }
+            else
+            {
+                if (board.isGridPositionOpen(snake.X - 1, snake.Y))
+                {
+                    snake.MoveLeft();
+                }
+                else
+                {
+                    snake.backOffRight();
+                }
+            }
+        }
+
 
         private void UpdateEndState()
         {
@@ -645,6 +808,13 @@ namespace LegendOfDarwin
                 leaf38.resetLeaf();
                 leaf39.resetLeaf();
                 leaf40.resetLeaf();
+                leaf41.resetLeaf();
+                leaf42.resetLeaf();
+                leaf43.resetLeaf();
+                leaf44.resetLeaf();
+
+                snake.setGridPosition(9, 7);
+                snake2.setGridPosition(15, 19);
 
                 board.setGridPositionOpen(fastZombie1);
                 fastZombie1.chasingDarwin = false;
@@ -661,8 +831,8 @@ namespace LegendOfDarwin
                 gameState.setState(GameState.state.Level);
                 gameOver = false;
                 gameWin = false;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                //MediaPlayer.Stop();
+                //MediaPlayer.Play(song);
             }
 
         }
@@ -828,6 +998,13 @@ namespace LegendOfDarwin
             leaf38.Draw(spriteBatch);
             leaf39.Draw(spriteBatch);
             leaf40.Draw(spriteBatch);
+            leaf41.Draw(spriteBatch);
+            leaf42.Draw(spriteBatch);
+            leaf43.Draw(spriteBatch);
+            leaf44.Draw(spriteBatch);
+
+            snake.Draw(spriteBatch);
+            snake2.Draw(spriteBatch);
 
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);

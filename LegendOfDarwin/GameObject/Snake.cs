@@ -38,7 +38,8 @@ namespace LegendOfDarwin.GameObject
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 allowedToWalk = true;
-                this.checkForFieryDeath(flames);
+                if(flames != null)
+                    this.checkForFieryDeath(flames);
 
                 if (snakeDelayCounter > (ZOMBIE_MOVE_RATE * 5))
                 {
@@ -158,7 +159,8 @@ namespace LegendOfDarwin.GameObject
             this.lineOfSight = false;
             this.delaySnakeCounter = true;
 
-            if(board.isGridPositionOpen(this.X, this.Y - 1)){
+            if(board.isGridPositionOpen(this.X, this.Y - 1))
+            {
                 this.MoveUp();
             }
 

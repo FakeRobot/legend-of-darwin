@@ -127,11 +127,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="DarwinPic\DarwinUp.png">
-      <Name>DarwinUp</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StaticPic\Switch.png">
@@ -489,6 +484,13 @@
   <ItemGroup>
     <Compile Include="DarwinPic\DeadDarwin.png">
       <Name>DeadDarwin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DarwinPic\DarwinUp.png">
+      <Name>DarwinUp</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

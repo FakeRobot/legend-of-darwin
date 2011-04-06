@@ -226,6 +226,7 @@ namespace LegendOfDarwin
                         {
                             case Dir.Left:
                                 this.MoveLeft();
+                                downCount = 0;
                                 break;
                             case Dir.Down:
                                 this.MoveDown();
@@ -233,9 +234,11 @@ namespace LegendOfDarwin
                                 break;
                             case Dir.Right:
                                 this.MoveRight();
+                                downCount = 0;
                                 break;
                             case Dir.Up:
                                 this.MoveUp();
+                                downCount = 0;
                                 break;
                         }
                     }
@@ -271,10 +274,12 @@ namespace LegendOfDarwin
                     hasPicked = true;
                     moveDirection = Dir.Right;
                     inMotion = true;
+                    downCount = 1;
                 }
                 else
                 {
                     facing = Dir.Right;
+                    downCount = 0;
                 }
             }
             if (ks.IsKeyDown(Keys.Left))
@@ -284,10 +289,12 @@ namespace LegendOfDarwin
                     hasPicked = true;
                     moveDirection = Dir.Left;
                     inMotion = true;
+                    downCount = 1;
                 }
                 else
                 {
                     facing = Dir.Left;
+                    downCount = 0;
                 }
                 
             }
@@ -299,28 +306,18 @@ namespace LegendOfDarwin
                     hasPicked = true;
                     moveDirection = Dir.Up;
                     inMotion = true;
+                    downCount = 1;
                 }
                 else
                 {
                     facing = Dir.Up;
+                    downCount = 0;
                 }
             }
             if (ks.IsKeyDown(Keys.Down))
             {
                 if (board.isGridPositionOpen(currentDarwinX, currentDarwinY + 1) && !hasPicked && facing == Dir.Down)
                 {
-                    /*
-                    if (downCount > 1)
-                    {
-                        downCount = 1;
-                    }
-                    else
-                    {
-                        downCount++;
-                    }
-                    
-                    this.MoveDown();
-                     * */
                     hasPicked = true;
                     moveDirection = Dir.Down;
                     inMotion = true;
@@ -422,7 +419,7 @@ namespace LegendOfDarwin
             {
                 if (facing == Dir.Up)
                 {
-                    spriteBatch.Draw(darwinUpTex, destination, source, Color.White);
+                    spriteBatch.Draw(darwinUpTex, destination, downSource[downCount], Color.White);
                 }
                 else if (facing == Dir.Down)
                 {
@@ -430,11 +427,11 @@ namespace LegendOfDarwin
                 }
                 else if (facing == Dir.Left)
                 {
-                    spriteBatch.Draw(darwinLeftTex, destination, source, Color.White);
+                    spriteBatch.Draw(darwinLeftTex, destination, downSource[downCount], Color.White);
                 }
                 else
                 {
-                    spriteBatch.Draw(darwinRightTex, destination, source, Color.White);
+                    spriteBatch.Draw(darwinRightTex, destination, downSource[downCount], Color.White);
                 }
             }
             else

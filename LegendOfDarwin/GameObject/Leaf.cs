@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
-
 
 namespace LegendOfDarwin.GameObject
 {
@@ -19,6 +19,8 @@ namespace LegendOfDarwin.GameObject
         // bool for whether or not the leaf is broken
         private Boolean leafBroken;
 
+        private SoundEffect leafSound;
+
         public Leaf( GameBoard myBoard, FastZombie parentZombie)
             : base(myBoard)
         {
@@ -32,11 +34,12 @@ namespace LegendOfDarwin.GameObject
             this.leafBroken = false;
         }
 
-        public void LoadContent(Texture2D brokenLeafTex, Texture2D wholeLeafTex)
+        public void LoadContent(Texture2D brokenLeafTex, Texture2D wholeLeafTex, SoundEffect lSound)
         {
             // textures
             this.brokenLeaf = brokenLeafTex;
             this.wholeLeaf = wholeLeafTex;
+            this.leafSound = lSound;
         }
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace LegendOfDarwin.GameObject
         public void breakLeaf()
         {
             leafBroken = true;
+            leafSound.Play();
         }
 
         public void resetLeaf()

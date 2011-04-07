@@ -422,7 +422,6 @@ namespace LegendOfDarwin
             board.LoadBackgroundContent(basicMenuTex);
             board.loadMenuBar(menuBarTexture);
 
-            //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
             SoundEffect transformSound = mainGame.Content.Load<SoundEffect>("transform");
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex,
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex, transformSound);
@@ -431,13 +430,13 @@ namespace LegendOfDarwin
 
             fastZombie1.LoadContent(zombieFastTex);
 
+            SoundEffect leafSound = mainGame.Content.Load<SoundEffect>("leaves");
+
             foreach(Leaf leaf in this.leaves)
             {
-                leaf.LoadContent(brokeLeafTex, wholeLeafTex);
+                leaf.LoadContent(brokeLeafTex, wholeLeafTex, leafSound);
             }
 
-            //secondZombie.LoadContent(zombieTex);
-            //thirdZombie.LoadContent(zombieTex);
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
             switchMessage.LoadContent(messagePic);

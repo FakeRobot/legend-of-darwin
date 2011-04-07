@@ -32,7 +32,7 @@ namespace LegendOfDarwin.GameObject
             snakeTexture = snakeTex;
         }
 
-        public new void Update(GameTime gameTime, Darwin darwin, LinkedList<Flame> flames)
+        public void Update(GameTime gameTime, Darwin darwin, LinkedList<Flame> flames)
         {
             //base.Update(gameTime);
             if (movecounter > ZOMBIE_MOVE_RATE)
@@ -100,41 +100,53 @@ namespace LegendOfDarwin.GameObject
 
         public void pushDarwinUp(Darwin darwin)
         {
+            if (board.isGridPositionOpen(darwin.X, darwin.Y - 1))
+            {
                 darwin.MoveUp();
 
                 if (board.isGridPositionOpen(this.X, this.Y - 1))
                 {
                     this.MoveUp();
                 }
+            }
         }
 
         public void pushDarwinDown(Darwin darwin)
         {
-            darwin.MoveDown();
-
-            if (board.isGridPositionOpen(this.X, this.Y + 1))
+            if(board.isGridPositionOpen(darwin.X, darwin.Y + 1))
             {
-                this.MoveDown();
+                darwin.MoveDown();
+
+                if (board.isGridPositionOpen(this.X, this.Y + 1))
+                {
+                    this.MoveDown();
+                }
             }
         }
 
         public void pushDarwinRight(Darwin darwin)
         {
-            darwin.MoveRight();
-
-            if (board.isGridPositionOpen(this.X + 1, this.Y))
+            if (board.isGridPositionOpen(darwin.X + 1, darwin.Y))
             {
-                this.MoveRight();
+                darwin.MoveRight();
+
+                if (board.isGridPositionOpen(this.X + 1, this.Y))
+                {
+                    this.MoveRight();
+                }
             }
         }
 
         public void pushDarwinLeft(Darwin darwin)
         {
-            darwin.MoveLeft();
-
-            if (board.isGridPositionOpen(this.X - 1, this.Y))
+            if (board.isGridPositionOpen(darwin.X - 1, darwin.Y))
             {
-                this.MoveLeft();
+                darwin.MoveLeft();
+
+                if (board.isGridPositionOpen(this.X - 1, this.Y))
+                {
+                    this.MoveLeft();
+                }
             }
         }
 

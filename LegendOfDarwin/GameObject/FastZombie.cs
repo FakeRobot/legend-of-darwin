@@ -38,7 +38,7 @@ namespace LegendOfDarwin.GameObject
             visionMaxY = 2;
         }
 
-        public void LoadContent(Texture2D fastZombieTexture)
+        public new void LoadContent(Texture2D fastZombieTexture)
         {
             zombieTexture = fastZombieTexture;
         }

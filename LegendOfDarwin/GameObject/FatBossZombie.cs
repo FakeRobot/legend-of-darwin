@@ -95,7 +95,7 @@ namespace LegendOfDarwin.GameObject
             explodeCount = 0;
         }
 
-        public new void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)
+        public void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)
         {
             zombieTexture = texIn;
             explosionTexture = explosion;

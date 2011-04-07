@@ -57,30 +57,42 @@ namespace LegendOfDarwin
 
         public void MoveRight()
         {
+            if (board.isGridPositionOpen(this.X + 1, this.Y))
+            {
                 this.setGridPosition(this.X + 1, this.Y);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X - 1, this.Y);
+            }
         }
 
         public void MoveLeft()
         {
+            if (board.isGridPositionOpen(this.X - 1, this.Y))
+            {
                 this.setGridPosition(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X + 1, this.Y);
+            }
         }
 
         public void MoveDown()
         {
+            if (board.isGridPositionOpen(this.X, this.Y + 1))
+            {
                 this.setGridPosition(this.X, this.Y + 1);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y - 1);
+            }
         }
 
         public void MoveUp()
         {
+            if (board.isGridPositionOpen(this.X, this.Y - 1))
+            {
                 this.setGridPosition(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X, this.Y);
                 board.setGridPositionOpen(this.X, this.Y + 1);
+            }
         }
 
         // Set their positions

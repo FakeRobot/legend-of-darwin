@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LegendOfDarwin
 {
@@ -27,6 +28,7 @@ namespace LegendOfDarwin
         //flag to show whether darwin is a zombie or not
         private bool zombieFlag;
         private bool isZombieButtonBeingPressed = false;
+        private SoundEffect transformSound;
 
         //start darwin's humanity at 100
         public int humanityLevel = 100;
@@ -131,7 +133,7 @@ namespace LegendOfDarwin
         */
 
         public void LoadContent(GraphicsDevice newGraphics, Texture2D humanUp, Texture2D humanDown, 
-            Texture2D humanRight, Texture2D humanLeft, Texture2D zombieTex,Texture2D deadTex)
+            Texture2D humanRight, Texture2D humanLeft, Texture2D zombieTex,Texture2D deadTex, SoundEffect tSound)
         {
             graphics = newGraphics;
             darwinUpTex = humanUp;
@@ -140,6 +142,7 @@ namespace LegendOfDarwin
             darwinLeftTex = humanLeft;
             zombieDarwinTex = zombieTex;
             deadDarwinTex = deadTex;
+            transformSound = tSound;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, GameBoard board, int currentDarwinX, int currentDarwinY)
@@ -339,10 +342,12 @@ namespace LegendOfDarwin
                 isZombieButtonBeingPressed = true;
                 if (zombieFlag == true)
                 {
+                    transformSound.Play();
                     zombieFlag = false;
                 }
                 else
                 {
+                    transformSound.Play();
                     zombieFlag = true;
                 }
             }

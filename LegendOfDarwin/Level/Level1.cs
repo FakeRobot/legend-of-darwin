@@ -345,8 +345,10 @@ namespace LegendOfDarwin
             Texture2D darwinLeftTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinLeft");
             Texture2D zombieDarwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/ZombieDarwin");
             Texture2D deadDarwinText = mainGame.Content.Load<Texture2D>("DarwinPic/DeadDarwin");
+            SoundEffect transformSound = mainGame.Content.Load<SoundEffect>("transform");
+
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
-                darwinRightTex, darwinLeftTex, zombieDarwinTex, deadDarwinText);
+                darwinRightTex, darwinLeftTex, zombieDarwinTex, deadDarwinText, transformSound);
             
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");

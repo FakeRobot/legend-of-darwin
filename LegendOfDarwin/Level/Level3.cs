@@ -422,8 +422,10 @@ namespace LegendOfDarwin
             board.loadMenuBar(menuBarTexture);
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
+            SoundEffect transformSound = mainGame.Content.Load<SoundEffect>("transform");
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex,
-                darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex);
+                darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex, transformSound);
+
             firstZombie.LoadContent(zombieTex);
 
             fastZombie1.LoadContent(zombieFastTex);

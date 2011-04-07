@@ -99,6 +99,7 @@ namespace LegendOfDarwin.GameObject
                 {
                     if (!babies[i].isZombieAlive())
                     {
+                        babies[i].reset();
                         babies[i].setZombieAlive(true);
                         babies[i].setGridPosition(spawnX, spawnY);
                         //Vector2 temp = findSpawnPoint();

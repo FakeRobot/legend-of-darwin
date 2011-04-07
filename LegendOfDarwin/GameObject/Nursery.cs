@@ -61,14 +61,14 @@ namespace LegendOfDarwin.GameObject
             this.destination.Y = board.getPosition(x, y).Y;
         }
 
-        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn, Texture2D explodeTexIn, SoundEffect bSound)
+        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn, Texture2D explodeTexIn, SoundEffect bSound, SoundEffect eSound)
         {
             nurseTex = nurseTexIn;
             babySound = bSound;
 
             foreach (BabyZombie b in babies)
             {
-                b.LoadContent(babyTexIn, explodeTexIn);
+                b.LoadContent(babyTexIn, explodeTexIn, eSound);
             }
         }
 

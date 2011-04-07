@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
@@ -15,6 +16,7 @@ namespace LegendOfDarwin.GameObject
 
         private Darwin darwin;
         private Texture2D explosionTexture;
+        private SoundEffect explosionSound;
 
         // for random walk and randomly opening his mouth
         private Random ran;
@@ -93,10 +95,11 @@ namespace LegendOfDarwin.GameObject
             explodeCount = 0;
         }
 
-        public new void LoadContent(Texture2D texIn, Texture2D explosion)
+        public new void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)
         {
             zombieTexture = texIn;
             explosionTexture = explosion;
+            explosionSound = eSound;
         }
 
         // checks if darwin is immediately to the left of the zombie, that is in range and not up or down
@@ -349,6 +352,7 @@ namespace LegendOfDarwin.GameObject
                     thirdExplosion = false;
                     thirdExplodeCount = 0;
                     explodeSecondWaveOfBabies = false;
+
                 }
                 if (thirdExplodeCount == 2)
                 {

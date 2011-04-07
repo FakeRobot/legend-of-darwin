@@ -123,17 +123,18 @@ namespace LegendOfDarwin.Level
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
 
             SoundEffect babySound = mainGame.Content.Load<SoundEffect>("baby");
+            SoundEffect explosionSound = mainGame.Content.Load<SoundEffect>("explosion");
             nurseryOne.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery-cribs"),
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"),
-                babySound);
+                babySound, explosionSound);
             
             nurseryTwo.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/nursery-cribs"),
                 mainGame.Content.Load<Texture2D>("ZombiePic/BabyZombie"),
                 mainGame.Content.Load<Texture2D>("explosion_sequence"),
-                babySound);
+                babySound, explosionSound);
 
-            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"), mainGame.Content.Load<Texture2D>("explosion_sequence"));
+            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"), mainGame.Content.Load<Texture2D>("explosion_sequence"), explosionSound);
 
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");

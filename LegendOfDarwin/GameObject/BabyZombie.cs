@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LegendOfDarwin.GameObject
 {
@@ -20,6 +21,8 @@ namespace LegendOfDarwin.GameObject
         private Rectangle[] explodeSource;
         public enum Direction { Up, Down, Left, Right };
         private Direction darwinDirection;
+
+        private SoundEffect explodeSound;
 
         public BabyZombie(int x, int y, int maxX, int minX, int maxY, int minY, Darwin dar, GameBoard gb) : 
             base(x, y, maxX, minX, maxY, minY, gb)
@@ -58,10 +61,11 @@ namespace LegendOfDarwin.GameObject
             this.setZombieAlive(false);
         }
 
-        public void LoadContent(Texture2D babyIn, Texture2D splodeIn)
+        public void LoadContent(Texture2D babyIn, Texture2D splodeIn, SoundEffect eSound)
         {
             base.LoadContent(babyIn);
             explodeTex = splodeIn;
+            explodeSound = eSound;
         }
 
         public new void Update(GameTime gameTime)
@@ -78,6 +82,7 @@ namespace LegendOfDarwin.GameObject
                         exploding = false;
                         setZombieAlive(false);
                         setEventLag(40);
+                        explodeSound.Play();
                     }
                 }
                 else if (goingToExplode)

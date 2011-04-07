@@ -40,6 +40,9 @@ namespace LegendOfDarwin
         private SoundEffect deathScreamSound;
         private bool playDeathSound = true;
 
+        private SoundEffect revealSound;
+        public bool playSound = true;
+
         private int counter;
 
         private int counterReady;
@@ -184,6 +187,7 @@ namespace LegendOfDarwin
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
 
             deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
+            revealSound = mainGame.Content.Load<SoundEffect>("reveal");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
 
@@ -375,6 +379,11 @@ namespace LegendOfDarwin
                         board.setGridPositionOpen(bo);
                     }
                 }
+                if (playSound)
+                {
+                    revealSound.Play();
+                    playSound = false;
+                }
             }
 
             checkUpdateToLevelThree();
@@ -458,11 +467,12 @@ namespace LegendOfDarwin
                 cannibalZombie.setZombieAlive(true);
 
                 potion.setGridPosition(3, 3);
-                potion.reset();
+                potion.reset();     
 
                 darwin.setHuman();
                 darwin.setDarwinAlive();
                 playDeathSound = true;
+                playSound = true;
                 gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
                 gameOver = false;

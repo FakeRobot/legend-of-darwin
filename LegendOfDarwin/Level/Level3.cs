@@ -412,8 +412,9 @@ namespace LegendOfDarwin
 
             secondStair.LoadContent(basicStairUpTex, basicStairDownTex, "Down");
 
-            firstSwitch.LoadContent(wallTex, switchTex);
-            secondSwitch.LoadContent(wallTex, switchTex);
+            SoundEffect switchSound = mainGame.Content.Load<SoundEffect>("switch");
+            firstSwitch.LoadContent(wallTex, switchTex, switchSound);
+            secondSwitch.LoadContent(wallTex, switchTex, switchSound);
 
             brain.LoadContent(brainTex);
 

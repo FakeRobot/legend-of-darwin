@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -25,6 +26,8 @@ namespace LegendOfDarwin
         private const int SWITCH_HEIGHT = 64;
 
         private bool isOn;
+
+        private SoundEffect switchSound;
 
         /* posX is the X coordinate of the switch
          * posy is the Y coordinate of the switch
@@ -82,10 +85,11 @@ namespace LegendOfDarwin
             isOn = false;
         }
 
-        public void LoadContent(Texture2D myWallTex, Texture2D mySwitchTex)
+        public void LoadContent(Texture2D myWallTex, Texture2D mySwitchTex, SoundEffect sSound)
         {
             wallTex = myWallTex;
             switchTex = mySwitchTex;
+            switchSound = sSound;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -152,10 +156,12 @@ namespace LegendOfDarwin
                 if (isOn)
                 {
                     turnOff();
+                    switchSound.Play();
                 }
                 else
                 {
                     turnOn();
+                    switchSound.Play();
                 }
             }
         }

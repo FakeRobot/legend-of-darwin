@@ -358,8 +358,9 @@ namespace LegendOfDarwin
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
 
+            SoundEffect switchSound = mainGame.Content.Load<SoundEffect>("switch");
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
-                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
+                mainGame.Content.Load<Texture2D>("StaticPic/Switch"), switchSound);
 
             brain.LoadContent(mainGame.Content.Load<Texture2D>("brain"));
 

@@ -360,11 +360,12 @@ namespace LegendOfDarwin.Level
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
 
+            SoundEffect switchSound = mainGame.Content.Load<SoundEffect>("switch");
             firstSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
-                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
+                mainGame.Content.Load<Texture2D>("StaticPic/Switch"), switchSound);
 
             secondSwitch.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Wall"),
-                mainGame.Content.Load<Texture2D>("StaticPic/Switch"));
+                mainGame.Content.Load<Texture2D>("StaticPic/Switch"), switchSound);
             Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/Level4/metal_tile_medium"));

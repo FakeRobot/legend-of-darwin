@@ -43,7 +43,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level6;
+            curLevel = LevelState.Start;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -136,8 +136,9 @@ namespace LegendOfDarwin
 
         private void InitializeGraphics()
         {
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.PreferredBackBufferWidth = 1300;
+            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
         }
 

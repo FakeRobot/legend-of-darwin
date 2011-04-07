@@ -159,7 +159,7 @@ namespace LegendOfDarwin.GameObject
         {
             if ((darwin.X == this.X || darwin.X == this.X + 1 || darwin.X == this.X + 2)) 
             {
-                if (darwin.Y == this.Y + 3 && !darwin.isZombie() && gapeMode)
+                if (darwin.Y == this.Y + 3 && !darwin.isZombie() && gapeMode && this.isZombieAlive())
                     return true;
             }
 
@@ -259,7 +259,6 @@ namespace LegendOfDarwin.GameObject
                     eatingBaby = false;
                     gapeMode = false;
                 }
-
 
 
                 allowedToWalk = true;

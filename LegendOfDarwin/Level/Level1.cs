@@ -34,6 +34,7 @@ namespace LegendOfDarwin
         private Potion potion;
         private Stairs stairs;
 
+        private int counter;
         private BasicObject[] walls;
         private Texture2D wallTex;
 

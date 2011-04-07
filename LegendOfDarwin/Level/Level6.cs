@@ -475,7 +475,7 @@ namespace LegendOfDarwin.Level
                 gameOver = true;
             }
 
-            if (darwin.collision)
+            if (darwin.collision && fatBossZombie.isZombieAlive())
             {
                 Rectangle rightSideOfDarwin = darwin.destination;
                 rightSideOfDarwin.X = rightSideOfDarwin.X + board.getSquareWidth();

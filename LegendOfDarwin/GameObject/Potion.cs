@@ -15,7 +15,7 @@ namespace LegendOfDarwin.GameObject
     {
         private Texture2D potionTex;
         private bool isConsumed;
-        private const int healthReplenished = 10;
+        private const int healthReplenished = 20;
         
         public SoundEffect potionSound;
 

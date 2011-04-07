@@ -43,9 +43,6 @@ namespace LegendOfDarwin
         private SoundEffect revealSound;
         public bool playSound = true;
 
-        private int counter;
-
-        private int counterReady;
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
 
@@ -125,10 +122,6 @@ namespace LegendOfDarwin
                 board.setGridPositionOccupied(darwin.X, darwin.Y);
                 darwin.setPosition(board.getPosition(darwin).X, board.getPosition(darwin).Y);
             }
-
-            // Darwin's lag movement
-            counterReady = counter = 5;
-
 
             if (board.isGridPositionOpen(27, 20))
             {

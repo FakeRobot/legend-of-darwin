@@ -407,7 +407,7 @@ namespace LegendOfDarwin.Level
 
             foreach (Box b in boxes)
             {
-                b.LoadContent(mainGame.Content.Load<Texture2D>("box"));
+                b.LoadContent(mainGame.Content.Load<Texture2D>("box"), (mainGame.Content.Load<SoundEffect>("boxSound")));
             }
 
             foreach (Vortex v in vortexes)

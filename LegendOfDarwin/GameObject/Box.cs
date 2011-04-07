@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -16,6 +17,8 @@ namespace LegendOfDarwin.GameObject
         public const int BOX_WIDTH = 64;
 
         protected Texture2D BoxTexture;
+
+        public SoundEffect boxSound;
 
         public Box(GameBoard myboard, int startX, int startY) : base(myboard)
         {
@@ -32,9 +35,10 @@ namespace LegendOfDarwin.GameObject
             destination = board.getPosition(startX, startY);
         }
 
-        public void LoadContent(Texture2D BoxTex)
+        public void LoadContent(Texture2D BoxTex, SoundEffect bSound)
         {
             BoxTexture = BoxTex;
+            boxSound = bSound;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin)
@@ -57,6 +61,7 @@ namespace LegendOfDarwin.GameObject
                             if (board.isGridPositionOpen(this.X - 1, this.Y))
                             {
                                 this.MoveLeft();
+                                boxSound.Play();
                             }
                         }
                         break;
@@ -65,6 +70,7 @@ namespace LegendOfDarwin.GameObject
                             if (board.isGridPositionOpen(this.X + 1, this.Y))
                             {
                                 this.MoveRight();
+                                boxSound.Play();
                             }
                         break;
                     case (LegendOfDarwin.Darwin.Dir.Up):
@@ -72,6 +78,7 @@ namespace LegendOfDarwin.GameObject
                             if (board.isGridPositionOpen(this.X, this.Y - 1))
                             {
                                 this.MoveUp();
+                                boxSound.Play();
                             }
                         break;
                     case (LegendOfDarwin.Darwin.Dir.Down):
@@ -79,6 +86,7 @@ namespace LegendOfDarwin.GameObject
                             if (board.isGridPositionOpen(this.X, this.Y + 1))
                             {
                                 this.MoveDown();
+                                boxSound.Play();
                             }
                         break;
                 }

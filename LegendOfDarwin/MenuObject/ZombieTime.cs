@@ -71,6 +71,10 @@ namespace LegendOfDarwin.MenuObject
         public void setTime(int mytime) 
         {
             source.X = mytime;
+            if (mytime < downTime)
+            {
+                source.X = 0;
+            }
         }
 
 

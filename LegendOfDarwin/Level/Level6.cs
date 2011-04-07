@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using LegendOfDarwin.MenuObject;
 using Microsoft.Xna.Framework.Media;
@@ -31,6 +32,9 @@ namespace LegendOfDarwin.Level
         public bool gameOver = false;
         public bool gameWin = false;
         private int gameOverCounter = 0;
+
+        private SoundEffect deathScreamSound;
+        private bool playDeathSound = true;
 
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
@@ -91,6 +95,8 @@ namespace LegendOfDarwin.Level
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
+
+            deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -176,6 +182,7 @@ namespace LegendOfDarwin.Level
 
             darwin.setDarwinAlive();
             darwin.setHuman();
+            playDeathSound = true;
             gameOverCounter = 0;
             stairs.setGridPosition(14, 1);
 
@@ -241,6 +248,12 @@ namespace LegendOfDarwin.Level
                         UpdateMessageMode();
                     else
                     {
+                        if (playDeathSound)
+                        {
+                            deathScreamSound.Play();
+                            playDeathSound = false;
+                        }
+
                         darwin.setDarwinDead();
                         darwin.setZombie();
                         UpdateLevelState(gameTime);
@@ -450,9 +463,9 @@ namespace LegendOfDarwin.Level
 
         private void checkForGameOverWithBoss()
         {
-            if (fatBossZombie.canDarwinBeEaten() && !fatBossZombie.isZombieAlive())
+            if (fatBossZombie.canDarwinBeEaten() && fatBossZombie.isZombieAlive())
                 gameOver = true;
-            if (fatBossZombie.isInCollision(darwin) && !fatBossZombie.isZombieAlive())
+            if (fatBossZombie.isInCollision(darwin) && fatBossZombie.isZombieAlive())
             {
                 gameOver = true;
             }

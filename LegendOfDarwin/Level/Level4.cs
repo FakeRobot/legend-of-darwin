@@ -50,6 +50,9 @@ namespace LegendOfDarwin.Level
         public bool gameWin = false;
         private int gameOverCounter = 0;
 
+        private SoundEffect deathScreamSound;
+        private bool playDeathSound = true;
+
         private int counter;
         private int counterReady;
         public Texture2D gameOverTexture;
@@ -336,6 +339,8 @@ namespace LegendOfDarwin.Level
         public void LoadContent()
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
+
+            deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -1084,6 +1089,12 @@ namespace LegendOfDarwin.Level
                         UpdateMessageMode();
                     else 
                     {
+                        if (playDeathSound)
+                        {
+                            deathScreamSound.Play();
+                            playDeathSound = false;
+                        }
+
                         darwin.setDarwinDead();
                         darwin.setZombie();
                         UpdateLevelState(gameTime);
@@ -1265,6 +1276,7 @@ namespace LegendOfDarwin.Level
                 potion2.reset();
                 darwin.setHuman();
                 darwin.setDarwinAlive();
+                playDeathSound = true;
                 gameOverCounter = 0;
                 gameState.setState(GameState.state.Level);
                 //MediaPlayer.Stop();

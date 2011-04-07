@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
@@ -13,6 +14,8 @@ namespace LegendOfDarwin.GameObject
         private int babyTimeSpawn = 300;
         private Texture2D nurseTex;
         public BabyZombie[] babies;
+
+        private SoundEffect babySound;
 
         private int spawnX, spawnY;
 
@@ -58,9 +61,10 @@ namespace LegendOfDarwin.GameObject
             this.destination.Y = board.getPosition(x, y).Y;
         }
 
-        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn, Texture2D explodeTexIn)
+        public void LoadContent(Texture2D nurseTexIn, Texture2D babyTexIn, Texture2D explodeTexIn, SoundEffect bSound)
         {
             nurseTex = nurseTexIn;
+            babySound = bSound;
 
             foreach (BabyZombie b in babies)
             {
@@ -99,7 +103,9 @@ namespace LegendOfDarwin.GameObject
                         babies[i].setGridPosition(spawnX, spawnY);
                         //Vector2 temp = findSpawnPoint();
                         //babies[i].setGridPosition((int)temp.X, (int)temp.Y);
-                        break;
+
+                        babySound.Play();
+                        break;                      
                     }
                 }
 

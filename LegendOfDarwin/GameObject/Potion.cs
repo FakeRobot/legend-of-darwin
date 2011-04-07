@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using LegendOfDarwin.MenuObject;
+using LegendOfDarwin.GameObject;
 
 namespace LegendOfDarwin.GameObject
 {
@@ -14,6 +16,8 @@ namespace LegendOfDarwin.GameObject
         private Texture2D potionTex;
         private bool isConsumed;
         private const int healthReplenished = 10;
+        
+        public SoundEffect potionSound;
 
         public Potion(GameBoard board) : base(board)
         {
@@ -21,9 +25,10 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this);
         }
 
-        public void LoadContent(Texture2D potTex)
+        public void LoadContent(Texture2D potTex, SoundEffect sound)
         {
             potionTex = potTex;
+            potionSound = sound;
         }
 
         public void Update(GameTime gameTime, KeyboardState ks, Darwin darwin, ZombieTime zTime)
@@ -41,6 +46,8 @@ namespace LegendOfDarwin.GameObject
 
             int updateTime = zTime.getTime() - healthReplenished;
             zTime.setTime(updateTime);
+
+            potionSound.Play();
 
         }
 

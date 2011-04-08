@@ -438,7 +438,7 @@ namespace LegendOfDarwin.Level
         {
             foreach (BabyZombie b in nurseryOne.babies)
             {
-                if (b.exploding)
+                if (b.exploding && b.isZombieAlive())
                 {
                     if (darwin.isOnTop(b)
                         || darwin.isOnTop(b.X, b.Y - 1)
@@ -453,7 +453,7 @@ namespace LegendOfDarwin.Level
 
             foreach (BabyZombie b in nurseryTwo.babies)
             {
-                if (b.exploding)
+                if (b.exploding && b.isZombieAlive())
                 {
                     if (darwin.isOnTop(b)
                         || darwin.isOnTop(b.X, b.Y - 1)

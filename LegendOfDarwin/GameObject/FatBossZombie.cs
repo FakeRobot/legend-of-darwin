@@ -306,7 +306,7 @@ namespace LegendOfDarwin.GameObject
         {
             base.Update(gameTime);
             deathCount++;
-
+            gapeMode = false;
             updateBossExplosions();
 
             if (canEventHappen())

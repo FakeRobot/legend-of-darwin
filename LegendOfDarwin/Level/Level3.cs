@@ -294,6 +294,39 @@ namespace LegendOfDarwin
             zTimeReset = new ZombieTime(board);
         }
 
+        public void setLevelState()
+        {
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(2, 2);
+
+            board.setGridPositionOpen(firstZombie);
+
+            firstZombie.setGridPosition(10, 10);
+
+            foreach (Leaf leaf in this.leaves)
+            {
+                leaf.resetLeaf();
+            }
+
+            board.setGridPositionOpen(fastZombie1);
+            fastZombie1.chasingDarwin = false;
+            fastZombie1.goBackToSleep();
+            fastZombie1.setGridPosition(15, 15);
+
+            board.setGridPositionOpen(brain);
+            brain.setGridPosition(5, 18);
+
+            darwin.setHuman();
+            darwin.setDarwinAlive();
+            playDeathSound = true;
+            gameOverCounter = 0;
+            firstSwitch.turnOn();
+            secondSwitch.turnOn();
+
+            gameOver = false;
+            gameWin = false;
+        }
+
         private BasicObject[] setRemovableWallsAroundStairs()
         {
             //later add an x and y to the constructor
@@ -513,7 +546,7 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                //MediaPlayer.Play(song);
+                setLevelState();
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -537,23 +570,6 @@ namespace LegendOfDarwin
             checkForExitGame(ks);
 
             updateKeyHeldDown(ks);
-            /*
-            if (keyIsHeldDown)
-            {
-                if (counter > counterReady)
-                {
-                    darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-                    counter = 0;
-                }
-                else
-                {
-                    counter++;
-                }
-            }
-            else
-            {
-                darwin.Update(gameTime, ks, board, darwin.X, darwin.Y);
-            }*/
 
             if (darwin.isDarwinAlive())
             {
@@ -608,56 +624,13 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Q))
             {
                 mainGame.setCurLevel(Game1.LevelState.Start);
-                //mainGame.Exit();
+                setLevelState();
+                gameState.setState(GameState.state.Start);
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
-
-                if (gameWin)
-                {
-                    zTime.reset();
-                    mainGame.setCurLevel(Game1.LevelState.Level1);
-                }
-                else if (gameOver)
-                {
-                    zTime = new ZombieTime(board);
-                    zTime.reset();
-                    zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-                    zTime.setTime(zTimeReset.getTime());
-                }
-
-                board.setGridPositionOpen(firstZombie);
-
-                firstZombie.setGridPosition(10, 10);
-                
-                foreach (Leaf leaf in this.leaves)
-                {
-                    leaf.resetLeaf();
-                }
-
-                board.setGridPositionOpen(fastZombie1);
-                fastZombie1.chasingDarwin = false;
-                fastZombie1.goBackToSleep();
-                fastZombie1.setGridPosition(15, 15);
-
-                board.setGridPositionOpen(brain);
-                brain.setGridPosition(5, 18);
-
-                darwin.setHuman();
-                darwin.setDarwinAlive();
-                playDeathSound = true;
-                gameOverCounter = 0;
-                firstSwitch.turnOn();
-                secondSwitch.turnOn();
-
+                setLevelState();
                 gameState.setState(GameState.state.Level);
-                gameOver = false;
-                gameWin = false;
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
-
                 mainGame.DEATH_COUNTER++;
             }
 

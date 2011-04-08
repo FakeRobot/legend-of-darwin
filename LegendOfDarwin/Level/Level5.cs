@@ -165,6 +165,63 @@ namespace LegendOfDarwin.Level
 
         }
 
+        public void setLevelState()
+        {
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(6, 18);
+
+            gameOver = false;
+            gameWin = false;
+
+            board.setGridPositionOpen(potion);
+
+            potion.setGridPosition(27, 5);
+
+            potion.reset();
+            darwin.setHuman();
+            darwin.setDarwinAlive();
+            gameOverCounter = 0;
+
+            playSound = true;
+            playDeathSound = true;
+
+
+            northZombie.setGridPosition(15, 3);
+            northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
+            northZombie.setNextPatrolPoint(new Vector2(5, 3));
+            northZombie.patrolling = true;
+
+            southZombie.setGridPosition(15, 20);
+            southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
+            southZombie.setNextPatrolPoint(new Vector2(27, 20));
+            southZombie.patrolling = true;
+
+            eastZombie.setGridPosition(29, 11);
+            eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
+            eastZombie.setNextPatrolPoint(new Vector2(29, 6));
+            eastZombie.patrolling = true;
+
+            westZombie.setGridPosition(3, 11);
+            westZombie.setCurrentPatrolPoint(new Vector2(3, 6));
+            westZombie.setNextPatrolPoint(new Vector2(3, 17));
+            westZombie.patrolling = true;
+
+            flames = new LinkedList<Flame>();
+
+            board.setGridPositionOpen(snake);
+            board.setGridPositionOpen(snake2);
+            board.setGridPositionOpen(snake3);
+            board.setGridPositionOpen(snake4);
+
+            snake.setGridPosition(10, 9);
+            snake2.setGridPosition(8, 15);
+            snake3.setGridPosition(21, 9);
+            snake4.setGridPosition(21, 15);
+
+            // reset the boxes
+            resetBoxes();
+        }
+
         private void setPotionPosition(int x, int y)
         {
             potion = new Potion(board);
@@ -506,7 +563,7 @@ namespace LegendOfDarwin.Level
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                //MediaPlayer.Play(song);
+                setLevelState();
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -796,80 +853,14 @@ namespace LegendOfDarwin.Level
 
             if (ks.IsKeyDown(Keys.Q))
             {
-                mainGame.setCurLevel(Game1.LevelState.Level1);
-                //mainGame.Exit();
+                setLevelState();
+                mainGame.setCurLevel(Game1.LevelState.Start);
+                gameState.setState(GameState.state.Start);
             }
             if (ks.IsKeyDown(Keys.R))
             {
-
-                if (gameWin)
-                {
-                    zTime.reset();
-                    mainGame.setCurLevel(Game1.LevelState.Start);
-                }
-                else if (gameOver)
-                {
-                    zTime = new ZombieTime(board);
-                    zTime.reset();
-                    zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-                    zTime.setTime(zTimeReset.getTime());
-                }
-
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(6, 18);
-
-                gameOver = false;
-                gameWin = false;
-
-                board.setGridPositionOpen(potion);
-
-                potion.setGridPosition(27, 5);
-
-                potion.reset();
-                darwin.setHuman();
-                darwin.setDarwinAlive();
-                gameOverCounter = 0;
+                setLevelState();
                 gameState.setState(GameState.state.Level);
-                playSound = true;
-                playDeathSound = true;
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
-
-                northZombie.setGridPosition(15, 3);
-                northZombie.setCurrentPatrolPoint(new Vector2(27, 3));
-                northZombie.setNextPatrolPoint(new Vector2(5, 3));
-                northZombie.patrolling = true;
-
-                southZombie.setGridPosition(15, 20);
-                southZombie.setCurrentPatrolPoint(new Vector2(5, 20));
-                southZombie.setNextPatrolPoint(new Vector2(27, 20));
-                southZombie.patrolling = true;
-                
-                eastZombie.setGridPosition(29, 11);
-                eastZombie.setCurrentPatrolPoint(new Vector2(29, 17));
-                eastZombie.setNextPatrolPoint(new Vector2(29, 6));
-                eastZombie.patrolling = true;
-
-                westZombie.setGridPosition(3, 11);
-                westZombie.setCurrentPatrolPoint(new Vector2(3, 6));
-                westZombie.setNextPatrolPoint(new Vector2(3, 17));
-                westZombie.patrolling = true;
-
-                flames = new LinkedList<Flame>();
-
-                board.setGridPositionOpen(snake);
-                board.setGridPositionOpen(snake2);
-                board.setGridPositionOpen(snake3);
-                board.setGridPositionOpen(snake4);
-
-                snake.setGridPosition(10, 9);
-                snake2.setGridPosition(8, 15);
-                snake3.setGridPosition(21, 9);
-                snake4.setGridPosition(21, 15);
-
-                // reset the boxes
-                resetBoxes();
-
                 mainGame.DEATH_COUNTER++;
             }
         }

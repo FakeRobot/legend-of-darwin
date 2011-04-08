@@ -400,14 +400,14 @@ namespace LegendOfDarwin.Level
 
             if (ks.IsKeyDown(Keys.Q))
             {
+                setLevelState();
                 mainGame.setCurLevel(Game1.LevelState.Start);
+                gameState.setState(GameState.state.Start);
                 //mainGame.Exit();
             }
             if (ks.IsKeyDown(Keys.R))
             {
                 setLevelState();
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
                 mainGame.DEATH_COUNTER++;
             }
 

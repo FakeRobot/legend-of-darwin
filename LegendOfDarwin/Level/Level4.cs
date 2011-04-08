@@ -250,6 +250,37 @@ namespace LegendOfDarwin.Level
             setDanceFloor();
         }
 
+        public void setLevelState()
+        {
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(16, 21);
+
+            gameOver = false;
+            gameWin = false;
+
+
+            board.setGridPositionOpen(potion);
+            board.setGridPositionOpen(potion2);
+
+            leaderZombie.Reset(8, 4);
+
+            foreach (CongaFollowerZombie follower in followerZombies)
+                follower.reset();
+
+            firstSwitch.turnOn();
+            secondSwitch.turnOn();
+
+            potion.setGridPosition(28, 7);
+            potion2.setGridPosition(1, 7);
+
+            potion.reset();
+            potion2.reset();
+            darwin.setHuman();
+            darwin.setDarwinAlive();
+            playDeathSound = true;
+            gameOverCounter = 0;
+        }
+
         private BasicObject[] setRemovableWallsSwitchOne()
         {
 
@@ -1777,6 +1808,7 @@ namespace LegendOfDarwin.Level
             if (ks.IsKeyDown(Keys.Enter))
             {
                 //MediaPlayer.Play(song);
+                setLevelState();
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -1860,71 +1892,15 @@ namespace LegendOfDarwin.Level
 
             if (ks.IsKeyDown(Keys.Q))
             {
+                setLevelState();
+                gameState.setState(GameState.state.Start);
                 mainGame.setCurLevel(Game1.LevelState.Start);
                 //mainGame.Exit();
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                
-                
-                if (gameWin)
-                {
-                    zTime.reset();
-                    mainGame.setCurLevel(Game1.LevelState.Level1);
-                }
-                else if (gameOver)
-                {
-                    zTime = new ZombieTime(board);
-                    zTime.reset();
-                    zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-                    zTime.setTime(zTimeReset.getTime());
-                }
-
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(16, 21);
-
-                gameOver = false;
-                gameWin = false;
-
-                //board.setGridPositionOpen(firstZombie);
-                //board.setGridPositionOpen(secondZombie);
-                //board.setGridPositionOpen(thirdZombie);
-                board.setGridPositionOpen(potion);
-                board.setGridPositionOpen(potion2);
-
-                //firstZombie.setGridPosition(10, 10);
-                //board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
-                //firstZombie.setZombieAlive(true);
-
-                //secondZombie.setGridPosition(10, 16);
-                //board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
-                //secondZombie.setZombieAlive(true);
-
-                //thirdZombie.setGridPosition(12, 10);
-                //board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
-                //thirdZombie.setZombieAlive(true);
-
-                leaderZombie.Reset(8, 4);
-
-                foreach (CongaFollowerZombie follower in followerZombies)
-                    follower.reset();
-
-                firstSwitch.turnOn();
-                secondSwitch.turnOn();
-
-                potion.setGridPosition(28, 7);
-                potion2.setGridPosition(1, 7);
-
-                potion.reset();
-                potion2.reset();
-                darwin.setHuman();
-                darwin.setDarwinAlive();
-                playDeathSound = true;
-                gameOverCounter = 0;
+                setLevelState();
                 gameState.setState(GameState.state.Level);
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
-
                 mainGame.DEATH_COUNTER++;
                 
             }

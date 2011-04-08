@@ -35,6 +35,7 @@ namespace LegendOfDarwin.Level
 
         private SoundEffect deathScreamSound;
         private bool playDeathSound = true;
+        
 
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
@@ -111,7 +112,7 @@ namespace LegendOfDarwin.Level
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
-            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("menubar");
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level6"));
 
@@ -471,10 +472,14 @@ namespace LegendOfDarwin.Level
         private void checkForGameOverWithBoss()
         {
             if (fatBossZombie.canDarwinBeEaten() && fatBossZombie.isZombieAlive())
+            {
                 gameOver = true;
+                fatBossZombie.eatingDarwin = true;
+            }
             else if (fatBossZombie.isInCollision(darwin) && fatBossZombie.isZombieAlive())
             {
                 gameOver = true;
+                fatBossZombie.eatingDarwin = true;
             }
 
             else if (darwin.collision && fatBossZombie.isZombieAlive())
@@ -497,6 +502,7 @@ namespace LegendOfDarwin.Level
                     onBottomOfDarwin == fatBossZombie.destination)
                 {
                     gameOver = true;
+                    fatBossZombie.eatingDarwin = true;
                 }
             }
         }
@@ -550,7 +556,11 @@ namespace LegendOfDarwin.Level
 
             stairs.Draw(spriteBatch);
 
-            darwin.Draw(spriteBatch);
+            if(!fatBossZombie.eatingDarwin)
+            {
+                darwin.Draw(spriteBatch);
+            }
+            
             zTime.Draw(spriteBatch);
 
             nurseryOne.Draw(spriteBatch);

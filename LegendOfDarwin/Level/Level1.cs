@@ -423,7 +423,7 @@ namespace LegendOfDarwin
 
             gameOverTexture = mainGame.Content.Load<Texture2D>("gameover");
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
-            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("menubar");
 
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");

@@ -200,7 +200,7 @@ namespace LegendOfDarwin
 
             Texture2D basicStairUpTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsUp");
             Texture2D basicStairDownTex = mainGame.Content.Load<Texture2D>("StaticPic/stairsDown");
-            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("menubar");
 
             removableWallTex = mainGame.Content.Load<Texture2D>("StaticPic/Wall");
 

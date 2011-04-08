@@ -379,7 +379,7 @@ namespace LegendOfDarwin.Level
 
             //load a sparkly overlay for the stairs
             sparkleTex = mainGame.Content.Load<Texture2D>("sparkle");
-            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
+            Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("menubar");
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex, transformSound);

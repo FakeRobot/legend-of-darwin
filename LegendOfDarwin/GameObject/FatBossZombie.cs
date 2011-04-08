@@ -33,6 +33,8 @@ namespace LegendOfDarwin.GameObject
         private bool thirdExplosion = false;
         private bool fourthExplosion = false;
 
+        public bool eatingDarwin = false;
+
         private int deathCount;
         private bool deathDraw;
         private int[] deathExplodeCount;
@@ -106,7 +108,7 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this.X + 1, this.Y + 2);
             board.setGridPositionOpen(this.X + 2, this.Y + 2);
             gapeMode = false;
-
+            eatingDarwin = false;
 
             count = 0;
             explodeCount = 0;
@@ -522,10 +524,15 @@ namespace LegendOfDarwin.GameObject
             {
                 this.source.X = 384;
             }
+            else if (eatingDarwin)
+            {
+                this.source.X = 512;
+            }
             else if (gapeMode)
             {
                 this.source.X = 256;
             }
+            
 
             if (deathDraw)
             {
@@ -582,10 +589,15 @@ namespace LegendOfDarwin.GameObject
             {
                 this.source.X = 384;
             }
+            else if (eatingDarwin)
+            {
+                this.source.X = 512;
+            }
             else if (gapeMode)
             {
                 this.source.X = 256;
             }
+            
 
             sb.Draw(zombieTexture, destination, source, Color.White);
 

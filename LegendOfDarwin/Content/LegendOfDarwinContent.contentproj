@@ -496,13 +496,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="rainbow.jpg">
-      <Name>rainbow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="deathScream1.wav">
       <Name>deathScream1</Name>
       <Importer>WavImporter</Importer>
@@ -638,6 +631,13 @@
   <ItemGroup>
     <Compile Include="SplashScreens\Final.png">
       <Name>Final</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="menubar.png">
+      <Name>menubar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

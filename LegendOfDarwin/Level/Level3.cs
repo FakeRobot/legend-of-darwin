@@ -426,7 +426,7 @@ namespace LegendOfDarwin
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex,
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex, transformSound);
 
-            firstZombie.LoadContent(zombieTex);
+            firstZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
 
             fastZombie1.LoadContent(zombieFastTex);
 

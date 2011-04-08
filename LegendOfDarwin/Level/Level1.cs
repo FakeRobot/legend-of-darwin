@@ -378,12 +378,12 @@ namespace LegendOfDarwin
 
             //darwin.LoadContent(graphics.GraphicsDevice, darwinTex, zombieDarwinTex);
 
-            firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            fourthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            fifthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
-            sixthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"));
+            firstZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            secondZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            thirdZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            fourthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            fifthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            sixthZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/Zombie"), mainGame.Content.Load<Texture2D>("ZombieSkull"));
 
             zombieMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));

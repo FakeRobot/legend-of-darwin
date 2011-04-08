@@ -22,6 +22,7 @@ namespace LegendOfDarwin.GameObject
         //protected Rectangle destination;
 
         protected Texture2D zombieTexture;
+        protected Texture2D zombieSkullTexture;
 
         //zombie range, designates an area that the zombie can be in, done in game board tiles
         protected int maxX;
@@ -94,8 +95,9 @@ namespace LegendOfDarwin.GameObject
         }
 
         // Load the content
-        public void LoadContent(Texture2D myZombieTexture)
+        public void LoadContent(Texture2D myZombieTexture, Texture2D myZombieSkullTexture)
         {
+            this.zombieSkullTexture = myZombieSkullTexture;
             zombieTexture = myZombieTexture;
         }
 
@@ -620,8 +622,12 @@ namespace LegendOfDarwin.GameObject
         public void Draw(SpriteBatch spriteBatch)
         {
             if (this.isZombieAlive())
-            {   
-                spriteBatch.Draw(zombieTexture, this.destination,this.source, Color.White);
+            {
+                spriteBatch.Draw(zombieTexture, this.destination, this.source, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(zombieSkullTexture, this.destination, this.source, Color.White);
             }
         }
 

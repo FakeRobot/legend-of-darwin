@@ -220,11 +220,11 @@ namespace LegendOfDarwin
 
             darwin.LoadContent(graphics.GraphicsDevice, darwinUpTex, darwinDownTex, 
                 darwinRightTex, darwinLeftTex, zombieDarwinTex,deadDarwinTex, transformSound);
-            firstZombie.LoadContent(zombieTex);
-            secondZombie.LoadContent(zombieTex);
-            thirdZombie.LoadContent(zombieTex);
-            fourthZombie.LoadContent(zombieTex);
-            cannibalZombie.LoadContent(cannibalTex, eatSound);
+            firstZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            secondZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            thirdZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            fourthZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            cannibalZombie.LoadContent(cannibalTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
 
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);

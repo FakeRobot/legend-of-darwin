@@ -63,7 +63,7 @@ namespace LegendOfDarwin.GameObject
 
         public void LoadContent(Texture2D babyIn, Texture2D splodeIn, SoundEffect eSound)
         {
-            base.LoadContent(babyIn);
+            base.LoadContent(babyIn, babyIn);
             explodeTex = splodeIn;
             explodeSound = eSound;
         }

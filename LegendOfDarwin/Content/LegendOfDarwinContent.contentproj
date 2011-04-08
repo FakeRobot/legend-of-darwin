@@ -595,8 +595,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SplashScreens\Intro.png">
-      <Name>Intro</Name>
+    <Compile Include="ZombieSkull.png">
+      <Name>ZombieSkull</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

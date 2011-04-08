@@ -44,7 +44,7 @@ namespace LegendOfDarwin.GameObject
         // loads in sprite as well as shifts sprite to look natural 
         public new void LoadContent(Texture2D myZombieTexture) 
         {
-            base.LoadContent(myZombieTexture);
+            base.LoadContent(myZombieTexture, myZombieTexture);
 
             // 100 is height of sprite on sheet, the destination is shifted proportionally to the gameboard
             source.Height=100;

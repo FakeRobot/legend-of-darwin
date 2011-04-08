@@ -146,6 +146,69 @@ namespace LegendOfDarwin
             setWalls();
         }
 
+        public void setLevelState()
+        {
+            gameOver = false;
+            gameWin = false;
+
+            fellDownPit = false;
+            fellDownCounter = 0;
+
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(2, 20);
+
+            zTime.reset();
+
+            board.setGridPositionOpen(firstZombie);
+            board.setGridPositionOpen(secondZombie);
+            board.setGridPositionOpen(thirdZombie);
+            board.setGridPositionOpen(fourthZombie);
+            board.setGridPositionOpen(fifthZombie);
+            board.setGridPositionOpen(sixthZombie);
+            board.setGridPositionOpen(brain);
+            board.setGridPositionOpen(potion);
+
+            firstZombie.setGridPosition(10, 10);
+            board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+            firstZombie.setZombieAlive(true);
+
+            secondZombie.setGridPosition(10, 16);
+            board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+            secondZombie.setZombieAlive(true);
+
+            thirdZombie.setGridPosition(12, 10);
+            board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+            thirdZombie.setZombieAlive(true);
+
+            fourthZombie.setGridPosition(20, 7);
+            board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+            fourthZombie.setZombieAlive(true);
+
+            fifthZombie.setGridPosition(22, 10);
+            board.setGridPositionOccupied(fifthZombie.X, fifthZombie.Y);
+            fifthZombie.setZombieAlive(true);
+
+            sixthZombie.setGridPosition(22, 10);
+            board.setGridPositionOccupied(sixthZombie.X, sixthZombie.Y);
+            sixthZombie.setZombieAlive(true);
+
+            potion.setGridPosition(25, 4);
+
+            brain.setGridPosition(3, 3);
+            brain.setVisible(true);
+            board.setGridPositionOccupied(brain.X, brain.Y);
+
+            potion.reset();
+            darwin.setHuman();
+            darwin.setDarwinAlive();
+            playDeathSound = true;
+            gameState.setState(GameState.state.Level);
+            //MediaPlayer.Stop();
+            //MediaPlayer.Play(song);
+
+            mainGame.DEATH_COUNTER++;
+        }
+
         private BasicObject[] setRemovableWallsInLevelOne()
         {
 
@@ -570,8 +633,10 @@ namespace LegendOfDarwin
             {
                 //mainGame.Exit();
                 ks = Keyboard.GetState();
+                setLevelState();
                 gameState.setState(GameState.state.Start);
                 mainGame.setCurLevel(Game1.LevelState.Start);
+
             }
             else
             {
@@ -579,66 +644,8 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                
-                gameOver = false;
-                gameWin = false;
 
-                fellDownPit = false;
-                fellDownCounter = 0;
-
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 20);
-
-                zTime.reset();
-
-                board.setGridPositionOpen(firstZombie);
-                board.setGridPositionOpen(secondZombie);
-                board.setGridPositionOpen(thirdZombie);
-                board.setGridPositionOpen(fourthZombie);
-                board.setGridPositionOpen(fifthZombie);
-                board.setGridPositionOpen(sixthZombie);
-                board.setGridPositionOpen(brain);
-                board.setGridPositionOpen(potion);
-
-                firstZombie.setGridPosition(10, 10);
-                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
-                firstZombie.setZombieAlive(true);
-
-                secondZombie.setGridPosition(10, 16);
-                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
-                secondZombie.setZombieAlive(true);
-
-                thirdZombie.setGridPosition(12, 10);
-                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
-                thirdZombie.setZombieAlive(true);
-
-                fourthZombie.setGridPosition(20, 7);
-                board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
-                fourthZombie.setZombieAlive(true);
-
-                fifthZombie.setGridPosition(22, 10);
-                board.setGridPositionOccupied(fifthZombie.X, fifthZombie.Y);
-                fifthZombie.setZombieAlive(true);
-
-                sixthZombie.setGridPosition(22, 10);
-                board.setGridPositionOccupied(sixthZombie.X, sixthZombie.Y);
-                sixthZombie.setZombieAlive(true);
-
-                potion.setGridPosition(25, 4);
-
-                brain.setGridPosition(3, 3);
-                brain.setVisible(true);
-                board.setGridPositionOccupied(brain.X, brain.Y);
-
-                potion.reset();
-                darwin.setHuman();
-                darwin.setDarwinAlive();
-                playDeathSound = true;
-                gameState.setState(GameState.state.Level);
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
-
-                mainGame.DEATH_COUNTER++;
+                setLevelState();
                 
             }
 

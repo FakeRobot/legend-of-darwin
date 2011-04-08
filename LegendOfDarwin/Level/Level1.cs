@@ -390,7 +390,7 @@ namespace LegendOfDarwin
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             brainMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Intro"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Intro2"));
             gameStart2.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Intro2"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));

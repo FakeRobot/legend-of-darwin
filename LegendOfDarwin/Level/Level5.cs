@@ -184,7 +184,8 @@ namespace LegendOfDarwin.Level
 
             playSound = true;
             playDeathSound = true;
-
+            fellDownPit = false;
+            fellDownCounter = 0;
 
             northZombie.setGridPosition(15, 3);
             northZombie.setCurrentPatrolPoint(new Vector2(27, 3));

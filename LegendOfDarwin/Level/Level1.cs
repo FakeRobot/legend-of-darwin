@@ -46,13 +46,16 @@ namespace LegendOfDarwin
 
         private bool playDeathSound = true;
         private SoundEffect deathScreamSound;
+        private SoundEffect fallScreamSound;
+
+        private bool fellDownPit = false;
+        private int fellDownCounter = 0;
 
         private int counterReady;
         public Texture2D gameOverTexture;
         public Texture2D gameWinTexture;
 
         Vector2 gameOverPosition = Vector2.Zero;
-
 
         // things for managing message boxes
         bool messageMode = false;
@@ -337,6 +340,7 @@ namespace LegendOfDarwin
         {
             messageFont = mainGame.Content.Load<SpriteFont>("TimesNewRoman");
             deathScreamSound = mainGame.Content.Load<SoundEffect>("chewScream");
+            fallScreamSound = mainGame.Content.Load<SoundEffect>("deathScream1");
 
             Texture2D darwinTex = mainGame.Content.Load<Texture2D>("DarwinPic/Darwin");
             Texture2D darwinUpTex = mainGame.Content.Load<Texture2D>("DarwinPic/DarwinUp");
@@ -410,8 +414,21 @@ namespace LegendOfDarwin
                     {
                         if (playDeathSound)
                         {
-                            deathScreamSound.Play();
+                            if (fellDownPit)
+                                fallScreamSound.Play();
+                            else
+                                deathScreamSound.Play();
+                            
                             playDeathSound = false;
+                        }
+
+                        // for changing darwin's sprite when he falls into the vortex
+                        fellDownCounter++;
+                        if (fellDownPit && darwin.destination.Width > 0 && darwin.destination.Height > 0 && fellDownCounter > 5)
+                        {
+                            darwin.destination.Width -= (int)((float)board.getSquareWidth() * 0.1);
+                            darwin.destination.Height -= (int)((float)board.getSquareLength() * 0.1);
+                            fellDownCounter = 0;
                         }
 
                         darwin.setDarwinDead();
@@ -478,7 +495,6 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
-
             if (darwin.isDarwinAlive())
             {
                 if (!darwin.isZombie())
@@ -543,6 +559,9 @@ namespace LegendOfDarwin
                 
                 gameOver = false;
                 gameWin = false;
+
+                fellDownPit = false;
+                fellDownCounter = 0;
 
                 board.setGridPositionOpen(darwin);
                 darwin.setGridPosition(2, 20);
@@ -650,6 +669,7 @@ namespace LegendOfDarwin
             if (darwin.isOnTop(myVortex))
             {
                 gameOver = true;
+                fellDownPit = true;
             }
         }
 
@@ -720,6 +740,9 @@ namespace LegendOfDarwin
                 darwin.setHuman();
                 darwin.setDarwinAlive();
 
+                fellDownCounter = 0;
+                fellDownPit = false;
+
                 gameState.setState(GameState.state.Start);
             }
         }
@@ -769,6 +792,7 @@ namespace LegendOfDarwin
             board.Draw(spriteBatch);
             stairs.Draw(spriteBatch);
 
+            vortex.Draw(spriteBatch);
             darwin.Draw(spriteBatch);
             firstZombie.Draw(spriteBatch);
             secondZombie.Draw(spriteBatch);
@@ -779,7 +803,6 @@ namespace LegendOfDarwin
             firstSwitch.Draw(spriteBatch);
             brain.Draw(spriteBatch);
             zTime.Draw(spriteBatch);
-            vortex.Draw(spriteBatch);
             potion.Draw(spriteBatch);
 
             if (messageMode)

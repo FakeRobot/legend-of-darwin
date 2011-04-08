@@ -566,7 +566,7 @@ namespace LegendOfDarwin
             if (darwin.isOnTop(stairs))
             {
                 board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(2, 2);
+                darwin.setGridPosition(21, 20);
                 mainGame.setCurLevel(Game1.LevelState.Level3);
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level3);
 

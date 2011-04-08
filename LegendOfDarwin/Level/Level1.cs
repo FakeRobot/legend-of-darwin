@@ -68,6 +68,8 @@ namespace LegendOfDarwin
         //public Song song;
         public Game1 mainGame;
 
+        KeyboardState ks;
+
         public Level1(Game1 myMainGame)
         {
             mainGame = myMainGame;
@@ -563,12 +565,17 @@ namespace LegendOfDarwin
 
         private void UpdateEndState()
         {
-            KeyboardState ks = Keyboard.GetState();
 
-            if (ks.IsKeyDown(Keys.Q))
+            if (ks.IsKeyDown(Keys.Q) && Keyboard.GetState().IsKeyUp(Keys.Q))
             {
                 //mainGame.Exit();
+                ks = Keyboard.GetState();
+                gameState.setState(GameState.state.Start);
                 mainGame.setCurLevel(Game1.LevelState.Start);
+            }
+            else
+            {
+                ks = Keyboard.GetState();
             }
             if (ks.IsKeyDown(Keys.R))
             {

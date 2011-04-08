@@ -43,7 +43,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level2;
+            curLevel = LevelState.Start;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -146,6 +146,7 @@ namespace LegendOfDarwin
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
                 {
                     setCurLevel(LevelState.Start2);
+                    ks = Keyboard.GetState();
                 }
                 else
                 {
@@ -158,6 +159,7 @@ namespace LegendOfDarwin
                 {
                     MediaPlayer.Play(song);
                     setCurLevel(LevelState.Level1);
+                    ks2 = Keyboard.GetState();
                 }
                 else
                 {

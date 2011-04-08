@@ -195,7 +195,6 @@ namespace LegendOfDarwin.Level
 
             gameOver = false;
             gameWin = false;
-            gameState.setState(GameState.state.Level);
             
             
         }
@@ -409,6 +408,7 @@ namespace LegendOfDarwin.Level
             {
                 setLevelState();
                 mainGame.DEATH_COUNTER++;
+                gameState.setState(GameState.state.Level);
             }
 
         }

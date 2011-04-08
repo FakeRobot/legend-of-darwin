@@ -180,6 +180,8 @@ namespace LegendOfDarwin
             potion.setGridPosition(3, 3);
             potion.reset();
 
+            zTime.setTime(zTimeReset.getTime());
+
             darwin.setHuman();
             darwin.setDarwinAlive();
             playDeathSound = true;

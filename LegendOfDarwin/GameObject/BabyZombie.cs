@@ -82,7 +82,7 @@ namespace LegendOfDarwin.GameObject
                         exploding = false;
                         setZombieAlive(false);
                         setEventLag(40);
-                        explodeSound.Play();
+
                     }
                 }
                 else if (goingToExplode)
@@ -98,6 +98,7 @@ namespace LegendOfDarwin.GameObject
                             babyCountTwo = 0;
                             exploding = true;
                             goingToExplode = false;
+                            explodeSound.Play();
                         }
                     }
                 }

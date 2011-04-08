@@ -872,7 +872,7 @@ namespace LegendOfDarwin.Level
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 mainGame.Exit();
 
-            if (ks.IsKeyDown(Keys.Q))
+            if (ks.IsKeyDown(Keys.Escape))
             {
                 mainGame.Exit();
             }

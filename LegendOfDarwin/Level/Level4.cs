@@ -254,6 +254,7 @@ namespace LegendOfDarwin.Level
         {
             board.setGridPositionOpen(darwin);
             darwin.setGridPosition(16, 21);
+            zTime.reset();
 
             gameOver = false;
             gameWin = false;

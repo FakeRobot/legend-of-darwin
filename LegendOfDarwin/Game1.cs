@@ -43,7 +43,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Start;
+            curLevel = LevelState.Level6;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -110,27 +110,21 @@ namespace LegendOfDarwin
             song = Content.Load<Song>("Thriller8bit");
 
             level1.spriteBatch = spriteBatch;
-            //level1.song = Content.Load<Song>("Thriller8bit");
             level1.LoadContent();
 
             level2.spriteBatch = spriteBatch;
-            //level2.song = Content.Load<Song>("Thriller8bit");
             level2.LoadContent();
 
             level3.spriteBatch = spriteBatch;
-            //level3.song = Content.Load<Song>("Thriller8bit");
             level3.LoadContent();
 
             level4.spriteBatch = spriteBatch;
-            //level4.song = Content.Load<Song>("Thriller8bit");
             level4.LoadContent();
 
             level5.spriteBatch = spriteBatch;
-            //level5.song = Content.Load<Song>("Thriller8bit");
             level5.LoadContent();
 
             level6.spriteBatch = spriteBatch;
-            //level6.song = Content.Load<Song>("Thriller8bit");
             level6.LoadContent();
         }
 

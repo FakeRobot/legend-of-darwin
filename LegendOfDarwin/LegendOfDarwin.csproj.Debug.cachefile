@@ -19,6 +19,7 @@ Content\StaticPic\metal_tile.xnb
 Content\StaticPic\side_wall.xnb
 Content\StaticPic\Level2\metal_tile_dark.xnb
 Content\StaticPic\Level2\side_wall_green.xnb
+Content\StaticPic\potion.xnb
 Content\StaticPic\Level3\side_wall_yellow.xnb
 Content\StaticPic\Level3\metal_tile_light.xnb
 Content\leaf.xnb
@@ -54,11 +55,10 @@ Content\DemoFinish.xnb
 Content\ZombiePic\King.xnb
 Content\DarwinPic\DeadDarwin.xnb
 Content\DarwinPic\DarwinUp.xnb
-Content\StaticPic\potion.xnb
-Content\rainbow.xnb
 Content\TimesNewRoman.xnb
 Content\Thriller8bit.xnb
 Content\reveal.xnb
+Content\rainbow.xnb
 Content\deathScream1.xnb
 Content\chewScream.xnb
 Content\potion.xnb
@@ -69,8 +69,8 @@ Content\baby.xnb
 Content\explosion.xnb
 Content\zombie_groan.xnb
 Content\boxSound.xnb
-Content\pit.xnb
 Content\flames.xnb
 Content\OmNom.xnb
+Content\pit.xnb
 Content\sidepit.xnb
 Content\Thriller8bit.wma

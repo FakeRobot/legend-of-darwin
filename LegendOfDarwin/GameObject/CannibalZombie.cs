@@ -299,7 +299,7 @@ namespace LegendOfDarwin.GameObject
 
         public void CollisionWithZombie(Zombie zombie)
         {
-            if (this.isOnTop(zombie))
+            if (this.isOnTop(zombie) && zombie.isZombieAlive())
             {
                 zombie.setZombieAlive(false);
                 eatSound.Play();

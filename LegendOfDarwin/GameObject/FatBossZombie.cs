@@ -10,9 +10,9 @@ namespace LegendOfDarwin.GameObject
 {
     class FatBossZombie : Zombie
     {
-        // mode for zombie
-        enum Stage { Nothing, Gape, Walk, Chuck }
-        private Stage curMode;
+
+        private enum MODE { Alive, Dead };
+        private MODE mode;
 
         private Darwin darwin;
         private Texture2D explosionTexture;
@@ -32,18 +32,26 @@ namespace LegendOfDarwin.GameObject
         private bool secondExplosion = false;
         private bool thirdExplosion = false;
         private bool fourthExplosion = false;
+
+        private int deathCount;
+        private bool deathDraw;
+        private int[] deathExplodeCount;
+        private bool[] deathExplodeBool;
+
         public bool explodeFirstWaveOfBabies = true;
         public bool explodeSecondWaveOfBabies = true;
         public bool explodeThirdWaveOfBabies = true;
+        private bool eatingBaby = false;
+        private bool gapeMode = false;
 
         private bool allowedToWalk;
         private int spriteStripCounter = 0;
-        private bool eatingBaby = false;
+
         private int eatingCounter = 0;
         private Rectangle[] explodeSource;
 
         // is this in mode where his mouth is open
-        private bool gapeMode = false;
+ 
         private int gapeCount = 0;
 
         // number of babies boss must eat to die
@@ -54,7 +62,6 @@ namespace LegendOfDarwin.GameObject
         public FatBossZombie(int x, int y, int maxX, int minX, int maxY, int minY, Darwin dar, GameBoard gb) :
             base(x, y, maxX, minX, maxY, minY, gb)
         {
-            health = 4;
             darwin = dar;
 
             destination.Height = board.getSquareLength() * 3;
@@ -62,10 +69,7 @@ namespace LegendOfDarwin.GameObject
 
             source = new Rectangle(0, 0, 128, 128);
 
-            setEventLag(75);
-
-            count = 0;
-            explodeCount = 0;
+            setEventLag(10);
 
             explodeSource = new Rectangle[4];
             explodeSource[0] = new Rectangle(0, 0, 75, 90);
@@ -75,6 +79,17 @@ namespace LegendOfDarwin.GameObject
 
             ran = new Random();
             ran1 = new Random();
+
+            deathExplodeCount = new int[9];
+            deathExplodeBool = new bool[9];
+
+            for (int i = 0; i < 9; i++)
+            {
+                deathExplodeBool[i] = new bool();
+                deathExplodeCount[i] = new int();
+            }
+
+            reset();
             ZOMBIE_MOVE_RATE = 50;
         }
 
@@ -90,9 +105,43 @@ namespace LegendOfDarwin.GameObject
             board.setGridPositionOpen(this.X + 1, this.Y + 2);
             board.setGridPositionOpen(this.X + 2, this.Y + 2);
             gapeMode = false;
-            this.setZombieAlive(true);
-            health = 4;
+
+
+            count = 0;
             explodeCount = 0;
+            secondExplodeCount = 0;
+            thirdExplodeCount = 0;
+            fourthExplodeCount = 0;
+            exploding = false;
+            secondExplosion = false;
+            thirdExplosion = false;
+            fourthExplosion = false;
+
+            deathCount = 0;
+            deathDraw = false;
+
+            explodeFirstWaveOfBabies = true;
+            explodeSecondWaveOfBabies = true;
+            explodeThirdWaveOfBabies = true;
+            eatingBaby = false;
+            gapeMode = false;
+
+            allowedToWalk = true;
+            spriteStripCounter = 0;
+
+            eatingCounter = 0;
+
+            gapeCount = 0;
+
+            for (int i = 0; i < 9; i ++)
+            {
+                deathExplodeCount[i] = 0;
+                deathExplodeBool[i] = false;
+            }
+
+            this.setZombieAlive(true);
+            mode = MODE.Alive;
+            health = 1;
         }
 
         public void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)
@@ -237,13 +286,91 @@ namespace LegendOfDarwin.GameObject
 
         public new void Update(GameTime gameTime)
         {
+            switch (mode)
+            {
+                case MODE.Alive:
+                    UpdateAlive(gameTime);
+                    break;
+                case MODE.Dead:
+                    UpdateDead(gameTime);
+                    break;
+
+            }
+        }
+
+        public void UpdateDead(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            deathCount++;
+
+            updateBossExplosions();
+
+            if (canEventHappen())
+            {
+                int i = ran.Next(0, 8);
+
+                deathExplodeBool[i] = true;
+
+                for (int j = 0; i < 9; i++)
+                {
+                    if (deathExplodeBool[j])
+                    {
+                        deathExplodeCount[j]++;
+
+                        if (deathExplodeCount[j] == 4)
+                        {
+                            deathExplodeBool[j] = false;
+                            deathExplodeCount[j] = 0;
+                        }
+                    }
+                }
+                setEventFalse();
+            }
+
+            if (deathCount > 180)
+            {
+                this.setZombieAlive(false);
+            }
+            else if (deathCount > 150)
+            {
+                deathDraw = true;
+            }
+            else if (deathCount > 120)
+            {
+                deathDraw = false;
+            }
+            else if (deathCount > 90)
+            {
+                deathDraw = true;
+            }
+            else if (deathCount > 60)
+            {
+                deathDraw = false;
+            }
+            else if (deathCount > 30)
+            {
+                deathDraw = true;
+            }
+        }
+
+        public void UpdateAlive(GameTime gameTime)
+        {
 
             base.Update(gameTime);
+
+            if (canEventHappen())
+            {
+                updateBossExplosions();
+                setEventFalse();
+            }
+
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
             if (health <= 0)
-                this.setZombieAlive(false);
+            {
+                mode = MODE.Dead;
+            }
 
             if (isDarwinToTheLeft() || isDarwinToTheRight())
                 ZOMBIE_MOVE_RATE = 5;
@@ -262,7 +389,6 @@ namespace LegendOfDarwin.GameObject
 
 
                 allowedToWalk = true;
-                setEventFalse();
 
                 if (isDarwinToTheLeft())
                     MoveLeft();
@@ -284,7 +410,7 @@ namespace LegendOfDarwin.GameObject
                     randomWalk();
                 }
 
-                updateBossExplosions();
+
 
                 movecounter = 0;
             }
@@ -371,6 +497,61 @@ namespace LegendOfDarwin.GameObject
         }
 
         public new void Draw(SpriteBatch sb)
+        {
+            switch (mode)
+            { 
+                case MODE.Alive:
+                    DrawAlive(sb);
+                    break;
+                case MODE.Dead:
+                    DrawDead(sb);
+                    break;
+            }
+        }
+
+        public void DrawDead(SpriteBatch sb)
+        {
+            if (eatingBaby)
+            {
+                this.source.X = 384;
+            }
+            else if (gapeMode)
+            {
+                this.source.X = 256;
+            }
+
+            if (deathDraw)
+            {
+                sb.Draw(zombieTexture, destination, source, Color.White);
+            }
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (deathExplodeBool[i])
+                {
+                    sb.Draw(explosionTexture, getBoardFromNumber(i), explodeSource[deathExplodeCount[i]], Color.White);
+                }
+            }
+
+            if (exploding)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this), explodeSource[explodeCount], Color.White);
+            }
+            if (secondExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X + 1, this.Y), explodeSource[secondExplodeCount], Color.White);
+            }
+            if (thirdExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X, this.Y + 1), explodeSource[thirdExplodeCount], Color.White);
+            }
+            if (fourthExplosion)
+            {
+                sb.Draw(explosionTexture, board.getPosition(this.X + 1, this.Y + 1), explodeSource[fourthExplodeCount], Color.White);
+            }
+        }
+
+        public void DrawAlive(SpriteBatch sb)
         {
             
             destination.Height = board.getSquareLength() * 3;
@@ -532,6 +713,46 @@ namespace LegendOfDarwin.GameObject
                 board.setGridPositionOpen(this.X , this.Y + 1);
                 board.setGridPositionOpen(this.X , this.Y + 2);
                 this.setGridPosition(this.X + 1, this.Y);
+            }
+        }
+
+        private Rectangle getBoardFromNumber(int num)
+        {
+            if (num == 0)
+            {
+                return board.getPosition(this.X, this.Y);
+            }
+            else if (num == 1)
+            {
+                return board.getPosition(this.X + 1, this.Y);
+            }
+            else if (num == 2)
+            {
+                return board.getPosition(this.X + 2, this.Y);
+            }
+            else if (num == 3)
+            {
+                return board.getPosition(this.X, this.Y + 1);
+            }
+            else if (num == 4)
+            {
+                return board.getPosition(this.X + 1, this.Y + 1);
+            }
+            else if (num == 5)
+            {
+                return board.getPosition(this.X + 2, this.Y + 1);
+            }
+            else if (num == 6)
+            {
+                return board.getPosition(this.X, this.Y + 2);
+            }
+            else if (num == 7)
+            {
+                return board.getPosition(this.X + 1, this.Y + 2);
+            }
+            else
+            {
+                return board.getPosition(this.X + 2, this.Y + 2);
             }
         }
 

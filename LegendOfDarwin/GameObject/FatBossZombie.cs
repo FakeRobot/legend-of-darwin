@@ -338,6 +338,7 @@ namespace LegendOfDarwin.GameObject
             if (deathCount > 180)
             {
                 this.setZombieAlive(false);
+                gapeSound.Play();
             }
             else if (deathCount > 150)
             {
@@ -358,6 +359,7 @@ namespace LegendOfDarwin.GameObject
             else if (deathCount > 30)
             {
                 deathDraw = true;
+                gapeSound.Play();
             }
         }
 
@@ -458,6 +460,7 @@ namespace LegendOfDarwin.GameObject
                 if (explodeCount == 2)
                 {
                     secondExplosion = true;
+                    explosionSound.Play();
                 }
             }
 
@@ -475,6 +478,7 @@ namespace LegendOfDarwin.GameObject
                 {
                     thirdExplosion = true;
                     explodeSecondWaveOfBabies = true;
+                    explosionSound.Play();
                 }
             }
 
@@ -491,6 +495,7 @@ namespace LegendOfDarwin.GameObject
                 if (thirdExplodeCount == 2)
                 {
                     fourthExplosion = true;
+                    explosionSound.Play();
                 }
             }
 
@@ -501,6 +506,10 @@ namespace LegendOfDarwin.GameObject
                 {
                     fourthExplosion = false;
                     fourthExplodeCount = 0;
+                }
+                else if (fourthExplodeCount == 1)
+                {
+                    explosionSound.Play();
                 }
             }
         }

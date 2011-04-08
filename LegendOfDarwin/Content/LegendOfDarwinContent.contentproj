@@ -569,6 +569,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pit.png">
+      <Name>pit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="flames.wav">
       <Name>flames</Name>
       <Importer>WavImporter</Importer>

@@ -410,9 +410,14 @@ namespace LegendOfDarwin.Level
                 b.LoadContent(mainGame.Content.Load<Texture2D>("box"), (mainGame.Content.Load<SoundEffect>("boxSound")));
             }
 
-            foreach (Vortex v in vortexes)
+            for (int i = 0; i < vortexes.Count(); i++)
             {
-                v.LoadContent(mainGame.Content.Load<Texture2D>("hole"));
+                if((i == 25) || (i == 49))
+                    vortexes.ElementAt(i).LoadContent(mainGame.Content.Load<Texture2D>("sidepit"));
+                else if (i < 50)
+                    vortexes.ElementAt(i).LoadContent(mainGame.Content.Load<Texture2D>("pit"));
+                else
+                    vortexes.ElementAt(i).LoadContent(mainGame.Content.Load<Texture2D>("sidepit"));
             }
 
             pattern.LoadContent(mainGame.Content.Load<Texture2D>("boxPattern"));

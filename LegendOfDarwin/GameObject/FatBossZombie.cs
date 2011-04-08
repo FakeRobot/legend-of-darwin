@@ -141,7 +141,7 @@ namespace LegendOfDarwin.GameObject
 
             this.setZombieAlive(true);
             mode = MODE.Alive;
-            health = 1;
+            health = 4;
         }
 
         public void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)

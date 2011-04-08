@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace LegendOfDarwin.GameObject
 {
@@ -23,6 +24,7 @@ namespace LegendOfDarwin.GameObject
         protected int pathLimit;
         protected Darwin darwin;
         protected List<Zombie> zombies;
+        protected SoundEffect eatSound;
 
         /**
          * Initalizes a cannibal on the game board
@@ -299,8 +301,8 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.isOnTop(zombie))
             {
-                
                 zombie.setZombieAlive(false);
+                eatSound.Play();
             }
         }
 
@@ -316,6 +318,12 @@ namespace LegendOfDarwin.GameObject
             }
 
             return newList;
+        }
+        
+        public new void LoadContent(Texture2D fastZombieTexture, SoundEffect eSound)
+        {
+            zombieTexture = fastZombieTexture;
+            eatSound = eSound;
         }
 
         public new void Update(GameTime gameTime, Darwin darwin) 

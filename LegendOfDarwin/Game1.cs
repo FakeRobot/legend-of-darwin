@@ -146,7 +146,10 @@ namespace LegendOfDarwin
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
                 {
                     setCurLevel(LevelState.Start2);
+<<<<<<< .mine
+=======
                     ks = Keyboard.GetState();
+>>>>>>> .r551
                 }
                 else
                 {
@@ -155,7 +158,11 @@ namespace LegendOfDarwin
             }
             else if(curLevel == LevelState.Start2)
             {
+<<<<<<< .mine
+                if (Keyboard.GetState().IsKeyUp(Keys.Space) && ks.IsKeyDown(Keys.Space))
+=======
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks2.IsKeyDown(Keys.Enter))
+>>>>>>> .r551
                 {
                     MediaPlayer.Play(song);
                     setCurLevel(LevelState.Level1);

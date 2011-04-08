@@ -367,7 +367,7 @@ namespace LegendOfDarwin.GameObject
 
                 if (hasZombieDest)
                 {
-                    if (Math.Abs(this.X - darwin.X) + Math.Abs(this.Y - darwin.Y) <= closestZombieDist)
+                    if (Math.Abs(this.X - darwin.X) + Math.Abs(this.Y - darwin.Y) <= closestZombieDist && darwin.isZombie())
                     {
                         goForDarwin = true;
                         hasZombieDest = false;

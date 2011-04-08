@@ -202,11 +202,6 @@ namespace LegendOfDarwin
             darwin.setHuman();
             darwin.setDarwinAlive();
             playDeathSound = true;
-            gameState.setState(GameState.state.Level);
-            //MediaPlayer.Stop();
-            //MediaPlayer.Play(song);
-
-            mainGame.DEATH_COUNTER++;
         }
 
         private BasicObject[] setRemovableWallsInLevelOne()
@@ -644,9 +639,9 @@ namespace LegendOfDarwin
             }
             if (ks.IsKeyDown(Keys.R))
             {
-
                 setLevelState();
-                
+                mainGame.DEATH_COUNTER++;
+                gameState.setState(GameState.state.Level);
             }
 
         }

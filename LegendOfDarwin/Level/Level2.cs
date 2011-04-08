@@ -139,6 +139,56 @@ namespace LegendOfDarwin
             potion.setGridPosition(3, 3);
         }
 
+        public void setLevelState()
+        {
+            board.setGridPositionOpen(darwin);
+            darwin.setGridPosition(21, 20);
+            board.setGridPositionOccupied(darwin);
+
+            board.setGridPositionOpen(firstZombie.X, firstZombie.Y);
+            firstZombie.setGridPosition(10, 9);
+            board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
+            firstZombie.setZombieAlive(true);
+
+            board.setGridPositionOpen(secondZombie.X, secondZombie.Y);
+            secondZombie.setGridPosition(12, 9);
+            board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
+            secondZombie.setZombieAlive(true);
+
+            board.setGridPositionOpen(thirdZombie.X, thirdZombie.Y);
+            thirdZombie.setGridPosition(8, 8);
+            board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
+            thirdZombie.setZombieAlive(true);
+
+            board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
+            fourthZombie.setGridPosition(8, 12);
+            board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
+            fourthZombie.setZombieAlive(true);
+
+            List<Zombie> myZombieList = new List<Zombie>();
+            myZombieList.Add(firstZombie);
+            myZombieList.Add(secondZombie);
+            myZombieList.Add(thirdZombie);
+            myZombieList.Add(fourthZombie);
+            cannibalZombie.updateListOfZombies(myZombieList);
+
+            board.setGridPositionOpen(cannibalZombie.X, cannibalZombie.Y);
+            cannibalZombie.setGridPosition(29, 3);
+            board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
+            cannibalZombie.setZombieAlive(true);
+
+            potion.setGridPosition(3, 3);
+            potion.reset();
+
+            darwin.setHuman();
+            darwin.setDarwinAlive();
+            playDeathSound = true;
+            playSound = true;
+            gameOverCounter = 0;
+            gameOver = false;
+            gameWin = false;
+        }
+
         private BasicObject[] setRemovableWallsInLevelTwo()
         {
             //later add an x and y to the constructor
@@ -244,7 +294,7 @@ namespace LegendOfDarwin
             switch (gameState.getState())
             {
                 case GameState.state.Start:
-                    UpdateStartState();
+                    UpdateLevelState(gameTime);
                     break;
                 case GameState.state.Level:
                     if (!messageMode && !gameOver)
@@ -299,6 +349,7 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Enter))
             {
                 //MediaPlayer.Play(song);
+                setLevelState();
                 gameState.setState(GameState.state.Level);
             }
         }
@@ -407,75 +458,15 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Q))
             {
                 //mainGame.Exit();
+                setLevelState();
+                gameState.setState(GameState.state.Start);
                 mainGame.setCurLevel(Game1.LevelState.Start);
             }
             if (ks.IsKeyDown(Keys.R))
             {
-                
-                board.setGridPositionOpen(darwin);
-                darwin.setGridPosition(21, 20);
-                board.setGridPositionOccupied(darwin);
-                
-                if (gameWin)
-                {
-                    zTime.reset();
-                    mainGame.setCurLevel(Game1.LevelState.Level1);
-                }
-                else if (gameOver) 
-                {
-                    zTime = new ZombieTime(board);
-                    zTime.reset();
-                    zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
-                    zTime.setTime(zTimeReset.getTime());
-                }
-
-                board.setGridPositionOpen(firstZombie.X, firstZombie.Y);
-                firstZombie.setGridPosition(10, 9);
-                board.setGridPositionOccupied(firstZombie.X, firstZombie.Y);
-                firstZombie.setZombieAlive(true);
-
-                board.setGridPositionOpen(secondZombie.X, secondZombie.Y);
-                secondZombie.setGridPosition(12, 9);
-                board.setGridPositionOccupied(secondZombie.X, secondZombie.Y);
-                secondZombie.setZombieAlive(true);
-
-                board.setGridPositionOpen(thirdZombie.X, thirdZombie.Y);
-                thirdZombie.setGridPosition(8, 8);
-                board.setGridPositionOccupied(thirdZombie.X, thirdZombie.Y);
-                thirdZombie.setZombieAlive(true);
-
-                board.setGridPositionOpen(fourthZombie.X, fourthZombie.Y);
-                fourthZombie.setGridPosition(8, 12);
-                board.setGridPositionOccupied(fourthZombie.X, fourthZombie.Y);
-                fourthZombie.setZombieAlive(true);
-
-                List<Zombie> myZombieList = new List<Zombie>();
-                myZombieList.Add(firstZombie);
-                myZombieList.Add(secondZombie);
-                myZombieList.Add(thirdZombie);
-                myZombieList.Add(fourthZombie);
-                cannibalZombie.updateListOfZombies(myZombieList);
-
-                board.setGridPositionOpen(cannibalZombie.X,cannibalZombie.Y);
-                cannibalZombie.setGridPosition(29,3);
-                board.setGridPositionOccupied(cannibalZombie.X, cannibalZombie.Y);
-                cannibalZombie.setZombieAlive(true);
-
-                potion.setGridPosition(3, 3);
-                potion.reset();     
-
-                darwin.setHuman();
-                darwin.setDarwinAlive();
-                playDeathSound = true;
-                playSound = true;
-                gameOverCounter = 0;
-                gameState.setState(GameState.state.Level);
-                gameOver = false;
-                gameWin = false;
-                //MediaPlayer.Stop();
-                //MediaPlayer.Play(song);
-
+                setLevelState();
                 mainGame.DEATH_COUNTER++;
+                gameState.setState(GameState.state.Level);
             }
 
         }

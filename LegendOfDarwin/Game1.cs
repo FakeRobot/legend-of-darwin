@@ -34,6 +34,7 @@ namespace LegendOfDarwin
         Level.Level6 level6;
 
         Song song;
+        SpriteFont spriteFont;
 
         public int DEATH_COUNTER;
 
@@ -109,6 +110,7 @@ namespace LegendOfDarwin
             main2 = Content.Load<Texture2D>("SplashScreens/Intro");
             end = Content.Load<Texture2D>("SplashScreens/Final");
             song = Content.Load<Song>("Thriller8bit");
+            spriteFont = Content.Load<SpriteFont>("TimesNewRoman");
 
             level1.spriteBatch = spriteBatch;
             level1.LoadContent();
@@ -133,7 +135,7 @@ namespace LegendOfDarwin
         {
             graphics.PreferredBackBufferHeight = 768;
             graphics.PreferredBackBufferWidth = 1024;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
         }
 
@@ -226,6 +228,8 @@ namespace LegendOfDarwin
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(end, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferWidth), Color.White);
+                spriteBatch.DrawString(spriteFont, "TOTAL DEATH = " + DEATH_COUNTER, new Vector2((float)(graphics.PreferredBackBufferWidth / 2.5),
+                    (float)(graphics.PreferredBackBufferHeight / 2.5)), Color.White);
                 spriteBatch.End();
             }
             base.Draw(gameTime);

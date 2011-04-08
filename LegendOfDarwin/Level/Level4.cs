@@ -395,7 +395,7 @@ namespace LegendOfDarwin.Level
             darwinMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelFour"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level4"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"), mainGame.Content.Load<SoundEffect>("potion"));
             potion2.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"), mainGame.Content.Load<SoundEffect>("potion"));

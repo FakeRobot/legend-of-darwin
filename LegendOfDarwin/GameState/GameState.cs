@@ -7,7 +7,7 @@ namespace LegendOfDarwin
 {
     class GameState
     {
-        public enum state { Start, Level, End };
+        public enum state { Start, Start2, Level, End };
         private state myState;
 
         public GameState()

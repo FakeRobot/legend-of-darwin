@@ -22,7 +22,7 @@ namespace LegendOfDarwin
         public GraphicsDevice device;
 
         private GameState gameState;
-        private GameStart gameStart;
+        private GameStart gameStart, gameStart2;
 
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie, fifthZombie, sixthZombie;
@@ -82,6 +82,7 @@ namespace LegendOfDarwin
 
             gameState = new GameState();
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
+            gameStart2 = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
 
             board = new GameBoard(new Vector2(33, 25), new Vector2(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight));
             darwin = new Darwin(board);
@@ -389,7 +390,8 @@ namespace LegendOfDarwin
             switchMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
             brainMessage.LoadContent(mainGame.Content.Load<Texture2D>("messageBox"));
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelOne"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Intro"));
+            gameStart2.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Intro2"));
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             vortex.LoadContent(mainGame.Content.Load<Texture2D>("vortex"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"), mainGame.Content.Load<SoundEffect>("potion"));
@@ -404,6 +406,9 @@ namespace LegendOfDarwin
             {
                 case GameState.state.Start:
                     UpdateStartState();
+                    break;
+                case GameState.state.Start2:
+                    UpdateStartState2();
                     break;
                 case GameState.state.Level:
                     if (!messageMode && !gameOver)
@@ -466,6 +471,16 @@ namespace LegendOfDarwin
         }
 
         private void UpdateStartState()
+        {
+            KeyboardState ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.Enter))
+            {
+                //MediaPlayer.Play(song);
+                gameState.setState(GameState.state.Start2);
+            }
+        }
+
+        private void UpdateStartState2()
         {
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
@@ -767,6 +782,9 @@ namespace LegendOfDarwin
                 case GameState.state.Start:
                     DrawStartState();
                     break;
+                case GameState.state.Start2:
+                    DrawStartState2();
+                    break;
                 case GameState.state.Level:
                     DrawLevelState(gameTime);
                     break;
@@ -785,6 +803,13 @@ namespace LegendOfDarwin
             spriteBatch.End();
         }
 
+        private void DrawStartState2()
+        {
+            mainGame.GraphicsDevice.Clear(Color.White);
+            spriteBatch.Begin();
+            gameStart2.Draw(spriteBatch);
+            spriteBatch.End();
+        }
         private void DrawLevelState(GameTime gameTime)
         {
             mainGame.GraphicsDevice.Clear(Color.White);

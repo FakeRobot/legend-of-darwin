@@ -23,7 +23,7 @@ namespace LegendOfDarwin
         Texture2D main, end;
         KeyboardState ks, ksEnd;
         // for keeping track of what level player is on
-        public enum LevelState { Start, Level1, Level2, Level3, Level4, Level5, Level6, End };
+        public enum LevelState { Start, Start2, Level1, Level2, Level3, Level4, Level5, Level6, End };
         LevelState curLevel;
 
         Level1 level1;
@@ -43,7 +43,7 @@ namespace LegendOfDarwin
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            curLevel = LevelState.Level4;
+            curLevel = LevelState.Level2;
 
             level1 = new Level1(this);
             level2 = new Level2(this);
@@ -106,7 +106,7 @@ namespace LegendOfDarwin
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             main = Content.Load<Texture2D>("startScreen");
-            end = Content.Load<Texture2D>("DemoFinish");
+            end = Content.Load<Texture2D>("SplashScreens/Final");
             song = Content.Load<Song>("Thriller8bit");
 
             level1.spriteBatch = spriteBatch;
@@ -141,6 +141,18 @@ namespace LegendOfDarwin
         protected override void Update(GameTime gameTime)
         {
             if (curLevel == LevelState.Start)
+            {
+                if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
+                {
+                    setCurLevel(LevelState.Start2);
+                    
+                }
+                else
+                {
+                    ks = Keyboard.GetState();
+                }
+            }
+            else if(curLevel == LevelState.Start2)
             {
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
                 {
@@ -186,6 +198,12 @@ namespace LegendOfDarwin
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(main, new Rectangle(0,0,graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferWidth), Color.White);
+                spriteBatch.End();
+            }
+            else if (curLevel == LevelState.Start2)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(main, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferWidth), Color.White);
                 spriteBatch.End();
             }
             else if (curLevel == LevelState.Level1)

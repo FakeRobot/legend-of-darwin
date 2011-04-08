@@ -229,7 +229,7 @@ namespace LegendOfDarwin
             darwinMessage.LoadContent(messagePic);
             cannibalMessage.LoadContent(messagePic);
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelTwo"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level2"));
             
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"), mainGame.Content.Load<SoundEffect>("potion"));

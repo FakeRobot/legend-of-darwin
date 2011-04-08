@@ -113,7 +113,7 @@ namespace LegendOfDarwin.Level
             gameWinTexture = mainGame.Content.Load<Texture2D>("gamewin");
             Texture2D menuBarTexture = mainGame.Content.Load<Texture2D>("rainbow");
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelSix"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level6"));
 
             board.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/metal_tile"));
             board.LoadBackgroundContent(mainGame.Content.Load<Texture2D>("StaticPic/side_wall"));

@@ -443,7 +443,7 @@ namespace LegendOfDarwin
             brainMessage.LoadContent(messagePic);
             fastMessage.LoadContent(messagePic);
 
-            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("LevelThree"));
+            gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level3"));
 
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
 

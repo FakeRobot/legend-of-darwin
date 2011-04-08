@@ -275,6 +275,7 @@ namespace LegendOfDarwin
             thirdZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
             fourthZombie.LoadContent(zombieTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
             cannibalZombie.LoadContent(cannibalTex, mainGame.Content.Load<Texture2D>("ZombieSkull"));
+            cannibalZombie.LoadContent(cannibalTex, eatSound);
 
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);

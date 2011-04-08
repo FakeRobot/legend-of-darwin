@@ -692,7 +692,7 @@ namespace LegendOfDarwin
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level4);
 
                 darwin.setHuman();
-                gameState.setState(GameState.state.Level);
+                gameState.setState(GameState.state.Start);
                 gameOver = false;
                 gameWin = false;
             }

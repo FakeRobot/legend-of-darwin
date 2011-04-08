@@ -931,7 +931,7 @@ namespace LegendOfDarwin.Level
                 mainGame.setZTimeLevel(zTime, Game1.LevelState.Level6);
 
                 darwin.setHuman();
-                gameState.setState(GameState.state.Level);
+                gameState.setState(GameState.state.Start);
                 gameOver = false;
                 gameWin = false;
             }

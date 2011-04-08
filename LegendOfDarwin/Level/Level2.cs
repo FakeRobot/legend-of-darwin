@@ -569,7 +569,7 @@ namespace LegendOfDarwin
 
                 resetZombies();
                 darwin.setHuman();
-                gameState.setState(GameState.state.Level);
+                gameState.setState(GameState.state.Start);
                 gameOver = false;
                 gameWin = false;
             }

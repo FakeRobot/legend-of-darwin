@@ -204,6 +204,8 @@ namespace LegendOfDarwin
             playDeathSound = true;
             firstSwitch.turnOn();
 
+            firstSwitch.turnOn();
+
             Keyboard.GetState();
         }
 
@@ -549,6 +551,7 @@ namespace LegendOfDarwin
             if (ks.IsKeyDown(Keys.Enter))
             {
                 //MediaPlayer.Play(song);
+                setLevelState();
                 gameState.setState(GameState.state.Level);
             }
         }

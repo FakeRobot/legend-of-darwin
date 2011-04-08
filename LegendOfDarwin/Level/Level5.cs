@@ -424,12 +424,12 @@ namespace LegendOfDarwin.Level
             snake4.LoadContent(snakeTexture);
 
             Texture2D pyroZombieTex = mainGame.Content.Load<Texture2D>("ZombiePic/FlamethrowerZombie");
-
+            SoundEffect flameSound = mainGame.Content.Load<SoundEffect>("flames");
             //second sprite is for when the flame is flaming
-            northZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            southZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            eastZombie.LoadContent(pyroZombieTex, pyroZombieTex);
-            westZombie.LoadContent(pyroZombieTex, pyroZombieTex);
+            northZombie.LoadContent(pyroZombieTex, pyroZombieTex, flameSound);
+            southZombie.LoadContent(pyroZombieTex, pyroZombieTex, flameSound);
+            eastZombie.LoadContent(pyroZombieTex, pyroZombieTex, flameSound);
+            westZombie.LoadContent(pyroZombieTex, pyroZombieTex, flameSound);
         }
 
 
@@ -567,6 +567,7 @@ namespace LegendOfDarwin.Level
                         flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 1));
                         flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 2));
                         flames.AddLast(new Flame(board, northZombie.X, northZombie.Y + 3));
+                        northZombie.doFlameSound();
                     }
                 }
                 else if (!southZombie.isPatrolling())
@@ -576,6 +577,7 @@ namespace LegendOfDarwin.Level
                         flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 1));
                         flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 2));
                         flames.AddLast(new Flame(board, southZombie.X, southZombie.Y - 3));
+                        southZombie.doFlameSound();
                     }
                 }
                 else if (!eastZombie.isPatrolling())
@@ -585,6 +587,7 @@ namespace LegendOfDarwin.Level
                         flames.AddLast(new Flame(board, eastZombie.X - 1, eastZombie.Y));
                         flames.AddLast(new Flame(board, eastZombie.X - 2, eastZombie.Y));
                         flames.AddLast(new Flame(board, eastZombie.X - 3, eastZombie.Y));
+                        eastZombie.doFlameSound();
                     }
                 }
                 else if (!westZombie.isPatrolling())
@@ -594,6 +597,7 @@ namespace LegendOfDarwin.Level
                         flames.AddLast(new Flame(board, westZombie.X + 1, westZombie.Y));
                         flames.AddLast(new Flame(board, westZombie.X + 2, westZombie.Y));
                         flames.AddLast(new Flame(board, westZombie.X + 3, westZombie.Y));
+                        westZombie.doFlameSound();
                     }
                 }
             }

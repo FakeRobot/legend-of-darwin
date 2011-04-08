@@ -38,8 +38,6 @@ namespace LegendOfDarwin
         private BasicObject[] walls;
         private Texture2D wallTex;
 
-        private int counter;
-
         public SpriteFont messageFont;
         public bool keyIsHeldDown = false;
         public bool gameOver = false;

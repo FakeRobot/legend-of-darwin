@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
@@ -15,6 +16,8 @@ namespace LegendOfDarwin.GameObject
 
         // texture to use when zombie is flaming darwin
         protected Texture2D flamingZombieTexture;
+        private SoundEffect flameSound;
+        private bool playFlameSound = true;
 
         // boolean to know whether or not we're patrolling or shooting flames
         public Boolean patrolling;
@@ -36,10 +39,11 @@ namespace LegendOfDarwin.GameObject
             this.killedDarwin = false;
         }
 
-        public void LoadContent(Texture2D pyroZombieTexture, Texture2D zombieFlamingTex)
+        public void LoadContent(Texture2D pyroZombieTexture, Texture2D zombieFlamingTex, SoundEffect fSound)
         {
             zombieTexture = pyroZombieTexture;
             this.flamingZombieTexture = zombieFlamingTex;
+            flameSound = fSound;
         }
 
         public Boolean isPatrolling()
@@ -79,14 +83,25 @@ namespace LegendOfDarwin.GameObject
                 this.MoveUp();
         }
 
+        public void doFlameSound()
+        {
+            if (playFlameSound)
+            {
+                flameSound.Play();
+                playFlameSound = false;
+            }
+        }
+
         public void Update(Darwin darwin)
         {
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 if (this.isPointInVision(darwin.X, darwin.Y))
                 {
-                    if(!darwin.isZombie())
-                        patrolling = false;                    
+                    if (!darwin.isZombie())
+                    {
+                        patrolling = false;
+                    }
                     // check cardinal directions for darwin
                         // if in range of flamethrower (vision - 1)
                             // flame darwin up the ass
@@ -94,6 +109,7 @@ namespace LegendOfDarwin.GameObject
                 else
                 {
                     patrolling = true;
+                    playFlameSound = true;
                 }
 
                 // if he is patrolling

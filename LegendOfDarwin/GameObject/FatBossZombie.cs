@@ -53,7 +53,7 @@ namespace LegendOfDarwin.GameObject
         private Rectangle[] explodeSource;
 
         // is this in mode where his mouth is open
- 
+
         private int gapeCount = 0;
         private SoundEffect gapeSound;
 
@@ -136,7 +136,7 @@ namespace LegendOfDarwin.GameObject
 
             gapeCount = 0;
 
-            for (int i = 0; i < 9; i ++)
+            for (int i = 0; i < 9; i++)
             {
                 deathExplodeCount[i] = 0;
                 deathExplodeBool[i] = false;
@@ -156,7 +156,7 @@ namespace LegendOfDarwin.GameObject
         }
 
         // checks if darwin is immediately to the left of the zombie, that is in range and not up or down
-        public bool isDarwinToTheLeft() 
+        public bool isDarwinToTheLeft()
         {
 
             bool result = false;
@@ -166,14 +166,14 @@ namespace LegendOfDarwin.GameObject
 
                 for (int i = 1; i < 6; i++)
                 {
-                    if (this.isZombieInRange(this.X-i,this.Y) && darwin.X==this.X-i)
+                    if (this.isZombieInRange(this.X - i, this.Y) && darwin.X == this.X - i)
                         result = true;
 
                 }
 
             }
 
-            return result; 
+            return result;
         }
 
         // checks if darwin is immediately to the right of the zombie, that is in range and not up or down
@@ -197,20 +197,20 @@ namespace LegendOfDarwin.GameObject
             return result;
         }
 
-        public bool isInCollision(Darwin myDarwin) 
+        public bool isInCollision(Darwin myDarwin)
         {
-            if ((this.X == darwin.X && this.Y == darwin.Y) || (this.X+1 == darwin.X && this.Y == darwin.Y) || (this.X+2 == darwin.X && this.Y == darwin.Y)
-                || (this.X == darwin.X && this.Y+1 == darwin.Y) || (this.X+1 == darwin.X && this.Y+1 == darwin.Y) || (this.X+2 == darwin.X && this.Y+1 == darwin.Y)
-                || (this.X == darwin.X && this.Y+2 == darwin.Y) || (this.X+1 == darwin.X && this.Y+2 == darwin.Y) || (this.X+2 == darwin.X && this.Y+2 == darwin.Y))
+            if ((this.X == darwin.X && this.Y == darwin.Y) || (this.X + 1 == darwin.X && this.Y == darwin.Y) || (this.X + 2 == darwin.X && this.Y == darwin.Y)
+                || (this.X == darwin.X && this.Y + 1 == darwin.Y) || (this.X + 1 == darwin.X && this.Y + 1 == darwin.Y) || (this.X + 2 == darwin.X && this.Y + 1 == darwin.Y)
+                || (this.X == darwin.X && this.Y + 2 == darwin.Y) || (this.X + 1 == darwin.X && this.Y + 2 == darwin.Y) || (this.X + 2 == darwin.X && this.Y + 2 == darwin.Y))
                 return true;
             else
                 return false;
         }
 
         // checks if darwin is in front of boss and boss has his mouth open and darwin is a human
-        public bool canDarwinBeEaten() 
+        public bool canDarwinBeEaten()
         {
-            if ((darwin.X == this.X || darwin.X == this.X + 1 || darwin.X == this.X + 2)) 
+            if ((darwin.X == this.X || darwin.X == this.X + 1 || darwin.X == this.X + 2))
             {
                 if (darwin.Y == this.Y + 3 && !darwin.isZombie() && gapeMode && this.isZombieAlive())
                     return true;
@@ -231,8 +231,8 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
-        public void resetGapeMode() 
-        { 
+        public void resetGapeMode()
+        {
             gapeMode = false;
             gapeCount = 0;
         }
@@ -249,25 +249,25 @@ namespace LegendOfDarwin.GameObject
             {
                 // if you are killing the zombie, free up his space
                 board.setGridPositionOpen(this.X, this.Y);
-                board.setGridPositionOpen(this.X + 1,this.Y);
+                board.setGridPositionOpen(this.X + 1, this.Y);
                 board.setGridPositionOpen(this.X + 2, this.Y);
-                board.setGridPositionOpen(this.X , this.Y+1);
-                board.setGridPositionOpen(this.X + 1, this.Y+1);
-                board.setGridPositionOpen(this.X + 2, this.Y+1);
-                board.setGridPositionOpen(this.X, this.Y+2);
-                board.setGridPositionOpen(this.X + 1, this.Y+2);
-                board.setGridPositionOpen(this.X + 2, this.Y+2);
+                board.setGridPositionOpen(this.X, this.Y + 1);
+                board.setGridPositionOpen(this.X + 1, this.Y + 1);
+                board.setGridPositionOpen(this.X + 2, this.Y + 1);
+                board.setGridPositionOpen(this.X, this.Y + 2);
+                board.setGridPositionOpen(this.X + 1, this.Y + 2);
+                board.setGridPositionOpen(this.X + 2, this.Y + 2);
             }
         }
 
         /**
          * checks if babies are in eating range, kills them, modifies health if necessary
          */
-        public void checkForBabyDeaths(Nursery nurseryOne, Nursery nurseryTwo) 
+        public void checkForBabyDeaths(Nursery nurseryOne, Nursery nurseryTwo)
         {
-            foreach (BabyZombie baby in nurseryOne.babies) 
+            foreach (BabyZombie baby in nurseryOne.babies)
             {
-                if (canBabyBeEaten(baby) && baby.isZombieAlive()) 
+                if (canBabyBeEaten(baby) && baby.isZombieAlive())
                 {
                     baby.setZombieAlive(false);
                     health--;
@@ -377,6 +377,8 @@ namespace LegendOfDarwin.GameObject
 
             if (health <= 0)
             {
+                gapeMode = false;
+                //this.setZombieAlive(false);
                 mode = MODE.Dead;
             }
 
@@ -402,11 +404,11 @@ namespace LegendOfDarwin.GameObject
                     MoveLeft();
                 else if (isDarwinToTheRight())
                     MoveRight();
-                else if (gapeMode) 
+                else if (gapeMode)
                 {
                     gapeCount++;
 
-                    if (gapeCount > 10) 
+                    if (gapeCount > 10)
                     {
                         gapeCount = 0;
                         gapeMode = false;
@@ -417,8 +419,6 @@ namespace LegendOfDarwin.GameObject
                     ZOMBIE_MOVE_RATE = 50;
                     randomWalk();
                 }
-
-
 
                 movecounter = 0;
             }
@@ -457,7 +457,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 if (explodeCount == 2)
                 {
-                    secondExplosion = true;  
+                    secondExplosion = true;
                 }
             }
 
@@ -471,7 +471,7 @@ namespace LegendOfDarwin.GameObject
                     secondExplodeCount = 0;
                     explodeFirstWaveOfBabies = false;
                 }
-                if(secondExplodeCount == 3)
+                if (secondExplodeCount == 3)
                 {
                     thirdExplosion = true;
                     explodeSecondWaveOfBabies = true;
@@ -479,7 +479,7 @@ namespace LegendOfDarwin.GameObject
             }
 
             if (thirdExplosion)
-            {       
+            {
                 thirdExplodeCount++;
                 if (thirdExplodeCount == 4)
                 {
@@ -508,7 +508,7 @@ namespace LegendOfDarwin.GameObject
         public new void Draw(SpriteBatch sb)
         {
             switch (mode)
-            { 
+            {
                 case MODE.Alive:
                     DrawAlive(sb);
                     break;
@@ -567,7 +567,7 @@ namespace LegendOfDarwin.GameObject
 
         public void DrawAlive(SpriteBatch sb)
         {
-            
+
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
@@ -620,7 +620,7 @@ namespace LegendOfDarwin.GameObject
         }
 
         private void randomWalk()
-        { 
+        {
             int i = ran.Next(1, 5);
 
             switch (i)
@@ -643,11 +643,11 @@ namespace LegendOfDarwin.GameObject
             destination.Width = board.getSquareWidth() * 3;
 
             setEventFalse();
-            if(count == 80)
+            if (count == 80)
             {
                 count = 0;
             }
-            
+
             count++;
 
             if (count > 40)
@@ -660,16 +660,16 @@ namespace LegendOfDarwin.GameObject
                 destination.Height = board.getSquareLength() * 3;
                 destination.Width = board.getSquareWidth() * 3;
             }
-            
+
         }
 
         private new void MoveUp()
         {
             if (((board.isGridPositionOpen(this.X, this.Y - 1) &&
                 board.isGridPositionOpen(this.X + 1, this.Y - 1) &&
-                board.isGridPositionOpen(this.X + 2, this.Y - 1)) || 
-                ((darwin.X == this.X && darwin.Y == this.Y -1) || (darwin.X == this.X+1 && darwin.Y == this.Y - 1) ||
-                (darwin.X == this.X+2 && darwin.Y == this.Y - 1))) && this.isZombieInRange(this.X, this.Y - 1))
+                board.isGridPositionOpen(this.X + 2, this.Y - 1)) ||
+                ((darwin.X == this.X && darwin.Y == this.Y - 1) || (darwin.X == this.X + 1 && darwin.Y == this.Y - 1) ||
+                (darwin.X == this.X + 2 && darwin.Y == this.Y - 1))) && this.isZombieInRange(this.X, this.Y - 1))
             {
                 board.setGridPositionOccupied(this.X, this.Y - 1);
                 board.setGridPositionOccupied(this.X + 1, this.Y - 1);
@@ -685,9 +685,9 @@ namespace LegendOfDarwin.GameObject
         {
             if (((board.isGridPositionOpen(this.X, this.Y + 3) &&
                 board.isGridPositionOpen(this.X + 1, this.Y + 3) &&
-                board.isGridPositionOpen(this.X + 2, this.Y + 3)) || 
-                ((darwin.X == this.X && darwin.Y == this.Y + 3) || (darwin.X == this.X+1 && darwin.Y == this.Y + 3) ||
-                (darwin.X == this.X+2 && darwin.Y == this.Y + 3))) && this.isZombieInRange(this.X, this.Y + 1))
+                board.isGridPositionOpen(this.X + 2, this.Y + 3)) ||
+                ((darwin.X == this.X && darwin.Y == this.Y + 3) || (darwin.X == this.X + 1 && darwin.Y == this.Y + 3) ||
+                (darwin.X == this.X + 2 && darwin.Y == this.Y + 3))) && this.isZombieInRange(this.X, this.Y + 1))
             {
                 board.setGridPositionOccupied(this.X, this.Y + 3);
                 board.setGridPositionOccupied(this.X + 1, this.Y + 3);
@@ -704,8 +704,8 @@ namespace LegendOfDarwin.GameObject
             if (((board.isGridPositionOpen(this.X - 1, this.Y) &&
                 board.isGridPositionOpen(this.X - 1, this.Y + 1) &&
                 board.isGridPositionOpen(this.X - 1, this.Y + 2)) ||
-                ((darwin.X == this.X-1 && darwin.Y == this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y + 1) ||
-                (darwin.X == this.X -1 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X-1, this.Y))
+                ((darwin.X == this.X - 1 && darwin.Y == this.Y) || (darwin.X == this.X - 1 && darwin.Y == this.Y + 1) ||
+                (darwin.X == this.X - 1 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X - 1, this.Y))
             {
                 board.setGridPositionOccupied(this.X - 1, this.Y);
                 board.setGridPositionOccupied(this.X - 1, this.Y + 1);
@@ -722,15 +722,15 @@ namespace LegendOfDarwin.GameObject
             if (((board.isGridPositionOpen(this.X + 3, this.Y) &&
                 board.isGridPositionOpen(this.X + 3, this.Y + 1) &&
                 board.isGridPositionOpen(this.X + 3, this.Y + 2)) ||
-                ((darwin.X == this.X+3 && darwin.Y == this.Y) || (darwin.X == this.X+3 && darwin.Y == this.Y + 1) ||
-                (darwin.X == this.X+3 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X+1, this.Y))
+                ((darwin.X == this.X + 3 && darwin.Y == this.Y) || (darwin.X == this.X + 3 && darwin.Y == this.Y + 1) ||
+                (darwin.X == this.X + 3 && darwin.Y == this.Y + 2))) && this.isZombieInRange(this.X + 1, this.Y))
             {
                 board.setGridPositionOccupied(this.X + 3, this.Y);
                 board.setGridPositionOccupied(this.X + 3, this.Y + 1);
                 board.setGridPositionOccupied(this.X + 3, this.Y + 2);
-                board.setGridPositionOpen(this.X , this.Y);
-                board.setGridPositionOpen(this.X , this.Y + 1);
-                board.setGridPositionOpen(this.X , this.Y + 2);
+                board.setGridPositionOpen(this.X, this.Y);
+                board.setGridPositionOpen(this.X, this.Y + 1);
+                board.setGridPositionOpen(this.X, this.Y + 2);
                 this.setGridPosition(this.X + 1, this.Y);
             }
         }

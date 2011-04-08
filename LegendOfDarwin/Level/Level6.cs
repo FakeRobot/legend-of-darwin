@@ -196,7 +196,6 @@ namespace LegendOfDarwin.Level
             gameOver = false;
             gameWin = false;
             
-            
         }
 
         private BasicObject[] setWallsInLevelSix()

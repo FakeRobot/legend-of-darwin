@@ -309,7 +309,11 @@ namespace LegendOfDarwin.GameObject
             {
                 int i = ran.Next(0, 8);
 
-                deathExplodeBool[i] = true;
+                if (deathExplodeBool[i] == false)
+                {
+                    deathExplodeBool[i] = true;
+                    explosionSound.Play();
+                }
 
                 for (int j = 0; i < 9; i++)
                 {

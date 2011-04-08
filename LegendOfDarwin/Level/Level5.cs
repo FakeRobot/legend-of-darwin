@@ -796,7 +796,8 @@ namespace LegendOfDarwin.Level
 
             if (ks.IsKeyDown(Keys.Q))
             {
-                mainGame.Exit();
+                mainGame.setCurLevel(Game1.LevelState.Start);
+                //mainGame.Exit();
             }
             if (ks.IsKeyDown(Keys.R))
             {

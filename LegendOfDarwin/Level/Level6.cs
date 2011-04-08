@@ -398,7 +398,8 @@ namespace LegendOfDarwin.Level
 
             if (ks.IsKeyDown(Keys.Q))
             {
-                mainGame.Exit();
+                mainGame.setCurLevel(Game1.LevelState.Start);
+                //mainGame.Exit();
             }
             if (ks.IsKeyDown(Keys.R))
             {
@@ -426,7 +427,7 @@ namespace LegendOfDarwin.Level
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 mainGame.Exit();
 
-            if (ks.IsKeyDown(Keys.Q))
+            if (ks.IsKeyDown(Keys.Escape))
             {
                 mainGame.Exit();
             }

@@ -134,7 +134,8 @@ namespace LegendOfDarwin.Level
                 mainGame.Content.Load<Texture2D>("explosion_sequence"),
                 babySound, explosionSound);
 
-            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"), mainGame.Content.Load<Texture2D>("explosion_sequence"), explosionSound);
+            fatBossZombie.LoadContent(mainGame.Content.Load<Texture2D>("ZombiePic/King"),
+                mainGame.Content.Load<Texture2D>("explosion_sequence"), explosionSound, mainGame.Content.Load<SoundEffect>("zombie_groan"));
 
             stairs.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/stairsUp"),
                 mainGame.Content.Load<Texture2D>("StaticPic/stairsDown"), "Down");
@@ -471,12 +472,12 @@ namespace LegendOfDarwin.Level
         {
             if (fatBossZombie.canDarwinBeEaten() && fatBossZombie.isZombieAlive())
                 gameOver = true;
-            if (fatBossZombie.isInCollision(darwin) && fatBossZombie.isZombieAlive())
+            else if (fatBossZombie.isInCollision(darwin) && fatBossZombie.isZombieAlive())
             {
                 gameOver = true;
             }
 
-            if (darwin.collision && fatBossZombie.isZombieAlive())
+            else if (darwin.collision && fatBossZombie.isZombieAlive())
             {
                 Rectangle rightSideOfDarwin = darwin.destination;
                 rightSideOfDarwin.X = rightSideOfDarwin.X + board.getSquareWidth();
@@ -489,7 +490,6 @@ namespace LegendOfDarwin.Level
 
                 Rectangle onBottomOfDarwin = darwin.destination;
                 onBottomOfDarwin.Y = onBottomOfDarwin.Y + board.getSquareLength();
-
 
                 if (rightSideOfDarwin == fatBossZombie.destination ||
                     leftSideOfDarwin == fatBossZombie.destination ||

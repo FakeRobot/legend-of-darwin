@@ -53,6 +53,7 @@ namespace LegendOfDarwin.GameObject
         // is this in mode where his mouth is open
  
         private int gapeCount = 0;
+        private SoundEffect gapeSound;
 
         // number of babies boss must eat to die
         private int health;
@@ -144,11 +145,12 @@ namespace LegendOfDarwin.GameObject
             health = 4;
         }
 
-        public void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound)
+        public void LoadContent(Texture2D texIn, Texture2D explosion, SoundEffect eSound, SoundEffect groanSound)
         {
             zombieTexture = texIn;
             explosionTexture = explosion;
             explosionSound = eSound;
+            gapeSound = groanSound;
         }
 
         // checks if darwin is immediately to the left of the zombie, that is in range and not up or down
@@ -436,6 +438,7 @@ namespace LegendOfDarwin.GameObject
                 if (checkForGape == 150)
                 {
                     gapeMode = true;
+                    gapeSound.Play();
                 }
             }
         }

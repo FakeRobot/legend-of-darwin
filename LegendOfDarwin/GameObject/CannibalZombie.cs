@@ -24,7 +24,7 @@ namespace LegendOfDarwin.GameObject
         protected int pathLimit;
         protected Darwin darwin;
         protected List<Zombie> zombies;
-        protected SoundEffect eatSound;
+        public SoundEffect eatSound;
 
         /**
          * Initalizes a cannibal on the game board

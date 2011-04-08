@@ -187,6 +187,8 @@ namespace LegendOfDarwin
             gameOverCounter = 0;
             gameOver = false;
             gameWin = false;
+
+            Keyboard.GetState();
         }
 
         private BasicObject[] setRemovableWallsInLevelTwo()
@@ -280,6 +282,8 @@ namespace LegendOfDarwin
             zombieMessage.LoadContent(messagePic);
             darwinMessage.LoadContent(messagePic);
             cannibalMessage.LoadContent(messagePic);
+
+            cannibalZombie.eatSound = eatSound;
 
             gameStart.LoadContent(mainGame.Content.Load<Texture2D>("SplashScreens/Level2"));
             

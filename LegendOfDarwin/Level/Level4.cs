@@ -279,6 +279,7 @@ namespace LegendOfDarwin.Level
             darwin.setDarwinAlive();
             playDeathSound = true;
             gameOverCounter = 0;
+            Keyboard.GetState();
         }
 
         private BasicObject[] setRemovableWallsSwitchOne()

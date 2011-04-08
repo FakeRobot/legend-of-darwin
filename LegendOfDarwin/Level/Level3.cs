@@ -322,9 +322,13 @@ namespace LegendOfDarwin
             gameOverCounter = 0;
             firstSwitch.turnOn();
             secondSwitch.turnOn();
+            board.setGridPositionOccupied(firstSwitch);
+            board.setGridPositionOccupied(secondSwitch);
 
             gameOver = false;
             gameWin = false;
+
+            Keyboard.GetState();
         }
 
         private BasicObject[] setRemovableWallsAroundStairs()

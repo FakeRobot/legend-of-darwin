@@ -202,6 +202,8 @@ namespace LegendOfDarwin
             darwin.setHuman();
             darwin.setDarwinAlive();
             playDeathSound = true;
+
+            Keyboard.GetState();
         }
 
         private BasicObject[] setRemovableWallsInLevelOne()

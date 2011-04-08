@@ -143,6 +143,7 @@ namespace LegendOfDarwin
         {
             if (curLevel == LevelState.Start)
             {
+                MediaPlayer.Stop();
                 if (Keyboard.GetState().IsKeyUp(Keys.Enter) && ks.IsKeyDown(Keys.Enter))
                 {
                     DEATH_COUNTER = 0;

@@ -195,6 +195,8 @@ namespace LegendOfDarwin.Level
 
             gameOver = false;
             gameWin = false;
+
+            Keyboard.GetState();
             
         }
 

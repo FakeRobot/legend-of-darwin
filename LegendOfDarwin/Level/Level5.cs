@@ -220,6 +220,8 @@ namespace LegendOfDarwin.Level
 
             // reset the boxes
             resetBoxes();
+
+            Keyboard.GetState();
         }
 
         private void setPotionPosition(int x, int y)

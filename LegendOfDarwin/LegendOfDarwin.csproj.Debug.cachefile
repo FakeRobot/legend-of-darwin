@@ -42,7 +42,6 @@ Content\ZombiePic\snake_strip.xnb
 Content\explosion_sequence.xnb
 Content\flame.xnb
 Content\ZombiePic\FatBossZombie.xnb
-Content\TimesNewRoman.xnb
 Content\ZombiePic\BabyZombie.xnb
 Content\ZombiePic\CongaFollowerZombie.xnb
 Content\StaticPic\nursery-cribs.xnb
@@ -68,12 +67,12 @@ Content\leaves.xnb
 Content\baby.xnb
 Content\explosion.xnb
 Content\zombie_groan.xnb
-Content\pit.xnb
-Content\sidepit.xnb
-Content\SplashScreens\Intro.xnb
 Content\boxSound.xnb
 Content\flames.xnb
 Content\OmNom.xnb
+Content\pit.xnb
+Content\sidepit.xnb
+Content\SplashScreens\Intro.xnb
 Content\SplashScreens\Intro2.xnb
 Content\SplashScreens\Level2.xnb
 Content\SplashScreens\Level3.xnb
@@ -82,6 +81,5 @@ Content\SplashScreens\Level5.xnb
 Content\SplashScreens\Level6.xnb
 Content\SplashScreens\Final.xnb
 Content\ZombieSkull.xnb
-Content\SplashScreens\Intro.xnb
 Content\menubar.xnb
 Content\Thriller8bit.wma

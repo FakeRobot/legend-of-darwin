@@ -294,7 +294,7 @@ namespace LegendOfDarwin
             switch (gameState.getState())
             {
                 case GameState.state.Start:
-                    UpdateLevelState(gameTime);
+                    UpdateStartState();
                     break;
                 case GameState.state.Level:
                     if (!messageMode && !gameOver)
@@ -348,7 +348,6 @@ namespace LegendOfDarwin
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Enter))
             {
-                //MediaPlayer.Play(song);
                 setLevelState();
                 gameState.setState(GameState.state.Level);
             }

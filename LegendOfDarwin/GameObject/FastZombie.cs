@@ -23,6 +23,7 @@ namespace LegendOfDarwin.GameObject
         public enum Dir { Up, Down, Left, Right };
         public Dir chaseDir;
 
+        // sleeping off the bat
         private Boolean sleeping = true;
         public Boolean chasingDarwin = false;
 
@@ -87,9 +88,9 @@ namespace LegendOfDarwin.GameObject
         }
 
         /// <summary>
-        /// 
+        /// Adds a leaf for this zombie to be 'watching.'
         /// </summary>
-        /// <param name="leaf"></param>
+        /// <param name="leaf">Leaf to be watched.</param>
         public void assignLeaf(Leaf leaf)
         {
             this.brokenLeaf = leaf;
@@ -189,7 +190,7 @@ namespace LegendOfDarwin.GameObject
                     spriteBatch.Draw(zombieTexture, destination, source, Color.White);
                     break;
                 default:
-                    throw new Exception("lolwut");
+                    throw new Exception("Could not draw fast zombie.");
             }
         }
 

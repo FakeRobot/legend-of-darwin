@@ -15,7 +15,7 @@ namespace LegendOfDarwin.GameObject
         protected enum Dir { Up, Down, Left, Right };
 
         // texture to use when zombie is flaming darwin
-        protected Texture2D flamingZombieTexture;
+        protected Texture2D flamingZombieTexture; // deprecated ???
         private SoundEffect flameSound;
         private bool playFlameSound = true;
 
@@ -46,31 +46,56 @@ namespace LegendOfDarwin.GameObject
             flameSound = fSound;
         }
 
+        /// <summary>
+        /// Checks whether or not the PyroZombie is patrolling.
+        /// </summary>
+        /// <returns>True if it is, False otherwise.</returns>
         public Boolean isPatrolling()
         {
             return this.patrolling;
         }
 
+        /// <summary>
+        /// Sets the current patrol path point that we want this zombie to go to.
+        /// </summary>
+        /// <param name="curr">Vector containing the x,y co-ordinates for the point.</param>
         public void setCurrentPatrolPoint(Vector2 curr)
         {
             this.currentPoint = curr;
         }
 
+        /// <summary>
+        /// Sets the next patrol path point that we want this zombie to go to.
+        /// </summary>
+        /// <param name="next">Vector containing the x,y co-ordinates for the point.</param>
         public void setNextPatrolPoint(Vector2 next)
         {
             this.nextPoint = next;
         }
 
+        /// <summary>
+        /// Returns the current patrol path point that this zombie is going to.
+        /// </summary>
+        /// <returns>Vector containing the x,y co-ordinates for the point.</returns>
         public Vector2 getCurrentPatrolPoint()
         {
             return this.currentPoint;
         }
 
+        /// <summary>
+        /// Returns the next patrol path point that this zombie is going to.
+        /// </summary>
+        /// <returns>Vector containing the x,y co-ordinates for the point.</returns>
         public Vector2 getNextPatrolPoint()
         {
             return this.nextPoint;
         }
 
+        /// <summary>
+        /// Simple function to tell this zombie which direction we want him to move in, 
+        /// base upon the point given to it.
+        /// </summary>
+        /// <param name="point">The Vector containing the x,y co-ordinates we want this zombie to walk to.</param>
         public void moveToPoint(Vector2 point)
         {
             if (this.X < point.X)
@@ -83,6 +108,9 @@ namespace LegendOfDarwin.GameObject
                 this.MoveUp();
         }
 
+        /// <summary>
+        /// Plays the flamethrower sound.
+        /// </summary>
         public void doFlameSound()
         {
             if (playFlameSound)
@@ -94,17 +122,18 @@ namespace LegendOfDarwin.GameObject
 
         public void Update(Darwin darwin)
         {
+            // once the zombie can move
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
+                // check if he see's darwin
+                // might be better to have a ! instead of the pyrozombie just stopping his patrol
                 if (this.isPointInVision(darwin.X, darwin.Y))
                 {
+                    // pyro zombies dislike darwin
                     if (!darwin.isZombie())
                     {
                         patrolling = false;
                     }
-                    // check cardinal directions for darwin
-                        // if in range of flamethrower (vision - 1)
-                            // flame darwin up the ass
                 }
                 else
                 {
@@ -128,7 +157,8 @@ namespace LegendOfDarwin.GameObject
                         this.moveToPoint(nextPoint);
                     }
                 }
-
+                
+                // reset move counter
                 movecounter = 0;
             }
 
@@ -145,7 +175,6 @@ namespace LegendOfDarwin.GameObject
                     break;
                 case (false):
                     // flamin' tiem
-                    // leave this in because i might make a sprite eventually
                     spriteBatch.Draw(this.flamingZombieTexture, destination, Color.White);
                     break;
                 default:

@@ -14,7 +14,7 @@ namespace LegendOfDarwin.GameObject
         private Texture2D brokenLeaf;
         private Texture2D wholeLeaf;
 
-        private FastZombie parentZombie;
+        private FastZombie parentZombie; // deprecated ???
 
         // bool for whether or not the leaf is broken
         private Boolean leafBroken;
@@ -60,6 +60,9 @@ namespace LegendOfDarwin.GameObject
             leafSound.Play();
         }
 
+        /// <summary>
+        /// Resets the leaf state to be unbroken.
+        /// </summary>
         public void resetLeaf()
         {
             leafBroken = false;

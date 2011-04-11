@@ -22,23 +22,24 @@ namespace LegendOfDarwin
 
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-
         private GameState gameState;
         private GameStart gameStart;
+        private GameBoard board;
+        public GraphicsDevice device;
+        public SpriteFont messageFont;
 
         private FastZombie fastZombie1;
-
         private LinkedList<Leaf> leaves;
 
+        // nice and big
         private int leafCount = 137;
 
         private Darwin darwin;
         private Zombie firstZombie;
+
         private Switch firstSwitch, secondSwitch;
         private Brain brain;
-        private GameBoard board;
-        public GraphicsDevice device;
-        public SpriteFont messageFont;
+        
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
@@ -151,6 +152,7 @@ namespace LegendOfDarwin
                 secondStair.setDestination(board.getPosition(30, 21));
             }
             
+            // add all the leaves to the map...
             leaves.ElementAt(0).setGridPosition(7, 7);
             leaves.ElementAt(1).setGridPosition(5, 15);
             leaves.ElementAt(2).setGridPosition(4, 2);
@@ -303,6 +305,7 @@ namespace LegendOfDarwin
 
             firstZombie.setGridPosition(10, 10);
 
+            // reset each leaf for new level
             foreach (Leaf leaf in this.leaves)
             {
                 leaf.resetLeaf();
@@ -469,6 +472,7 @@ namespace LegendOfDarwin
 
             SoundEffect leafSound = mainGame.Content.Load<SoundEffect>("leaves");
 
+            // load leaf texture for all leaves
             foreach(Leaf leaf in this.leaves)
             {
                 leaf.LoadContent(brokeLeafTex, wholeLeafTex, leafSound);

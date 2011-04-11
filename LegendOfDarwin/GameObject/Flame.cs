@@ -10,12 +10,12 @@ namespace LegendOfDarwin.GameObject
     public class Flame : BasicObject
     {
         // static int for how long this flame should live
-        private static int FLAME_LIFE = 150;
+        private static int FLAME_LIFE = 150; // TODO: actually make this work instead of eternal flames
 
         // counter for how long this flame will burn a tile
         private int flameCounter;
 
-        // true if hte left sprite will show
+        // true if the left sprite will show
         private bool leftSprite;
 
         // is this flame alive
@@ -30,11 +30,19 @@ namespace LegendOfDarwin.GameObject
             this.alive = true;
         }
 
+        /// <summary>
+        /// Sets the flame to be alive and a burnin'
+        /// </summary>
+        /// <param name="state">True if the flame is alive, False if otherwise.</param>
         public void setAlive(Boolean state)
         {
             this.alive = state;
         }
 
+        /// <summary>
+        /// Gets the flame's current state.
+        /// </summary>
+        /// <returns>True if alive, False if otherwise</returns>
         public Boolean isAlive()
         {
             return this.alive;
@@ -44,10 +52,11 @@ namespace LegendOfDarwin.GameObject
         {
             if (this.flameCounter > FLAME_LIFE)
             {
-                // flame can die
+                // TODO: make this work
                 //this.alive = false;
             }
 
+            // animutions
             if (flameCounter > 0 && flameCounter <= 20)
                 leftSprite = true;
             else if (flameCounter > 20 && flameCounter <= 40)

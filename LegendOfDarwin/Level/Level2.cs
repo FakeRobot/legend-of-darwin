@@ -180,8 +180,8 @@ namespace LegendOfDarwin
             potion.setGridPosition(3, 3);
             potion.reset();
 
-            zTime.reset();
-
+            zTime.setTime(zTimeReset.getTime());
+            
             darwin.setHuman();
             darwin.setDarwinAlive();
             playDeathSound = true;
@@ -292,9 +292,6 @@ namespace LegendOfDarwin
             zTime.LoadContent(mainGame.Content.Load<Texture2D>("humanities_bar"));
             potion.LoadContent(mainGame.Content.Load<Texture2D>("StaticPic/potion"), mainGame.Content.Load<SoundEffect>("potion"));
         }
-            
-
-        //protected override void UnloadContent() { }
 
         public void Update(GameTime gameTime)
         {
@@ -515,6 +512,7 @@ namespace LegendOfDarwin
             potion.setGridPosition(3, 3);
             potion.reset();
 
+            zTime.setTime(zTimeReset.getTime());
         }
 
         private void checkForExitGame(KeyboardState ks)

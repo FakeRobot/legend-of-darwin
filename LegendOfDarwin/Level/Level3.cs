@@ -486,9 +486,6 @@ namespace LegendOfDarwin
 
         }
 
-
-        //protected override void UnloadContent() { }
-
         public void Update(GameTime gameTime)
         {
             switch (gameState.getState())

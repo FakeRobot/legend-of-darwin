@@ -180,6 +180,7 @@ namespace LegendOfDarwin
             potion.setGridPosition(3, 3);
             potion.reset();
 
+            zTime.reset();
             zTime.setTime(zTimeReset.getTime());
             
             darwin.setHuman();
@@ -597,7 +598,7 @@ namespace LegendOfDarwin
 
         public void setZTime(ZombieTime mytime) 
         {
-            zTime = mytime;
+            zTime.setTime(mytime.getTime());
 
             zTimeReset = new ZombieTime(board);
             zTimeReset.reset();

@@ -135,7 +135,7 @@ namespace LegendOfDarwin
         {
             graphics.PreferredBackBufferHeight = 768;
             graphics.PreferredBackBufferWidth = 1024;
-            graphics.IsFullScreen = false;
+            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
         }
 

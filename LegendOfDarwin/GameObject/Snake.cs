@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
+    // pushes darwin if he is lined up with snake
+    // has rook like movement and sight
     public class Snake: Zombie
     {
         protected Texture2D snakeTexture;
@@ -19,6 +21,7 @@ namespace LegendOfDarwin.GameObject
         public enum Direction {Up, Down, Left, Right};
         public Direction lineOfSightDirection;
 
+        // refer to ZOmbie constructor
         public Snake(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard)
             : base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {
@@ -38,6 +41,8 @@ namespace LegendOfDarwin.GameObject
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
                 allowedToWalk = true;
+
+                // snakes can die in fire
                 if(flames != null)
                     this.checkForFieryDeath(flames);
 
@@ -87,6 +92,7 @@ namespace LegendOfDarwin.GameObject
             snakeDelayCounter++;
         }
 
+        // should snake die?
         public void checkForFieryDeath(LinkedList<Flame> flames)
         {
             foreach (Flame flame in flames)
@@ -98,6 +104,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // methods for moving darwin when the snake comes into contact with him
         public void pushDarwinUp(Darwin darwin)
         {
             if (board.isGridPositionOpen(darwin.X, darwin.Y - 1))
@@ -150,6 +157,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // snake should retreat when it has backed darwin into a corner
         public void backOffDown()
         {
             this.lineOfSight = false;
@@ -214,6 +222,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // check for darwins relative position to snake
         public bool isDarwinAboveSnakeSomewhere(Darwin darwin)
         {
             if(darwin.X == this.X && darwin.Y < this.Y){
@@ -285,6 +294,7 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        // uses fixed pit coords in level 5
         public bool isSnakeInPit()
         {
             if (this.X <= 4 || this.X >= 28 || this.Y <= 4 || this.Y >= 19)

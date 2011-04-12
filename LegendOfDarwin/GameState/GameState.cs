@@ -5,6 +5,7 @@ using System.Text;
 
 namespace LegendOfDarwin
 {
+    // simple class for managing splash screens / death screen  etc
     class GameState
     {
         public enum state { Start, Start2, Level, End };

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace LegendOfDarwin.GameObject
 {
+    // baby zombies for the sixth level
     class BabyZombie : Zombie
     {
         private Darwin darwin;
@@ -15,6 +16,7 @@ namespace LegendOfDarwin.GameObject
         private int babyCount, babyCountTwo;
         private Rectangle[] babySource;
 
+        // for managing baby sprite/ movement
         public bool goingToExplode, exploding;
         private Texture2D explodeTex;
         private int explodeCount;
@@ -24,6 +26,7 @@ namespace LegendOfDarwin.GameObject
 
         private SoundEffect explodeSound;
 
+        // refer to Zombie constructor for details
         public BabyZombie(int x, int y, int maxX, int minX, int maxY, int minY, Darwin dar, GameBoard gb) : 
             base(x, y, maxX, minX, maxY, minY, gb)
         {
@@ -50,6 +53,7 @@ namespace LegendOfDarwin.GameObject
             this.setEventLag(40);
         }
 
+        // reset baby, starts baby as dead, not exploding
         public void reset()
         {
             this.setEventLag(40);
@@ -78,6 +82,7 @@ namespace LegendOfDarwin.GameObject
                     explodeCount++;
                     if (explodeCount == 3)
                     {
+                        // start explosion, kill baby
                         explodeCount = 0;
                         exploding = false;
                         setZombieAlive(false);
@@ -91,6 +96,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if (goingToExplode)
                 {
+                    // explosion sequence 
                     babyCount++;
                     if (babyCount == 3)
                     {
@@ -107,6 +113,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if (isZombieAlive())
                 {
+                    // attack darwin
                     this.moveTowardsDarwin(darwin);
                     updateFacingDarwin(darwin);
                     if (nearDarwin())
@@ -119,6 +126,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // make sure sprite is facing darwin
         private void updateFacingDarwin(Darwin darwin)
         {
             if (darwin.X <= this.X)
@@ -181,6 +189,8 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // is darwin in a very small range of nearby spaces?
+        // constants can be adjusted to change range
         public bool nearDarwin()
         {
             int xDist, yDist;

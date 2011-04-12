@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin
 {
+    // Basic object which can take up a space on the game board
     public class BasicObject
     {
         // The x coordinate to be put on the GameBoard class
@@ -13,8 +14,8 @@ namespace LegendOfDarwin
         // The y coordinate to be put on the GameBoard class
         public int Y;
 
+        // used for actions that only need to be done every so many iterations
         protected int eventLagMin, eventLagMax;
-
         protected bool eventFlag;
 
         // mostly used for only basic objects that can get sucked into the vortex
@@ -45,16 +46,19 @@ namespace LegendOfDarwin
             destination.Y = myY;
         }
 
+        // change destination rectangle
         public void setDestination(Rectangle rectangle)
         {
             destination = rectangle;
         }
 
+        // can it be seen?
         public void setVisible(bool isVisible)
         {
             visible = isVisible;
         }
 
+        // methods for moving a object on the game board
         public void MoveRight()
         {
             this.setGridPosition(this.X + 1, this.Y);
@@ -92,6 +96,8 @@ namespace LegendOfDarwin
             setDestination(board.getPosition(X, Y));
         }
 
+        // is this object on top of another game object?
+        // only makes sense if one or both of the objects does not set the space it is on to occupied
         public bool isOnTop(BasicObject bo)
         {
             if (bo.X == this.X && bo.Y == this.Y)
@@ -110,22 +116,26 @@ namespace LegendOfDarwin
             return false;
         }
 
+        // has enough time elapsed so that event flag has been thrown?
         public bool canEventHappen()
         {
             return this.eventFlag;
         }
 
+        // reset event flag
         public void setEventFalse()
         {
             this.eventFlag = false;
             eventLagMin = 0;
         }
 
+        // set a threshold for the event counter
         public void setEventLag(int lag)
         {
             this.eventLagMax = lag;
         }
 
+        // increment event counter
         public void Update(GameTime gameTime)
         {
             eventLagMin++;

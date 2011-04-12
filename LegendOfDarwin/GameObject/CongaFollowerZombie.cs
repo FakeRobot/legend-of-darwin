@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    // basic path following zombie used on level 4
     class CongaFollowerZombie : Zombie
     {
         // darwin that is on the current game board
@@ -31,6 +32,7 @@ namespace LegendOfDarwin.GameObject
         protected bool killMode = false;
         protected bool preKillMode = false;
 
+        // the leader in the current level
         protected CongaLeaderZombie leaderZombie;
 
         // set ranges to whole board
@@ -258,7 +260,7 @@ namespace LegendOfDarwin.GameObject
 
                 if (preKillMode)
                 {
-                    
+                    // zombie's groove has been thrown off, alert leader
                     source.X = 128;
                     killMode = true;
                     preKillMode = false;
@@ -266,6 +268,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if(killMode)
                 {
+                    // just kill darwin
                     ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;
@@ -273,6 +276,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if (this.isPointInVision(darwin.X, darwin.Y) && !darwin.isZombie() && isDarwinOnFloor(darwin))
                 {
+                        // darwin is a human on the dance floow he must die
                         ZOMBIE_MOVE_RATE = 10;
                         this.enemyAlert = true;
                         source.X = 64;
@@ -283,6 +287,7 @@ namespace LegendOfDarwin.GameObject
                 {
                         if (!hasBeenSeen)
                         {
+                            // get ready to attack
                             ZOMBIE_MOVE_RATE = 20;
                             hasBeenSeenCounter++;
                             if (hasBeenSeenCounter > 3)
@@ -291,6 +296,7 @@ namespace LegendOfDarwin.GameObject
                         }
                         else
                         {
+                            // someone saw darwin, attack
                             ZOMBIE_MOVE_RATE = 10;
                             this.enemyAlert = true;
                             source.X = 64;
@@ -300,6 +306,7 @@ namespace LegendOfDarwin.GameObject
                  }
                 else
                 {
+                        // no threat at the moment, just dance, watch out for alarm from other zombies
                         ZOMBIE_MOVE_RATE = 20;
                         hasBeenSeen = false;
                         hasBeenSeenCounter = 0;

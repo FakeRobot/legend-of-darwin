@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    // leader dance zombie for level 4
     class CongaLeaderZombie : Zombie
     {
         // darwin that is on the current game board
@@ -275,6 +276,7 @@ namespace LegendOfDarwin.GameObject
             {
                 if (killMode) 
                 {
+                    // attack
                     ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;
@@ -285,6 +287,7 @@ namespace LegendOfDarwin.GameObject
                 }
                 else if (isDarwinOnFloor(darwin) && !darwin.isZombie())
                 {
+                    // darwin is human he must die
                     ZOMBIE_MOVE_RATE = 10;
                     this.enemyAlert = true;
                     source.X = 64;

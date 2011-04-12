@@ -8,9 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
+    // final boss for level 6
     class FatBossZombie : Zombie
     {
-
+        // used to manage death animation
         private enum MODE { Alive, Dead };
         private MODE mode;
 
@@ -35,11 +36,13 @@ namespace LegendOfDarwin.GameObject
 
         public bool eatingDarwin = false;
 
+        // for death animation
         private int deathCount;
         private bool deathDraw;
         private int[] deathExplodeCount;
         private bool[] deathExplodeBool;
 
+        // for setting off chain reactions of explosions
         public bool explodeFirstWaveOfBabies = true;
         public bool explodeSecondWaveOfBabies = true;
         public bool explodeThirdWaveOfBabies = true;
@@ -197,6 +200,7 @@ namespace LegendOfDarwin.GameObject
             return result;
         }
 
+        // checks squares that boss inhabits for darwin
         public bool isInCollision(Darwin myDarwin)
         {
             if ((this.X == darwin.X && this.Y == darwin.Y) || (this.X + 1 == darwin.X && this.Y == darwin.Y) || (this.X + 2 == darwin.X && this.Y == darwin.Y)
@@ -231,6 +235,7 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        // close mouth
         public void resetGapeMode()
         {
             gapeMode = false;
@@ -290,6 +295,8 @@ namespace LegendOfDarwin.GameObject
 
         public new void Update(GameTime gameTime)
         {
+            // alive mode manages normal boss actions
+            // dead mode manages death animation/ explosions
             switch (mode)
             {
                 case MODE.Alive:
@@ -308,6 +315,7 @@ namespace LegendOfDarwin.GameObject
             deathCount++;
             gapeMode = false;
             updateBossExplosions();
+            // progresses through boss death animation
 
             if (canEventHappen())
             {
@@ -374,6 +382,7 @@ namespace LegendOfDarwin.GameObject
                 setEventFalse();
             }
 
+            // make sure sprite is stretched
             destination.Height = board.getSquareLength() * 3;
             destination.Width = board.getSquareWidth() * 3;
 
@@ -384,14 +393,16 @@ namespace LegendOfDarwin.GameObject
                 mode = MODE.Dead;
             }
 
+            // move really fast if darwin tries to get by
             if (isDarwinToTheLeft() || isDarwinToTheRight())
                 ZOMBIE_MOVE_RATE = 5;
 
+            // open mouth randomly
             checkForRandomBossGape();
 
             if (movecounter > ZOMBIE_MOVE_RATE)
             {
-
+                // close mouth after a while
                 if (eatingCounter > (ZOMBIE_MOVE_RATE * 7))
                 {
                     eatingCounter = 0;
@@ -433,6 +444,7 @@ namespace LegendOfDarwin.GameObject
 
         }
 
+        // open mouth every once in a while
         private void checkForRandomBossGape()
         {
             if (!exploding && !secondExplosion && !thirdExplosion && !fourthExplosion)
@@ -447,6 +459,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // to show that boss has been damaged
         private void updateBossExplosions()
         {
             if (exploding)
@@ -527,6 +540,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // death animation
         public void DrawDead(SpriteBatch sb)
         {
             if (eatingBaby)
@@ -594,6 +608,7 @@ namespace LegendOfDarwin.GameObject
                 }
             }
 
+            // open mouth/ darwin in mouth / baby in mouth
             if (eatingBaby)
             {
                 this.source.X = 384;
@@ -610,6 +625,7 @@ namespace LegendOfDarwin.GameObject
 
             sb.Draw(zombieTexture, destination, source, Color.White);
 
+            // damage markers
             if (exploding)
             {
                 sb.Draw(explosionTexture, board.getPosition(this), explodeSource[explodeCount], Color.White);
@@ -628,6 +644,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // random walk specifically for boss
         private void randomWalk()
         {
             int i = ran.Next(1, 5);
@@ -672,6 +689,14 @@ namespace LegendOfDarwin.GameObject
 
         }
 
+
+        /**
+         * boss movement methods are here
+         * these methods have to manage movement/obstacle detection for a 3x3 object
+         * so logic is somewhat messy
+         * basically checks all spaces in direction that has to be moved for either empty space or darwin
+         * assume flat walls, no concaves/convexes
+         */
         private new void MoveUp()
         {
             if (((board.isGridPositionOpen(this.X, this.Y - 1) &&
@@ -744,6 +769,7 @@ namespace LegendOfDarwin.GameObject
             }
         }
 
+        // for managing large 3x3 object
         private Rectangle getBoardFromNumber(int num)
         {
             if (num == 0)

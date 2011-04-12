@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
+    // unleashes hordes of babies across the level
     class Nursery : BasicObject
     {
         private int maxBabies = 7;
@@ -87,6 +88,7 @@ namespace LegendOfDarwin.GameObject
         {
             base.Update(gameTime);
 
+            // just call each alaive baby
             foreach (BabyZombie b in babies)
             {
                 if (b.isZombieAlive())
@@ -95,6 +97,7 @@ namespace LegendOfDarwin.GameObject
 
             if (canEventHappen())
             {
+                // revive babies when neccessary
                 for( int i = 0; i < maxBabies; i ++)
                 {
                     if (!babies[i].isZombieAlive())

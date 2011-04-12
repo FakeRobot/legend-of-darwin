@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace LegendOfDarwin.GameObject
 {
 
+    // brain that can be pushed around by zombie darwin
     public class Brain: BasicObject
     {
         public const int BRAIN_HEIGHT = 64;
@@ -17,6 +18,7 @@ namespace LegendOfDarwin.GameObject
 
         protected Texture2D brainTexture;
 
+        // takes in board and starting positions on initialization
         public Brain(GameBoard myboard, int startX, int startY) : base(myboard)
         {
             this.X = startX;

@@ -29,6 +29,7 @@ namespace LegendOfDarwin.GameObject
 
         int sleepyTime = 0;
 
+        // refer to zombie constructor
         public FastZombie(int startX, int startY, int mymaxX, int myminX, int mymaxY, int myminY, GameBoard myboard) :
             base(startX, startY, mymaxX, myminX, mymaxY, myminY, myboard)
         {

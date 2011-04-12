@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 namespace LegendOfDarwin.GameObject
 {
 
+    // Boxes to be pushed around by darwin
     public class Box : BasicObject
     {
         public const int BOX_HEIGHT = 64;
@@ -20,6 +21,8 @@ namespace LegendOfDarwin.GameObject
 
         public SoundEffect boxSound;
 
+        // sets a new box on the game board
+        // takes in board, and a starting position
         public Box(GameBoard myboard, int startX, int startY) : base(myboard)
         {
             this.X = startX;

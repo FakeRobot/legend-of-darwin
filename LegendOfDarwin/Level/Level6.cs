@@ -337,6 +337,7 @@ namespace LegendOfDarwin.Level
             updateSecondBabyWaveExplosion();
         }
 
+        // for managing chain reactions with babies
         private void updateSecondBabyWaveExplosion()
         {
             if (fatBossZombie.explodeSecondWaveOfBabies)
@@ -365,6 +366,7 @@ namespace LegendOfDarwin.Level
             }
         }
 
+        // this is for managing chain reactions
         private void updateFirstBabyWaveExplosion()
         {
             if (fatBossZombie.explodeFirstWaveOfBabies)
@@ -436,6 +438,7 @@ namespace LegendOfDarwin.Level
             }
         }
 
+        // checks for deaths caused by babies
         private void checkForGameOver()
         {
             foreach (BabyZombie b in nurseryOne.babies)

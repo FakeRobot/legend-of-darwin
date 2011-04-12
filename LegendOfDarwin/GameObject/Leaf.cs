@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin.GameObject
 {
+    // for level 3
     class Leaf : BasicObject
     {
         // leaf textures

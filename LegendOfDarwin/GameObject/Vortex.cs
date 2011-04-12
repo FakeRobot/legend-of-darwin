@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    // spaces to kill darwin, double as pits
     class Vortex : BasicObject
     {
         Texture2D vortexTex;
@@ -25,6 +26,7 @@ namespace LegendOfDarwin.GameObject
             base.Update(gameTime);
         }
 
+        // can kill zombies as well
         public void CollisionWithZombie(Zombie zombie)
         {
             if (this.isOnTop(zombie))

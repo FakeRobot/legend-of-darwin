@@ -17,6 +17,7 @@ namespace LegendOfDarwin
 {
     public class Level1
     {
+        // overhead
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public GraphicsDevice device;
@@ -24,6 +25,7 @@ namespace LegendOfDarwin
         private GameState gameState;
         private GameStart gameStart, gameStart2;
 
+        // objects in level
         private Darwin darwin;
         private Zombie firstZombie, secondZombie, thirdZombie, fourthZombie, fifthZombie, sixthZombie;
         private Switch firstSwitch;
@@ -38,12 +40,14 @@ namespace LegendOfDarwin
         private BasicObject[] walls;
         private Texture2D wallTex;
 
+        // for help
         public SpriteFont messageFont;
         public bool keyIsHeldDown = false;
         public bool gameOver = false;
         public bool gameWin = false;
         private int gameOverCounter = 0;
 
+        // death overhead
         private bool playDeathSound = true;
         private SoundEffect deathScreamSound;
         private SoundEffect fallScreamSound;
@@ -82,6 +86,7 @@ namespace LegendOfDarwin
 
             device = graphics.GraphicsDevice;
 
+            // set up all basic game objects for level1 here
             gameState = new GameState();
             gameStart = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
             gameStart2 = new GameStart(device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight);
@@ -146,6 +151,7 @@ namespace LegendOfDarwin
             setWalls();
         }
 
+        // for conveniently reseting level
         public void setLevelState()
         {
             gameOver = false;
@@ -209,6 +215,7 @@ namespace LegendOfDarwin
             Keyboard.GetState();
         }
 
+        // walls linked to switch are made here
         private BasicObject[] setRemovableWallsInLevelOne()
         {
 
@@ -476,6 +483,7 @@ namespace LegendOfDarwin
                     UpdateStartState2();
                     break;
                 case GameState.state.Level:
+                    // decide if screen should be played normally or frozen for death animation or messages
                     if (!messageMode && !gameOver)
                         UpdateLevelState(gameTime);
                     else if (messageMode)
@@ -501,6 +509,7 @@ namespace LegendOfDarwin
                             fellDownCounter = 0;
                         }
 
+                        // kill darwin
                         darwin.setDarwinDead();
                         darwin.setZombie();
                         UpdateLevelState(gameTime);
@@ -519,6 +528,7 @@ namespace LegendOfDarwin
             
         }
 
+        // used for message bubbles
         private void UpdateMessageMode()
         {
             KeyboardState ks = Keyboard.GetState();
@@ -576,6 +586,7 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
+            // only check for deaths if neccessary
             if (darwin.isDarwinAlive())
             {
                 if (!darwin.isZombie())
@@ -663,6 +674,7 @@ namespace LegendOfDarwin
             }
         }
 
+        // logic for what happens when darwin dies is here
         private void checkForGameOver(Zombie myZombie)
         {
             if (darwin.isOnTop(myZombie))

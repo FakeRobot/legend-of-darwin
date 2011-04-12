@@ -308,6 +308,7 @@ namespace LegendOfDarwin
                         UpdateMessageMode();
                     else
                     {
+                        // death logic is here, freezes screen plays animation
                         if (playDeathSound)
                         {
                             deathScreamSound.Play();
@@ -378,6 +379,7 @@ namespace LegendOfDarwin
 
             updateKeyHeldDown(ks);
 
+            // only check for deaths if neccessary
             if (darwin.isDarwinAlive())
             {
                 if (!darwin.isZombie())
@@ -446,6 +448,7 @@ namespace LegendOfDarwin
 
         }
 
+        // used to check for level completion
         private bool isAllZombiesDead()
         {
             if (!firstZombie.isZombieAlive() && !secondZombie.isZombieAlive() && !thirdZombie.isZombieAlive() && !fourthZombie.isZombieAlive())

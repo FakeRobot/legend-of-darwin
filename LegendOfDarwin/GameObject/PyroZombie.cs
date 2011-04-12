@@ -28,6 +28,7 @@ namespace LegendOfDarwin.GameObject
 
         public Boolean killedDarwin;
 
+        // refer to zombie constructor
         public PyroZombie(int startX, int startY, int maxX, int minX, int maxY, int minY, GameBoard myboard)
             : base(startX, startY, maxX, minX, maxY, minY, myboard)
         {

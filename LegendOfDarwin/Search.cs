@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin
 {
+    // not in use, has many problems
+    // we ended up not having a use for this, so it was never fixed
     class Search
     {
         GameBoard board;

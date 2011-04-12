@@ -11,6 +11,7 @@ using LegendOfDarwin.GameObject;
 
 namespace LegendOfDarwin.GameObject
 {
+    // potion for healing humanity
     class Potion : BasicObject
     {
         private Texture2D potionTex;

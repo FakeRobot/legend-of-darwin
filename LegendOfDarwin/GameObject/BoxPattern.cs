@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    // used to detect if boxes in a level comply to a set pattern
+    // used to tell if player has completed a puzzle
     class BoxPattern
     {
         // the list of spots on the board that are a part of the pattern
@@ -18,9 +20,11 @@ namespace LegendOfDarwin.GameObject
 
         private int numberOfSpotsToCheck;
 
+        // for sparkle animation
         bool showSparkles;
         int sparkleCount = 0;
 
+        // takes in a board and an array of basic objects representing squares that are part of the pattern
         public BoxPattern(GameBoard board, BasicObject[] mySpots)
         {
             int i = 0;
@@ -92,6 +96,7 @@ namespace LegendOfDarwin.GameObject
             return false;
         }
 
+        // accessors for managing the sparkle animation
         public bool shouldSparkle()
         {
             return showSparkles;

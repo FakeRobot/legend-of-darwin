@@ -56,9 +56,11 @@ namespace LegendOfDarwin
         Texture2D darwinLeftTex;
         Texture2D zombieDarwinTex;
 
+        // used to get darwin to fall over when he dies
         Texture2D deadDarwinTex;
         bool isDead = false;
 
+        // over head for movement/ transformation
         private int widthLength, heightLength, darwinLag, zombieLag, darwinCount, zombieCount;
         private int darwinWidthLength, darwinHeightLength, zombieWidthLength, zombieHeightLength;
         private bool inMotion;
@@ -76,12 +78,14 @@ namespace LegendOfDarwin
             source.X = 0;
             source.Y = 0;
 
+            // for animating feet
             downSource = new Rectangle[3];
             downSource[0] = new Rectangle(0, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
             downSource[1] = new Rectangle(DARWIN_WIDTH, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
             downSource[2] = new Rectangle(DARWIN_WIDTH * 2, 0, DARWIN_WIDTH, DARWIN_HEIGHT);
             downCount = 0;
 
+            // tweaks to make darwin look natural
             darwinLag = 10;
             zombieLag = 15;
             darwinCount = 0;
@@ -98,10 +102,9 @@ namespace LegendOfDarwin
             this.setEventLag(darwinLag);
 
             inMotion = false;
-
-
         }
 
+        // move source
         public void setSource(Rectangle rec)
         {
             source.Width = rec.Width;
@@ -110,6 +113,7 @@ namespace LegendOfDarwin
             source.Y = rec.Y;
         }
 
+        // change displayed picture size
         public void setPictureSize(int width, int height)
         {
             destination.Width = width;
@@ -336,7 +340,7 @@ namespace LegendOfDarwin
 
         private void updateDarwinTransformState(KeyboardState ks)
         {
-            
+            // manage overhead for transforming
             if (ks.IsKeyDown(Keys.Z))
             {
                 isZombieButtonBeingPressed = true;
@@ -353,6 +357,7 @@ namespace LegendOfDarwin
             }
         }
 
+        // these are not used
         // Check if Darwin is intersecting something
         public bool Intersects(/*Zombie enemy*/)
         {
@@ -386,6 +391,7 @@ namespace LegendOfDarwin
             return false;
         }
 
+        // basic accessor/mutators for darwin transformation attributes
         public bool isZombie()
         {
             return this.zombieFlag;

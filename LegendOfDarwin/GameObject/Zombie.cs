@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LegendOfDarwin.GameObject
 {
+    // normal base zombie
     public class Zombie : BasicObject
     {
         // Zombie's height in pixels
@@ -510,6 +511,7 @@ namespace LegendOfDarwin.GameObject
             allowRangeDetection = myAllow;
         }
 
+        // early test for movement, implements a patrol path
         public void testRun()
         {
             if (movecounter < 300 && (movecounter % 50) == 0)
@@ -533,6 +535,7 @@ namespace LegendOfDarwin.GameObject
                 movecounter++;
         }
 
+        // update to be used for levels with a brain in them
         public void Update(GameTime gameTime,Darwin darwin,Brain brain)
         {
             //testRun();
@@ -579,6 +582,7 @@ namespace LegendOfDarwin.GameObject
 
         }
 
+        // update to be used for brainless levels
         public void Update(GameTime gameTime, Darwin darwin)
         {
             //testRun();

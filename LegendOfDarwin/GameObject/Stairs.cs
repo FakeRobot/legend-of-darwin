@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace LegendOfDarwin
 {
-
+    // for completing levels
     class Stairs : BasicObject
     {
         private Texture2D stairUpTex;
@@ -60,6 +60,7 @@ namespace LegendOfDarwin
 
         }
 
+        // check for darwin contact
         public void Update(GameTime gameTime, Darwin darwin)
         {
             base.Update(gameTime);

@@ -19,10 +19,14 @@ namespace LegendOfDarwin.GameObject
         //flag for if zombie is in 'bug2' mode
         protected bool goAroundMode;
 
+        // more overhead for nieve path planning
         protected Vector2[] path;
         protected int pathCount;
         protected int pathLimit;
+
         protected Darwin darwin;
+
+        // list of zombies on same stage as cannibal
         protected List<Zombie> zombies;
         public SoundEffect eatSound;
 
@@ -243,14 +247,6 @@ namespace LegendOfDarwin.GameObject
         {
             Random rand1 = new Random();
 
-            //bool rightNext = false;
-
-            //foreach (Zombie someZombie in zombies)
-            //{
-            //    if (isZombieOneSquareAway(someZombie))
-            //        rightNext = true;
-            //}
-
             if (rand1.Next(7) == 2)
                 base.RandomWalk();
 
@@ -297,6 +293,7 @@ namespace LegendOfDarwin.GameObject
             zombies = myZombieList;
         }
 
+        // used to kill other zombies
         public void CollisionWithZombie(Zombie zombie)
         {
             if (this.isOnTop(zombie) && zombie.isZombieAlive())
@@ -348,6 +345,7 @@ namespace LegendOfDarwin.GameObject
                 bool goForDarwin = true;
                 int closestZombieDist = 10000;
 
+                // checks where other zombies are, and where zombie darwin is, finds closest one that is in range
                 foreach (Zombie myzombie in zombies) 
                 {
                     if (isVisionAllowed() && isPointInVision(myzombie.X, myzombie.Y) && myzombie.isZombieAlive()) 
@@ -374,12 +372,11 @@ namespace LegendOfDarwin.GameObject
                     }
                 }
 
-                //Console.Out.WriteLine("goAround:{0} hasZombieDest:{1} goForDarwin:{2}",goAroundMode,hasZombieDest,goForDarwin);
-
                 if (goAroundMode)
                     goAroundObstacle();
                 else if (isVisionAllowed() && isPointInVision(darwin.X, darwin.Y) && darwin.isZombie() && goForDarwin)
                 {
+                    // either go for darwin or a zombie, use exclamation mark
                     source.X = 64;
                     this.enemyAlert = true;
                     this.moveTowardsPoint(darwin.X, darwin.Y);

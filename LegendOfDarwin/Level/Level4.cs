@@ -16,6 +16,7 @@ using LegendOfDarwin.MenuObject;
 
 namespace LegendOfDarwin.Level
 {
+    // DANCE!!
     public class Level4
     {
 
@@ -105,6 +106,7 @@ namespace LegendOfDarwin.Level
 
             followerZombies = new List<CongaFollowerZombie>();
 
+            // all conga paths for the different conga zombies are created here along with all conga zombies
             myPath = new Vector2[8]; 
             myPath[0] = new Vector2(8,4);
             myPath[1] = new Vector2(8, 12);
@@ -250,6 +252,7 @@ namespace LegendOfDarwin.Level
             setDanceFloor();
         }
 
+        // reset level
         public void setLevelState()
         {
             board.setGridPositionOpen(darwin);
@@ -435,7 +438,7 @@ namespace LegendOfDarwin.Level
 
         }
 
-        
+        // massive method sets all wall tiles...
         private void setWallsInLevelFour()
         {
             //lower area wall
@@ -1112,6 +1115,7 @@ namespace LegendOfDarwin.Level
         }
 
         // initializes the dance floor
+        // equally massive method...
         private void setDanceFloor()
         {
             //lower area wall
